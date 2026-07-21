@@ -151,6 +151,16 @@ tr:hover td{background:rgba(16,185,129,.02)}
     .pr-sig .sr{font-size:8px;color:#444;margin-top:2px}
     @page{size:A4 portrait;margin:8mm}
 }
+
+/* Tambahan untuk Multi Rundown */
+.rundown-item-row {
+    background: var(--bg2);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    position: relative;
+}
 </style>
 </head>
 <body>
@@ -281,18 +291,18 @@ tr:hover td{background:rgba(16,185,129,.02)}
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Pertemuan Ke-</label><select class="input" id="agendaPertemuan"><option value="1">1 - Pengenalan</option><option value="2">2 - Kontekstualisasi</option><option value="3">3 - Aksi (Praktik)</option><option value="4">4 - Gelar Karya</option><option value="5">5 - Refleksi & Evaluasi</option><option value="0">Rundown / Tips (tanpa pertemuan)</option></select></div>
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Judul Kegiatan</label><input type="text" class="input" id="agendaJudul" placeholder="Pengenalan Jajanan Tradisional"></div>
         </div>
-        <!-- JAM & DURASI — hanya tampil jika tipe=rundown -->
+        
+        <!-- MULTI RUNDOWN ITEMS -->
         <div id="jamFields" style="display:none">
             <div class="p-3 rounded-xl border border-purple-500/20 bg-purple-500/5">
-                <div class="text-[11px] font-bold text-purple-400 mb-3"><i class="fas fa-clock mr-1"></i>Jam & Durasi Kegiatan</div>
-                <div class="grid grid-cols-3 gap-3">
-                    <div><label class="text-[10px] text-slate-500 mb-1 block">Jam Mulai</label><input type="time" class="input-time" id="agendaJamMulai" value="07:00"></div>
-                    <div><label class="text-[10px] text-slate-500 mb-1 block">Jam Selesai</label><input type="time" class="input-time" id="agendaJamSelesai" value="08:00"></div>
-                    <div><label class="text-[10px] text-slate-500 mb-1 block">Durasi (menit)</label><div class="flex items-center gap-1"><input type="number" class="input-durasi" id="agendaDurasi" value="60" min="5" max="480" oninput="autoCalcSelesai()"><span class="text-[10px] text-slate-500">mnt</span></div></div>
+                <div class="flex justify-between items-center mb-3">
+                    <div class="text-[11px] font-bold text-purple-400"><i class="fas fa-list-ol mr-1"></i>Daftar Kegiatan Rundown</div>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="addRundownItem()"><i class="fas fa-plus"></i>Tambah Baris</button>
                 </div>
-                <div class="text-[10px] text-slate-500 mt-2"><i class="fas fa-info-circle mr-1"></i>Isi jam mulai + durasi, maka jam selesai terhitung otomatis. Atau isi manual semua.</div>
+                <div id="rundownItemsContainer"></div>
             </div>
         </div>
+        
         <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Konten / Materi Kegiatan</label><textarea class="input" id="agendaKonten" placeholder="Tuliskan deskripsi lengkap kegiatan, materi, langkah-langkah..." style="min-height:120px;font-size:13px;line-height:1.7"></textarea></div>
         <div><label class="text-[11px] text-slate-400 font-semibold mb-2 block">Dimensi Profil Pelajar Pancasila</label><div class="flex flex-wrap gap-2" id="agendaDimensiWrap"><label class="dimensi-chip" data-dim="beriman" onclick="toggleAgendaDim(this)"><i class="fas fa-hands-praying" style="font-size:9px"></i> Beriman & Bertakwa</label><label class="dimensi-chip" data-dim="berkebinekaan" onclick="toggleAgendaDim(this)"><i class="fas fa-globe-asia" style="font-size:9px"></i> Berkebinekaan Global</label><label class="dimensi-chip" data-dim="gotong_royong" onclick="toggleAgendaDim(this)"><i class="fas fa-people-carry-box" style="font-size:9px"></i> Bergotong Royong</label><label class="dimensi-chip" data-dim="mandiri" onclick="toggleAgendaDim(this)"><i class="fas fa-person-walking" style="font-size:9px"></i> Mandiri</label><label class="dimensi-chip" data-dim="bernalar" onclick="toggleAgendaDim(this)"><i class="fas fa-brain" style="font-size:9px"></i> Bernalar Kritis</label><label class="dimensi-chip" data-dim="kreatif" onclick="toggleAgendaDim(this)"><i class="fas fa-lightbulb" style="font-size:9px"></i> Kreatif</label></div></div>
         <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Catatan / Alat & Bahan</label><textarea class="input" id="agendaCatatan" placeholder="Alat, bahan, atau catatan tambahan..." style="min-height:55px;font-size:12px"></textarea></div>
@@ -413,7 +423,7 @@ function editBlok(id){const b=allBlok[id];if(!b)return;document.getElementById('
 async function hapusBlok(id){if(!(await confirmAction('Hapus blok ini?')))return;db.ref('kokurikuler/blok/'+id).remove().then(()=>{toast('Dihapus');loadBlokList()}).catch(()=>toast('Gagal','error'))}
 
 /* ============================================================
-   AGENDA P5 — JAM INPUT, CETAK RUNDDOWN
+   AGENDA P5 — JAM INPUT, CETAK RUNDDOWN, MULTI RUNDOWN
    ============================================================ */
 function loadAgendaPage(){db.ref('kokurikuler/agenda').once('value').then(s=>{allAgenda=s.val()||{};populateAgendaTemaFilter();renderAllAgendaViews()})}
 function populateAgendaTemaFilter(){const sel=document.getElementById('filterAgendaTema'),ts=new Set();Object.values(allAgenda).forEach(a=>{if(a.tema)ts.add(a.tema)});let h='<option value="">Semua Tema</option>';[...ts].sort().forEach(t=>{h+='<option value="'+t+'">'+t+'</option>'});sel.innerHTML=h}
@@ -434,12 +444,32 @@ function renderAgendaRundown(){
     const tipItems=getFilteredAgenda().filter(([,a])=>a.tipe==='tips');
     let h='';
     if(rdItems.length){
+        // Grouping items berdasarkan judul
+        const grouped = {};
+        rdItems.forEach(([k, a]) => {
+            if(!grouped[a.judul]) grouped[a.judul] = [];
+            grouped[a.judul].push([k, a]);
+        });
+
         h+='<div class="card"><div class="flex items-center justify-between mb-4"><h3 class="font-bold text-sm"><i class="fas fa-clock text-purple-400 mr-2"></i>Rundown Kegiatan Harian</h3><button class="btn btn-primary btn-sm no-print" onclick="cetakRundown()"><i class="fas fa-print"></i>Cetak Rundown</button></div>';
-        rdItems.forEach(([k,a])=>{
-            const jam=a.jamMulai&&a.jamSelesai?a.jamMulai+' - '+a.jamSelesai:'-';
-            const dur=a.durasi?a.durasi+' mnt':'';
-            h+='<div class="rundown-row" style="cursor:pointer" onclick="viewAgenda(\''+k+'\')"><div class="rd-time-block"><div class="rd-time-jam">'+jam+'</div>'+(dur?'<div class="rd-time-durasi">'+dur+'</div>':'')+'</div><div class="rundown-body"><div class="rd-title">'+a.judul+' <span class="kelas-chip" style="font-size:9px">'+getKelasLabel(a.kelas)+'</span></div><div class="rd-detail">'+(a.konten||'-')+'</div></div></div>';
-        });h+='</div>';
+        
+        for(const judul in grouped) {
+            const items = grouped[judul];
+            h+=`<div class="rundown-group mb-4 p-3 rounded-lg border border-slate-700/50 bg-slate-800/20">
+                <div class="text-purple-400 font-bold text-sm mb-2 border-b border-slate-700/50 pb-1">${judul} <span class="kelas-chip" style="font-size:9px">${getKelasLabel(items[0][1].kelas)}</span></div>
+                <div class="space-y-2">`;
+            
+            items.forEach(([k,a])=>{
+                const jam=a.jamMulai&&a.jamSelesai?a.jamMulai+' - '+a.jamSelesai:'-';
+                const dur=a.durasi?a.durasi+' mnt':'';
+                h+=`<div class="rundown-row" style="cursor:pointer;border-bottom-color:rgba(51,65,85,.2);padding:10px 0" onclick="viewAgenda('${k}')">
+                    <div class="rd-time-block"><div class="rd-time-jam">${jam}</div>${dur?`<div class="rd-time-durasi">${dur}</div>`:''}</div>
+                    <div class="rundown-body"><div class="rd-detail">${(a.konten||'-')}</div></div>
+                </div>`;
+            });
+            h+=`</div></div>`;
+        }
+        h+='</div>';
     }
     if(tipItems.length){
         h+='<div class="card mt-4"><h3 class="font-bold text-sm mb-3"><i class="fas fa-lightbulb text-orange-400 mr-2"></i>Tips Pelaksanaan</h3><div class="space-y-2">';
@@ -478,29 +508,154 @@ function cetakRundown(){
 
 /* --- CRUD Agenda --- */
 function toggleAgendaDim(el){const d=el.dataset.dim,i=selectedAgendaDim.indexOf(d);if(i>=0){selectedAgendaDim.splice(i,1);el.classList.remove('selected')}else{selectedAgendaDim.push(d);el.classList.add('selected')}}
-function toggleJamFields(){document.getElementById('jamFields').style.display=document.getElementById('agendaTipe').value==='rundown'?'':'none'}
-function autoCalcSelesai(){const mulai=document.getElementById('agendaJamMulai').value,dur=parseInt(document.getElementById('agendaDurasi').value)||0;if(!mulai||!dur)return;const[h,m]=mulai.split(':').map(Number);let total=h*60+m+dur;const nh=Math.floor(total/60)%24,nm=total%60;document.getElementById('agendaJamSelesai').value=String(nh).padStart(2,'0')+':'+String(nm).padStart(2,'0')}
+
+/* MULTI RUNDOWN LOGIC */
+function toggleJamFields(){
+    const isRundown = document.getElementById('agendaTipe').value==='rundown';
+    document.getElementById('jamFields').style.display = isRundown ? '' : 'none';
+    if(isRundown && document.getElementById('rundownItemsContainer').children.length === 0) {
+        addRundownItem();
+    }
+}
+
+function addRundownItem(data = {}) {
+    const container = document.getElementById('rundownItemsContainer');
+    const div = document.createElement('div');
+    div.className = 'rundown-item-row';
+    div.innerHTML = `
+        <div class="grid grid-cols-12 gap-2 items-start">
+            <div class="col-span-12 md:col-span-3">
+                <label class="text-[10px] text-slate-500 mb-0.5 block">Jam Mulai</label>
+                <input type="time" class="input-time" value="${data.jamMulai || '07:00'}">
+            </div>
+            <div class="col-span-6 md:col-span-2">
+                <label class="text-[10px] text-slate-500 mb-0.5 block">Durasi (mnt)</label>
+                <input type="number" class="input-durasi w-full" value="${data.durasi || 60}" min="5" max="480">
+            </div>
+            <div class="col-span-6 md:col-span-2">
+                <label class="text-[10px] text-slate-500 mb-0.5 block">Jam Selesai</label>
+                <input type="time" class="input-time" value="${data.jamSelesai || '08:00'}">
+            </div>
+            <div class="col-span-11 md:col-span-4">
+                <label class="text-[10px] text-slate-500 mb-0.5 block">Detail Kegiatan</label>
+                <input type="text" class="input" style="font-size:12px" placeholder="Deskripsi singkat kegiatan" value="${data.konten || ''}">
+            </div>
+            <div class="col-span-1 flex items-end justify-center">
+                <button type="button" onclick="removeRundownItem(this)" class="btn btn-danger btn-sm" style="padding: 7px 10px;"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    `;
+    container.appendChild(div);
+}
+
+function removeRundownItem(btn) {
+    btn.closest('.rundown-item-row').remove();
+}
 
 function openAgendaModal(id){
     selectedAgendaDim=[];document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.remove('selected'));
-    document.getElementById('agendaId').value='';document.getElementById('agendaKelas').value='1,2,3';document.getElementById('agendaTema').value='Kearifan Lokal';document.getElementById('agendaSubTema').value='';document.getElementById('agendaTipe').value='alur';document.getElementById('agendaPertemuan').value='1';document.getElementById('agendaJudul').value='';document.getElementById('agendaKonten').value='';document.getElementById('agendaCatatan').value='';document.getElementById('agendaJamMulai').value='07:00';document.getElementById('agendaJamSelesai').value='08:00';document.getElementById('agendaDurasi').value='60';
+    document.getElementById('agendaId').value='';document.getElementById('agendaKelas').value='1,2,3';document.getElementById('agendaTema').value='Kearifan Lokal';document.getElementById('agendaSubTema').value='';document.getElementById('agendaTipe').value='alur';document.getElementById('agendaPertemuan').value='1';document.getElementById('agendaJudul').value='';document.getElementById('agendaKonten').value='';document.getElementById('agendaCatatan').value='';
+    
+    // Reset & Init Multi Rundown
+    document.getElementById('rundownItemsContainer').innerHTML = '';
+    
     toggleJamFields();
     if(id&&allAgenda[id]){
-        const a=allAgenda[id];document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Agenda P5';document.getElementById('agendaId').value=id;document.getElementById('agendaKelas').value=a.kelas||'1,2,3';document.getElementById('agendaTema').value=a.tema||'Kearifan Lokal';document.getElementById('agendaSubTema').value=a.subTema||'';document.getElementById('agendaTipe').value=a.tipe||'alur';document.getElementById('agendaPertemuan').value=a.pertemuan||'1';document.getElementById('agendaJudul').value=a.judul||'';document.getElementById('agendaKonten').value=a.konten||'';document.getElementById('agendaCatatan').value=a.catatan||'';document.getElementById('agendaJamMulai').value=a.jamMulai||'07:00';document.getElementById('agendaJamSelesai').value=a.jamSelesai||'08:00';document.getElementById('agendaDurasi').value=a.durasi||'60';selectedAgendaDim=a.dimensi?[...a.dimensi]:[];document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.toggle('selected',selectedAgendaDim.includes(c.dataset.dim)));toggleJamFields();
-    }else{document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-scroll text-purple-400 mr-2"></i>Tambah Agenda P5'}
+        const a=allAgenda[id];
+        document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Agenda P5';
+        document.getElementById('agendaId').value=id;document.getElementById('agendaKelas').value=a.kelas||'1,2,3';document.getElementById('agendaTema').value=a.tema||'Kearifan Lokal';document.getElementById('agendaSubTema').value=a.subTema||'';document.getElementById('agendaTipe').value=a.tipe||'alur';document.getElementById('agendaPertemuan').value=a.pertemuan||'1';document.getElementById('agendaJudul').value=a.judul||'';document.getElementById('agendaKonten').value=a.konten||'';document.getElementById('agendaCatatan').value=a.catatan||'';
+        
+        selectedAgendaDim=a.dimensi?[...a.dimensi]:[];
+        document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.toggle('selected',selectedAgendaDim.includes(c.dataset.dim)));
+        
+        // Load existing rundown items or initialize
+        if(a.tipe === 'rundown') {
+            if(a.items && a.items.length > 0) {
+                a.items.forEach(item => addRundownItem(item));
+            } else {
+                // Migrasi data lama (yang belum multi-row) ke format baru
+                addRundownItem({
+                    jamMulai: a.jamMulai,
+                    jamSelesai: a.jamSelesai,
+                    durasi: a.durasi,
+                    konten: a.konten
+                });
+            }
+        }
+        toggleJamFields();
+    }else{
+        document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-scroll text-purple-400 mr-2"></i>Tambah Agenda P5';
+    }
     openModal('modalAgenda');
 }
+
 function simpanAgenda(){
     const id=document.getElementById('agendaId').value,judul=document.getElementById('agendaJudul').value.trim();
     if(!judul){toast('Judul wajib','error');return}
     const tipe=document.getElementById('agendaTipe').value;
-    const data={kelas:document.getElementById('agendaKelas').value,tema:document.getElementById('agendaTema').value,subTema:document.getElementById('agendaSubTema').value.trim(),tipe:tipe,pertemuan:document.getElementById('agendaPertemuan').value,judul:judul,konten:document.getElementById('agendaKonten').value.trim(),dimensi:[...selectedAgendaDim],catatan:document.getElementById('agendaCatatan').value.trim(),isTemplate:false,updatedAt:Date.now()};
-    if(tipe==='rundown'){data.jamMulai=document.getElementById('agendaJamMulai').value;data.jamSelesai=document.getElementById('agendaJamSelesai').value;data.durasi=document.getElementById('agendaDurasi').value}else{data.jamMulai='';data.jamSelesai='';data.durasi=''}
+    
+    // Ambil nilai field umum
+    const kelas = document.getElementById('agendaKelas').value;
+    const tema = document.getElementById('agendaTema').value;
+    const subTema = document.getElementById('agendaSubTema').value.trim();
+    const pertemuan = document.getElementById('agendaPertemuan').value;
+    const catatan = document.getElementById('agendaCatatan').value.trim();
+    
+    let data = {
+        kelas: kelas,
+        tema: tema,
+        subTema: subTema,
+        tipe: tipe,
+        pertemuan: pertemuan,
+        judul: judul,
+        konten: document.getElementById('agendaKonten').value.trim(),
+        dimensi: [...selectedAgendaDim],
+        catatan: catatan,
+        isTemplate: false,
+        updatedAt: Date.now()
+    };
+
+    if(tipe==='rundown'){
+        // Kumpulkan data multi-row
+        const rows = document.querySelectorAll('#rundownItemsContainer .rundown-item-row');
+        const items = [];
+        let firstItem = null;
+        
+        rows.forEach(row => {
+            const inputs = row.querySelectorAll('input');
+            const item = {
+                jamMulai: inputs[0].value,
+                durasi: inputs[1].value,
+                jamSelesai: inputs[2].value,
+                konten: inputs[3].value
+            };
+            items.push(item);
+            if(!firstItem) firstItem = item; // Ambil item pertama untuk default field jam di tabel utama (biar sorting tetap jalan)
+        });
+        
+        if(items.length === 0) {
+            toast('Tambahkan minimal 1 baris kegiatan rundown','error');
+            return;
+        }
+        
+        data.items = items;
+        // Pindahkan konten item pertama ke field konten utama untuk preview di daftar
+        data.konten = firstItem.konten; 
+        data.jamMulai = firstItem.jamMulai;
+        data.jamSelesai = firstItem.jamSelesai;
+        data.durasi = firstItem.durasi;
+    } else {
+        data.jamMulai='';data.jamSelesai='';data.durasi='';
+        data.items = null;
+    }
+    
     const ref=id?db.ref('kokurikuler/agenda/'+id):db.ref('kokurikuler/agenda').push();
     ref.set(data).then(()=>{toast('Agenda disimpan');closeModal('modalAgenda');loadAgendaPage()}).catch(e=>toast('Gagal: '+e.message,'error'));
 }
+
 function editAgenda(id){openAgendaModal(id)}
 async function hapusAgenda(id){if(!(await confirmAction('Hapus agenda ini?')))return;db.ref('kokurikuler/agenda/'+id).remove().then(()=>{toast('Dihapus');loadAgendaPage()}).catch(()=>toast('Gagal','error'))}
+
 function viewAgenda(id){
     const a=allAgenda[id];if(!a)return;
     const tl=a.tipe==='alur'?'Alur Pentahapan':a.tipe==='rundown'?'Rundown Harian':'Tips Pelaksanaan';
@@ -510,13 +665,31 @@ function viewAgenda(id){
     let h='<div class="space-y-4">';
     h+='<div class="flex flex-wrap gap-2"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span>'+(a.jamMulai&&a.jamSelesai?'<span class="badge badge-rundown" style="font-family:monospace">'+a.jamMulai+' - '+a.jamSelesai+(a.durasi?' ('+a.durasi+' mnt)':'')+'</span>':'')+'</div>';
     h+='<div><div class="text-[10px] text-slate-500 font-semibold">Tema</div><div class="text-sm font-bold mt-0.5">'+a.tema+'</div>'+(a.subTema?'<div class="text-xs text-slate-400">'+a.subTema+'</div>':'')+'</div>';
-    h+='<div class="p-4 rounded-xl" style="background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.15)"><div class="text-[11px] font-bold text-purple-400 mb-2">Konten / Materi Kegiatan</div><p class="text-sm text-slate-200 leading-relaxed">'+(a.konten||'-')+'</p></div>';
+    
+    // Tampilan detail rundown
+    if(a.tipe === 'rundown' && a.items && a.items.length > 0) {
+        h+='<div class="p-4 rounded-xl" style="background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.15)"><div class="text-[11px] font-bold text-purple-400 mb-3">Rincian Waktu & Kegiatan</div><div class="space-y-3">';
+        a.items.forEach((item, idx) => {
+            h+=`<div class="flex gap-3 items-start border-b border-slate-700/30 pb-2 last:border-0">
+                <div class="text-center" style="min-width: 100px;">
+                    <div class="text-purple-400 font-bold text-sm">${item.jamMulai} - ${item.jamSelesai}</div>
+                    <div class="text-[9px] text-slate-500">${item.durasi} menit</div>
+                </div>
+                <div class="text-slate-200 text-sm flex-1">${item.konten || '-'}</div>
+            </div>`;
+        });
+        h+='</div></div>';
+    } else {
+        h+='<div class="p-4 rounded-xl" style="background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.15)"><div class="text-[11px] font-bold text-purple-400 mb-2">Konten / Materi Kegiatan</div><p class="text-sm text-slate-200 leading-relaxed">'+(a.konten||'-')+'</p></div>';
+    }
+    
     if(dm)h+='<div><div class="text-[11px] text-slate-500 font-semibold mb-1">Dimensi Profil Pelajar Pancasila</div><div class="flex flex-wrap gap-1">'+dm+'</div></div>';
     if(a.catatan)h+='<div class="p-3 rounded-lg bg-orange-500/5 border border-orange-500/15"><div class="text-[11px] text-orange-300 font-bold mb-1"><i class="fas fa-sticky-note mr-1"></i>Catatan</div><p class="text-xs text-slate-300 leading-relaxed">'+a.catatan+'</p></div>';
     h+='<div class="flex gap-2 pt-3 border-t border-slate-700/50"><button class="btn btn-outline btn-sm" onclick="closeModal(\'modalAgendaDetail\');editAgenda(\''+id+'\')"><i class="fas fa-edit"></i>Edit</button><button class="btn btn-danger btn-sm" onclick="closeModal(\'modalAgendaDetail\');hapusAgenda(\''+id+'\')"><i class="fas fa-trash"></i>Hapus</button></div></div>';
     document.getElementById('modalAgDetailTitle').innerHTML='<i class="fas fa-eye text-purple-400 mr-2"></i>'+a.judul;
     document.getElementById('agendaDetailContent').innerHTML=h;openModal('modalAgendaDetail');
 }
+
 function loadTemplateAgenda(){confirmAction('Muat template "Kearifan Lokal - Jajanan Tradisional" ('+TPL.length+' agenda) ke database?').then(yes=>{if(!yes)return;const updates={};TPL.forEach(t=>{const k=db.ref('kokurikuler/agenda').push().key;updates[k]={...t,isTemplate:true,updatedAt:Date.now()}});db.ref('kokurikuler/agenda').update(updates).then(()=>{toast('Template dimuat: '+TPL.length+' agenda');loadAgendaPage()}).catch(e=>toast('Gagal: '+e.message,'error'))})}
 
 /* ===== STUBS ===== */
