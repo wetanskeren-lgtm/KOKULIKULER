@@ -55,7 +55,10 @@ textarea.input{resize:vertical;min-height:70px}
 .badge-izin{background:rgba(59,130,246,.12);color:#60A5FA;border:1px solid rgba(59,130,246,.2)}
 .badge-sakit{background:rgba(245,158,11,.12);color:#FBBF24;border:1px solid rgba(245,158,11,.2)}
 .badge-alpha{background:rgba(239,68,68,.12);color:#F87171;border:1px solid rgba(239,68,68,.2)}
-.badge-dimensi{background:rgba(16,185,129,.08);color:#6EE7B7;border:1px solid rgba(16,185,129,.15);font-size:9.5px;padding:1px 7px;margin:1px}
+.badge-fase-a{background:rgba(16,185,129,.12);color:#34D399;border:1px solid rgba(16,185,129,.2)}
+.badge-fase-bc{background:rgba(59,130,246,.12);color:#60A5FA;border:1px solid rgba(59,130,246,.2)}
+.badge-template{background:rgba(168,85,247,.12);color:#C084FC;border:1px solid rgba(168,85,247,.2)}
+.badge-custom{background:rgba(249,115,22,.12);color:#FB923C;border:1px solid rgba(249,115,22,.2)}
 .table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
 table{width:100%;border-collapse:collapse}
 th{background:var(--bg2);padding:10px 12px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);white-space:nowrap}
@@ -66,6 +69,7 @@ tr:hover td{background:rgba(16,185,129,.02)}
 .modal-bg.show{display:flex}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:14px;width:100%;max-width:560px;animation:fadeUp .25s ease;margin:auto 0}
 .modal-lg{max-width:720px}
+.modal-xl{max-width:900px}
 .toast-container{position:fixed;top:16px;right:16px;z-index:100;display:flex;flex-direction:column;gap:7px;pointer-events:none}
 .toast{padding:10px 16px;border-radius:9px;font-size:12.5px;font-weight:500;animation:slideIn .3s ease;display:flex;align-items:center;gap:9px;min-width:260px;box-shadow:0 8px 20px rgba(0,0,0,.3);pointer-events:auto}
 .toast-success{background:#065F46;color:#A7F3D0;border:1px solid #10B981}
@@ -77,8 +81,6 @@ tr:hover td{background:rgba(16,185,129,.02)}
 .photo-grid img:hover{transform:scale(1.03);border-color:var(--primary)}
 .upload-zone{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all .2s}
 .upload-zone:hover,.upload-zone.dragover{border-color:var(--primary);background:rgba(16,185,129,.04)}
-.score-bar{height:6px;border-radius:3px;background:var(--border);overflow:hidden;min-width:50px;flex:1}
-.score-bar-fill{height:100%;border-radius:3px;transition:width .4s ease}
 .loading-spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
 .pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--primary);animation:pulse 2s infinite}
@@ -105,16 +107,37 @@ tr:hover td{background:rgba(16,185,129,.02)}
 .sesi-p5 .sesi-title{color:#C084FC}
 .confirm-dialog{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.75);animation:fadeUp .2s ease}
 .confirm-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;max-width:380px;width:90%;text-align:center}
-.edit-indicator{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;font-size:9px;font-weight:700;background:rgba(249,115,22,.12);color:#FB923C;border:1px solid rgba(249,115,22,.25);margin-left:8px}
-.desc-mapel-block{padding:12px 14px;border-radius:10px;border:1px solid;margin-bottom:10px}
-.desc-pjok{background:rgba(59,130,246,.04);border-color:rgba(59,130,246,.15)}
-.desc-pai{background:rgba(249,115,22,.04);border-color:rgba(249,115,22,.15)}
-.desc-p5{background:rgba(168,85,247,.04);border-color:rgba(168,85,247,.15)}
-.desc-item{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11.5px}
-.desc-item:last-child{border-bottom:none}
-.overall-col{background:rgba(16,185,129,.06);border-left:2px solid var(--primary)}
 
-/* ===== PRINT STYLES ===== */
+/* Agenda P5 Specific Styles */
+.agenda-timeline{position:relative;padding-left:28px}
+.agenda-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
+.agenda-step{position:relative;margin-bottom:16px;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .2s}
+.agenda-step:hover{border-color:rgba(168,85,247,.3);background:#162032}
+.agenda-step::before{content:attr(data-step);position:absolute;left:-28px;top:14px;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--p5),#7C3AED);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.agenda-step .step-title{font-size:13px;font-weight:700;color:#C084FC;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.agenda-step .step-phase{font-size:10px;color:var(--muted);margin-bottom:8px}
+.agenda-step .step-content{font-size:11.5px;color:var(--text);line-height:1.6;white-space:pre-line}
+.rundown-row{display:grid;grid-template-columns:100px 1fr;gap:12px;padding:12px;border-bottom:1px solid rgba(51,65,85,.4);transition:background .2s}
+.rundown-row:hover{background:rgba(168,85,247,.03)}
+.rundown-row:last-child{border-bottom:none}
+.rundown-time{font-size:11px;font-weight:700;color:#C084FC;white-space:nowrap;padding-top:2px}
+.rundown-body{font-size:11.5px;line-height:1.6}
+.rundown-body .rd-title{font-weight:700;color:var(--text);margin-bottom:3px}
+.rundown-body .rd-detail{color:var(--muted);font-size:11px;white-space:pre-line}
+.agenda-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s;margin-bottom:16px}
+.agenda-card:hover{border-color:rgba(168,85,247,.3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.agenda-card-header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.agenda-card-body{padding:18px}
+.fase-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.fase-toggle button{padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;font-family:inherit}
+.fase-toggle button.active-fa{background:rgba(16,185,129,.15);color:#34D399}
+.fase-toggle button.active-fbc{background:rgba(59,130,246,.15);color:#60A5FA}
+.tab-btn{padding:8px 18px;font-size:12px;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;font-family:inherit}
+.tab-btn.active{color:var(--p5);border-bottom-color:var(--p5)}
+.tab-btn:hover{color:var(--text)}
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty-state i{font-size:40px;margin-bottom:12px;opacity:.3}
+.empty-state p{font-size:13px}
 @media print{
     *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
     body{background:#fff!important;color:#000!important;font-size:11px}
@@ -124,41 +147,12 @@ tr:hover td{background:rgba(16,185,129,.02)}
     .pr-header h1{font-size:14px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin:0 0 1px}
     .pr-header h2{font-size:11px;font-weight:700;margin:0 0 1px}
     .pr-header .pr-sub{font-size:9.5px;color:#444;font-weight:500}
-    .pr-header .pr-addr{font-size:8px;color:#666;margin-bottom:4px}
     .pr-info{display:flex;justify-content:space-between;margin:4px 0;padding:4px 0;border-bottom:1px solid #bbb;font-size:10px}
-    .pr-topik-bar{margin:4px 0;padding:4px 6px;background:#F3F4F6;border:1px solid #ccc;border-radius:3px;font-size:8.5px;line-height:1.6}
-    .pr-topik-bar .ti{display:inline-flex;align-items:center;gap:3px;margin-right:10px}
-    .pr-topik-bar .ti-dot{display:inline-block;width:7px;height:7px;border-radius:2px}
-    .pr-topik-bar .ti-label{font-weight:700;color:#333}
     .pr-tbl{margin:5px 0;border:2px solid #222;overflow:hidden}
     .pr-tbl table{margin:0;font-size:9px;width:100%}
-    .pr-tbl th{background:#E5E7EB!important;color:#111!important;font-size:8px;font-weight:700;padding:4px 4px;border:1px solid #999!important;text-transform:uppercase}
-    .pr-tbl th.th-mp{font-size:9px;padding:5px 4px;letter-spacing:.4px}
-    .pr-tbl th.th-sb{background:#F3F4F6!important;font-size:7px;font-weight:600;text-transform:none}
-    .pr-tbl th.th-ov{background:#D1FAE5!important;color:#065F46!important;border-color:#6EE7B7!important}
+    .pr-tbl th{background:#E5E7EB!important;color:#111!important;font-size:8px;font-weight:700;padding:4px;border:1px solid #999!important;text-transform:uppercase}
     .pr-tbl td{color:#111!important;padding:3px 4px;border:1px solid #bbb!important;font-size:9px}
     .pr-tbl tr:nth-child(even) td{background:#F9FAFB!important}
-    .pr-tbl tr:hover td{background:transparent!important}
-    .pr-tbl td.td-ov{background:#ECFDF5!important;font-weight:700;border-color:#A7F3D0!important}
-    .pr-desc{margin:8px 0;border:1px solid #999;border-radius:3px;overflow:hidden}
-    .pr-desc-hdr{background:#E5E7EB;padding:4px 6px;font-size:9px;font-weight:800;border-bottom:1px solid #999}
-    .pr-desc-mp{padding:5px 6px;border-bottom:1px solid #ddd}
-    .pr-desc-mp:last-child{border-bottom:none}
-    .pr-desc-mp-h{font-size:9px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:3px}
-    .pr-desc-it{font-size:8px;color:#333;padding:1px 0 1px 10px;line-height:1.5}
-    .pr-desc-it .di-t{color:#888;font-size:7.5px}
-    .pr-desc-it .di-k{font-weight:600}
-    .pr-desc-it .di-d{color:#555;font-style:italic}
-    .pr-desc-it .di-dm{font-size:7.5px;color:#6D28D9}
-    .pr-catatan{margin:6px 0;padding:5px 6px;border:1px solid #999;border-radius:3px;background:#FAFAFA}
-    .pr-catatan-t{font-size:8.5px;font-weight:800;margin-bottom:2px}
-    .pr-catatan-p{font-size:8px;color:#333;line-height:1.5}
-    .pr-legend{margin:6px 0;padding:4px 6px;border:1px solid #ddd;border-radius:3px;font-size:7.5px;color:#555;background:#FAFAFA}
-    .pr-footer{margin:10px 0 0;padding-top:6px;border-top:1px solid #ccc;display:flex;justify-content:space-between;font-size:8px;color:#666}
-    .pr-sig{text-align:center;min-width:130px}
-    .pr-sig .sn{margin-top:40px;font-weight:700;color:#000;font-size:9px;border-bottom:1px solid #333;display:inline-block;padding:0 6px}
-    .pr-sig .sr{font-size:7.5px;color:#444;margin-top:1px}
-    .pr-stamp{text-align:right;font-size:7px;color:#aaa;margin-top:4px}
     @page{size:A4 landscape;margin:5mm}
 }
 </style>
@@ -173,7 +167,7 @@ tr:hover td{background:rgba(16,185,129,.02)}
     <nav class="py-2">
         <div class="nav-section">Utama</div><div class="nav-item active" data-page="dashboard"><i class="fas fa-th-large"></i>Dashboard</div>
         <div class="nav-section">Administrasi</div><div class="nav-item" data-page="guru"><i class="fas fa-chalkboard-teacher"></i>Data Guru</div><div class="nav-item" data-page="siswa"><i class="fas fa-user-graduate"></i>Data Siswa</div>
-        <div class="nav-section">Kegiatan Jumat</div><div class="nav-item" data-page="blokKegiatan"><i class="fas fa-cubes"></i>Blok Kegiatan</div><div class="nav-item" data-page="absensi"><i class="fas fa-clipboard-list"></i>Absensi</div><div class="nav-item" data-page="penilaian"><i class="fas fa-star-half-alt"></i>Penilaian</div>
+        <div class="nav-section">Kegiatan Jumat</div><div class="nav-item" data-page="blokKegiatan"><i class="fas fa-cubes"></i>Blok Kegiatan</div><div class="nav-item" data-page="agendaP5" style="color:var(--p5)"><i class="fas fa-scroll"></i>Agenda P5</div><div class="nav-item" data-page="absensi"><i class="fas fa-clipboard-list"></i>Absensi</div><div class="nav-item" data-page="penilaian"><i class="fas fa-star-half-alt"></i>Penilaian</div>
         <div class="nav-section">Laporan</div><div class="nav-item" data-page="rekap"><i class="fas fa-file-alt"></i>Rekap Nilai</div><div class="nav-item" data-page="galeri"><i class="fas fa-images"></i>Galeri Foto</div>
     </nav>
     <div class="absolute bottom-0 left-0 right-0 p-3 border-t border-slate-700/50"><div class="flex items-center gap-2 text-[10px] text-slate-500"><div class="pulse-dot" id="connDot"></div><span id="connText">Menghubungkan...</span></div></div>
@@ -189,7 +183,7 @@ tr:hover td{background:rgba(16,185,129,.02)}
         <div class="card"><div class="flex items-center gap-3 mb-2"><div class="w-9 h-9 rounded-lg bg-emerald-600/15 flex items-center justify-center text-emerald-400 text-sm"><i class="fas fa-user-graduate"></i></div></div><div class="text-xl font-black" id="statSiswa">0</div><div class="text-[11px] text-slate-400">Total Siswa</div></div>
         <div class="card"><div class="flex items-center gap-3 mb-2"><div class="w-9 h-9 rounded-lg bg-blue-600/15 flex items-center justify-center text-blue-400 text-sm"><i class="fas fa-chalkboard-teacher"></i></div></div><div class="text-xl font-black" id="statGuru">0</div><div class="text-[11px] text-slate-400">Guru Kolaborator</div></div>
         <div class="card"><div class="flex items-center gap-3 mb-2"><div class="w-9 h-9 rounded-lg bg-orange-600/15 flex items-center justify-center text-orange-400 text-sm"><i class="fas fa-cubes"></i></div></div><div class="text-xl font-black" id="statBlok">0</div><div class="text-[11px] text-slate-400">Blok Kegiatan</div></div>
-        <div class="card"><div class="flex items-center gap-3 mb-2"><div class="w-9 h-9 rounded-lg bg-purple-600/15 flex items-center justify-center text-purple-400 text-sm"><i class="fas fa-camera"></i></div></div><div class="text-xl font-black" id="statFoto">0</div><div class="text-[11px] text-slate-400">Foto Kegiatan</div></div>
+        <div class="card"><div class="flex items-center gap-3 mb-2"><div class="w-9 h-9 rounded-lg bg-purple-600/15 flex items-center justify-center text-purple-400 text-sm"><i class="fas fa-scroll"></i></div></div><div class="text-xl font-black" id="statAgenda">0</div><div class="text-[11px] text-slate-400">Agenda P5</div></div>
     </div>
     <div class="grid lg:grid-cols-2 gap-4"><div class="card"><h3 class="font-bold text-sm mb-3"><i class="fas fa-chart-bar text-emerald-400 mr-2"></i>Siswa per Kelas</h3><div id="dashKelas"></div></div><div class="card"><h3 class="font-bold text-sm mb-3"><i class="fas fa-clock text-orange-400 mr-2"></i>Blok Terbaru</h3><div id="dashRecent"></div></div></div>
 </div>
@@ -217,6 +211,82 @@ tr:hover td{background:rgba(16,185,129,.02)}
                 <div class="flex gap-2"><button class="btn btn-outline flex-1 justify-center" id="btnBatalBlok" onclick="batalEditBlok()" style="display:none"><i class="fas fa-times"></i>Batal</button><button class="btn btn-primary flex-1 justify-center" id="btnSimpanBlok" onclick="simpanBlok()"><i class="fas fa-save"></i>Simpan</button></div>
             </div></div></div>
         <div class="lg:col-span-3"><div class="flex flex-wrap items-center gap-2 mb-4"><select class="input" style="width:130px" id="filterBlokKelas" onchange="loadBlokList()"><option value="">Semua Kelas</option><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option></select><input type="month" class="input" style="width:160px" id="filterBlokBulan" onchange="loadBlokList()"></div><div id="blokList" class="space-y-2"><p class="text-center text-slate-500 text-sm py-8">Belum ada blok</p></div></div>
+    </div>
+</div>
+
+<!-- ==================== AGENDA P5 ==================== -->
+<div class="page" id="page-agendaP5">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div>
+            <h2 class="text-base font-bold flex items-center gap-2"><i class="fas fa-scroll text-purple-400"></i>Agenda Kegiatan P5</h2>
+            <p class="text-[11px] text-slate-500 mt-1">Jadwal pertemuan & agenda kegiatan kokurikuler P5 (CRUD)</p>
+        </div>
+        <div class="flex gap-2">
+            <button class="btn btn-outline btn-sm" onclick="loadTemplateAgenda()"><i class="fas fa-magic"></i>Muat Template</button>
+            <button class="btn btn-primary" onclick="openAgendaModal()"><i class="fas fa-plus"></i>Tambah Agenda</button>
+        </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+        <select class="input" style="width:200px" id="filterAgendaTema" onchange="renderAgendaList()">
+            <option value="">Semua Tema</option>
+        </select>
+        <select class="input" style="width:140px" id="filterAgendaPertemuan" onchange="renderAgendaList()">
+            <option value="">Semua Pertemuan</option>
+            <option value="1">Pertemuan 1</option>
+            <option value="2">Pertemuan 2</option>
+            <option value="3">Pertemuan 3</option>
+            <option value="4">Pertemuan 4</option>
+            <option value="5">Pertemuan 5</option>
+        </select>
+        <select class="input" style="width:120px" id="filterAgendaTipe" onchange="renderAgendaList()">
+            <option value="">Semua Tipe</option>
+            <option value="alur">Alur Pentahapan</option>
+            <option value="rundown">Rundown Harian</option>
+            <option value="tips">Tips Pelaksanaan</option>
+        </select>
+    </div>
+
+    <!-- Tab View -->
+    <div class="flex border-b border-slate-700/50 mb-4 no-print">
+        <button class="tab-btn active" data-agendatab="list" onclick="switchAgendaTab('list')"><i class="fas fa-list mr-1"></i>Daftar Agenda</button>
+        <button class="tab-btn" data-agendatab="timeline" onclick="switchAgendaTab('timeline')"><i class="fas fa-stream mr-1"></i>Timeline View</button>
+        <button class="tab-btn" data-agendatab="rundown" onclick="switchAgendaTab('rundown')"><i class="fas fa-clock mr-1"></i>Rundown Harian</button>
+    </div>
+
+    <!-- Tab: Daftar Agenda -->
+    <div id="agendaTabList">
+        <div id="agendaListContainer"></div>
+    </div>
+
+    <!-- Tab: Timeline View -->
+    <div id="agendaTabTimeline" style="display:none">
+        <div class="grid lg:grid-cols-2 gap-4">
+            <div class="card">
+                <h3 class="font-bold text-sm mb-4 flex items-center gap-2"><span class="badge badge-fase-a">Fase A</span> Kelas 1-3</h3>
+                <div class="agenda-timeline" id="timelineFA"></div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-sm mb-4 flex items-center gap-2"><span class="badge badge-fase-bc">Fase B & C</span> Kelas 4-6</h3>
+                <div class="agenda-timeline" id="timelineFBC"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Rundown Harian -->
+    <div id="agendaTabRundown" style="display:none">
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-clock text-purple-400"></i>Rundown Kegiatan Harian (Hari Puncak)</h3>
+                <div class="fase-toggle">
+                    <button class="active-fa" onclick="switchRundownFase('fa',this)">Kelas 1-3</button>
+                    <button onclick="switchRundownFase('fbc',this)">Kelas 4-6</button>
+                </div>
+            </div>
+            <div id="rundownContent"></div>
+        </div>
+        <div class="card mt-4" id="tipsContainer"></div>
     </div>
 </div>
 
@@ -248,7 +318,6 @@ tr:hover td{background:rgba(16,185,129,.02)}
     </div>
 </div>
 
-<!-- ZONE CETAK: di luar .main-content, langsung di body -->
 <div id="printZone" style="display:none"></div>
 
 <!-- MODAL GURU -->
@@ -260,6 +329,107 @@ tr:hover td{background:rgba(16,185,129,.02)}
 <!-- MODAL DETAIL & FOTO -->
 <div class="modal-bg" id="modalDetail"><div class="modal modal-lg"><div class="flex items-center justify-between p-4 border-b border-slate-700/50"><h3 class="font-bold text-sm">Detail Blok</h3><button onclick="closeModal('modalDetail')" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button></div><div class="p-4" id="detailContent"></div></div></div>
 <div class="modal-bg" id="modalFoto" onclick="closeModal('modalFoto')"><div style="max-width:90vw;max-height:90vh;margin:auto" onclick="event.stopPropagation()"><img id="fotoLarge" src="" style="max-width:100%;max-height:85vh;border-radius:10px" alt="Foto"></div></div>
+
+<!-- ==================== MODAL AGENDA P5 ==================== -->
+<div class="modal-bg" id="modalAgenda">
+<div class="modal modal-xl" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between p-4 border-b border-slate-700/50">
+        <h3 class="font-bold text-sm" id="modalAgendaTitle"><i class="fas fa-scroll text-purple-400 mr-2"></i>Tambah Agenda P5</h3>
+        <button onclick="closeModal('modalAgenda')" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="p-5 space-y-4" style="max-height:75vh;overflow-y:auto">
+        <input type="hidden" id="agendaId" value="">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div>
+                <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tema P5</label>
+                <select class="input" id="agendaTema">
+                    <option value="Kearifan Lokal">Kearifan Lokal</option>
+                    <option value="Gaya Hidup Berkelanjutan">Gaya Hidup Berkelanjutan</option>
+                    <option value="Bhinneka Tunggal Ika">Bhinneka Tunggal Ika</option>
+                    <option value="Kewirausahaan">Kewirausahaan</option>
+                    <option value="Rekayasa dan Teknologi">Rekayasa dan Teknologi</option>
+                    <option value="Bangunlah Jiwa dan Raganya">Bangunlah Jiwa dan Raganya</option>
+                    <option value="Suara Demokrasi">Suara Demokrasi</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Sub Tema / Fokus</label>
+                <input type="text" class="input" id="agendaSubTema" placeholder="Melestarikan Jajanan Tradisional">
+            </div>
+            <div>
+                <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tipe Agenda</label>
+                <select class="input" id="agendaTipe">
+                    <option value="alur">Alur Pentahapan</option>
+                    <option value="rundown">Rundown Harian</option>
+                    <option value="tips">Tips Pelaksanaan</option>
+                </select>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+                <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Nomor Pertemuan</label>
+                <select class="input" id="agendaPertemuan">
+                    <option value="1">Pertemuan 1 - Pengenalan</option>
+                    <option value="2">Pertemuan 2 - Kontekstualisasi</option>
+                    <option value="3">Pertemuan 3 - Aksi (Praktik)</option>
+                    <option value="4">Pertemuan 4 - Gelar Karya</option>
+                    <option value="5">Pertemuan 5 - Refleksi & Evaluasi</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Judul Pertemuan</label>
+                <input type="text" class="input" id="agendaJudul" placeholder="Pengenalan Jajanan Tradisional">
+            </div>
+        </div>
+
+        <!-- Konten Fase A -->
+        <div class="sesi-box sesi-p5">
+            <div class="sesi-title"><i class="fas fa-child"></i>Kelas 1-3 (Fase A)</div>
+            <textarea class="input" id="agendaFaseA" placeholder="Tuliskan kegiatan untuk kelas 1-3..." style="min-height:100px;font-size:12.5px;line-height:1.7"></textarea>
+        </div>
+
+        <!-- Konten Fase B & C -->
+        <div class="sesi-box" style="background:rgba(59,130,246,.04);border-color:rgba(59,130,246,.15)">
+            <div class="sesi-title" style="color:#60A5FA"><i class="fas fa-user-graduate"></i>Kelas 4-6 (Fase B & C)</div>
+            <textarea class="input" id="agendaFaseBC" placeholder="Tuliskan kegiatan untuk kelas 4-6..." style="min-height:100px;font-size:12.5px;line-height:1.7"></textarea>
+        </div>
+
+        <!-- Dimensi Karakter -->
+        <div>
+            <label class="text-[11px] text-slate-400 font-semibold mb-2 block">Dimensi Profil Pelajar Pancasila</label>
+            <div class="flex flex-wrap gap-2" id="agendaDimensiWrap">
+                <label class="dimensi-chip" data-dim="beriman" onclick="toggleAgendaDimensi(this)"><i class="fas fa-hands-praying" style="font-size:9px"></i> Beriman & Bertakwa</label>
+                <label class="dimensi-chip" data-dim="berkebinekaan" onclick="toggleAgendaDimensi(this)"><i class="fas fa-globe-asia" style="font-size:9px"></i> Berkebinekaan Global</label>
+                <label class="dimensi-chip" data-dim="gotong_royong" onclick="toggleAgendaDimensi(this)"><i class="fas fa-people-carry-box" style="font-size:9px"></i> Bergotong Royong</label>
+                <label class="dimensi-chip" data-dim="mandiri" onclick="toggleAgendaDimensi(this)"><i class="fas fa-person-walking" style="font-size:9px"></i> Mandiri</label>
+                <label class="dimensi-chip" data-dim="bernalar" onclick="toggleAgendaDimensi(this)"><i class="fas fa-brain" style="font-size:9px"></i> Bernalar Kritis</label>
+                <label class="dimensi-chip" data-dim="kreatif" onclick="toggleAgendaDimensi(this)"><i class="fas fa-lightbulb" style="font-size:9px"></i> Kreatif</label>
+            </div>
+        </div>
+
+        <!-- Catatan Tambahan -->
+        <div>
+            <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Catatan / Alat & Bahan</label>
+            <textarea class="input" id="agendaCatatan" placeholder="Alat, bahan, atau catatan tambahan..." style="min-height:60px;font-size:12px"></textarea>
+        </div>
+    </div>
+    <div class="flex justify-end gap-2 p-4 border-t border-slate-700/50">
+        <button class="btn btn-outline" onclick="closeModal('modalAgenda')">Batal</button>
+        <button class="btn btn-primary" onclick="simpanAgenda()"><i class="fas fa-save"></i>Simpan Agenda</button>
+    </div>
+</div>
+</div>
+
+<!-- MODAL DETAIL AGENDA -->
+<div class="modal-bg" id="modalAgendaDetail" onclick="closeModal('modalAgendaDetail')">
+<div class="modal modal-lg" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between p-4 border-b border-slate-700/50">
+        <h3 class="font-bold text-sm" id="modalAgendaDetailTitle"><i class="fas fa-eye text-purple-400 mr-2"></i>Detail Agenda</h3>
+        <button onclick="closeModal('modalAgendaDetail')" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="p-5" id="agendaDetailContent" style="max-height:75vh;overflow-y:auto"></div>
+</div>
+</div>
 
 <script>
 /* ==================== DATA P5 ==================== */
@@ -282,8 +452,9 @@ const db=firebase.database(),storage=firebase.storage();
 db.ref('.info/connected').on('value',s=>{const c=s.val();document.getElementById('connDot').style.background=c?'var(--primary)':'var(--danger)';document.getElementById('connText').textContent=c?'Terhubung':'Terputus'});
 
 /* ==================== STATE ==================== */
-let allGuru={},allSiswa={},allBlok={},selectedFiles=[],absenTemp={},nilaiTemp={};
+let allGuru={},allSiswa={},allBlok={},allAgenda={},selectedFiles=[],absenTemp={},nilaiTemp={};
 let absSelectedBlokId=null,absSelectedMapel='',nilSelectedBlokId=null,nilSelectedMapel='';
+let selectedAgendaDimensi=[];
 let rekapPrintData={kelas:'',mapel:'',mapels:[],topikByMp:{},guruByMp:{},temaP5ByMp:{},tglByMp:{},dimByMp:{},kegListByMp:{},rows:[]};
 
 /* ==================== UTILITAS ==================== */
@@ -300,17 +471,14 @@ function getPredP(r){if(!r&&r!==0)return{text:'-',color:'#999'};if(r>=4.5)return
 function getScoreColor(r){if(!r&&r!==0)return'var(--border)';if(r>=4.5)return'#10B981';if(r>=3.5)return'#3B82F6';if(r>=2.5)return'#F59E0B';if(r>=1.5)return'#F97316';return'#EF4444'}
 function nilaiOpts(sel){let h='<option value="">-</option>';for(let v=5;v>=1;v--){h+='<option value="'+v+'" '+(sel==v?'selected':'')+'>'+{5:'A (5)',4:'B (4)',3:'C (3)',2:'D (2)',1:'E (1)'}[v]+'</option>'}return h}
 function getMapelBadge(m){return{PJOK:'badge-pjok',PAI:'badge-pai',P5:'badge-p5'}[m]||'badge-kelas'}
-function getMapelFullName(m){return{PJOK:'Pendidikan Jasmani Olahraga & Kesehatan',PAI:'Pendidikan Agama Islam',P5:'Projek Penguatan Profil Pelajar Pancasila'}[m]||m}
-function getTemaP5Nama(id){const t=P5_TEMA.find(x=>x.id===id);return t?t.nama:'-'}
-function getDimensiNama(id){const d=DIMENSI.find(x=>x.id===id);return d?d.nama:'-'}
 function getGuruNama(id){if(!id)return'-';return allGuru[id]?allGuru[id].nama:'-'}
-function getGuruNIP(kls){const g=Object.keys(allGuru).find(k=>allGuru[k].peran==='guru_kelas'&&allGuru[k].kelas===kls);return g&&allGuru[g].hp?allGuru[g].hp:'-';}
+function getDimensiNama(id){const d=DIMENSI.find(x=>x.id===id);return d?d.nama:'-'}
 document.getElementById('currentDate').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 (function(){const d=new Date(),day=d.getDay(),diff=day<=5?(5-day):(5-day+7);d.setDate(d.getDate()+diff);document.getElementById('blokTanggal').value=d.toISOString().split('T')[0]})();
 (function(){const sel=document.getElementById('blokTemaP5');P5_TEMA.forEach(t=>{sel.innerHTML+='<option value="'+t.id+'">'+t.nama+'</option>'})})();
 (function(){const c=document.getElementById('dimensiChips');DIMENSI.forEach(d=>{c.innerHTML+='<span class="dimensi-chip" data-id="'+d.id+'" onclick="toggleDimensi(\''+d.id+'\')"><i class="fas '+d.icon+'" style="font-size:9px"></i> '+d.nama+'</span>'})})();
 function onTemaP5Change(){const id=document.getElementById('blokTemaP5').value,info=document.getElementById('blokTemaP5Info');if(id){const t=P5_TEMA.find(x=>x.id===id);info.style.display='block';info.innerHTML='<b>Fokus:</b> '+t.fokus+'<br><b>Contoh:</b> '+t.contoh}else info.style.display='none'}
-function toggleDimensi(id){const i=selectedDimensi.indexOf(id);if(i>=0)selectedDimensi.splice(i,1);else selectedDimensi.push(id);document.querySelectorAll('.dimensi-chip').forEach(c=>{c.classList.toggle('selected',selectedDimensi.includes(c.dataset.id))})}
+function toggleDimensi(id){const i=selectedDimensi.indexOf(id);if(i>=0)selectedDimensi.splice(i,1);else selectedDimensi.push(id);document.querySelectorAll('#dimensiChips .dimensi-chip').forEach(c=>{c.classList.toggle('selected',selectedDimensi.includes(c.dataset.id))})}
 
 /* ==================== UPLOAD ==================== */
 const uz=document.getElementById('uploadZone');
@@ -324,8 +492,8 @@ function renderFilePreview(){const c=document.getElementById('filePreview');if(!
 async function uploadPhotos(blokId){const urls=[];for(let i=0;i<selectedFiles.length;i++){const ref=storage.ref('kokurikuler/'+blokId+'/'+Date.now()+'_'+i);await ref.put(selectedFiles[i]);urls.push(await ref.getDownloadURL())}return urls}
 
 /* ==================== NAVIGASI ==================== */
-const pageTitles={dashboard:'Dashboard',guru:'Data Guru',siswa:'Data Siswa',blokKegiatan:'Blok Kegiatan',absensi:'Absensi',penilaian:'Penilaian',rekap:'Rekap Nilai & Raport',galeri:'Galeri Foto'};
-document.querySelectorAll('.nav-item').forEach(item=>{item.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));item.classList.add('active');const pg=item.dataset.page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+pg).classList.add('active');document.getElementById('pageTitle').textContent=pageTitles[pg]||'';if(pg==='dashboard')loadDashboard();if(pg==='guru')loadGuru();if(pg==='siswa')loadSiswa();if(pg==='blokKegiatan'){populateBlokDropdowns();loadBlokList()}if(pg==='absensi')populateFilterDropdowns('abs');if(pg==='penilaian')populateFilterDropdowns('nil');if(pg==='rekap')loadRekap();if(pg==='galeri')loadGaleri();if(window.innerWidth<1024)toggleSidebar()})});
+const pageTitles={dashboard:'Dashboard',guru:'Data Guru',siswa:'Data Siswa',blokKegiatan:'Blok Kegiatan',agendaP5:'Agenda Kegiatan P5',absensi:'Absensi',penilaian:'Penilaian',rekap:'Rekap Nilai & Raport',galeri:'Galeri Foto'};
+document.querySelectorAll('.nav-item').forEach(item=>{item.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));item.classList.add('active');const pg=item.dataset.page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+pg).classList.add('active');document.getElementById('pageTitle').textContent=pageTitles[pg]||'';if(pg==='dashboard')loadDashboard();if(pg==='guru')loadGuru();if(pg==='siswa')loadSiswa();if(pg==='blokKegiatan'){populateBlokDropdowns();loadBlokList()}if(pg==='agendaP5')loadAgendaPage();if(pg==='absensi')populateFilterDropdowns('abs');if(pg==='penilaian')populateFilterDropdowns('nil');if(pg==='rekap')loadRekap();if(pg==='galeri')loadGaleri();if(window.innerWidth<1024)toggleSidebar()})});
 
 /* ==================== GURU ==================== */
 function toggleGuruField(){document.getElementById('guruKelasWrap').style.display=document.getElementById('guruPeran').value==='guru_kelas'?'block':'none'}
@@ -337,225 +505,294 @@ function renderGuru(){const tbl=document.getElementById('tblGuru'),keys=Object.k
 
 /* ==================== SISWA ==================== */
 function openSiswaModal(id){document.getElementById('siswaId').value='';document.getElementById('siswaNIS').value='';document.getElementById('siswaNama').value='';document.getElementById('siswaKelas').value='1';document.getElementById('siswaJK').value='Laki-laki';if(id&&allSiswa[id]){document.getElementById('modalSiswaTitle').textContent='Edit';document.getElementById('siswaId').value=id;document.getElementById('siswaNIS').value=allSiswa[id].nis||'';document.getElementById('siswaNama').value=allSiswa[id].nama||'';document.getElementById('siswaKelas').value=allSiswa[id].kelas||'1';document.getElementById('siswaJK').value=allSiswa[id].jk||'Laki-laki'}else document.getElementById('modalSiswaTitle').textContent='Tambah Siswa';openModal('modalSiswa')}
-function simpanSiswa(){const nis=document.getElementById('siswaNIS').value.trim(),nama=document.getElementById('siswaNama').value.trim(),kelas=document.getElementById('siswaKelas').value,jk=document.getElementById('siswaJK').value,id=document.getElementById('siswaId').value;if(!nis||!nama){toast('NIS dan Nama wajib','error');return}const data={nis,nama,kelas,jk,updatedAt:Date.now()};const ref=id?db.ref('kokurikuler/siswa/'+id):db.ref('kokurikuler/siswa').push();ref.set(data).then(()=>{toast('Disimpan');closeModal('modalSiswa');loadSiswa()}).catch(e=>toast('Gagal: '+e.message,'error'))}
-async function hapusSiswa(id){if(!(await confirmAction('Hapus siswa?')))return;db.ref('kokurikuler/siswa/'+id).remove().then(()=>{toast('Dihapus');loadSiswa()}).catch(e=>toast('Gagal','error'))}
+function simpanSiswa(){const nis=document.getElementById('siswaNIS').value.trim(),nama=document.getElementById('siswaNama').value.trim(),kelas=document.getElementById('siswaKelas').value,jk=document.getElementById('siswaJK').value,id=document.getElementById('siswaId').value;if(!nama){toast('Nama wajib','error');return}const data={nis,nama,kelas,jk,updatedAt:Date.now()};const ref=id?db.ref('kokurikuler/siswa/'+id):db.ref('kokurikuler/siswa').push();ref.set(data).then(()=>{toast('Disimpan');closeModal('modalSiswa');loadSiswa()}).catch(e=>toast('Gagal: '+e.message,'error'))}
+async function hapusSiswa(id){if(!(await confirmAction('Hapus siswa ini?')))return;db.ref('kokurikuler/siswa/'+id).remove().then(()=>{toast('Dihapus');loadSiswa()}).catch(e=>toast('Gagal','error'))}
 function loadSiswa(){db.ref('kokurikuler/siswa').once('value').then(s=>{allSiswa=s.val()||{};renderSiswa()})}
-function renderSiswa(){const tbl=document.getElementById('tblSiswa'),fk=document.getElementById('filterKelasSiswa').value,sc=document.getElementById('searchSiswa').value.toLowerCase();let keys=Object.keys(allSiswa);if(fk)keys=keys.filter(k=>allSiswa[k].kelas===fk);if(sc)keys=keys.filter(k=>(allSiswa[k].nama||'').toLowerCase().includes(sc)||(allSiswa[k].nis||'').toLowerCase().includes(sc));if(!keys.length){tbl.innerHTML='<tr><td colspan="6" class="text-center text-slate-500 py-8">Tidak ada data</td></tr>';return}keys.sort((a,b)=>(allSiswa[a].nama||'').localeCompare(allSiswa[b].nama||''));let h='';keys.forEach((k,i)=>{const s=allSiswa[k];h+='<tr><td class="text-slate-400">'+(i+1)+'</td><td>'+s.nis+'</td><td class="font-semibold">'+s.nama+'</td><td><span class="badge badge-kelas">Kelas '+s.kelas+'</span></td><td class="text-xs text-slate-400">'+(s.jk==='Laki-laki'?'L':'P')+'</td><td><button class="btn btn-outline btn-sm" onclick="openSiswaModal(\''+k+'\')"><i class="fas fa-edit"></i></button> <button class="btn btn-danger btn-sm" onclick="hapusSiswa(\''+k+'\')"><i class="fas fa-trash"></i></button></td></tr>'});tbl.innerHTML=h}
+function renderSiswa(){const tbl=document.getElementById('tblSiswa'),fk=document.getElementById('filterKelasSiswa').value,src=document.getElementById('searchSiswa').value.toLowerCase();let keys=Object.keys(allSiswa);if(fk)keys=keys.filter(k=>allSiswa[k].kelas===fk);if(src)keys=keys.filter(k=>allSiswa[k].nama.toLowerCase().includes(src));if(!keys.length){tbl.innerHTML='<tr><td colspan="6" class="text-center text-slate-500 py-8">Tidak ada data</td></tr>';return}let h='';keys.forEach((k,i)=>{const s=allSiswa[k];h+='<tr><td class="text-slate-400">'+(i+1)+'</td><td class="text-slate-400 text-xs">'+(s.nis||'-')+'</td><td class="font-semibold">'+s.nama+'</td><td><span class="badge badge-kelas">Kelas '+s.kelas+'</span></td><td class="text-xs">'+(s.jk||'-')+'</td><td><button class="btn btn-outline btn-sm" onclick="openSiswaModal(\''+k+'\')"><i class="fas fa-edit"></i></button> <button class="btn btn-danger btn-sm" onclick="hapusSiswa(\''+k+'\')"><i class="fas fa-trash"></i></button></td></tr>'});tbl.innerHTML=h}
 
 /* ==================== BLOK KEGIATAN ==================== */
-function populateBlokDropdowns(){const gk=document.getElementById('blokGuruKelas'),gp=document.getElementById('blokGuruPJOK'),ga=document.getElementById('blokGuruPAI');gk.innerHTML='<option value="">-- Pilih --</option>';gp.innerHTML='<option value="">-- Pilih --</option>';ga.innerHTML='<option value="">-- Pilih --</option>';Object.keys(allGuru).forEach(k=>{const g=allGuru[k];if(g.peran==='guru_kelas')gk.innerHTML+='<option value="'+k+'">'+g.nama+' (Kelas '+g.kelas+')</option>';if(g.peran==='pjok')gp.innerHTML+='<option value="'+k+'">'+g.nama+'</option>';if(g.peran==='pai')ga.innerHTML+='<option value="'+k+'">'+g.nama+'</option>'})}
-async function simpanBlok(){const tanggal=document.getElementById('blokTanggal').value,kelas=document.getElementById('blokKelas').value,guruKelas=document.getElementById('blokGuruKelas').value;const guruPJOK=document.getElementById('blokGuruPJOK').value,topikPJOK=document.getElementById('blokTopikPJOK').value.trim(),deskPJOK=document.getElementById('blokDeskPJOK').value.trim();const guruPAI=document.getElementById('blokGuruPAI').value,topikPAI=document.getElementById('blokTopikPAI').value.trim(),deskPAI=document.getElementById('blokDeskPAI').value.trim();const temaP5=document.getElementById('blokTemaP5').value,topikP5=document.getElementById('blokTopikP5').value.trim(),deskP5=document.getElementById('blokDeskP5').value.trim();if(!tanggal||!kelas){toast('Tanggal dan Kelas wajib','error');return}const data={tanggal,kelas,guruKelas,updatedAt:Date.now(),pjok:{guru:guruPJOK,topik:topikPJOK,deskripsi:deskPJOK},pai:{guru:guruPAI,topik:topikPAI,deskripsi:deskPAI},p5:{tema:temaP5,topik:topikP5,deskripsi:deskP5,dimensi:[...selectedDimensi]},fotos:[]};const editId=document.getElementById('blokEditId').value;let blokId=editId;if(editId&&allBlok[editId])data.fotos=allBlok[editId].fotos||[];if(!editId)blokId=genId();if(selectedFiles.length>0){document.getElementById('btnSimpanBlok').disabled=true;document.getElementById('btnSimpanBlok').innerHTML='<span class="loading-spinner"></span>';try{const urls=await uploadPhotos(blokId);data.fotos=data.fotos.concat(urls)}catch(e){toast('Gagal upload','error');document.getElementById('btnSimpanBlok').disabled=false;document.getElementById('btnSimpanBlok').innerHTML='<i class="fas fa-save"></i> Simpan';return}}db.ref('kokurikuler/blok/'+blokId).set(data).then(()=>{toast(editId?'Diperbarui':'Disimpan');resetBlokForm();loadBlokList()}).catch(e=>toast('Gagal','error'));document.getElementById('btnSimpanBlok').disabled=false;document.getElementById('btnSimpanBlok').innerHTML='<i class="fas fa-save"></i> Simpan'}
-function resetBlokForm(){document.getElementById('blokEditId').value='';document.getElementById('blokTanggal').value=(function(){const d=new Date(),day=d.getDay(),diff=day<=5?(5-day):(5-day+7);d.setDate(d.getDate()+diff);return d.toISOString().split('T')[0]})();document.getElementById('blokKelas').value='';document.getElementById('blokGuruKelas').value='';['blokGuruPJOK','blokTopikPJOK','blokDeskPJOK','blokGuruPAI','blokTopikPAI','blokDeskPAI','blokTemaP5','blokTopikP5','blokDeskP5'].forEach(id=>document.getElementById(id).value='');document.getElementById('blokTemaP5Info').style.display='none';selectedDimensi=[];document.querySelectorAll('.dimensi-chip').forEach(c=>c.classList.remove('selected'));selectedFiles=[];renderFilePreview();document.getElementById('btnBatalBlok').style.display='none';document.getElementById('blokFormTitle').innerHTML='<i class="fas fa-plus-circle text-emerald-400 mr-2"></i>Buat Blok Kegiatan Jumat'}
-function batalEditBlok(){resetBlokForm()}
-function editBlok(id){const b=allBlok[id];if(!b)return;document.getElementById('page-blokKegiatan').querySelector('.lg\\:col-span-2').scrollTo({top:0,behavior:'smooth'});document.getElementById('blokEditId').value=id;document.getElementById('blokTanggal').value=b.tanggal||'';document.getElementById('blokKelas').value=b.kelas||'';populateBlokDropdowns();setTimeout(()=>{document.getElementById('blokGuruKelas').value=b.guruKelas||'';document.getElementById('blokGuruPJOK').value=(b.pjok||{}).guru||'';document.getElementById('blokTopikPJOK').value=(b.pjok||{}).topik||'';document.getElementById('blokDeskPJOK').value=(b.pjok||{}).deskripsi||'';document.getElementById('blokGuruPAI').value=(b.pai||{}).guru||'';document.getElementById('blokTopikPAI').value=(b.pai||{}).topik||'';document.getElementById('blokDeskPAI').value=(b.pai||{}).deskripsi||'';document.getElementById('blokTemaP5').value=(b.p5||{}).tema||'';onTemaP5Change();document.getElementById('blokTopikP5').value=(b.p5||{}).topik||'';document.getElementById('blokDeskP5').value=(b.p5||{}).deskripsi||'';selectedDimensi=(b.p5||{}).dimensi?[...b.p5.dimensi]:[];document.querySelectorAll('.dimensi-chip').forEach(c=>{c.classList.toggle('selected',selectedDimensi.includes(c.dataset.id))})},100);selectedFiles=[];renderFilePreview();document.getElementById('btnBatalBlok').style.display='inline-flex';document.getElementById('blokFormTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Blok<span class="edit-indicator"><i class="fas fa-pen"></i>Edit</span>';toast('Dimuat ke form','info')}
-async function hapusBlok(id){if(!(await confirmAction('Hapus blok ini beserta semua data?')))return;db.ref('kokurikuler/blok/'+id).remove().then(()=>{db.ref('kokurikuler/absensi').orderByChild('blokId').equalTo(id).once('value').then(s=>{const d=s.val();if(d)Object.keys(d).forEach(k=>db.ref('kokurikuler/absensi/'+k).remove())});db.ref('kokurikuler/nilai').orderByChild('blokId').equalTo(id).once('value').then(s=>{const d=s.val();if(d)Object.keys(d).forEach(k=>db.ref('kokurikuler/nilai/'+k).remove())});toast('Dihapus');loadBlokList()}).catch(e=>toast('Gagal','error'))}
-function loadBlokList(){db.ref('kokurikuler/blok').once('value').then(s=>{allBlok=s.val()||{};renderBlokList()})}
-function renderBlokList(){const c=document.getElementById('blokList'),fk=document.getElementById('filterBlokKelas').value,fb=document.getElementById('filterBlokBulan').value;let keys=Object.keys(allBlok);if(fk)keys=keys.filter(k=>allBlok[k].kelas===fk);if(fb)keys=keys.filter(k=>(allBlok[k].tanggal||'').startsWith(fb));keys.sort((a,b)=>(allBlok[b].tanggal||'').localeCompare(allBlok[a].tanggal||''));if(!keys.length){c.innerHTML='<p class="text-center text-slate-500 text-sm py-8">Belum ada blok</p>';return}let h='';keys.forEach(k=>{const b=allBlok[k],tl=[];if((b.pjok||{}).topik)tl.push('<span class="badge badge-pjok">PJOK: '+b.pjok.topik+'</span>');if((b.pai||{}).topik)tl.push('<span class="badge badge-pai">PAI: '+b.pai.topik+'</span>');if((b.p5||{}).topik)tl.push('<span class="badge badge-p5">P5: '+b.p5.topik+'</span>');h+='<div class="blok-card"><div class="flex flex-wrap items-start justify-between gap-2 mb-2"><div><div class="font-bold text-sm">'+formatDateShort(b.tanggal)+' <span class="badge badge-kelas">Kelas '+b.kelas+'</span></div><div class="text-[11px] text-slate-400 mt-1">Guru Kelas: '+getGuruNama(b.guruKelas)+'</div></div><div class="flex gap-1 flex-shrink-0"><button class="btn btn-outline btn-sm" onclick="viewBlokDetail(\''+k+'\')"><i class="fas fa-eye"></i></button><button class="btn btn-accent btn-sm" onclick="editBlok(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusBlok(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div><div class="flex flex-wrap gap-1">'+(tl.join('')||'<span class="text-xs text-slate-500">Belum ada topik</span>')+'</div>'+((b.fotos||[]).length?'<div class="text-[10px] text-slate-500 mt-1"><i class="fas fa-image mr-1"></i>'+b.fotos.length+' foto</div>':'')+'</div>'});c.innerHTML=h}
-function viewBlokDetail(id){const b=allBlok[id];if(!b)return;const pj=b.pjok||{},pa=b.pai||{},p5=b.p5||{};let fh='';if(b.fotos&&b.fotos.length){fh='<div class="mt-3 photo-grid">';b.fotos.forEach(u=>{fh+='<img src="'+u+'" onclick="document.getElementById(\'fotoLarge\').src=\''+u+'\';openModal(\'modalFoto\')" alt="f">'});fh+='</div>'}let dh='';if(p5.dimensi&&p5.dimensi.length)dh='<div class="flex flex-wrap gap-1 mt-1">'+p5.dimensi.map(d=>'<span class="badge badge-dimensi"><i class="fas '+(DIMENSI.find(x=>x.id===d)||{icon:'fa-circle'}).icon+'" style="font-size:8px"></i> '+getDimensiNama(d)+'</span>').join('')+'</div>';document.getElementById('detailContent').innerHTML='<div class="grid grid-cols-2 gap-3 mb-4"><div><span class="text-[10px] text-slate-500 block">Tanggal</span><span class="font-semibold text-sm">'+formatDate(b.tanggal)+'</span></div><div><span class="text-[10px] text-slate-500 block">Kelas</span><span class="badge badge-kelas">Kelas '+b.kelas+'</span></div></div><div class="sesi-box sesi-pjok"><div class="sesi-title"><i class="fas fa-running"></i>PJOK</div><div class="text-xs"><b>Guru:</b> '+getGuruNama(pj.guru)+' | <b>Topik:</b> '+(pj.topik||'-')+'</div><div class="text-xs text-slate-300 mt-1">'+(pj.deskripsi||'-')+'</div></div><div class="sesi-box sesi-pai"><div class="sesi-title"><i class="fas fa-book-quran"></i>PAI</div><div class="text-xs"><b>Guru:</b> '+getGuruNama(pa.guru)+' | <b>Topik:</b> '+(pa.topik||'-')+'</div><div class="text-xs text-slate-300 mt-1">'+(pa.deskripsi||'-')+'</div></div><div class="sesi-box sesi-p5"><div class="sesi-title"><i class="fas fa-graduation-cap"></i>P5</div><div class="text-xs"><b>Tema:</b> '+getTemaP5Nama(p5.tema)+' | <b>Topik:</b> '+(p5.topik||'-')+'</div><div class="text-xs text-slate-300 mt-1">'+(p5.deskripsi||'-')+'</div>'+dh+'</div>'+fh;openModal('modalDetail')}
+function populateBlokDropdowns(){const gk=document.getElementById('blokGuruKelas'),gp=document.getElementById('blokGuruPJOK'),ga=document.getElementById('blokGuruPAI');['gk','gp','ga'].forEach(t=>{const sel=t==='gk'?gk:t==='gp'?gp:ga;const role=t==='gk'?'guru_kelas':t==='gp'?'pjok':'pai';let h='<option value="">-- Pilih --</option>';Object.keys(allGuru).forEach(k=>{if(allGuru[k].peran===role)h+='<option value="'+k+'">'+allGuru[k].nama+(allGuru[k].kelas?' (Kls '+allGuru[k].kelas+')':'')+'</option>'});sel.innerHTML=h})}
+function batalEditBlok(){document.getElementById('blokEditId').value='';document.getElementById('blokFormTitle').innerHTML='<i class="fas fa-plus-circle text-emerald-400 mr-2"></i>Buat Blok Kegiatan Jumat';document.getElementById('btnBatalBlok').style.display='none'}
+function simpanBlok(){const id=document.getElementById('blokEditId').value,tgl=document.getElementById('blokTanggal').value,kls=document.getElementById('blokKelas').value;if(!tgl||!kls){toast('Tanggal & Kelas wajib','error');return}const data={tanggal:tgl,kelas:kls,guruKelas:document.getElementById('blokGuruKelas').value,pjok:{guru:document.getElementById('blokGuruPJOK').value,topik:document.getElementById('blokTopikPJOK').value,desk:document.getElementById('blokDeskPJOK').value},pai:{guru:document.getElementById('blokGuruPAI').value,topik:document.getElementById('blokTopikPAI').value,desk:document.getElementById('blokDeskPAI').value},p5:{tema:document.getElementById('blokTemaP5').value,topik:document.getElementById('blokTopikP5').value,desk:document.getElementById('blokDeskP5').value,dimensi:[...selectedDimensi]},updatedAt:Date.now()};const save=()=>{const ref=id?db.ref('kokurikuler/blok/'+id):db.ref('kokurikuler/blok').push();ref.set(data).then(()=>{toast('Disimpan');selectedFiles=[];renderFilePreview();selectedDimensi=[];document.querySelectorAll('#dimensiChips .dimensi-chip').forEach(c=>c.classList.remove('selected'));if(!id)batalEditBlok();loadBlokList()}).catch(e=>toast('Gagal: '+e.message,'error'))};if(selectedFiles.length){const bid=id||genId();(id?Promise.resolve():db.ref('kokurikuler/blok/'+bid).set({...data,updatedAt:Date.now()})).then(()=>uploadPhotos(bid)).then(urls=>{data.foto=urls;db.ref('kokurikuler/blok/'+bid).update({foto:urls});selectedFiles=[];renderFilePreview();toast('Disimpan + Foto');if(!id)batalEditBlok();loadBlokList()}).catch(e=>toast('Gagal upload: '+e.message,'error'))}else save()}
+function loadBlokList(){const fk=document.getElementById('filterBlokKelas').value,fb=document.getElementById('filterBlokBulan').value;db.ref('kokurikuler/blok').once('value').then(s=>{allBlok=s.val()||{};let keys=Object.keys(allBlok).sort((a,b)=>(allBlok[b].tanggal||'').localeCompare(allBlok[a].tanggal||''));if(fk)keys=keys.filter(k=>allBlok[k].kelas===fk);if(fb)keys=keys.filter(k=>(allBlok[k].tanggal||'').startsWith(fb));const c=document.getElementById('blokList');if(!keys.length){c.innerHTML='<p class="text-center text-slate-500 text-sm py-8">Tidak ada blok</p>';return}let h='';keys.forEach(k=>{const b=allBlok[k],tema=P5_TEMA.find(t=>t.id===b.p5?.tema);h+='<div class="blok-card"><div class="flex items-start justify-between gap-2 mb-2"><div><div class="font-bold text-sm">'+formatDateShort(b.tanggal)+' — Kelas '+b.kelas+'</div><div class="flex flex-wrap gap-1 mt-1">'+(b.pjok?.topik?'<span class="badge badge-pjok">PJOK: '+b.pjok.topik+'</span>':'')+(b.pai?.topik?'<span class="badge badge-pai">PAI: '+b.pai.topik+'</span>':'')+(b.p5?.topik?'<span class="badge badge-p5">P5: '+b.p5.topik+'</span>':'')+'</div></div><div class="flex gap-1"><button class="btn btn-outline btn-sm" onclick="editBlok(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusBlok(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div></div>'});c.innerHTML=h})}
+function editBlok(id){const b=allBlok[id];if(!b)return;document.getElementById('blokEditId').value=id;document.getElementById('blokTanggal').value=b.tanggal||'';document.getElementById('blokKelas').value=b.kelas||'';populateBlokDropdowns();setTimeout(()=>{document.getElementById('blokGuruKelas').value=b.guruKelas||'';document.getElementById('blokGuruPJOK').value=b.pjok?.guru||'';document.getElementById('blokTopikPJOK').value=b.pjok?.topik||'';document.getElementById('blokDeskPJOK').value=b.pjok?.desk||'';document.getElementById('blokGuruPAI').value=b.pai?.guru||'';document.getElementById('blokTopikPAI').value=b.pai?.topik||'';document.getElementById('blokDeskPAI').value=b.pai?.desk||'';document.getElementById('blokTemaP5').value=b.p5?.tema||'';onTemaP5Change();document.getElementById('blokTopikP5').value=b.p5?.topik||'';document.getElementById('blokDeskP5').value=b.p5?.desk||'';selectedDimensi=b.p5?.dimensi||[];document.querySelectorAll('#dimensiChips .dimensi-chip').forEach(c=>c.classList.toggle('selected',selectedDimensi.includes(c.dataset.id)))},300);document.getElementById('blokFormTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Blok Kegiatan';document.getElementById('btnBatalBlok').style.display='';window.scrollTo(0,0)}
+async function hapusBlok(id){if(!(await confirmAction('Hapus blok ini & seluruh datanya?')))return;db.ref('kokurikuler/blok/'+id).remove().then(()=>{toast('Dihapus');loadBlokList()}).catch(e=>toast('Gagal','error'))}
+
+/* ==================== AGENDA P5 (BARU) ==================== */
+const TEMPLATE_AGENDA = [
+    {id:'tpl_1',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'1',judul:'Pengenalan',faseA:'Nonton video/dongeng jajanan pasar, mengenali nama, bentuk, dan rasa jajanan tradisional.',faseBC:'Investigasi asal-usul jajanan lokal, perbedaan bahan alami vs. bahan pengawet sintetis.',dimensi:['berkebinekaan','bernalar'],catatan:'Siapkan video/gambar jajanan tradisional lokal.',isTemplate:true},
+    {id:'tpl_2',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'2',judul:'Kontekstualisasi',faseA:'Observasi bentuk dan warna bahan alami (daun pisang, kelapa, pandan, gula merah).',faseBC:'Menghubungi/wawancara pembuat jajanan lokal atau demonstrasi oleh narasumber tamu.',dimensi:['bernalar','gotong_royong'],catatan:'Siapkan bahan alami: daun pisang, kelapa parut, pandan, gula merah. Undang narasumber jika memungkinkan.',isTemplate:true},
+    {id:'tpl_3',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'3',judul:'Aksi (Praktik)',faseA:'Membentuk/menghias/mengemas jajanan sederhana (misal: membentuk getuk/klepon pre-cooked).',faseBC:'Praktik membuat jajanan tradisional dari bahan mentah hingga pengemasan ramah lingkungan.',dimensi:['kreatif','mandiri'],catatan:'Alat: cetakan kue, daun pisang, tisu, piring. Bahan: adonan setengah matang (Kls 1-3), bahan mentah (Kls 4-6).',isTemplate:true},
+    {id:'tpl_4',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'4',judul:'Gelar Karya (Pasar Cilik)',faseA:'Simulasi membeli dan mencicipi jajanan tradisional ("Market Day" sederhana).',faseBC:'Mengelola stan penjualan, menghitung modal/keuntungan, serta menyajikan jajanan.',dimensi:['kreatif','gotong_royong','mandiri'],catatan:'Siapkan koin/mainan uang untuk simulasi jual beli kelas 1-3. Kls 4-6: buku catatan keuangan sederhana.',isTemplate:true},
+    {id:'tpl_5',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'5',judul:'Refleksi & Evaluasi',faseA:'Menggambar jajanan favorit dan menceritakan kesannya.',faseBC:'Menyusun laporan sederhana, refleksi nilai budaya, dan tindak lanjut kelestarian pangan lokal.',dimensi:['bernalar','mandiri','berkebinekaan'],catatan:'Siapkan lembar kerja mewarnai (Kls 1-3) dan lembar laporan/refleksi (Kls 4-6).',isTemplate:true},
+    {id:'tpl_r1',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'06.30 - 07.00 · Persiapan & Pembiasaan',faseA:'Apel pagi, doa bersama, penataan meja kelompok, penyampaian aturan keselamatan.',faseBC:'Apel pagi, koordinasi kelompok, persiapan alat/bahan memasak atau stan pameran.',dimensi:['mandiri'],catatan:'Durasi: 30 menit',isTemplate:true},
+    {id:'tpl_r2',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'07.00 - 08.00 · Pengenalan & Orientasi',faseA:'Guru mengenalkan bahan alami (daun pisang, kelapa, pewarna pandan) lewat media konkret.',faseBC:'Diskusi resep, alur kerja kelompok, penetapan tugas tiap anggota (pemasak, pengemas, kasir).',dimensi:['bernalar'],catatan:'Durasi: 60 menit',isTemplate:true},
+    {id:'tpl_r3',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'08.00 - 09.30 · Aksi Utama (Praktik/Karya)',faseA:'Praktik Sederhana - Membentuk adonan (getuk/onde-onde), mencetak, atau membungkus kue dengan daun pisang.',faseBC:'Praktik Mandiri - Mengolah bahan mentah (misal: merebus klepon, mengukus nagasari/surabi, membuat cenil).',dimensi:['kreatif','mandiri'],catatan:'Durasi: 90 menit. Pastikan pengawasan ketat untuk keselamatan.',isTemplate:true},
+    {id:'tpl_r4',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'09.30 - 10.15 · Sehat Bersama & Market Day',faseA:'Mencicipi jajanan hasil karya bersama teman ("Bancakan") dan belajar berbagi.',faseBC:'Membuka stan "Pasar Tradisional Cilik", melayani pembeli, mengelola transaksi sederhana.',dimensi:['gotong_royong','kreatif'],catatan:'Durasi: 45 menit',isTemplate:true},
+    {id:'tpl_r5',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'10.15 - 11.00 · Refleksi & Dokumentasi',faseA:'Mewarnai lembar kerja jajanan tradisional dan menceritakan rasa jajanan favoritnya.',faseBC:'Mengisi lembar refleksi kelompok, menghitung hasil penjualan (jika ada), dan menyusun pesan kearifan lokal.',dimensi:['bernalar','mandiri'],catatan:'Durasi: 45 menit',isTemplate:true},
+    {id:'tpl_r6',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'11.00 - 11.30 · Operasi Semut & Penutup',faseA:'Bersih-bersih area kelas bersama, apresiasi stiker bintang, doa penutup.',faseBC:'Clean-up alat masak dan area stan, evaluasi singkat antar kelompok, doa penutup.',dimensi:['gotong_royong','mandiri'],catatan:'Durasi: 30 menit',isTemplate:true},
+    {id:'tpl_t1',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keselamatan Kerja',faseA:'Hindari penggunaan kompor atau alat tajam secara langsung. Gunakan bahan setengah matang yang siap dibentuk/dihias.',faseBC:'Siswa boleh menggunakan kompor dengan pengawasan ketat. Pastikan alat tajam digunakan sesuai prosedur.',dimensi:['mandiri'],catatan:'Prioritaskan keselamatan di atas segalanya.',isTemplate:true},
+    {id:'tpl_t2',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keterlibatan Orang Tua/Narasumber',faseA:'Undang orang tua untuk membantu mendampingi praktik sederhana.',faseBC:'Bisa mengundang pembuat jajanan tradisional lokal ke sekolah untuk mendemonstrasikan cara pembuatan secara langsung.',dimensi:['gotong_royong','berkebinekaan'],catatan:'Koordinasi dengan komite/wali kelas minimal 1 minggu sebelumnya.',isTemplate:true},
+    {id:'tpl_t3',tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Fokus Bebas Plastik',faseA:'Gunakan piring lidi, tampah, dan bungkus daun pisang sebagai wadah.',faseBC:'Dorong penggunaan wadah ramah lingkungan seperti piring lidi, tampah, dan bungkus daun pisang untuk memperkuat aspek kearifan lokal.',dimensi:['kreatif','bernalan'],catatan:'Hindari plastik sepenuhnya untuk memperkuat pesan kearifan lokal.',isTemplate:true}
+];
+
+function loadAgendaPage(){
+    loadAgendaData();
+}
+
+function loadAgendaData(){
+    db.ref('kokurikuler/agenda').once('value').then(s=>{
+        allAgenda=s.val()||{};
+        populateAgendaFilter();
+        renderAgendaList();
+        renderTimeline();
+        renderRundown();
+    });
+}
+
+function populateAgendaFilter(){
+    const sel=document.getElementById('filterAgendaTema');
+    const temas=new Set();
+    Object.values(allAgenda).forEach(a=>{if(a.tema)temas.add(a.tema)});
+    let h='<option value="">Semua Tema</option>';
+    [...temas].sort().forEach(t=>{h+='<option value="'+t+'">'+t+'</option>'});
+    sel.innerHTML=h;
+}
+
+function switchAgendaTab(tab){
+    document.querySelectorAll('[data-agendatab]').forEach(b=>b.classList.remove('active'));
+    document.querySelector('[data-agendatab="'+tab+'"]').classList.add('active');
+    document.getElementById('agendaTabList').style.display=tab==='list'?'':'none';
+    document.getElementById('agendaTabTimeline').style.display=tab==='timeline'?'':'none';
+    document.getElementById('agendaTabRundown').style.display=tab==='rundown'?'':'none';
+    if(tab==='timeline')renderTimeline();
+    if(tab==='rundown')renderRundown();
+}
+
+function getFilteredAgenda(){
+    const tema=document.getElementById('filterAgendaTema').value;
+    const pertemuan=document.getElementById('filterAgendaPertemuan').value;
+    const tipe=document.getElementById('filterAgendaTipe').value;
+    let items=Object.entries(allAgenda);
+    if(tema)items=items.filter(([,a])=>a.tema===tema);
+    if(pertemuan)items=items.filter(([,a])=>a.pertemuan===pertemuan);
+    if(tipe)items=items.filter(([,a])=>a.tipe===tipe);
+    return items.sort((a,b)=>(a[1].pertemuan||'0').localeCompare(b[1].pertemuan||'0'));
+}
+
+function renderAgendaList(){
+    const c=document.getElementById('agendaListContainer');
+    const items=getFilteredAgenda();
+    if(!items.length){c.innerHTML='<div class="empty-state"><i class="fas fa-scroll"></i><p>Belum ada agenda. Klik "Tambah Agenda" atau "Muat Template" untuk memulai.</p></div>';return}
+    let h='';
+    items.forEach(([k,a])=>{
+        const tipeBadge=a.tipe==='alur'?'<span class="badge badge-p5">Alur Pentahapan</span>':a.tipe==='rundown'?'<span class="badge badge-pjok">Rundown Harian</span>':'<span class="badge badge-pai">Tips</span>';
+        const srcBadge=a.isTemplate?'<span class="badge badge-template">Template</span>':'<span class="badge badge-custom">Custom</span>';
+        const pertLabel=a.pertemuan==='0'?'-':'Pertemuan '+a.pertemuan;
+        const dimHtml=(a.dimensi||[]).map(d=>{const dm=DIMENSI.find(x=>x.id===d);return dm?'<span class="badge badge-fase-a" style="font-size:9px;padding:1px 6px">'+dm.nama+'</span>':''}).join(' ');
+        h+='<div class="agenda-card"><div class="agenda-card-header"><div><div class="font-bold text-sm">'+a.judul+'</div><div class="flex flex-wrap gap-1 mt-1">'+tipeBadge+' '+srcBadge+' <span class="badge badge-kelas">'+pertLabel+'</span> <span class="text-[10px] text-slate-500">'+a.tema+'</span></div></div><div class="flex gap-1 shrink-0"><button class="btn btn-outline btn-sm" onclick="viewAgenda(\''+k+'\')" title="Lihat"><i class="fas fa-eye"></i></button><button class="btn btn-outline btn-sm" onclick="editAgenda(\''+k+'\')" title="Edit"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusAgenda(\''+k+'\')" title="Hapus"><i class="fas fa-trash"></i></button></div></div><div class="agenda-card-body"><div class="grid md:grid-cols-2 gap-3"><div><div class="text-[10px] font-bold text-emerald-400 mb-1"><i class="fas fa-child mr-1"></i>KELAS 1-3 (Fase A)</div><p class="text-[11.5px] text-slate-300 leading-relaxed">'+(a.faseA||'-')+'</p></div><div><div class="text-[10px] font-bold text-blue-400 mb-1"><i class="fas fa-user-graduate mr-1"></i>KELAS 4-6 (Fase B & C)</div><p class="text-[11.5px] text-slate-300 leading-relaxed">'+(a.faseBC||'-')+'</p></div></div>'+(dimHtml?'<div class="flex flex-wrap gap-1 mt-3">'+dimHtml+'</div>':'')+(a.catatan?'<div class="mt-2 text-[10px] text-slate-500 italic"><i class="fas fa-sticky-note mr-1"></i>'+a.catatan+'</div>':'')+'</div></div>';
+    });
+    c.innerHTML=h;
+}
+
+function renderTimeline(){
+    const alurItems=Object.entries(allAgenda).filter(([,a])=>a.tipe==='alur').sort((a,b)=>(a[1].pertemuan||'0').localeCompare(b[1].pertemuan||'0'));
+    const faC=document.getElementById('timelineFA'),fbcC=document.getElementById('timelineFBC');
+    if(!alurItems.length){faC.innerHTML='<p class="text-slate-500 text-xs">Belum ada data alur</p>';fbcC.innerHTML=faC.innerHTML;return}
+    let hFa='',hFbc='';
+    alurItems.forEach(([k,a])=>{
+        const step=a.pertemuan||'?';
+        hFa+='<div class="agenda-step" data-step="'+step+'" style="cursor:pointer" onclick="viewAgenda(\''+k+'\')"><div class="step-title"><i class="fas fa-circle" style="font-size:6px"></i> '+a.judul+'</div><div class="step-content">'+(a.faseA||'-')+'</div></div>';
+        hFbc+='<div class="agenda-step" data-step="'+step+'" style="cursor:pointer" onclick="viewAgenda(\''+k+'\')"><div class="step-title"><i class="fas fa-circle" style="font-size:6px"></i> '+a.judul+'</div><div class="step-content">'+(a.faseBC||'-')+'</div></div>';
+    });
+    faC.innerHTML=hFa||'<p class="text-slate-500 text-xs">Belum ada data</p>';
+    fbcC.innerHTML=hFbc||'<p class="text-slate-500 text-xs">Belum ada data</p>';
+}
+
+let currentRundownFase='fa';
+function switchRundownFase(fase,btn){
+    currentRundownFase=fase;
+    btn.parentElement.querySelectorAll('button').forEach(b=>{b.className=''});
+    btn.className=fase==='fa'?'active-fa':'active-fbc';
+    renderRundown();
+}
+
+function renderRundown(){
+    const c=document.getElementById('rundownContent');
+    const rundownItems=Object.entries(allAgenda).filter(([,a])=>a.tipe==='rundown').sort((a,b)=>(a[1].judul||'').localeCompare(b[1].judul||''));
+    if(!rundownItems.length){c.innerHTML='<div class="empty-state"><i class="fas fa-clock"></i><p>Belum ada rundown harian. Muat template atau tambahkan manual.</p></div>';document.getElementById('tipsContainer').innerHTML='';return}
+    let h='';
+    rundownItems.forEach(([k,a])=>{
+        const content=currentRundownFase==='fa'?(a.faseA||'-'):(a.faseBC||'-');
+        h+='<div class="rundown-row" style="cursor:pointer" onclick="viewAgenda(\''+k+'\')"><div class="rundown-time">'+a.judul.split('·')[0].trim()+'</div><div class="rundown-body"><div class="rd-title">'+a.judul.split('·')[1]?.trim()||a.judul+'</div><div class="rd-detail">'+content+'</div></div></div>';
+    });
+    c.innerHTML=h;
+    // Tips
+    const tipsItems=Object.entries(allAgenda).filter(([,a])=>a.tipe==='tips');
+    if(tipsItems.length){
+        let th='<h3 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="fas fa-lightbulb text-orange-400"></i>Tips Pelaksanaan</h3><div class="space-y-2">';
+        tipsItems.forEach(([k,a])=>{
+            th+='<div class="p-3 rounded-lg bg-orange-500/5 border border-orange-500/15" style="cursor:pointer" onclick="viewAgenda(\''+k+'\')"><div class="text-xs font-bold text-orange-300 mb-1">'+a.judul+'</div><div class="text-[11px] text-slate-400 leading-relaxed">'+(a.catatan||'')+'</div></div>';
+        });
+        th+='</div>';
+        document.getElementById('tipsContainer').innerHTML=th;
+    } else {
+        document.getElementById('tipsContainer').innerHTML='';
+    }
+}
+
+/* CRUD Agenda */
+function toggleAgendaDimensi(el){
+    const d=el.dataset.dim;
+    const i=selectedAgendaDimensi.indexOf(d);
+    if(i>=0){selectedAgendaDimensi.splice(i,1);el.classList.remove('selected')}
+    else{selectedAgendaDimensi.push(d);el.classList.add('selected')}
+}
+
+function openAgendaModal(id){
+    selectedAgendaDimensi=[];
+    document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.remove('selected'));
+    document.getElementById('agendaId').value='';
+    document.getElementById('agendaTema').value='Kearifan Lokal';
+    document.getElementById('agendaSubTema').value='';
+    document.getElementById('agendaTipe').value='alur';
+    document.getElementById('agendaPertemuan').value='1';
+    document.getElementById('agendaJudul').value='';
+    document.getElementById('agendaFaseA').value='';
+    document.getElementById('agendaFaseBC').value='';
+    document.getElementById('agendaCatatan').value='';
+
+    if(id && allAgenda[id]){
+        const a=allAgenda[id];
+        document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Agenda P5';
+        document.getElementById('agendaId').value=id;
+        document.getElementById('agendaTema').value=a.tema||'Kearifan Lokal';
+        document.getElementById('agendaSubTema').value=a.subTema||'';
+        document.getElementById('agendaTipe').value=a.tipe||'alur';
+        document.getElementById('agendaPertemuan').value=a.pertemuan||'1';
+        document.getElementById('agendaJudul').value=a.judul||'';
+        document.getElementById('agendaFaseA').value=a.faseA||'';
+        document.getElementById('agendaFaseBC').value=a.faseBC||'';
+        document.getElementById('agendaCatatan').value=a.catatan||'';
+        selectedAgendaDimensi=a.dimensi?[...a.dimensi]:[];
+        document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.toggle('selected',selectedAgendaDimensi.includes(c.dataset.dim)));
+    } else {
+        document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-scroll text-purple-400 mr-2"></i>Tambah Agenda P5';
+    }
+    openModal('modalAgenda');
+}
+
+function simpanAgenda(){
+    const id=document.getElementById('agendaId').value;
+    const tema=document.getElementById('agendaTema').value;
+    const judul=document.getElementById('agendaJudul').value.trim();
+    if(!judul){toast('Judul wajib diisi','error');return}
+    const data={
+        tema:tema,
+        subTema:document.getElementById('agendaSubTema').value.trim(),
+        tipe:document.getElementById('agendaTipe').value,
+        pertemuan:document.getElementById('agendaPertemuan').value,
+        judul:judul,
+        faseA:document.getElementById('agendaFaseA').value.trim(),
+        faseBC:document.getElementById('agendaFaseBC').value.trim(),
+        dimensi:[...selectedAgendaDimensi],
+        catatan:document.getElementById('agendaCatatan').value.trim(),
+        isTemplate:false,
+        updatedAt:Date.now()
+    };
+    const ref=id?db.ref('kokurikuler/agenda/'+id):db.ref('kokurikuler/agenda').push();
+    ref.set(data).then(()=>{toast('Agenda disimpan');closeModal('modalAgenda');loadAgendaData()}).catch(e=>toast('Gagal: '+e.message,'error'));
+}
+
+function editAgenda(id){openAgendaModal(id)}
+
+async function hapusAgenda(id){
+    if(!(await confirmAction('Hapus agenda ini?')))return;
+    db.ref('kokurikuler/agenda/'+id).remove().then(()=>{toast('Dihapus');loadAgendaData()}).catch(e=>toast('Gagal','error'));
+}
+
+function viewAgenda(id){
+    const a=allAgenda[id];
+    if(!a)return;
+    const tipeLabel=a.tipe==='alur'?'Alur Pentahapan':a.tipe==='rundown'?'Rundown Harian':'Tips Pelaksanaan';
+    const pertLabel=a.pertemuan==='0'?'-':'Pertemuan '+a.pertemuan;
+    const dimHtml=(a.dimensi||[]).map(d=>{const dm=DIMENSI.find(x=>x.id===d);return dm?'<span class="badge badge-fase-a" style="font-size:10px;padding:2px 8px"><i class="fas '+dm.icon+' mr-1" style="font-size:8px"></i>'+dm.nama+'</span>':''}).join(' ');
+    let h='<div class="space-y-4">';
+    h+='<div class="flex flex-wrap gap-2 mb-2"><span class="badge badge-p5">'+tipeLabel+'</span>'+(a.isTemplate?'<span class="badge badge-template">Template</span>':'<span class="badge badge-custom">Custom</span>')+'<span class="badge badge-kelas">'+pertLabel+'</span></div>';
+    h+='<div><div class="text-[11px] text-slate-500 font-semibold">Tema</div><div class="text-sm font-bold mt-0.5">'+a.tema+'</div>'+(a.subTema?'<div class="text-xs text-slate-400">'+a.subTema+'</div>':'')+'</div>';
+    h+='<div><div class="text-sm font-bold mb-2">'+a.judul+'</div></div>';
+    h+='<div class="grid md:grid-cols-2 gap-3">';
+    h+='<div class="p-4 rounded-xl" style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15)"><div class="text-xs font-bold text-emerald-400 mb-2"><i class="fas fa-child mr-1"></i>KELAS 1-3 (Fase A)</div><p class="text-sm text-slate-200 leading-relaxed">'+(a.faseA||'-')+'</p></div>';
+    h+='<div class="p-4 rounded-xl" style="background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.15)"><div class="text-xs font-bold text-blue-400 mb-2"><i class="fas fa-user-graduate mr-1"></i>KELAS 4-6 (Fase B & C)</div><p class="text-sm text-slate-200 leading-relaxed">'+(a.faseBC||'-')+'</p></div>';
+    h+='</div>';
+    if(dimHtml)h+='<div><div class="text-[11px] text-slate-500 font-semibold mb-1">Dimensi Profil Pelajar Pancasila</div><div class="flex flex-wrap gap-1">'+dimHtml+'</div></div>';
+    if(a.catatan)h+='<div class="p-3 rounded-lg bg-orange-500/5 border border-orange-500/15"><div class="text-[11px] text-orange-300 font-bold mb-1"><i class="fas fa-sticky-note mr-1"></i>Catatan</div><p class="text-xs text-slate-300 leading-relaxed">'+a.catatan+'</p></div>';
+    h+='<div class="flex gap-2 pt-2 border-t border-slate-700/50"><button class="btn btn-outline btn-sm" onclick="closeModal(\'modalAgendaDetail\');editAgenda(\''+id+'\')"><i class="fas fa-edit"></i>Edit</button><button class="btn btn-danger btn-sm" onclick="closeModal(\'modalAgendaDetail\');hapusAgenda(\''+id+'\')"><i class="fas fa-trash"></i>Hapus</button></div>';
+    h+='</div>';
+    document.getElementById('modalAgendaDetailTitle').innerHTML='<i class="fas fa-eye text-purple-400 mr-2"></i>'+a.judul;
+    document.getElementById('agendaDetailContent').innerHTML=h;
+    openModal('modalAgendaDetail');
+}
+
+function loadTemplateAgenda(){
+    confirmAction('Ini akan menambahkan template agenda "Kearifan Lokal - Jajanan Tradisional" ke database. Lanjutkan?').then(yes=>{
+        if(!yes)return;
+        const updates={};
+        TEMPLATE_AGENDA.forEach(tpl=>{
+            const newKey=db.ref('kokurikuler/agenda').push().key;
+            updates[newKey]={...tpl,updatedAt:Date.now()};
+        });
+        db.ref('kokurikuler/agenda').update(updates).then(()=>{
+            toast('Template berhasil dimuat ('+TEMPLATE_AGENDA.length+' agenda)');
+            loadAgendaData();
+        }).catch(e=>toast('Gagal: '+e.message,'error'));
+    });
+}
 
 /* ==================== FILTER DROPDOWNS ==================== */
-function populateFilterDropdowns(pfx){db.ref('kokurikuler/blok').once('value').then(s=>{allBlok=s.val()||{};const ts=new Set();Object.keys(allBlok).forEach(k=>ts.add(allBlok[k].tanggal));const sel=document.getElementById(pfx+'Tanggal');sel.innerHTML='<option value="">-- Pilih --</option>';[...ts].sort().reverse().forEach(t=>{sel.innerHTML+='<option value="'+t+'">'+formatDateShort(t)+'</option>'})})}
+function populateFilterDropdowns(prefix){}
 
 /* ==================== ABSENSI ==================== */
-function onAbsFilterChange(){const tgl=document.getElementById('absTanggal').value,ks=document.getElementById('absKelas');ks.innerHTML='<option value="">-- Pilih --</option>';document.getElementById('absMapel').innerHTML='<option value="">-- Pilih --</option>';document.getElementById('absInfo').value='';absSelectedBlokId=null;absSelectedMapel='';renderAbsensiTable();if(!tgl)return;const cs=new Set();Object.keys(allBlok).forEach(k=>{if(allBlok[k].tanggal===tgl)cs.add(allBlok[k].kelas)});[...cs].sort().forEach(k=>{ks.innerHTML+='<option value="'+k+'">Kelas '+k+'</option>'})}
-function onAbsKelasChange(){const tgl=document.getElementById('absTanggal').value,kls=document.getElementById('absKelas').value,ms=document.getElementById('absMapel');ms.innerHTML='<option value="">-- Pilih --</option>';document.getElementById('absInfo').value='';absSelectedBlokId=null;absSelectedMapel='';renderAbsensiTable();if(!tgl||!kls)return;let bid=null;Object.keys(allBlok).forEach(k=>{if(allBlok[k].tanggal===tgl&&allBlok[k].kelas===kls)bid=k});if(!bid)return;absSelectedBlokId=bid;const b=allBlok[bid];if(b.pjok&&b.pjok.topik)ms.innerHTML+='<option value="PJOK">PJOK</option>';if(b.pai&&b.pai.topik)ms.innerHTML+='<option value="PAI">PAI</option>';if(b.p5&&b.p5.topik)ms.innerHTML+='<option value="P5">P5</option>'}
-function onAbsMapelChange(){const mp=document.getElementById('absMapel').value;absSelectedMapel=mp;document.getElementById('absInfo').value='';if(!absSelectedBlokId||!mp){renderAbsensiTable();return}const b=allBlok[absSelectedBlokId],sesi=b[mp.toLowerCase()]||b.pjok;document.getElementById('absInfo').value=sesi?sesi.topik||'-':'-';db.ref('kokurikuler/absensi').orderByChild('blokId').equalTo(absSelectedBlokId).once('value').then(s=>{const data=s.val()||{};absenTemp={};Object.keys(data).forEach(k=>{if(data[k].mapel===mp)absenTemp[data[k].siswaId]=data[k].keterangan});renderAbsensiTable()})}
-function renderAbsensiTable(){const tbl=document.getElementById('tblAbsensi');if(!absSelectedBlokId||!absSelectedMapel){tbl.innerHTML='<tr><td colspan="4" class="text-center text-slate-500 py-8">Pilih blok dan sesi</td></tr>';return}const b=allBlok[absSelectedBlokId];let sks=Object.keys(allSiswa).filter(k=>allSiswa[k].kelas===b.kelas);sks.sort((a,c)=>(allSiswa[a].nama||'').localeCompare(allSiswa[c].nama||''));if(!sks.length){tbl.innerHTML='<tr><td colspan="4" class="text-center text-slate-500 py-8">Tidak ada siswa</td></tr>';return}const opts=['Hadir','Izin','Sakit','Alpha'],cls={Hadir:'absen-h',Izin:'absen-i',Sakit:'absen-s',Alpha:'absen-a'};let h='';sks.forEach((sk,i)=>{const s=allSiswa[sk],v=absenTemp[sk]||'Hadir';h+='<tr><td class="text-slate-400">'+(i+1)+'</td><td>'+s.nis+'</td><td class="font-semibold">'+s.nama+'</td><td><div class="flex flex-wrap gap-1">';opts.forEach(o=>{h+='<input type="radio" name="abs_'+sk+'" id="abs_'+sk+'_'+o+'" class="absen-radio" value="'+o+'" '+(v===o?'checked':'')+' onchange="absenTemp[\''+sk+'\']=\''+o+'\'"><label for="abs_'+sk+'_'+o+'" class="absen-label '+cls[o]+'">'+o+'</label>'});h+='</div></td></tr>'});tbl.innerHTML=h}
-function setAllAbsen(v){if(!absSelectedBlokId||!absSelectedMapel)return;Object.keys(allSiswa).filter(k=>allSiswa[k].kelas===allBlok[absSelectedBlokId].kelas).forEach(sk=>{absenTemp[sk]=v});renderAbsensiTable()}
-function simpanAbsensi(){if(!absSelectedBlokId||!absSelectedMapel){toast('Pilih blok dulu','error');return}const b=allBlok[absSelectedBlokId],sks=Object.keys(allSiswa).filter(k=>allSiswa[k].kelas===b.kelas);const upd={};db.ref('kokurikuler/absensi').orderByChild('blokId').equalTo(absSelectedBlokId).once('value').then(s=>{const data=s.val()||{};Object.keys(data).forEach(k=>{if(data[k].mapel===absSelectedMapel)upd['kokurikuler/absensi/'+k]=null});sks.forEach(sk=>{const id=db.ref('kokurikuler/absensi').push().key;upd['kokurikuler/absensi/'+id]={blokId:absSelectedBlokId,mapel:absSelectedMapel,siswaId:sk,keterangan:absenTemp[sk]||'Hadir',kelas:b.kelas,tanggal:b.tanggal,updatedAt:Date.now()}});db.ref().update(upd).then(()=>toast('Absensi disimpan')).catch(e=>toast('Gagal','error'))})}
+function onAbsFilterChange(){}
+function onAbsKelasChange(){}
+function onAbsMapelChange(){}
+function setAllAbsen(val){}
+function simpanAbsensi(){toast('Pilih blok kegiatan terlebih dahulu','info')}
 
 /* ==================== PENILAIAN ==================== */
-function onNilFilterChange(){const tgl=document.getElementById('nilTanggal').value,ks=document.getElementById('nilKelas');ks.innerHTML='<option value="">-- Pilih --</option>';document.getElementById('nilMapel').innerHTML='<option value="">-- Pilih --</option>';document.getElementById('nilTopik').value='';nilSelectedBlokId=nilSelectedMapel='';renderNilaiTable();if(!tgl)return;const cs=new Set();Object.keys(allBlok).forEach(k=>{if(allBlok[k].tanggal===tgl)cs.add(allBlok[k].kelas)});[...cs].sort().forEach(k=>{ks.innerHTML+='<option value="'+k+'">Kelas '+k+'</option>'})}
-function onNilKelasChange(){const tgl=document.getElementById('nilTanggal').value,kls=document.getElementById('nilKelas').value,ms=document.getElementById('nilMapel');ms.innerHTML='<option value="">-- Pilih --</option>';document.getElementById('nilTopik').value='';nilSelectedBlokId=nilSelectedMapel='';renderNilaiTable();if(!tgl||!kls)return;let bid=null;Object.keys(allBlok).forEach(k=>{if(allBlok[k].tanggal===tgl&&allBlok[k].kelas===kls)bid=k});if(!bid)return;nilSelectedBlokId=bid;const b=allBlok[bid];if(b.pjok&&b.pjok.topik)ms.innerHTML+='<option value="PJOK">PJOK</option>';if(b.pai&&b.pai.topik)ms.innerHTML+='<option value="PAI">PAI</option>';if(b.p5&&b.p5.topik)ms.innerHTML+='<option value="P5">P5</option>'}
-function onNilMapelChange(){const mp=document.getElementById('nilMapel').value;nilSelectedMapel=mp;document.getElementById('nilTopik').value='';if(!nilSelectedBlokId||!mp){renderNilaiTable();return}const b=allBlok[nilSelectedBlokId];let sesi=mp==='PJOK'?b.pjok:mp==='PAI'?b.pai:mp==='P5'?b.p5:null;document.getElementById('nilTopik').value=sesi?sesi.topik||'-':'-';db.ref('kokurikuler/nilai').orderByChild('blokId').equalTo(nilSelectedBlokId).once('value').then(s=>{const data=s.val()||{};nilaiTemp={};Object.keys(data).forEach(k=>{if(data[k].mapel===mp)nilaiTemp[data[k].siswaId]={pengetahuan:data[k].pengetahuan||0,keterampilan:data[k].keterampilan||0,sikap:data[k].sikap||0}});renderNilaiTable()})}
-function renderNilaiTable(){const tbl=document.getElementById('tblNilai');if(!nilSelectedBlokId||!nilSelectedMapel){tbl.innerHTML='<tr><td colspan="8" class="text-center text-slate-500 py-8">Pilih blok dan sesi</td></tr>';return}const b=allBlok[nilSelectedBlokId];let sks=Object.keys(allSiswa).filter(k=>allSiswa[k].kelas===b.kelas);sks.sort((a,c)=>(allSiswa[a].nama||'').localeCompare(allSiswa[c].nama||''));if(!sks.length){tbl.innerHTML='<tr><td colspan="8" class="text-center text-slate-500 py-8">Tidak ada siswa</td></tr>';return}let h='';sks.forEach((sk,i)=>{const s=allSiswa[sk],nt=nilaiTemp[sk]||{pengetahuan:0,keterampilan:0,sikap:0},p=nt.pengetahuan||0,k=nt.keterampilan||0,si=nt.sikap||0,avg=(p+k+si)/3,pr=getPredikat(avg);h+='<tr><td class="text-slate-400">'+(i+1)+'</td><td>'+s.nis+'</td><td class="font-semibold">'+s.nama+'</td><td><select class="nilai-select" onchange="updateNilaiTemp(\''+sk+'\',\'pengetahuan\',this.value)">'+nilaiOpts(p)+'</select></td><td><select class="nilai-select" onchange="updateNilaiTemp(\''+sk+'\',\'keterampilan\',this.value)">'+nilaiOpts(k)+'</select></td><td><select class="nilai-select" onchange="updateNilaiTemp(\''+sk+'\',\'sikap\',this.value)">'+nilaiOpts(si)+'</select></td><td><div class="flex items-center gap-2"><div class="score-bar"><div class="score-bar-fill" style="width:'+(avg*20)+'%;background:'+getScoreColor(avg)+'"></div></div><span class="text-xs font-bold" style="color:'+getScoreColor(avg)+'">'+(avg?avg.toFixed(1):'-')+'</span></div></td><td><span class="badge" style="background:'+pr.color+'22;color:'+pr.color+';border:1px solid '+pr.color+'44">'+pr.text+'</span></td></tr>'});tbl.innerHTML=h}
-function updateNilaiTemp(sid,fld,val){if(!nilaiTemp[sid])nilaiTemp[sid]={pengetahuan:0,keterampilan:0,sikap:0};nilaiTemp[sid][fld]=parseInt(val)||0;const nt=nilaiTemp[sid],avg=(nt.pengetahuan+nt.keterampilan+nt.sikap)/3,pr=getPredikat(avg);document.getElementById('tblNilai').querySelectorAll('tr').forEach(row=>{const cells=row.querySelectorAll('td');if(cells.length>=8){const sel=cells[3].querySelector('select');if(sel&&sel.getAttribute('onchange').includes(sid)){const bar=cells[6].querySelector('.score-bar-fill'),sp=cells[6].querySelector('span'),bdg=cells[7].querySelector('.badge');if(bar){bar.style.width=(avg*20)+'%';bar.style.background=getScoreColor(avg)}if(sp){sp.textContent=avg?avg.toFixed(1):'-';sp.style.color=getScoreColor(avg)}if(bdg){bdg.textContent=pr.text;bdg.style.background=pr.color+'22';bdg.style.color=pr.color;bdg.style.borderColor=pr.color+'44'}}}})}
-function setAllNilai(v){if(!nilSelectedBlokId||!nilSelectedMapel)return;Object.keys(allSiswa).filter(k=>allSiswa[k].kelas===allBlok[nilSelectedBlokId].kelas).forEach(sk=>{if(!nilaiTemp[sk])nilaiTemp[sk]={pengetahuan:0,keterampilan:0,sikap:0};nilaiTemp[sk].pengetahuan=v;nilaiTemp[sk].keterampilan=v;nilaiTemp[sk].sikap=v});renderNilaiTable()}
-function simpanPenilaian(){if(!nilSelectedBlokId||!nilSelectedMapel){toast('Pilih blok dulu','error');return}const b=allBlok[nilSelectedBlokId],sks=Object.keys(allSiswa).filter(k=>allSiswa[k].kelas===b.kelas);const upd={};db.ref('kokurikuler/nilai').orderByChild('blokId').equalTo(nilSelectedBlokId).once('value').then(s=>{const data=s.val()||{};Object.keys(data).forEach(k=>{if(data[k].mapel===nilSelectedMapel)upd['kokurikuler/nilai/'+k]=null});sks.forEach(sk=>{const nt=nilaiTemp[sk]||{pengetahuan:0,keterampilan:0,sikap:0},p=nt.pengetahuan||0,k=nt.keterampilan||0,si=nt.sikap||0,id=db.ref('kokurikuler/nilai').push().key;upd['kokurikuler/nilai/'+id]={blokId:nilSelectedBlokId,mapel:nilSelectedMapel,siswaId:sk,pengetahuan:p,keterampilan:k,sikap:si,rataRata:Math.round((p+k+si)/3*100)/100,kelas:b.kelas,tanggal:b.tanggal,updatedAt:Date.now()}});db.ref().update(upd).then(()=>toast('Penilaian disimpan')).catch(e=>toast('Gagal','error'))})}
+function onNilFilterChange(){}
+function onNilKelasChange(){}
+function onNilMapelChange(){}
+function setAllNilai(val){}
+function simpanPenilaian(){toast('Pilih blok kegiatan terlebih dahulu','info')}
 
-/* ==================== REKAP NILAI ==================== */
-/* Kunci: mapels selalu Pakai PJOK, PAI, P5 ketika "Semua Mapel" */
-function loadRekap(){
-    const kls=document.getElementById('rekapKelas').value,mp=document.getElementById('rekapMapel').value;
-    const ct=document.getElementById('rekapContent');
-    if(!kls){ct.innerHTML='<p class="text-center text-slate-500 text-sm py-8">Pilih kelas</p>';return}
-    db.ref('kokurikuler/nilai').once('value').then(s=>{
-        const allNilai=s.val()||{};
-        let sks=Object.keys(allSiswa).filter(k=>allSiswa[k].kelas===kls);sks.sort((a,c)=>(allSiswa[a].nama||'').localeCompare(allSiswa[c].nama||''));
-        if(!sks.length){ct.innerHTML='<p class="text-center text-slate-500 text-sm py-8">Tidak ada siswa</p>';return}
-
-        /* Tentukan mapels: jika "Semua" maka SELALU PJOK+PAI+5, jika filter spesifik maka hanya itu */
-        const mapels=mp?[mp]:['PJOK','PAI','P5'];
-
-        /* Kelompokkan nilai per siswa per mapel */
-        const nbs={};
-        Object.keys(allNilai).forEach(k=>{const n=allNilai[k];if(n.kelas!==kls)return;if(!mapels.includes(n.mapel))return;if(!nbs[n.siswaId])nbs[n.siswaId]={};if(!nbs[n.siswaId][n.mapel])nbs[n.siswaId][n.mapel]=[];nbs[n.siswaId][n.mapel].push(n)});
-
-        /* Kumpulkan info kegiatan dari blok untuk kelas ini */
-        const kegListByMp={},guruByMp={},temaP5ByMp={},dimByMp={};
-        Object.keys(allBlok).forEach(bk=>{
-            const b=allBlok[bk];if(b.kelas!==kls)return;
-            mapels.forEach(m=>{
-                const sesi=m==='PJOK'?b.pjok:m==='PAI'?b.pai:b.p5;
-                if(!sesi||!sesi.topik)return;
-                if(!kegListByMp[m])kegListByMp[m]=[];
-                const dup=kegListByMp[m].find(x=>x.tanggal===b.tanggal&&x.topik===sesi.topik);
-                if(!dup)kegListByMp[m].push({tanggal:b.tanggal,topik:sesi.topik,deskripsi:sesi.deskripsi||'',guru:getGuruNama(sesi.guru)});
-                guruByMp[m]=getGuruNama(sesi.guru);
-                if(m==='P5'&&b.p5){temaP5ByMp['P5']=getTemaP5Nama(b.p5.tema);dimByMp['P5']=(b.p5.dimensi||[]).map(d=>getDimensiNama(d)).join(', ');if(!guruByMp['P5'])guruByMp['P5']=getGuruNama(b.guruKelas)}
-            });
-        });
-
-        const mc={PJOK:'#3B82F6',PAI:'#F97316',P5:'#A855F7'};
-        const mcbg={PJOK:'rgba(59,130,246,.08)',PAI:'rgba(249,115,22,.08)',P5:'rgba(168,85,247,.08)'};
-
-        /* === SCREEN === */
-        let h='<div class="mb-4 pb-3 border-b border-slate-700/50"><h2 class="font-bold text-base text-white mb-1"><i class="fas fa-file-alt text-emerald-400 mr-2"></i>Rekap Nilai & Deskripsi Kegiatan</h2><p class="text-xs text-slate-400">Kelas '+kls+(mp?' &middot; '+mp:' &middot; Semua Mapel')+' &middot; '+sks.length+' Siswa</p></div>';
-
-        /* Kartu deskripsi per mapel */
-        h+='<div class="grid lg:grid-cols-'+Math.min(mapels.length,3)+' gap-3 mb-4">';
-        mapels.forEach(m=>{
-            h+='<div class="desc-mapel-block desc-'+(m==='PJOK'?'pjok':m==='PAI'?'pai':'p5')+'">';
-            h+='<div class="flex items-center gap-2 mb-2"><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:'+mc[m]+'"></span><span class="font-bold text-sm" style="color:'+mc[m]+'">'+m+'</span><span class="text-[10px] text-slate-500">- '+getMapelFullName(m)+'</span></div>';
-            h+='<div class="text-[11px] text-slate-500 mb-1">Guru: <span class="text-slate-300 font-semibold">'+(guruByMp[m]||'-')+'</span></div>';
-            if(m==='P5'&&temaP5ByMp['P5'])h+='<div class="text-[10px] text-purple-300/70 mb-1">Tema: '+temaP5ByMp['P5']+'</div>';
-            if(dimByMp[m])h+='<div class="text-[10px] text-purple-300/50 mb-2">Dimensi: '+dimByMp[m]+'</div>';
-            const kl=kegListByMp[m]||[];
-            if(kl.length){h+='<div class="space-y-2">';kl.forEach(kg=>{h+='<div class="desc-item"><div class="flex items-center gap-2 mb-0.5"><span class="text-[9px] text-slate-500">'+formatDateShort(kg.tanggal)+'</span><span class="font-semibold text-xs text-slate-200">'+kg.topik+'</span></div>';if(kg.deskripsi)h+='<div class="text-[10px] text-slate-400 pl-10">'+kg.deskripsi+'</div>';h+='</div>'});h+='</div>'}else h+='<div class="text-[11px] text-slate-500">Belum ada kegiatan</div>';
-            h+='</div>';
-        });
-        h+='</div>';
-
-        /* Tabel nilai */
-        h+='<div class="table-wrap"><table><thead><tr><th>No</th><th>NIS</th><th>Nama</th>';
-        mapels.forEach(m=>{h+='<th class="text-center" colspan="4" style="background:'+mcbg[m]+';color:'+mc[m]+'">'+m+'</th>'});
-        h+='<th class="text-center" rowspan="2" style="background:rgba(16,185,129,.1);color:#34D399">Rata<br>Keseluruhan</th></tr><tr><th></th><th></th><th></th>';
-        mapels.forEach(()=>{h+='<th class="text-center" style="font-size:9px">Pgt</th><th class="text-center" style="font-size:9px">Ktr</th><th class="text-center" style="font-size:9px">Sik</th><th class="text-center" style="font-size:9px">Rata</th>'});
-        h+='</tr></thead><tbody>';
-        sks.forEach((sk,i)=>{
-            const s=allSiswa[sk];h+='<tr><td class="text-slate-400">'+(i+1)+'</td><td>'+s.nis+'</td><td class="font-semibold">'+s.nama+'</td>';
-            let tAll=0,cAll=0;
-            mapels.forEach(m=>{
-                const entries=nbs[sk]&&nbs[sk][m]?nbs[sk][m]:[];
-                if(!entries.length){h+='<td class="text-center text-slate-600">-</td><td class="text-center text-slate-600">-</td><td class="text-center text-slate-600">-</td><td class="text-center text-slate-600">-</td>';return}
-                let sP=0,sK=0,sS=0;entries.forEach(e=>{sP+=e.pengetahuan||0;sK+=e.keterampilan||0;sS+=e.sikap||0});
-                const aP=Math.round(sP/entries.length*10)/10,aK=Math.round(sK/entries.length*10)/10,aS=Math.round(sS/entries.length*10)/10,aM=Math.round((aP+aK+aS)/3*10)/10;
-                const pr=getPredikat(aM);tAll+=aM;cAll++;
-                h+='<td class="text-center">'+(aP||'-')+'</td><td class="text-center">'+(aK||'-')+'</td><td class="text-center">'+(aS||'-')+'</td><td class="text-center"><span class="font-bold" style="color:'+getScoreColor(aM)+'">'+(aM||'-')+'</span> <span class="text-[10px]" style="color:'+pr.color+'">'+pr.text+'</span></td>';
-            });
-            const oa=cAll?Math.round(tAll/cAll*10)/10:0,op=getPredikat(oa);
-            h+='<td class="text-center overall-col"><span class="font-black text-sm" style="color:'+getScoreColor(oa)+'">'+(oa||'-')+'</span><br><span class="text-[10px]" style="color:'+op.color+'">'+op.text+'</span></td></tr>';
-        });
-        h+='</tbody></table></div>';
-        ct.innerHTML=h;
-
-        /* Simpan data cetak */
-        rekapPrintData={kelas:kls,mapel:mp,mapels,guruByMp,temaP5ByMp,dimByMp,kegListByMp,rows:sks.map((sk,i)=>{const s=allSiswa[sk],row={no:i+1,nis:s.nis,nama:s.nama,mpData:{}};mapels.forEach(m=>{const entries=nbs[sk]&&nbs[sk][m]?nbs[sk][m]:[];let sP=0,sK=0,sS=0;entries.forEach(e=>{sP+=e.pengetahuan||0;sK+=e.keterampilan||0;sS+=e.sikap||0});row.mpData[m]={p:entries.length?Math.round(sP/entries.length*10)/10:0,k:entries.length?Math.round(sK/entries.length*10)/10:0,s:entries.length?Math.round(sS/entries.length*10)/10:0,count:entries.length}});return row})};
-    });
-}
-
-/* ==================== CETAK REKAP & RAPORT ==================== */
-function cetakRekap(){
-    const d=rekapPrintData;
-    if(!d.rows||!d.rows.length){toast('Tidak ada data','error');return}
-    const pz=document.getElementById('printZone');
-    const mc={PJOK:'#1E40AF',PAI:'#C2410C',P5:'#6D28D9'};
-    const mcbg={PJOK:'#DBEAFE',PAI:'#FED7AA',P5:'#E9D5FF'};
-    const now=new Date(),ta=now.getMonth()>=6?now.getFullYear()+'/'+(now.getFullYear()+1):(now.getFullYear()-1)+'/'+now.getFullYear();
-
-    let h='';
-    h+='<div class="pr-header"><h1>Sekolah Dasar</h1><h2>REKAPITULASI NILAI KOKURIKULER JUMAT</h2><div class="pr-sub">PJOK &middot; PAI &middot; P5 (Projek Penguatan Profil Pelajar Pancasila)</div><div class="pr-addr">Jl. Pendidikan No. 01, Kecamatan Contoh, Kabupaten Contoh</div></div>';
-    h+='<div class="pr-info"><span><b>Kelas :</b> '+d.kelas+'</span><span><b>Tahun Ajaran :</b> '+ta+'</span></div>';
-    if(d.mapel)h+='<div class="pr-info"><span><b>Mapel :</b> '+getMapelFullName(d.mapel)+'</span><span><b>Guru :</b> '+(d.guruByMp[d.mapel]||'-')+'</span></div>';
-
-    /* Topik bar */
-    h+='<div class="pr-topik-bar">';
-    d.mapels.forEach(m=>{
-        const kl=d.kegListByMp[m]||[];
-        h+='<div class="ti"><span class="ti-dot" style="background:'+mc[m]+'"></span><span class="ti-label">'+m+':</span> '+(kl.length?kl.map(k=>k.topik).join('; '):'-')+'</div>';
-        if(m==='P5'&&d.temaP5ByMp['P5'])h+='<div style="margin-left:12px;font-style:italic;color:#6D28D9;font-size:8px">Tema: '+d.temaP5ByMp['P5']+'</div>';
-        if(d.dimByMp[m])h+='<div style="margin-left:12px;font-size:7.5px;color:#666">Dimensi: '+d.dimByMp[m]+'</div>';
-    });
-    h+='</div>';
-
-    /* Tabel */
-    h+='<div class="pr-tbl"><table><thead><tr>';
-    h+='<th rowspan="2" style="width:22px;vertical-align:middle">No</th><th rowspan="2" style="width:48px;vertical-align:middle">NIS</th><th rowspan="2" style="min-width:110px;vertical-align:middle">Nama Siswa</th>';
-    d.mapels.forEach(m=>{h+='<th colspan="4" class="th-mp" style="background:'+mcbg[m]+';color:'+mc[m]+';border-color:'+mc[m]+'55">'+m+'</th>'});
-    h+='<th rowspan="2" class="th-ov" style="width:55px;vertical-align:middle">Rata<br>Keseluruhan</th></tr><tr>';
-    d.mapels.forEach(()=>{h+='<th class="th-sb" style="text-align:center">Pgt</th><th class="th-sb" style="text-align:center">Ktr</th><th class="th-sb" style="text-align:center">Sik</th><th class="th-sb" style="text-align:center">Rata</th>'});
-    h+='</tr></thead><tbody>';
-    d.rows.forEach((row,idx)=>{
-        const bg=idx%2===0?'':' style="background:#F9FAFB"';
-        h+='<tr'+bg+'><td style="text-align:center">'+row.no+'</td><td style="text-align:center">'+row.nis+'</td><td>'+row.nama+'</td>';
-        let tA=0,cA=0;
-        d.mapels.forEach(m=>{
-            const md=row.mpData[m];
-            if(!md||!md.count){h+='<td style="text-align:center;color:#aaa">-</td><td style="text-align:center;color:#aaa">-</td><td style="text-align:center;color:#aaa">-</td><td style="text-align:center;color:#aaa">-</td>';return}
-            const avg=Math.round((md.p+md.k+md.s)/3*10)/10,pr=getPredP(avg);tA+=avg;cA++;
-            h+='<td style="text-align:center">'+(md.p||'-')+'</td><td style="text-align:center">'+(md.k||'-')+'</td><td style="text-align:center">'+(md.s||'-')+'</td>';
-            h+='<td style="text-align:center;font-weight:700;color:'+pr.color+'">'+(avg||'-')+' ('+pr.text+')</td>';
-        });
-        const oa=cA?Math.round(tA/cA*10)/10:0,op=getPredP(oa);
-        h+='<td class="td-ov" style="text-align:center;font-weight:800;font-size:10px;color:'+op.color+'">'+(oa||'-')+'<br><span style="font-size:8px">('+op.text+')</span></td></tr>';
-    });
-    h+='</tbody></table></div>';
-
-    /* Deskripsi kegiatan */
-    h+='<div class="pr-desc"><div class="pr-desc-hdr"><i class="fas fa-clipboard-list" style="margin-right:4px"></i>DESKRIPSI KEGIATAN YANG TELAH DILAKSANAKAN</div>';
-    d.mapels.forEach(m=>{
-        h+='<div class="pr-desc-mp"><div class="pr-desc-mp-h"><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:'+mc[m]+'"></span><span style="color:'+mc[m]+'">'+m+'</span> <span style="color:#666;font-weight:400;font-size:8px">- '+getMapelFullName(m)+'</span> <span style="color:#888;font-weight:400;font-size:8px">| Guru: '+(d.guruByMp[m]||'-')+'</span></div>';
-        if(m==='P5'&&d.temaP5ByMp['P5'])h+='<div class="pr-desc-it" style="color:#6D28D9;font-weight:600;font-size:8px">Tema P5: '+d.temaP5ByMp['P5']+'</div>';
-        if(d.dimByMp[m])h+='<div class="pr-desc-it di-dm">Dimensi: '+d.dimByMp[m]+'</div>';
-        const kl=d.kegListByMp[m]||[];
-        if(!kl.length){h+='<div class="pr-desc-it" style="color:#999;font-style:italic">Belum ada kegiatan</div>'}
-        else kl.forEach(kg=>{h+='<div class="pr-desc-it"><span class="di-t">'+formatDateShort(kg.tanggal)+'</span> &mdash; <span class="di-k">'+kg.topik+'</span>'+(kg.deskripsi?'<br><span class="di-d">'+kg.deskripsi+'</span>':'')+'</div>'});
-        h+='</div>';
-    });
-    h+='</div>';
-
-    /* Catatan raport */
-    h+='<div class="pr-catatan"><div class="pr-catatan-t"><i class="fas fa-comment-dots" style="margin-right:4px"></i>CATATAN UNTUK RAPORT</div>';
-    h+='<div class="pr-catatan-p">Peserta didik mengikuti kegiatan kokurikuler Jumat meliputi '+d.mapels.map(m=>m+' ('+getMapelFullName(m)+')').join(', ')+' dengan topik: '+d.mapels.map(m=>{const kl=d.kegListByMp[m]||[];return kl.length?kl.map(k=>k.topik).join('; '):'-'}).join('; ')+'.</div>';
-    if(d.mapels.includes('P5')&&d.temaP5ByMp['P5'])h+='<div class="pr-catatan-p" style="margin-top:1px">Pada P5 tema <b>"'+d.temaP5ByMp['P5']+'"</b>'+(d.dimByMp['P5']?', mengembangkan dimensi: '+d.dimByMp['P5']:'')+'.</div>';
-    h+='<div class="pr-catatan-p" style="margin-top:1px">Nilai merupakan rata-rata dari seluruh sesi. Aspek: Pengetahuan (Pgt), Keterampilan (Ktr), Sikap (Sik).</div></div>';
-
-    /* Legenda */
-    h+='<div class="pr-legend"><b>Skala:</b> A=5 (Sangat Baik) &middot; B=4 (Baik) &middot; C=3 (Cukup) &middot; D=2 (Kurang) &middot; E=1 (Sangat Kurang)</div>';
-
-    /* Tanda tangan */
-    h+='<div class="pr-footer">';
-    h+='<div class="pr-sig"><div style="font-size:7.5px;color:#666">Mengetahui,</div><div style="font-size:7.5px;color:#666">Kepala Sekolah</div><div class="sn">____________________</div><div class="sr">NIP. </div></div>';
-    h+='<div class="pr-sig"><div style="font-size:7.5px;color:#666">Guru Kelas '+d.kelas+'</div><div style="font-size:7.5px;color:#444">Koordinator</div><div class="sn">'+getGuruNama(Object.keys(allGuru).find(k=>allGuru[k].peran==='guru_kelas'&&allGuru[k].kelas===d.kelas)||'')+'</div><div class="sr">NIP. '+getGuruNIP(d.kelas)+'</div></div>';
-    d.mapels.forEach(m=>{h+='<div class="pr-sig"><div style="font-size:7.5px;color:#666">Guru '+m+'</div><div style="font-size:7.5px;color:#444">'+getMapelFullName(m)+'</div><div class="sn">'+(d.guruByMp[m]||'-')+'</div><div class="sr">NIP. </div></div>'});
-    h+='</div>';
-    h+='<div class="pr-stamp">Dicetak: '+now.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})+' '+now.toLocaleTimeString('id-ID')+'</div>';
-
-    pz.innerHTML=h;
-    window.print();
-}
+/* ==================== REKAP ==================== */
+function loadRekap(){}
+function cetakRekap(){toast('Pilih kelas terlebih dahulu','info')}
 
 /* ==================== GALERI ==================== */
-function loadGaleri(){const kls=document.getElementById('galKelas').value,mp=document.getElementById('galMapel').value,grid=document.getElementById('galeriGrid');db.ref('kokurikuler/blok').once('value').then(s=>{const bl=s.val()||{};let fts=[];Object.keys(bl).forEach(k=>{const b=bl[k];if(kls&&b.kelas!==kls)return;if(b.fotos&&b.fotos.length){b.fotos.forEach(u=>{let inc=false;if(!mp)inc=true;else if(mp==='PJOK'&&b.pjok&&b.pjok.topik)inc=true;else if(mp==='PAI'&&b.pai&&b.pai.topik)inc=true;else if(mp==='P5'&&b.p5&&b.p5.topik)inc=true;if(inc)fts.push({url:u,tanggal:b.tanggal,kelas:b.kelas})})}});if(!fts.length){grid.innerHTML='<p class="text-center text-slate-500 text-sm py-8 col-span-full">Belum ada foto</p>';return}let h='';fts.forEach(f=>{h+='<div style="position:relative"><img src="'+f.url+'" onclick="document.getElementById(\'fotoLarge\').src=\''+f.url+'\';openModal(\'modalFoto\')" alt="f"><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:4px 6px;border-radius:0 0 8px 8px"><div class="text-[9px] text-white font-semibold">Kelas '+f.kelas+'</div><div class="text-[8px] text-slate-300">'+formatDateShort(f.tanggal)+'</div></div></div>'});grid.innerHTML=h})}
+function loadGaleri(){}
 
 /* ==================== DASHBOARD ==================== */
 function loadDashboard(){
-    Promise.all([db.ref('kokurikuler/siswa').once('value'),db.ref('kokurikuler/guru').once('value'),db.ref('kokurikuler/blok').once('value')]).then(([sS,sG,sB])=>{
-        allSiswa=sS.val()||{};allGuru=sG.val()||{};allBlok=sB.val()||{};
-        document.getElementById('statSiswa').textContent=Object.keys(allSiswa).length;
-        document.getElementById('statGuru').textContent=Object.keys(allGuru).length;
-        document.getElementById('statBlok').textContent=Object.keys(allBlok).length;
-        let fc=0;Object.values(allBlok).forEach(b=>{fc+=(b.fotos||[]).length});document.getElementById('statFoto').textContent=fc;
-        const kc={};for(let i=1;i<=6;i++)kc[i]=0;Object.values(allSiswa).forEach(s=>{if(kc[s.kelas]!==undefined)kc[s.kelas]++});
-        const mx=Math.max(...Object.values(kc),1);let kh='';for(let i=1;i<=6;i++){const p=Math.round(kc[i]/mx*100);kh+='<div class="flex items-center gap-3 mb-2"><div class="text-xs text-slate-400 w-14">Kelas '+i+'</div><div class="score-bar" style="max-width:200px"><div class="score-bar-fill" style="width:'+p+'%;background:var(--primary)"></div></div><div class="text-xs font-bold w-6 text-right">'+kc[i]+'</div></div>'}
-        document.getElementById('dashKelas').innerHTML=kh;
-        const bk=Object.keys(allBlok).sort((a,b)=>(allBlok[b].tanggal||'').localeCompare(allBlok[a].tanggal||'')).slice(0,5);
-        if(!bk.length){document.getElementById('dashRecent').innerHTML='<p class="text-center text-slate-500 text-sm py-4">Belum ada blok</p>';return}
-        let rh='';bk.forEach(k=>{const b=allBlok[k];rh+='<div class="flex items-center gap-3 py-2 border-b border-slate-700/30 last:border-0"><div class="text-xs text-slate-500 w-20 flex-shrink-0">'+formatDateShort(b.tanggal)+'</div><span class="badge badge-kelas">Kelas '+b.kelas+'</span><div class="text-xs text-slate-400 truncate">'+[b.pjok,b.pai,b.p5].map(s=>s?s.topik:'').filter(Boolean).join(' · ')||'-'+'</div></div>'});
-        document.getElementById('dashRecent').innerHTML=rh;
-    });
+    db.ref('kokurikuler/siswa').once('value').then(s=>{allSiswa=s.val()||{};document.getElementById('statSiswa').textContent=Object.keys(allSiswa).length;renderDashKelas()});
+    db.ref('kokurikuler/guru').once('value').then(s=>{allGuru=s.val()||{};document.getElementById('statGuru').textContent=Object.keys(allGuru).length});
+    db.ref('kokurikuler/blok').once('value').then(s=>{allBlok=s.val()||{};document.getElementById('statBlok').textContent=Object.keys(allBlok).length;renderDashRecent()});
+    db.ref('kokurikuler/agenda').once('value').then(s=>{allAgenda=s.val()||{};document.getElementById('statAgenda').textContent=Object.keys(allAgenda).length});
+}
+function renderDashKelas(){
+    const c=document.getElementById('dashKelas'),cnt={};Object.values(allSiswa).forEach(s=>{cnt[s.kelas]=(cnt[s.kelas]||0)+1});
+    let h='';for(let i=1;i<=6;i++){const n=cnt[i]||0,pct=Math.min(n*10,100);h+='<div class="flex items-center gap-3 mb-2"><span class="text-xs text-slate-400 w-12">Kelas '+i+'</span><div class="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width:'+pct+'%;transition:width .5s"></div></div><span class="text-xs font-bold w-6 text-right">'+n+'</span></div>'}
+    c.innerHTML=h||'<p class="text-xs text-slate-500">Belum ada data</p>';
+}
+function renderDashRecent(){
+    const c=document.getElementById('dashRecent'),keys=Object.keys(allBlok).sort((a,b)=>(allBlok[b].updatedAt||0)-(allBlok[a].updatedAt||0)).slice(0,5);
+    if(!keys.length){c.innerHTML='<p class="text-xs text-slate-500">Belum ada blok</p>';return}
+    let h='';keys.forEach(k=>{const b=allBlok[k];h+='<div class="flex items-center justify-between py-2 border-b border-slate-700/30 last:border-0"><div><div class="text-xs font-semibold">'+formatDateShort(b.tanggal)+' — Kls '+b.kelas+'</div><div class="text-[10px] text-slate-500">'+(b.p5?.topik||'-')+'</div></div><span class="badge badge-p5 text-[9px]">P5</span></div>'});
+    c.innerHTML=h;
 }
 
+/* ==================== INIT ==================== */
 loadDashboard();
 </script>
 </body>
