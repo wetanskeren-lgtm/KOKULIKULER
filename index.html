@@ -34,8 +34,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:inherit}
 .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(16,185,129,.3)}
-.btn-accent{background:linear-gradient(135deg,var(--accent),#EA580C);color:#fff}
-.btn-accent:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(249,115,22,.3)}
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
 .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
 .btn-danger{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.2)}
@@ -104,10 +102,12 @@ tr:hover td{background:rgba(16,185,129,.02)}
 .tab-btn:hover{color:var(--text)}
 .empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
 .empty-state i{font-size:40px;margin-bottom:12px;opacity:.3}
-.rundown-row{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid rgba(51,65,85,.4)}
+.rundown-row{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid rgba(51,65,85,.4);align-items:start}
 .rundown-row:last-child{border-bottom:none}
-.rundown-time{font-size:12px;font-weight:700;color:#C084FC;white-space:nowrap}
-.rundown-body .rd-title{font-weight:700;color:var(--text);margin-bottom:4px;font-size:13px}
+.rd-time-block{text-align:center;padding:10px 8px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.15);border-radius:10px}
+.rd-time-jam{font-size:15px;font-weight:800;color:#C084FC;letter-spacing:0.5px}
+.rd-time-durasi{font-size:10px;color:var(--muted);margin-top:2px}
+.rundown-body .rd-title{font-weight:700;color:var(--text);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
 .rundown-body .rd-detail{color:var(--muted);font-size:12px;line-height:1.7;white-space:pre-line}
 .agenda-step{position:relative;margin-bottom:14px;padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .2s;cursor:pointer}
 .agenda-step:hover{border-color:rgba(168,85,247,.3);background:#162032}
@@ -115,7 +115,42 @@ tr:hover td{background:rgba(16,185,129,.02)}
 .agenda-timeline{position:relative;padding-left:36px}
 .agenda-timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--border)}
 .kelas-chip{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:600;background:rgba(16,185,129,.1);color:#34D399;border:1px solid rgba(16,185,129,.2)}
-@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{background:#fff!important;color:#000!important}.sidebar,.sidebar-overlay,.no-print,.toast-container,header,.main-content{display:none!important}#printZone{display:block!important;position:static;width:100%;padding:8mm}@page{size:A4 landscape;margin:5mm}}
+.input-time{width:100%;padding:7px 8px;background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:13px;font-family:inherit;text-align:center;transition:border-color .2s}
+.input-time:focus{outline:none;border-color:var(--p5);box-shadow:0 0 0 2px rgba(168,85,247,.15)}
+.input-durasi{width:80px;padding:7px 8px;background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:13px;font-family:inherit;text-align:center;transition:border-color .2s}
+.input-durasi:focus{outline:none;border-color:var(--p5);box-shadow:0 0 0 2px rgba(168,85,247,.15)}
+
+/* ===== PRINT STYLES ===== */
+#printZone{display:none}
+@media print{
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+    body{background:#fff!important;color:#000!important;font-size:11px}
+    .sidebar,.sidebar-overlay,.no-print,.toast-container,header,.main-content{display:none!important}
+    #printZone{display:block!important;position:static;width:100%;padding:6mm 10mm}
+    .pr-header{text-align:center;margin-bottom:8px;padding-bottom:8px;border-bottom:3px double #222}
+    .pr-header h1{font-size:16px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin:0 0 2px}
+    .pr-header h2{font-size:13px;font-weight:700;margin:0 0 2px}
+    .pr-header .pr-sub{font-size:10px;color:#444;font-weight:500}
+    .pr-info{display:flex;justify-content:space-between;margin:6px 0;padding:5px 0;border:1px solid #999;border-radius:4px;font-size:10px;background:#f9f9f9}
+    .pr-info span{font-weight:700}
+    .pr-table{width:100%;border-collapse:collapse;margin:8px 0;border:2px solid #222}
+    .pr-table th{background:#E5E7EB!important;color:#111!important;font-size:9px;font-weight:700;padding:6px 8px;border:1px solid #999!important;text-transform:uppercase;text-align:left}
+    .pr-table th.th-time{width:130px;text-align:center}
+    .pr-table td{padding:6px 8px;border:1px solid #bbb!important;font-size:10px;color:#111!important;vertical-align:top}
+    .pr-table tr:nth-child(even) td{background:#F9FAFB!important}
+    .pr-table .td-time{text-align:center;font-weight:800;color:#6D28D9;background:#F5F3FF!important}
+    .pr-table .td-judul{font-weight:700}
+    .pr-tips{margin:10px 0;border:1px solid #999;border-radius:4px;overflow:hidden}
+    .pr-tips-hdr{background:#FEF3C7;padding:5px 8px;font-size:10px;font-weight:800;border-bottom:1px solid #999;color:#92400E}
+    .pr-tips-item{padding:5px 8px;border-bottom:1px solid #ddd;font-size:9px;line-height:1.6}
+    .pr-tips-item:last-child{border-bottom:none}
+    .pr-tips-item b{color:#111}
+    .pr-footer{margin-top:16px;padding-top:8px;border-top:1px solid #ccc;display:flex;justify-content:space-between;font-size:9px;color:#666}
+    .pr-sig{text-align:center;min-width:120px}
+    .pr-sig .sn{margin-top:45px;font-weight:700;color:#000;font-size:10px;border-bottom:1px solid #333;display:inline-block;padding:0 8px}
+    .pr-sig .sr{font-size:8px;color:#444;margin-top:2px}
+    @page{size:A4 portrait;margin:8mm}
+}
 </style>
 </head>
 <body>
@@ -184,7 +219,6 @@ tr:hover td{background:rgba(16,185,129,.02)}
             <button class="btn btn-primary" onclick="openAgendaModal()"><i class="fas fa-plus"></i>Tambah Agenda</button>
         </div>
     </div>
-    <!-- Filter Bar -->
     <div class="card mb-4 no-print">
         <div class="flex flex-wrap items-center gap-2">
             <div class="flex items-center gap-1"><label class="text-[10px] text-slate-500 font-semibold">Kelas:</label><select class="input" style="width:120px" id="filterAgendaKelas" onchange="renderAllAgendaViews()"><option value="">Semua</option><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option></select></div>
@@ -193,7 +227,6 @@ tr:hover td{background:rgba(16,185,129,.02)}
             <div class="flex items-center gap-1"><label class="text-[10px] text-slate-500 font-semibold">Tipe:</label><select class="input" style="width:120px" id="filterAgendaTipe" onchange="renderAllAgendaViews()"><option value="">Semua</option><option value="alur">Alur Pentahapan</option><option value="rundown">Rundown Harian</option><option value="tips">Tips</option></select></div>
         </div>
     </div>
-    <!-- Tabs -->
     <div class="flex border-b border-slate-700/50 mb-4 no-print">
         <button class="tab-btn active" data-at="list" onclick="switchAgendaTab('list',this)"><i class="fas fa-list mr-1"></i>Daftar</button>
         <button class="tab-btn" data-at="timeline" onclick="switchAgendaTab('timeline',this)"><i class="fas fa-stream mr-1"></i>Timeline</button>
@@ -205,10 +238,10 @@ tr:hover td{background:rgba(16,185,129,.02)}
 </div>
 
 <!-- ABSENSI -->
-<div class="page" id="page-absensi"><div class="card mb-4"><h3 class="font-bold text-sm mb-3"><i class="fas fa-clipboard-list text-emerald-400 mr-2"></i>Pilih Blok Kegiatan</h3><div class="grid grid-cols-1 md:grid-cols-4 gap-3"><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tanggal</label><select class="input" id="absTanggal" onchange="onAbsFilterChange()"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Kelas</label><select class="input" id="absKelas" onchange="onAbsKelasChange()"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Sesi</label><select class="input" id="absMapel" onchange="onAbsMapelChange()"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Topik</label><input type="text" class="input" id="absInfo" readonly></div></div></div><div class="card"><div class="flex flex-wrap items-center justify-between mb-3 gap-2"><h3 class="font-bold text-sm"><i class="fas fa-users text-blue-400 mr-2"></i>Daftar Hadir</h3><div class="flex gap-2"><button class="btn btn-outline btn-sm" onclick="setAllAbsen('Hadir')">Semua Hadir</button><button class="btn btn-primary btn-sm" onclick="simpanAbsensi()"><i class="fas fa-save"></i>Simpan</button></div></div><div class="table-wrap"><table><thead><tr><th>No</th><th>NIS</th><th>Nama Siswa</th><th>Keterangan</th></tr></thead><tbody id="tblAbsensi"><tr><td colspan="4" class="text-center text-slate-500 py-8">Pilih blok kegiatan</td></tr></tbody></table></div></div></div>
+<div class="page" id="page-absensi"><div class="card mb-4"><h3 class="font-bold text-sm mb-3"><i class="fas fa-clipboard-list text-emerald-400 mr-2"></i>Pilih Blok Kegiatan</h3><div class="grid grid-cols-1 md:grid-cols-4 gap-3"><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tanggal</label><select class="input" id="absTanggal"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Kelas</label><select class="input" id="absKelas"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Sesi</label><select class="input" id="absMapel"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Topik</label><input type="text" class="input" id="absInfo" readonly></div></div></div><div class="card"><div class="flex flex-wrap items-center justify-between mb-3 gap-2"><h3 class="font-bold text-sm"><i class="fas fa-users text-blue-400 mr-2"></i>Daftar Hadir</h3><div class="flex gap-2"><button class="btn btn-outline btn-sm" onclick="setAllAbsen('Hadir')">Semua Hadir</button><button class="btn btn-primary btn-sm" onclick="simpanAbsensi()"><i class="fas fa-save"></i>Simpan</button></div></div><div class="table-wrap"><table><thead><tr><th>No</th><th>NIS</th><th>Nama Siswa</th><th>Keterangan</th></tr></thead><tbody id="tblAbsensi"><tr><td colspan="4" class="text-center text-slate-500 py-8">Pilih blok kegiatan</td></tr></tbody></table></div></div></div>
 
 <!-- PENILAIAN -->
-<div class="page" id="page-penilaian"><div class="card mb-4"><h3 class="font-bold text-sm mb-3"><i class="fas fa-star-half-alt text-emerald-400 mr-2"></i>Pilih Blok Kegiatan</h3><div class="grid grid-cols-1 md:grid-cols-4 gap-3"><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tanggal</label><select class="input" id="nilTanggal" onchange="onNilFilterChange()"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Kelas</label><select class="input" id="nilKelas" onchange="onNilKelasChange()"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Sesi</label><select class="input" id="nilMapel" onchange="onNilMapelChange()"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Topik</label><input type="text" class="input" id="nilTopik" readonly></div></div></div><div class="card"><div class="flex flex-wrap items-center justify-between mb-3 gap-2"><div><h3 class="font-bold text-sm"><i class="fas fa-clipboard-check text-blue-400 mr-2"></i>Penilaian</h3><div class="text-[10px] text-slate-500 mt-1">A=5 B=4 C=3 D=2 E=1</div></div><div class="flex gap-2"><button class="btn btn-outline btn-sm" onclick="setAllNilai(4)">Semua B</button><button class="btn btn-outline btn-sm" onclick="setAllNilai(3)">Semua C</button><button class="btn btn-primary btn-sm" onclick="simpanPenilaian()"><i class="fas fa-save"></i>Simpan</button></div></div><div class="table-wrap"><table><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Pgt</th><th>Ktr</th><th>Sik</th><th>Rata</th><th>Predikat</th></tr></thead><tbody id="tblNilai"><tr><td colspan="8" class="text-center text-slate-500 py-8">Pilih blok kegiatan</td></tr></tbody></table></div></div></div>
+<div class="page" id="page-penilaian"><div class="card mb-4"><h3 class="font-bold text-sm mb-3"><i class="fas fa-star-half-alt text-emerald-400 mr-2"></i>Pilih Blok Kegiatan</h3><div class="grid grid-cols-1 md:grid-cols-4 gap-3"><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tanggal</label><select class="input" id="nilTanggal"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Kelas</label><select class="input" id="nilKelas"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Sesi</label><select class="input" id="nilMapel"><option value="">-- Pilih --</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Topik</label><input type="text" class="input" id="nilTopik" readonly></div></div></div><div class="card"><div class="flex flex-wrap items-center justify-between mb-3 gap-2"><div><h3 class="font-bold text-sm"><i class="fas fa-clipboard-check text-blue-400 mr-2"></i>Penilaian</h3><div class="text-[10px] text-slate-500 mt-1">A=5 B=4 C=3 D=2 E=1</div></div><div class="flex gap-2"><button class="btn btn-outline btn-sm" onclick="setAllNilai(4)">Semua B</button><button class="btn btn-outline btn-sm" onclick="setAllNilai(3)">Semua C</button><button class="btn btn-primary btn-sm" onclick="simpanPenilaian()"><i class="fas fa-save"></i>Simpan</button></div></div><div class="table-wrap"><table><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Pgt</th><th>Ktr</th><th>Sik</th><th>Rata</th><th>Predikat</th></tr></thead><tbody id="tblNilai"><tr><td colspan="8" class="text-center text-slate-500 py-8">Pilih blok kegiatan</td></tr></tbody></table></div></div></div>
 
 <!-- REKAP -->
 <div class="page" id="page-rekap"><div class="flex flex-wrap items-center gap-2 mb-4"><select class="input" style="width:140px" id="rekapKelas" onchange="loadRekap()"><option value="">Pilih Kelas</option><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option></select><select class="input" style="width:140px" id="rekapMapel" onchange="loadRekap()"><option value="">Semua Mapel</option><option value="PJOK">PJOK</option><option value="PAI">PAI</option><option value="P5">P5</option></select><button class="btn btn-primary btn-sm no-print" onclick="cetakRekap()"><i class="fas fa-print"></i>Cetak</button></div><div id="rekapContent" class="card"><p class="text-center text-slate-500 text-sm py-8">Pilih kelas</p></div></div>
@@ -218,7 +251,7 @@ tr:hover td{background:rgba(16,185,129,.02)}
 
 </div></div>
 
-<div id="printZone" style="display:none"></div>
+<div id="printZone"></div>
 
 <!-- MODAL GURU -->
 <div class="modal-bg" id="modalGuru"><div class="modal"><div class="flex items-center justify-between p-4 border-b border-slate-700/50"><h3 class="font-bold text-sm" id="modalGuruTitle">Tambah Guru</h3><button onclick="closeModal('modalGuru')" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button></div><div class="p-4 space-y-3"><input type="hidden" id="guruId"><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Nama Lengkap</label><input type="text" class="input" id="guruNama" placeholder="Nama guru"></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Peran</label><select class="input" id="guruPeran" onchange="toggleGuruField()"><option value="guru_kelas">Guru Kelas (P5)</option><option value="pjok">Guru PJOK</option><option value="pai">Guru PAI</option></select></div><div id="guruKelasWrap"><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Kelas</label><select class="input" id="guruKelasAmpu"><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option></select></div><div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">No. HP / NIP</label><input type="text" class="input" id="guruHP" placeholder="NIP / HP"></div></div><div class="flex justify-end gap-2 p-4 border-t border-slate-700/50"><button class="btn btn-outline" onclick="closeModal('modalGuru')">Batal</button><button class="btn btn-primary" onclick="simpanGuru()"><i class="fas fa-save"></i>Simpan</button></div></div></div>
@@ -228,7 +261,6 @@ tr:hover td{background:rgba(16,185,129,.02)}
 
 <!-- MODAL DETAIL BLOK -->
 <div class="modal-bg" id="modalDetail"><div class="modal modal-lg"><div class="flex items-center justify-between p-4 border-b border-slate-700/50"><h3 class="font-bold text-sm">Detail Blok</h3><button onclick="closeModal('modalDetail')" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button></div><div class="p-4" id="detailContent"></div></div></div>
-<div class="modal-bg" id="modalFoto" onclick="closeModal('modalFoto')"><div style="max-width:90vw;max-height:90vh;margin:auto" onclick="event.stopPropagation()"><img id="fotoLarge" src="" style="max-width:100%;max-height:85vh;border-radius:10px"></div></div>
 
 <!-- ========== MODAL AGENDA P5 ========== -->
 <div class="modal-bg" id="modalAgenda">
@@ -245,13 +277,25 @@ tr:hover td{background:rgba(16,185,129,.02)}
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Sub Tema</label><input type="text" class="input" id="agendaSubTema" placeholder="Melestarikan Jajanan Tradisional"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tipe</label><select class="input" id="agendaTipe"><option value="alur">Alur Pentahapan</option><option value="rundown">Rundown Harian</option><option value="tips">Tips Pelaksanaan</option></select></div>
+            <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tipe</label><select class="input" id="agendaTipe" onchange="toggleJamFields()"><option value="alur">Alur Pentahapan</option><option value="rundown">Rundown Harian</option><option value="tips">Tips Pelaksanaan</option></select></div>
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Pertemuan Ke-</label><select class="input" id="agendaPertemuan"><option value="1">1 - Pengenalan</option><option value="2">2 - Kontekstualisasi</option><option value="3">3 - Aksi (Praktik)</option><option value="4">4 - Gelar Karya</option><option value="5">5 - Refleksi & Evaluasi</option><option value="0">Rundown / Tips (tanpa pertemuan)</option></select></div>
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Judul Kegiatan</label><input type="text" class="input" id="agendaJudul" placeholder="Pengenalan Jajanan Tradisional"></div>
         </div>
-        <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Konten / Materi Kegiatan</label><textarea class="input" id="agendaKonten" placeholder="Tuliskan deskripsi lengkap kegiatan, materi, langkah-langkah..." style="min-height:130px;font-size:13px;line-height:1.7"></textarea></div>
+        <!-- JAM & DURASI — hanya tampil jika tipe=rundown -->
+        <div id="jamFields" style="display:none">
+            <div class="p-3 rounded-xl border border-purple-500/20 bg-purple-500/5">
+                <div class="text-[11px] font-bold text-purple-400 mb-3"><i class="fas fa-clock mr-1"></i>Jam & Durasi Kegiatan</div>
+                <div class="grid grid-cols-3 gap-3">
+                    <div><label class="text-[10px] text-slate-500 mb-1 block">Jam Mulai</label><input type="time" class="input-time" id="agendaJamMulai" value="07:00"></div>
+                    <div><label class="text-[10px] text-slate-500 mb-1 block">Jam Selesai</label><input type="time" class="input-time" id="agendaJamSelesai" value="08:00"></div>
+                    <div><label class="text-[10px] text-slate-500 mb-1 block">Durasi (menit)</label><div class="flex items-center gap-1"><input type="number" class="input-durasi" id="agendaDurasi" value="60" min="5" max="480" oninput="autoCalcSelesai()"><span class="text-[10px] text-slate-500">mnt</span></div></div>
+                </div>
+                <div class="text-[10px] text-slate-500 mt-2"><i class="fas fa-info-circle mr-1"></i>Isi jam mulai + durasi, maka jam selesai terhitung otomatis. Atau isi manual semua.</div>
+            </div>
+        </div>
+        <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Konten / Materi Kegiatan</label><textarea class="input" id="agendaKonten" placeholder="Tuliskan deskripsi lengkap kegiatan, materi, langkah-langkah..." style="min-height:120px;font-size:13px;line-height:1.7"></textarea></div>
         <div><label class="text-[11px] text-slate-400 font-semibold mb-2 block">Dimensi Profil Pelajar Pancasila</label><div class="flex flex-wrap gap-2" id="agendaDimensiWrap"><label class="dimensi-chip" data-dim="beriman" onclick="toggleAgendaDim(this)"><i class="fas fa-hands-praying" style="font-size:9px"></i> Beriman & Bertakwa</label><label class="dimensi-chip" data-dim="berkebinekaan" onclick="toggleAgendaDim(this)"><i class="fas fa-globe-asia" style="font-size:9px"></i> Berkebinekaan Global</label><label class="dimensi-chip" data-dim="gotong_royong" onclick="toggleAgendaDim(this)"><i class="fas fa-people-carry-box" style="font-size:9px"></i> Bergotong Royong</label><label class="dimensi-chip" data-dim="mandiri" onclick="toggleAgendaDim(this)"><i class="fas fa-person-walking" style="font-size:9px"></i> Mandiri</label><label class="dimensi-chip" data-dim="bernalar" onclick="toggleAgendaDim(this)"><i class="fas fa-brain" style="font-size:9px"></i> Bernalar Kritis</label><label class="dimensi-chip" data-dim="kreatif" onclick="toggleAgendaDim(this)"><i class="fas fa-lightbulb" style="font-size:9px"></i> Kreatif</label></div></div>
-        <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Catatan / Alat & Bahan</label><textarea class="input" id="agendaCatatan" placeholder="Alat, bahan, atau catatan tambahan..." style="min-height:60px;font-size:12px"></textarea></div>
+        <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Catatan / Alat & Bahan</label><textarea class="input" id="agendaCatatan" placeholder="Alat, bahan, atau catatan tambahan..." style="min-height:55px;font-size:12px"></textarea></div>
     </div>
     <div class="flex justify-end gap-2 p-4 border-t border-slate-700/50">
         <button class="btn btn-outline" onclick="closeModal('modalAgenda')">Batal</button>
@@ -264,7 +308,7 @@ tr:hover td{background:rgba(16,185,129,.02)}
 <div class="modal-bg" id="modalAgendaDetail" onclick="closeModal('modalAgendaDetail')">
 <div class="modal modal-lg" onclick="event.stopPropagation()">
     <div class="flex items-center justify-between p-4 border-b border-slate-700/50">
-        <h3 class="font-bold text-sm" id="modalAgDetailTitle"><i class="fas fa-eye text-purple-400 mr-2"></i>Detail Agenda</h3>
+        <h3 class="font-bold text-sm" id="modalAgDetailTitle"><i class="fas fa-eye text-purple-400 mr-2"></i>Detail</h3>
         <button onclick="closeModal('modalAgendaDetail')" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
     </div>
     <div class="p-5" id="agendaDetailContent" style="max-height:75vh;overflow-y:auto"></div>
@@ -276,34 +320,34 @@ tr:hover td{background:rgba(16,185,129,.02)}
 const P5_TEMA=[{id:'gaya_hidup_berkelanjutan',nama:'Gaya Hidup Berkelanjutan'},{id:'kearifan_lokal',nama:'Kearifan Lokal'},{id:'bhinneka_tunggal_ika',nama:'Bhinneka Tunggal Ika'},{id:'kewirausahaan',nama:'Kewirausahaan'},{id:'rekayasa_teknologi',nama:'Rekayasa dan Teknologi'},{id:'bangun_jiwa_raga',nama:'Bangunlah Jiwa dan Raganya'},{id:'suara_demokrasi',nama:'Suara Demokrasi'}];
 const DIMENSI=[{id:'beriman',nama:'Beriman & Bertakwa',icon:'fa-hands-praying'},{id:'berkebinekaan',nama:'Berkebinekaan Global',icon:'fa-globe-asia'},{id:'gotong_royong',nama:'Bergotong Royong',icon:'fa-people-carry-box'},{id:'mandiri',nama:'Mandiri',icon:'fa-person-walking'},{id:'bernalar',nama:'Bernalar Kritis',icon:'fa-brain'},{id:'kreatif',nama:'Kreatif',icon:'fa-lightbulb'}];
 
-/* ===== TEMPLATE AGENDA ===== */
+/* ===== TEMPLATE AGENDA (dengan jamMulai, jamSelesai, durasi) ===== */
 const TPL=[
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'1',judul:'Pengenalan',kelas:'1,2,3',konten:'Nonton video/dongeng jajanan pasar, mengenali nama, bentuk, dan rasa jajanan tradisional.',dimensi:['berkebinekaan','bernalar'],catatan:'Siapkan video/gambar jajanan tradisional lokal.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'1',judul:'Pengenalan',kelas:'4,5,6',konten:'Investigasi asal-usul jajanan lokal, perbedaan bahan alami vs. bahan pengawet sintetis.',dimensi:['berkebinekaan','bernalar'],catatan:'Siapkan contoh bahan alami dan bahan pengawet untuk perbandingan.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'2',judul:'Kontekstualisasi',kelas:'1,2,3',konten:'Observasi bentuk dan warna bahan alami (daun pisang, kelapa, pandan, gula merah).',dimensi:['bernalar','gotong_royong'],catatan:'Siapkan bahan alami: daun pisang, kelapa parut, pandan, gula merah.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'2',judul:'Kontekstualisasi',kelas:'4,5,6',konten:'Menghubungi/wawancara pembuat jajanan lokal atau demonstrasi oleh narasumber tamu.',dimensi:['bernalar','gotong_royong'],catatan:'Undang narasumber pembuat jajanan tradisional jika memungkinkan.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'3',judul:'Aksi (Praktik)',kelas:'1,2,3',konten:'Membentuk/menghias/mengemas jajanan sederhana (misal: membentuk getuk/klepon pre-cooked).',dimensi:['kreatif','mandiri'],catatan:'Alat: cetakan kue, daun pisang. Gunakan adonan setengah matang (aman untuk anak).'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'3',judul:'Aksi (Praktik)',kelas:'4,5,6',konten:'Praktik membuat jajanan tradisional dari bahan mentah hingga pengemasan ramah lingkungan.',dimensi:['kreatif','mandiri'],catatan:'Bahan: tepung, kelapa parut, gula merah, pewarna pandan. Pengawasan ketat saat menggunakan kompor.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'4',judul:'Gelar Karya (Pasar Cilik)',kelas:'1,2,3',konten:'Simulasi membeli dan mencicipi jajanan tradisional ("Market Day" sederhana).',dimensi:['kreatif','gotong_royong','mandiri'],catatan:'Siapkan koin/mainan uang untuk simulasi jual beli.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'4',judul:'Gelar Karya (Pasar Cilik)',kelas:'4,5,6',konten:'Mengelola stan penjualan, menghitung modal/keuntungan, serta menyajikan jajanan.',dimensi:['kreatif','gotong_royong','mandiri'],catatan:'Kls 4-6: buku catatan keuangan sederhana, label harga.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'5',judul:'Refleksi & Evaluasi',kelas:'1,2,3',konten:'Menggambar jajanan favorit dan menceritakan kesannya.',dimensi:['bernalar','mandiri','berkebinekaan'],catatan:'Siapkan lembar kerja mewarnai.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'5',judul:'Refleksi & Evaluasi',kelas:'4,5,6',konten:'Menyusun laporan sederhana, refleksi nilai budaya, dan tindak lanjut kelestarian pangan lokal.',dimensi:['bernalar','mandiri','berkebinekaan'],catatan:'Siapkan lembar laporan/refleksi.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'06.30 - 07.00 · Persiapan & Pembiasaan',kelas:'1,2,3',konten:'Apel pagi, doa bersama, penataan meja kelompok, penyampaian aturan keselamatan.',dimensi:['mandiri'],catatan:'Durasi: 30 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'06.30 - 07.00 · Persiapan & Pembiasaan',kelas:'4,5,6',konten:'Apel pagi, koordinasi kelompok, persiapan alat/bahan memasak atau stan pameran.',dimensi:['mandiri'],catatan:'Durasi: 30 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'07.00 - 08.00 · Pengenalan & Orientasi',kelas:'1,2,3',konten:'Guru mengenalkan bahan alami (daun pisang, kelapa, pewarna pandan) lewat media konkret.',dimensi:['bernalar'],catatan:'Durasi: 60 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'07.00 - 08.00 · Pengenalan & Orientasi',kelas:'4,5,6',konten:'Diskusi resep, alur kerja kelompok, penetapan tugas tiap anggota (pemasak, pengemas, kasir).',dimensi:['bernalar'],catatan:'Durasi: 60 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'08.00 - 09.30 · Aksi Utama (Praktik/Karya)',kelas:'1,2,3',konten:'Praktik Sederhana - Membentuk adonan (getuk/onde-onde), mencetak, atau membungkus kue dengan daun pisang.',dimensi:['kreatif','mandiri'],catatan:'Durasi: 90 menit. Pengawasan ketat.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'08.00 - 09.30 · Aksi Utama (Praktik/Karya)',kelas:'4,5,6',konten:'Praktik Mandiri - Mengolah bahan mentah (merebus klepon, mengukus nagasari/surabi, membuat cenil).',dimensi:['kreatif','mandiri'],catatan:'Durasi: 90 menit. Pastikan pengawasan ketat untuk keselamatan.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'09.30 - 10.15 · Sehat Bersama & Market Day',kelas:'1,2,3',konten:'Mencicipi jajanan hasil karya bersama teman ("Bancakan") dan belajar berbagi.',dimensi:['gotong_royong','kreatif'],catatan:'Durasi: 45 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'09.30 - 10.15 · Sehat Bersama & Market Day',kelas:'4,5,6',konten:'Membuka stan "Pasar Tradisional Cilik", melayani pembeli, mengelola transaksi sederhana.',dimensi:['gotong_royong','kreatif'],catatan:'Durasi: 45 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'10.15 - 11.00 · Refleksi & Dokumentasi',kelas:'1,2,3',konten:'Mewarnai lembar kerja jajanan tradisional dan menceritakan rasa jajanan favoritnya.',dimensi:['bernalar','mandiri'],catatan:'Durasi: 45 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'10.15 - 11.00 · Refleksi & Dokumentasi',kelas:'4,5,6',konten:'Mengisi lembar refleksi kelompok, menghitung hasil penjualan (jika ada), dan menyusun pesan kearifan lokal.',dimensi:['bernalar','mandiri'],catatan:'Durasi: 45 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'11.00 - 11.30 · Operasi Semut & Penutup',kelas:'1,2,3',konten:'Bersih-bersih area kelas bersama, apresiasi stiker bintang, doa penutup.',dimensi:['gotong_royong','mandiri'],catatan:'Durasi: 30 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'11.00 - 11.30 · Operasi Semut & Penutup',kelas:'4,5,6',konten:'Clean-up alat masak dan area stan, evaluasi singkat antar kelompok, doa penutup.',dimensi:['gotong_royong','mandiri'],catatan:'Durasi: 30 menit'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keselamatan Kerja',kelas:'1,2,3',konten:'Hindari penggunaan kompor atau alat tajam secara langsung. Gunakan bahan setengah matang yang siap dibentuk/dihias.',dimensi:['mandiri'],catatan:'Prioritaskan keselamatan di atas segalanya.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keselamatan Kerja',kelas:'4,5,6',konten:'Siswa boleh menggunakan kompor dengan pengawasan ketat. Pastikan alat tajam digunakan sesuai prosedur.',dimensi:['mandiri'],catatan:'Prioritaskan keselamatan di atas segalanya.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keterlibatan Orang Tua/Narasumber',kelas:'1,2,3,4,5,6',konten:'Undang orang tua atau pembuat jajanan tradisional lokal ke sekolah untuk mendemonstrasikan cara pembuatan secara langsung.',dimensi:['gotong_royong','berkebinekaan'],catatan:'Koordinasi dengan komite/wali kelas minimal 1 minggu sebelumnya.'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Fokus Bebas Plastik',kelas:'1,2,3,4,5,6',konten:'Gunakan wadah ramah lingkungan: piring lidi, tampah, bungkus daun pisang. Hindari plastik sepenuhnya untuk memperkuat pesan kearifan lokal.',dimensi:['kreatif','bernalar'],catatan:'Hindari plastik sepenuhnya.'}
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'1',judul:'Pengenalan',kelas:'1,2,3',konten:'Nonton video/dongeng jajanan pasar, mengenali nama, bentuk, dan rasa jajanan tradisional.',dimensi:['berkebinekaan','bernalar'],catatan:'Siapkan video/gambar jajanan tradisional lokal.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'1',judul:'Pengenalan',kelas:'4,5,6',konten:'Investigasi asal-usul jajanan lokal, perbedaan bahan alami vs. bahan pengawet sintetis.',dimensi:['berkebinekaan','bernalar'],catatan:'Siapkan contoh bahan alami dan bahan pengawet.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'2',judul:'Kontekstualisasi',kelas:'1,2,3',konten:'Observasi bentuk dan warna bahan alami (daun pisang, kelapa, pandan, gula merah).',dimensi:['bernalar','gotong_royong'],catatan:'Siapkan bahan alami: daun pisang, kelapa parut, pandan, gula merah.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'2',judul:'Kontekstualisasi',kelas:'4,5,6',konten:'Menghubungi/wawancara pembuat jajanan lokal atau demonstrasi oleh narasumber tamu.',dimensi:['bernalar','gotong_royong'],catatan:'Undang narasumber pembuat jajanan tradisional.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'3',judul:'Aksi (Praktik)',kelas:'1,2,3',konten:'Membentuk/menghias/mengemas jajanan sederhana (membentuk getuk/klepon pre-cooked).',dimensi:['kreatif','mandiri'],catatan:'Gunakan adonan setengah matang (aman untuk anak).',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'3',judul:'Aksi (Praktik)',kelas:'4,5,6',konten:'Praktik membuat jajanan tradisional dari bahan mentah hingga pengemasan ramah lingkungan.',dimensi:['kreatif','mandiri'],catatan:'Bahan: tepung, kelapa parut, gula merah, pewarna pandan.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'4',judul:'Gelar Karya (Pasar Cilik)',kelas:'1,2,3',konten:'Simulasi membeli dan mencicipi jajanan tradisional ("Market Day" sederhana).',dimensi:['kreatif','gotong_royong','mandiri'],catatan:'Siapkan koin/mainan uang untuk simulasi jual beli.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'4',judul:'Gelar Karya (Pasar Cilik)',kelas:'4,5,6',konten:'Mengelola stan penjualan, menghitung modal/keuntungan, serta menyajikan jajanan.',dimensi:['kreatif','gotong_royong','mandiri'],catatan:'Buku catatan keuangan sederhana, label harga.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'5',judul:'Refleksi & Evaluasi',kelas:'1,2,3',konten:'Menggambar jajanan favorit dan menceritakan kesannya.',dimensi:['bernalar','mandiri','berkebinekaan'],catatan:'Siapkan lembar kerja mewarnai.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'5',judul:'Refleksi & Evaluasi',kelas:'4,5,6',konten:'Menyusun laporan sederhana, refleksi nilai budaya, dan tindak lanjut kelestarian pangan lokal.',dimensi:['bernalar','mandiri','berkebinekaan'],catatan:'Siapkan lembar laporan/refleksi.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Persiapan & Pembiasaan',kelas:'1,2,3',konten:'Apel pagi, doa bersama, penataan meja kelompok, penyampaian aturan keselamatan.',dimensi:['mandiri'],catatan:'Durasi: 30 menit',jamMulai:'06:30',jamSelesai:'07:00',durasi:'30'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Persiapan & Pembiasaan',kelas:'4,5,6',konten:'Apel pagi, koordinasi kelompok, persiapan alat/bahan memasak atau stan pameran.',dimensi:['mandiri'],catatan:'Durasi: 30 menit',jamMulai:'06:30',jamSelesai:'07:00',durasi:'30'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Pengenalan & Orientasi',kelas:'1,2,3',konten:'Guru mengenalkan bahan alami (daun pisang, kelapa, pewarna pandan) lewat media konkret.',dimensi:['bernalar'],catatan:'Durasi: 60 menit',jamMulai:'07:00',jamSelesai:'08:00',durasi:'60'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Pengenalan & Orientasi',kelas:'4,5,6',konten:'Diskusi resep, alur kerja kelompok, penetapan tugas tiap anggota (pemasak, pengemas, kasir).',dimensi:['bernalar'],catatan:'Durasi: 60 menit',jamMulai:'07:00',jamSelesai:'08:00',durasi:'60'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Aksi Utama (Praktik/Karya)',kelas:'1,2,3',konten:'Praktik Sederhana - Membentuk adonan (getuk/onde-onde), mencetak, atau membungkus kue dengan daun pisang.',dimensi:['kreatif','mandiri'],catatan:'Durasi: 90 menit. Pengawasan ketat.',jamMulai:'08:00',jamSelesai:'09:30',durasi:'90'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Aksi Utama (Praktik/Karya)',kelas:'4,5,6',konten:'Praktik Mandiri - Mengolah bahan mentah (merebus klepon, mengukus nagasari/surabi, membuat cenil).',dimensi:['kreatif','mandiri'],catatan:'Durasi: 90 menit. Pastikan pengawasan ketat.',jamMulai:'08:00',jamSelesai:'09:30',durasi:'90'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Sehat Bersama & Market Day',kelas:'1,2,3',konten:'Mencicipi jajanan hasil karya bersama teman ("Bancakan") dan belajar berbagi.',dimensi:['gotong_royong','kreatif'],catatan:'Durasi: 45 menit',jamMulai:'09:30',jamSelesai:'10:15',durasi:'45'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Sehat Bersama & Market Day',kelas:'4,5,6',konten:'Membuka stan "Pasar Tradisional Cilik", melayani pembeli, mengelola transaksi sederhana.',dimensi:['gotong_royong','kreatif'],catatan:'Durasi: 45 menit',jamMulai:'09:30',jamSelesai:'10:15',durasi:'45'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Refleksi & Dokumentasi',kelas:'1,2,3',konten:'Mewarnai lembar kerja jajanan tradisional dan menceritakan rasa jajanan favoritnya.',dimensi:['bernalar','mandiri'],catatan:'Durasi: 45 menit',jamMulai:'10:15',jamSelesai:'11:00',durasi:'45'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Refleksi & Dokumentasi',kelas:'4,5,6',konten:'Mengisi lembar refleksi kelompok, menghitung hasil penjualan, dan menyusun pesan kearifan lokal.',dimensi:['bernalar','mandiri'],catatan:'Durasi: 45 menit',jamMulai:'10:15',jamSelesai:'11:00',durasi:'45'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Operasi Semut & Penutup',kelas:'1,2,3',konten:'Bersih-bersih area kelas bersama, apresiasi stiker bintang, doa penutup.',dimensi:['gotong_royong','mandiri'],catatan:'Durasi: 30 menit',jamMulai:'11:00',jamSelesai:'11:30',durasi:'30'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Operasi Semut & Penutup',kelas:'4,5,6',konten:'Clean-up alat masak dan area stan, evaluasi singkat antar kelompok, doa penutup.',dimensi:['gotong_royong','mandiri'],catatan:'Durasi: 30 menit',jamMulai:'11:00',jamSelesai:'11:30',durasi:'30'},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keselamatan Kerja',kelas:'1,2,3',konten:'Hindari penggunaan kompor atau alat tajam secara langsung. Gunakan bahan setengah matang yang siap dibentuk/dihias.',dimensi:['mandiri'],catatan:'Prioritaskan keselamatan di atas segalanya.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keselamatan Kerja',kelas:'4,5,6',konten:'Siswa boleh menggunakan kompor dengan pengawasan ketat. Pastikan alat tajam digunakan sesuai prosedur.',dimensi:['mandiri'],catatan:'Prioritaskan keselamatan di atas segalanya.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Keterlibatan Orang Tua/Narasumber',kelas:'1,2,3,4,5,6',konten:'Undang orang tua atau pembuat jajanan tradisional lokal ke sekolah untuk mendemonstrasikan cara pembuatan secara langsung.',dimensi:['gotong_royong','berkebinekaan'],catatan:'Koordinasi dengan komite/wali kelas minimal 1 minggu sebelumnya.',jamMulai:'',jamSelesai:'',durasi:''},
+{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'tips',pertemuan:'0',judul:'Fokus Bebas Plastik',kelas:'1,2,3,4,5,6',konten:'Gunakan wadah ramah lingkungan: piring lidi, tampah, bungkus daun pisang. Hindari plastik sepenuhnya untuk memperkuat pesan kearifan lokal.',dimensi:['kreatif','bernalar'],catatan:'Hindari plastik sepenuhnya.',jamMulai:'',jamSelesai:'',durasi:''}
 ];
 
 /* ===== FIREBASE ===== */
@@ -320,11 +364,11 @@ function toast(m,t='success'){const c=document.getElementById('toastContainer'),
 function openModal(id){document.getElementById(id).classList.add('show')}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('show')}
-function formatDate(d){if(!d)return'-';return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}
 function formatDateShort(d){if(!d)return'-';return new Date(d).toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'})}
 function confirmAction(msg){return new Promise(r=>{const e=document.createElement('div');e.className='confirm-dialog';e.innerHTML='<div class="confirm-box"><i class="fas fa-exclamation-triangle text-2xl text-orange-400 mb-3"></i><p class="text-sm font-semibold mb-4">'+msg+'</p><div class="flex justify-center gap-2"><button class="btn btn-outline" id="cN">Batal</button><button class="btn btn-danger" id="cY"><i class="fas fa-trash mr-1"></i>Hapus</button></div></div>';document.body.appendChild(e);e.querySelector('#cN').onclick=()=>{e.remove();r(false)};e.querySelector('#cY').onclick=()=>{e.remove();r(true)};e.addEventListener('click',ev=>{if(ev.target===e){e.remove();r(false)}})})}
-function getKelasLabel(k){if(!k)return'-';if(k==='1,2,3,4,5,6')return'Semua Kelas';const arr=k.split(',').map(Number).sort((a,b)=>a-b);return'Kelas '+arr.join(', ')}
-function getDimNama(id){const d=DIMENSI.find(x=>x.id===id);return d?d.nama:'-'}
+function getKelasLabel(k){if(!k)return'-';if(k==='1,2,3,4,5,6')return'Semua Kelas';return'Kelas '+k.split(',').map(Number).sort((a,b)=>a-b).join(', ')}
+function getDimNama(id){return(DIMENSI.find(x=>x.id===id)||{}).nama||'-'}
+function genId(){return Date.now().toString(36)+Math.random().toString(36).substr(2,5)}
 document.getElementById('currentDate').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 (function(){const d=new Date(),dy=d.getDay(),df=dy<=5?(5-dy):(5-dy+7);d.setDate(d.getDate()+df);document.getElementById('blokTanggal').value=d.toISOString().split('T')[0]})();
 (function(){const s=document.getElementById('blokTemaP5');P5_TEMA.forEach(t=>s.innerHTML+='<option value="'+t.id+'">'+t.nama+'</option>')})();
@@ -343,7 +387,7 @@ async function uploadPhotos(bid){const urls=[];for(let i=0;i<selectedFiles.lengt
 
 /* ===== NAVIGASI ===== */
 const pageTitles={dashboard:'Dashboard',guru:'Data Guru',siswa:'Data Siswa',blokKegiatan:'Blok Kegiatan',agendaP5:'Agenda Kegiatan P5',absensi:'Absensi',penilaian:'Penilaian',rekap:'Rekap Nilai & Raport',galeri:'Galeri Foto'};
-document.querySelectorAll('.nav-item').forEach(item=>{item.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));item.classList.add('active');const pg=item.dataset.page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+pg).classList.add('active');document.getElementById('pageTitle').textContent=pageTitles[pg]||'';if(pg==='dashboard')loadDashboard();if(pg==='guru')loadGuru();if(pg==='siswa')loadSiswa();if(pg==='blokKegiatan'){populateBlokDD();loadBlokList()}if(pg==='agendaP5')loadAgendaPage();if(pg==='absensi')loadAbsPage();if(pg==='penilaian')loadNilPage();if(pg==='rekap')loadRekap();if(pg==='galeri')loadGaleri();if(window.innerWidth<1024)toggleSidebar()})});
+document.querySelectorAll('.nav-item').forEach(item=>{item.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));item.classList.add('active');const pg=item.dataset.page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+pg).classList.add('active');document.getElementById('pageTitle').textContent=pageTitles[pg]||'';if(pg==='dashboard')loadDashboard();if(pg==='guru')loadGuru();if(pg==='siswa')loadSiswa();if(pg==='blokKegiatan'){populateBlokDD();loadBlokList()}if(pg==='agendaP5')loadAgendaPage();if(pg==='absensi')toast('Pilih blok kegiatan','info');if(pg==='penilaian')toast('Pilih blok kegiatan','info');if(pg==='rekap')loadRekap();if(pg==='galeri')loadGaleri();if(window.innerWidth<1023)toggleSidebar()})});
 
 /* ===== GURU ===== */
 function toggleGuruField(){document.getElementById('guruKelasWrap').style.display=document.getElementById('guruPeran').value==='guru_kelas'?'block':'none'}
@@ -361,74 +405,40 @@ function loadSiswa(){db.ref('kokurikuler/siswa').once('value').then(s=>{allSiswa
 function renderSiswa(){const tbl=document.getElementById('tblSiswa'),fk=document.getElementById('filterKelasSiswa').value,src=document.getElementById('searchSiswa').value.toLowerCase();let keys=Object.keys(allSiswa);if(fk)keys=keys.filter(k=>allSiswa[k].kelas===fk);if(src)keys=keys.filter(k=>allSiswa[k].nama.toLowerCase().includes(src));if(!keys.length){tbl.innerHTML='<tr><td colspan="6" class="text-center text-slate-500 py-8">Tidak ada data</td></tr>';return}let h='';keys.forEach((k,i)=>{const s=allSiswa[k];h+='<tr><td class="text-slate-400">'+(i+1)+'</td><td class="text-slate-400 text-xs">'+(s.nis||'-')+'</td><td class="font-semibold">'+s.nama+'</td><td><span class="badge badge-kelas">Kelas '+s.kelas+'</span></td><td class="text-xs">'+(s.jk||'-')+'</td><td><button class="btn btn-outline btn-sm" onclick="openSiswaModal(\''+k+'\')"><i class="fas fa-edit"></i></button> <button class="btn btn-danger btn-sm" onclick="hapusSiswa(\''+k+'\')"><i class="fas fa-trash"></i></button></td></tr>'});tbl.innerHTML=h}
 
 /* ===== BLOK KEGIATAN ===== */
-function populateBlokDD(){['blokGuruKelas','blokGuruPJOK','blokGuruPAI'].forEach(sid=>{const sel=document.getElementById(sid);const role=sid==='blokGuruKelas'?'guru_kelas':sid==='blokGuruPJOK'?'pjok':'pai';let h='<option value="">-- Pilih --</option>';Object.keys(allGuru).forEach(k=>{if(allGuru[k].peran===role)h+='<option value="'+k+'">'+allGuru[k].nama+(allGuru[k].kelas?' (Kls '+allGuru[k].kelas+')':'')+'</option>'});sel.innerHTML=h})}
+function populateBlokDD(){['blokGuruKelas','blokGuruPJOK','blokGuruPAI'].forEach(sid=>{const sel=document.getElementById(sid),role=sid==='blokGuruKelas'?'guru_kelas':sid==='blokGuruPJOK'?'pjok':'pai';let h='<option value="">-- Pilih --</option>';Object.keys(allGuru).forEach(k=>{if(allGuru[k].peran===role)h+='<option value="'+k+'">'+allGuru[k].nama+(allGuru[k].kelas?' (Kls '+allGuru[k].kelas+')':'')+'</option>'});sel.innerHTML=h})}
 function batalEditBlok(){document.getElementById('blokEditId').value='';document.getElementById('blokFormTitle').innerHTML='<i class="fas fa-plus-circle text-emerald-400 mr-2"></i>Buat Blok Kegiatan';document.getElementById('btnBatalBlok').style.display='none'}
 function simpanBlok(){const id=document.getElementById('blokEditId').value,tgl=document.getElementById('blokTanggal').value,kls=document.getElementById('blokKelas').value;if(!tgl||!kls){toast('Tanggal & Kelas wajib','error');return}const data={tanggal:tgl,kelas:kls,guruKelas:document.getElementById('blokGuruKelas').value,pjok:{guru:document.getElementById('blokGuruPJOK').value,topik:document.getElementById('blokTopikPJOK').value,desk:document.getElementById('blokDeskPJOK').value},pai:{guru:document.getElementById('blokGuruPAI').value,topik:document.getElementById('blokTopikPAI').value,desk:document.getElementById('blokDeskPAI').value},p5:{tema:document.getElementById('blokTemaP5').value,topik:document.getElementById('blokTopikP5').value,desk:document.getElementById('blokDeskP5').value},updatedAt:Date.now()};const save=()=>{const ref=id?db.ref('kokurikuler/blok/'+id):db.ref('kokurikuler/blok').push();ref.set(data).then(()=>{toast('Disimpan');selectedFiles=[];renderFilePreview();if(!id)batalEditBlok();loadBlokList()}).catch(e=>toast('Gagal: '+e.message,'error'))};if(selectedFiles.length){const bid=id||genId();(id?Promise.resolve():db.ref('kokurikuler/blok/'+bid).set({...data})).then(()=>uploadPhotos(bid)).then(urls=>{data.foto=urls;db.ref('kokurikuler/blok/'+bid).update({foto:urls});selectedFiles=[];renderFilePreview();toast('Disimpan + Foto');if(!id)batalEditBlok();loadBlokList()}).catch(e=>toast('Gagal upload: '+e.message,'error'))}else save()}
-function genId(){return Date.now().toString(36)+Math.random().toString(36).substr(2,5)}
-function loadBlokList(){const fk=document.getElementById('filterBlokKelas').value,fb=document.getElementById('filterBlokBulan').value;db.ref('kokurikuler/blok').once('value').then(s=>{allBlok=s.val()||{};let keys=Object.keys(allBlok).sort((a,b)=>(allBlok[b].tanggal||'').localeCompare(allBlok[a].tanggal||''));if(fk)keys=keys.filter(k=>allBlok[k].kelas===fk);if(fb)keys=keys.filter(k=>(allBlok[k].tanggal||'').startsWith(fb));const c=document.getElementById('blokList');if(!keys.length){c.innerHTML='<p class="text-center text-slate-500 text-sm py-8">Tidak ada blok</p>';return}let h='';keys.forEach(k=>{const b=allBlok[k];h+='<div class="blok-card"><div class="flex items-start justify-between gap-2 mb-2"><div><div class="font-bold text-sm">'+formatDateShort(b.tanggal)+' — Kelas '+b.kelas+'</div><div class="flex flex-wrap gap-1 mt-1">'+(b.pjok?.topik?'<span class="badge badge-pjok">PJOK: '+b.pjok.topik+'</span>':'')+(b.pai?.topik?'<span class="badge badge-pai">PAI: '+b.pai.topik+'</span>':'')+(b.p5?.topik?'<span class="badge badge-p5">P5: '+b.p5.topik+'</span>':'')+'</div></div><div class="flex gap-1"><button class="btn btn-outline btn-sm" onclick="editBlok(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusBlok(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div></div>'});c.innerHTML=h})}
-function editBlok(id){const b=allBlok[id];if(!b)return;document.getElementById('blokEditId').value=id;document.getElementById('blokTanggal').value=b.tanggal||'';document.getElementById('blokKelas').value=b.kelas||'';populateBlokDD();setTimeout(()=>{document.getElementById('blokGuruKelas').value=b.guruKelas||'';document.getElementById('blokGuruPJOK').value=b.pjok?.guru||'';document.getElementById('blokTopikPJOK').value=b.pjok?.topik||'';document.getElementById('blokDeskPJOK').value=b.pjok?.desk||'';document.getElementById('blokGuruPAI').value=b.pai?.guru||'';document.getElementById('blokTopikPAI').value=b.pai?.topik||'';document.getElementById('blokDeskPAI').value=b.pai?.desk||'';document.getElementById('blokTemaP5').value=b.p5?.tema||'';onTemaP5Change();document.getElementById('blokTopikP5').value=b.p5?.topik||'';document.getElementById('blokDeskP5').value=b.p5?.desk||''},300);document.getElementById('blokFormTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Blok Kegiatan';document.getElementById('btnBatalBlok').style.display='';window.scrollTo(0,0)}
+function loadBlokList(){const fk=document.getElementById('filterBlokKelas').value,fb=document.getElementById('filterBlokBulan').value;db.ref('kokurikuler/blok').once('value').then(s=>{allBlok=s.val()||{};let keys=Object.keys(allBlok).sort((a,b)=>(allBlok[b].tanggal||'').localeCompare(allBlok[a].tanggal||''));if(fk)keys=keys.filter(k=>allBlok[k].kelas===fk);if(fb)keys=keys.filter(k=>(allBlok[k].tanggal||'').startsWith(fb));const c=document.getElementById('blokList');if(!keys.length){c.innerHTML='<p class="text-center text-slate-500 text-sm py-8">Tidak ada blok</p>';return}let h='';keys.forEach(k=>{const b=allBlok[k];h+='<div class="blok-card"><div class="flex items-start justify-between gap-2"><div><div class="font-bold text-sm">'+formatDateShort(b.tanggal)+' — Kelas '+b.kelas+'</div><div class="flex flex-wrap gap-1 mt-1">'+(b.pjok?.topik?'<span class="badge badge-pjok">PJOK: '+b.pjok.topik+'</span>':'')+(b.pai?.topik?'<span class="badge badge-pai">PAI: '+b.pai.topik+'</span>':'')+(b.p5?.topik?'<span class="badge badge-p5">P5: '+b.p5.topik+'</span>':'')+'</div></div><div class="flex gap-1"><button class="btn btn-outline btn-sm" onclick="editBlok(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusBlok(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div></div>'});c.innerHTML=h})}
+function editBlok(id){const b=allBlok[id];if(!b)return;document.getElementById('blokEditId').value=id;document.getElementById('blokTanggal').value=b.tanggal||'';document.getElementById('blokKelas').value=b.kelas||'';populateBlokDD();setTimeout(()=>{document.getElementById('blokGuruKelas').value=b.guruKelas||'';document.getElementById('blokGuruPJOK').value=b.pjok?.guru||'';document.getElementById('blokTopikPJOK').value=b.pjok?.topik||'';document.getElementById('blokDeskPJOK').value=b.pjok?.desk||'';document.getElementById('blokGuruPAI').value=b.pai?.guru||'';document.getElementById('blokTopikPAI').value=b.pai?.topik||'';document.getElementById('blokDeskPAI').value=b.pai?.desk||'';document.getElementById('blokTemaP5').value=b.p5?.tema||'';onTemaP5Change();document.getElementById('blokTopikP5').value=b.p5?.topik||'';document.getElementById('blokDeskP5').value=b.p5?.desk||''},300);document.getElementById('blokFormTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Blok';document.getElementById('btnBatalBlok').style.display='';window.scrollTo(0,0)}
 async function hapusBlok(id){if(!(await confirmAction('Hapus blok ini?')))return;db.ref('kokurikuler/blok/'+id).remove().then(()=>{toast('Dihapus');loadBlokList()}).catch(()=>toast('Gagal','error'))}
 
 /* ============================================================
-   AGENDA P5 — FILTER PER KELAS, SATU FIELD KONTEN, FULL CRUD
+   AGENDA P5 — JAM INPUT, CETAK RUNDDOWN
    ============================================================ */
-function loadAgendaPage(){
-    db.ref('kokurikuler/agenda').once('value').then(s=>{allAgenda=s.val()||{};populateAgendaTemaFilter();renderAllAgendaViews()});
-}
+function loadAgendaPage(){db.ref('kokurikuler/agenda').once('value').then(s=>{allAgenda=s.val()||{};populateAgendaTemaFilter();renderAllAgendaViews()})}
 function populateAgendaTemaFilter(){const sel=document.getElementById('filterAgendaTema'),ts=new Set();Object.values(allAgenda).forEach(a=>{if(a.tema)ts.add(a.tema)});let h='<option value="">Semua Tema</option>';[...ts].sort().forEach(t=>{h+='<option value="'+t+'">'+t+'</option>'});sel.innerHTML=h}
-
-function getFilteredAgenda(){
-    const fk=document.getElementById('filterAgendaKelas').value;
-    const ft=document.getElementById('filterAgendaTema').value;
-    const fp=document.getElementById('filterAgendaPertemuan').value;
-    const ftp=document.getElementById('filterAgendaTipe').value;
-    let items=Object.entries(allAgenda);
-    if(fk)items=items.filter(([,a])=>(a.kelas||'').includes(fk));
-    if(ft)items=items.filter(([,a])=>a.tema===ft);
-    if(fp)items=items.filter(([,a])=>a.pertemuan===fp);
-    if(ftp)items=items.filter(([,a])=>a.tipe===ftp);
-    return items.sort((a,b)=>{const pa=parseInt(a[1].pertemuan)||99,pb=parseInt(b[1].pertemuan)||99;return pa-pb||(a[1].judul||'').localeCompare(b[1].judul||'')});
-}
+function getFilteredAgenda(){const fk=document.getElementById('filterAgendaKelas').value,ft=document.getElementById('filterAgendaTema').value,fp=document.getElementById('filterAgendaPertemuan').value,ftp=document.getElementById('filterAgendaTipe').value;let items=Object.entries(allAgenda);if(fk)items=items.filter(([,a])=>(a.kelas||'').includes(fk));if(ft)items=items.filter(([,a])=>a.tema===ft);if(fp)items=items.filter(([,a])=>a.pertemuan===fp);if(ftp)items=items.filter(([,a])=>a.tipe===ftp);return items.sort((a,b)=>{const pa=parseInt(a[1].pertemuan)||99,pb=parseInt(b[1].pertemuan)||99;if(pa!==pb)return pa-pb;const ta=a[1].jamMulai||'',tb=b[1].jamMulai||'';return ta.localeCompare(tb)||(a[1].judul||'').localeCompare(b[1].judul||'')})}
 function renderAllAgendaViews(){renderAgendaList();renderAgendaTimeline();renderAgendaRundown()}
-
-function switchAgendaTab(tab,btn){document.querySelectorAll('[data-at]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('agendaTabList').style.display=tab==='list'?'':'none';document.getElementById('agendaTabTimeline').style.display=tab==='timeline'?'':'none';document.getElementById('agendaTabRundown').style.display=tab==='rundown'?'':'none';if(tab==='timeline')renderAgendaTimeline();if(tab==='rundown')renderAgendaRundown()}
+function switchAgendaTab(tab,btn){document.querySelectorAll('[data-at]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('agendaTabList').style.display=tab==='list'?'':'none';document.getElementById('agendaTabTimeline').style.display=tab==='timeline'?'':'none';document.getElementById('agendaTabRundown').style.display=tab==='rundown'?'':'none'}
 
 /* --- Tab: Daftar --- */
-function renderAgendaList(){
-    const c=document.getElementById('agendaTabList'),items=getFilteredAgenda();
-    if(!items.length){c.innerHTML='<div class="empty-state"><i class="fas fa-scroll"></i><p>Belum ada agenda. Klik "Muat Template" atau "Tambah Agenda".</p></div>';return}
-    let h='';items.forEach(([k,a])=>{
-        const tb=a.tipe==='alur'?'badge-alur':a.tipe==='rundown'?'badge-rundown':'badge-tips';
-        const tl=a.tipe==='alur'?'Alur Pentahapan':a.tipe==='rundown'?'Rundown Harian':'Tips';
-        const pl=a.pertemuan==='0'?'-':'Pertemuan '+a.pertemuan;
-        const dm=(a.dimensi||[]).map(d=>'<span class="badge badge-dim">'+getDimNama(d)+'</span>').join(' ');
-        h+='<div class="agenda-card"><div class="agenda-card-header"><div><div class="font-bold text-[13px]">'+a.judul+'</div><div class="flex flex-wrap gap-1 mt-1"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span><span class="text-[10px] text-slate-500">'+a.tema+'</span></div></div><div class="flex gap-1 shrink-0"><button class="btn btn-outline btn-sm" onclick="viewAgenda(\''+k+'\')" title="Lihat"><i class="fas fa-eye"></i></button><button class="btn btn-outline btn-sm" onclick="editAgenda(\''+k+'\')" title="Edit"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusAgenda(\''+k+'\')" title="Hapus"><i class="fas fa-trash"></i></button></div></div><div class="agenda-card-body"><p class="text-[12px] text-slate-300 leading-relaxed mb-2">'+(a.konten||'-')+'</p>'+(dm?'<div class="flex flex-wrap gap-1">'+dm+'</div>':'')+(a.catatan?'<div class="mt-2 text-[10px] text-slate-500 italic"><i class="fas fa-sticky-note mr-1"></i>'+a.catatan+'</div>':'')+'</div></div>';
-    });c.innerHTML=h;
-}
+function renderAgendaList(){const c=document.getElementById('agendaTabList'),items=getFilteredAgenda();if(!items.length){c.innerHTML='<div class="empty-state"><i class="fas fa-scroll"></i><p>Belum ada agenda. Klik "Muat Template" atau "Tambah Agenda".</p></div>';return}let h='';items.forEach(([k,a])=>{const tb=a.tipe==='alur'?'badge-alur':a.tipe==='rundown'?'badge-rundown':'badge-tips';const tl=a.tipe==='alur'?'Alur':a.tipe==='rundown'?'Rundown':'Tips';const pl=a.pertemuan==='0'?'-':'Pertemuan '+a.pertemuan;const dm=(a.dimensi||[]).map(d=>'<span class="badge badge-dim">'+getDimNama(d)+'</span>').join(' ');const jamInfo=(a.jamMulai&&a.jamSelesai)?'<span class="text-[10px] text-purple-400 font-mono ml-1">'+a.jamMulai+' - '+a.jamSelesai+'</span>':'';h+='<div class="agenda-card"><div class="agenda-card-header"><div><div class="font-bold text-[13px]">'+a.judul+jamInfo+'</div><div class="flex flex-wrap gap-1 mt-1"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span></div></div><div class="flex gap-1 shrink-0"><button class="btn btn-outline btn-sm" onclick="viewAgenda(\''+k+'\')"><i class="fas fa-eye"></i></button><button class="btn btn-outline btn-sm" onclick="editAgenda(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusAgenda(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div><div class="agenda-card-body"><p class="text-[12px] text-slate-300 leading-relaxed mb-2">'+(a.konten||'-')+'</p>'+(dm?'<div class="flex flex-wrap gap-1">'+dm+'</div>':'')+(a.catatan?'<div class="mt-2 text-[10px] text-slate-500 italic"><i class="fas fa-sticky-note mr-1"></i>'+a.catatan+'</div>':'')+'</div></div>'});c.innerHTML=h}
 
 /* --- Tab: Timeline --- */
-function renderAgendaTimeline(){
-    const c=document.getElementById('agendaTabTimeline'),items=getFilteredAgenda().filter(([,a])=>a.tipe==='alur');
-    if(!items.length){c.innerHTML='<div class="empty-state"><i class="fas fa-stream"></i><p>Belum ada alur pertemuan untuk filter ini.</p></div>';return}
-    let h='<div class="card"><h3 class="font-bold text-sm mb-4"><i class="fas fa-stream text-purple-400 mr-2"></i>Alur Pentahapan Pertemuan</h3><div class="agenda-timeline">';
-    items.forEach(([k,a])=>{
-        const num=a.pertemuan||'?';
-        const dm=(a.dimensi||[]).map(d=>'<span class="badge badge-dim" style="margin-left:4px">'+getDimNama(d)+'</span>').join('');
-        h+='<div class="agenda-step" onclick="viewAgenda(\''+k+'\')"><div class="step-num">'+num+'</div><div class="font-bold text-[13px] text-purple-300 mb-1">'+a.judul+'</div><div class="kelas-chip mb-2"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</div><p class="text-[12px] text-slate-300 leading-relaxed">'+(a.konten||'-')+'</p>'+(dm?'<div class="mt-2">'+dm+'</div>':'')+'</div>';
-    });h+='</div></div>';c.innerHTML=h;
-}
+function renderAgendaTimeline(){const c=document.getElementById('agendaTabTimeline'),items=getFilteredAgenda().filter(([,a])=>a.tipe==='alur');if(!items.length){c.innerHTML='<div class="empty-state"><i class="fas fa-stream"></i><p>Belum ada alur pertemuan.</p></div>';return}let h='<div class="card"><h3 class="font-bold text-sm mb-4"><i class="fas fa-stream text-purple-400 mr-2"></i>Alur Pentahapan</h3><div class="agenda-timeline">';items.forEach(([k,a])=>{const dm=(a.dimensi||[]).map(d=>'<span class="badge badge-dim" style="margin-left:4px">'+getDimNama(d)+'</span>').join('');h+='<div class="agenda-step" onclick="viewAgenda(\''+k+'\')"><div class="step-num">'+a.pertemuan+'</div><div class="font-bold text-[13px] text-purple-300 mb-1">'+a.judul+'</div><div class="kelas-chip mb-2"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</div><p class="text-[12px] text-slate-300 leading-relaxed">'+(a.konten||'-')+'</p>'+(dm?'<div class="mt-2">'+dm+'</div>':'')+'</div>'});h+='</div></div>';c.innerHTML=h}
 
-/* --- Tab: Rundown --- */
+/* --- Tab: Rundown (dengan jam rapi + tombol cetak) --- */
 function renderAgendaRundown(){
     const c=document.getElementById('agendaTabRundown');
     const rdItems=getFilteredAgenda().filter(([,a])=>a.tipe==='rundown');
     const tipItems=getFilteredAgenda().filter(([,a])=>a.tipe==='tips');
     let h='';
     if(rdItems.length){
-        h+='<div class="card"><h3 class="font-bold text-sm mb-3"><i class="fas fa-clock text-purple-400 mr-2"></i>Rundown Kegiatan Harian (Hari Puncak)</h3>';
+        h+='<div class="card"><div class="flex items-center justify-between mb-4"><h3 class="font-bold text-sm"><i class="fas fa-clock text-purple-400 mr-2"></i>Rundown Kegiatan Harian</h3><button class="btn btn-primary btn-sm no-print" onclick="cetakRundown()"><i class="fas fa-print"></i>Cetak Rundown</button></div>';
         rdItems.forEach(([k,a])=>{
-            const parts=(a.judul||'').split('·');
-            h+='<div class="rundown-row" style="cursor:pointer" onclick="viewAgenda(\''+k+'\')"><div class="rundown-time">'+(parts[0]||'').trim()+'</div><div class="rundown-body"><div class="rd-title">'+(parts[1]||a.judul).trim()+' <span class="kelas-chip" style="font-size:9px;vertical-align:middle">'+getKelasLabel(a.kelas)+'</span></div><div class="rd-detail">'+(a.konten||'-')+'</div></div></div>';
+            const jam=a.jamMulai&&a.jamSelesai?a.jamMulai+' - '+a.jamSelesai:'-';
+            const dur=a.durasi?a.durasi+' mnt':'';
+            h+='<div class="rundown-row" style="cursor:pointer" onclick="viewAgenda(\''+k+'\')"><div class="rd-time-block"><div class="rd-time-jam">'+jam+'</div>'+(dur?'<div class="rd-time-durasi">'+dur+'</div>':'')+'</div><div class="rundown-body"><div class="rd-title">'+a.judul+' <span class="kelas-chip" style="font-size:9px">'+getKelasLabel(a.kelas)+'</span></div><div class="rd-detail">'+(a.konten||'-')+'</div></div></div>';
         });h+='</div>';
     }
     if(tipItems.length){
@@ -440,21 +450,52 @@ function renderAgendaRundown(){
     c.innerHTML=h;
 }
 
-/* --- CRUD --- */
+/* --- Cetak Rundown --- */
+function cetakRundown(){
+    const rdItems=getFilteredAgenda().filter(([,a])=>a.tipe==='rundown');
+    const tipItems=getFilteredAgenda().filter(([,a])=>a.tipe==='tips');
+    const fk=document.getElementById('filterAgendaKelas').value;
+    const ft=document.getElementById('filterAgendaTema').value;
+    if(!rdItems.length){toast('Tidak ada rundown untuk dicetak','error');return}
+    let h='<div class="pr-header"><h1>Rundown Kegiatan Harian</h1><h2>Kokurikuler P5 — Projek Penguatan Profil Pelajar Pancasila</h2><div class="pr-sub">'+(ft||'Semua Tema')+(fk?' — '+getKelasLabel(fk):' — Semua Kelas')+'</div></div>';
+    h+='<div class="pr-info"><span>Tanggal: _______________</span><span>Hari: Jumat</span><span>Tahun Pelajaran: _______________</span></div>';
+    h+='<table class="pr-table"><thead><tr><th class="th-time">WAKTU</th><th>KEGIATAN</th><th>KELAS</th><th>KETERANGAN</th></tr></thead><tbody>';
+    rdItems.forEach(([,a])=>{
+        const jam=a.jamMulai&&a.jamSelesai?a.jamMulai+' - '+a.jamSelesai:'-';
+        const dur=a.durasi?'('+a.durasi+' mnt)':'';
+        h+='<tr><td class="td-time">'+jam+'<br><span style="font-size:8px;font-weight:400;color:#666">'+dur+'</span></td><td class="td-judul">'+a.judul+'</td><td>'+getKelasLabel(a.kelas)+'</td><td style="font-size:9px;line-height:1.5">'+(a.konten||'-')+'</td></tr>';
+    });
+    h+='</tbody></table>';
+    if(tipItems.length){
+        h+='<div class="pr-tips"><div class="pr-tips-hdr"><i class="fas fa-lightbulb" style="margin-right:4px"></i>TIPS PELAKSANAAN</div>';
+        tipItems.forEach(([,a])=>{h+='<div class="pr-tips-item"><b>'+a.judul+'</b> ('+getKelasLabel(a.kelas)+')<br>'+a.konten+'</div>'});
+        h+='</div>';
+    }
+    h+='<div class="pr-footer"><div class="pr-sig"><div>Mengetahui,</div><div class="sn">Kepala Sekolah</div><div class="sr">NIP. _______________________</div></div><div class="pr-sig"><div>&nbsp;</div><div class="sn">Guru P5</div><div class="sr">NIP. _______________________</div></div><div class="pr-sig"><div>&nbsp;</div><div class="sn">Wali Kelas</div><div class="sr">NIP. _______________________</div></div></div>';
+    document.getElementById('printZone').innerHTML=h;
+    setTimeout(()=>window.print(),300);
+}
+
+/* --- CRUD Agenda --- */
 function toggleAgendaDim(el){const d=el.dataset.dim,i=selectedAgendaDim.indexOf(d);if(i>=0){selectedAgendaDim.splice(i,1);el.classList.remove('selected')}else{selectedAgendaDim.push(d);el.classList.add('selected')}}
+function toggleJamFields(){document.getElementById('jamFields').style.display=document.getElementById('agendaTipe').value==='rundown'?'':'none'}
+function autoCalcSelesai(){const mulai=document.getElementById('agendaJamMulai').value,dur=parseInt(document.getElementById('agendaDurasi').value)||0;if(!mulai||!dur)return;const[h,m]=mulai.split(':').map(Number);let total=h*60+m+dur;const nh=Math.floor(total/60)%24,nm=total%60;document.getElementById('agendaJamSelesai').value=String(nh).padStart(2,'0')+':'+String(nm).padStart(2,'0')}
 
 function openAgendaModal(id){
     selectedAgendaDim=[];document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.remove('selected'));
-    document.getElementById('agendaId').value='';document.getElementById('agendaKelas').value='1,2,3';document.getElementById('agendaTema').value='Kearifan Lokal';document.getElementById('agendaSubTema').value='';document.getElementById('agendaTipe').value='alur';document.getElementById('agendaPertemuan').value='1';document.getElementById('agendaJudul').value='';document.getElementById('agendaKonten').value='';document.getElementById('agendaCatatan').value='';
+    document.getElementById('agendaId').value='';document.getElementById('agendaKelas').value='1,2,3';document.getElementById('agendaTema').value='Kearifan Lokal';document.getElementById('agendaSubTema').value='';document.getElementById('agendaTipe').value='alur';document.getElementById('agendaPertemuan').value='1';document.getElementById('agendaJudul').value='';document.getElementById('agendaKonten').value='';document.getElementById('agendaCatatan').value='';document.getElementById('agendaJamMulai').value='07:00';document.getElementById('agendaJamSelesai').value='08:00';document.getElementById('agendaDurasi').value='60';
+    toggleJamFields();
     if(id&&allAgenda[id]){
-        const a=allAgenda[id];document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Agenda P5';document.getElementById('agendaId').value=id;document.getElementById('agendaKelas').value=a.kelas||'1,2,3';document.getElementById('agendaTema').value=a.tema||'Kearifan Lokal';document.getElementById('agendaSubTema').value=a.subTema||'';document.getElementById('agendaTipe').value=a.tipe||'alur';document.getElementById('agendaPertemuan').value=a.pertemuan||'1';document.getElementById('agendaJudul').value=a.judul||'';document.getElementById('agendaKonten').value=a.konten||'';document.getElementById('agendaCatatan').value=a.catatan||'';selectedAgendaDim=a.dimensi?[...a.dimensi]:[];document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.toggle('selected',selectedAgendaDim.includes(c.dataset.dim)));
+        const a=allAgenda[id];document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Agenda P5';document.getElementById('agendaId').value=id;document.getElementById('agendaKelas').value=a.kelas||'1,2,3';document.getElementById('agendaTema').value=a.tema||'Kearifan Lokal';document.getElementById('agendaSubTema').value=a.subTema||'';document.getElementById('agendaTipe').value=a.tipe||'alur';document.getElementById('agendaPertemuan').value=a.pertemuan||'1';document.getElementById('agendaJudul').value=a.judul||'';document.getElementById('agendaKonten').value=a.konten||'';document.getElementById('agendaCatatan').value=a.catatan||'';document.getElementById('agendaJamMulai').value=a.jamMulai||'07:00';document.getElementById('agendaJamSelesai').value=a.jamSelesai||'08:00';document.getElementById('agendaDurasi').value=a.durasi||'60';selectedAgendaDim=a.dimensi?[...a.dimensi]:[];document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.toggle('selected',selectedAgendaDim.includes(c.dataset.dim)));toggleJamFields();
     }else{document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-scroll text-purple-400 mr-2"></i>Tambah Agenda P5'}
     openModal('modalAgenda');
 }
 function simpanAgenda(){
     const id=document.getElementById('agendaId').value,judul=document.getElementById('agendaJudul').value.trim();
     if(!judul){toast('Judul wajib','error');return}
-    const data={kelas:document.getElementById('agendaKelas').value,tema:document.getElementById('agendaTema').value,subTema:document.getElementById('agendaSubTema').value.trim(),tipe:document.getElementById('agendaTipe').value,pertemuan:document.getElementById('agendaPertemuan').value,judul:judul,konten:document.getElementById('agendaKonten').value.trim(),dimensi:[...selectedAgendaDim],catatan:document.getElementById('agendaCatatan').value.trim(),isTemplate:false,updatedAt:Date.now()};
+    const tipe=document.getElementById('agendaTipe').value;
+    const data={kelas:document.getElementById('agendaKelas').value,tema:document.getElementById('agendaTema').value,subTema:document.getElementById('agendaSubTema').value.trim(),tipe:tipe,pertemuan:document.getElementById('agendaPertemuan').value,judul:judul,konten:document.getElementById('agendaKonten').value.trim(),dimensi:[...selectedAgendaDim],catatan:document.getElementById('agendaCatatan').value.trim(),isTemplate:false,updatedAt:Date.now()};
+    if(tipe==='rundown'){data.jamMulai=document.getElementById('agendaJamMulai').value;data.jamSelesai=document.getElementById('agendaJamSelesai').value;data.durasi=document.getElementById('agendaDurasi').value}else{data.jamMulai='';data.jamSelesai='';data.durasi=''}
     const ref=id?db.ref('kokurikuler/agenda/'+id):db.ref('kokurikuler/agenda').push();
     ref.set(data).then(()=>{toast('Agenda disimpan');closeModal('modalAgenda');loadAgendaPage()}).catch(e=>toast('Gagal: '+e.message,'error'));
 }
@@ -467,7 +508,7 @@ function viewAgenda(id){
     const pl=a.pertemuan==='0'?'-':'Pertemuan '+a.pertemuan;
     const dm=(a.dimensi||[]).map(d=>'<span class="badge badge-dim"><i class="fas '+(DIMENSI.find(x=>x.id===d)||{icon:'fa-circle'}).icon+'" style="font-size:8px;margin-right:3px"></i>'+getDimNama(d)+'</span>').join(' ');
     let h='<div class="space-y-4">';
-    h+='<div class="flex flex-wrap gap-2"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span></div>';
+    h+='<div class="flex flex-wrap gap-2"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span>'+(a.jamMulai&&a.jamSelesai?'<span class="badge badge-rundown" style="font-family:monospace">'+a.jamMulai+' - '+a.jamSelesai+(a.durasi?' ('+a.durasi+' mnt)':'')+'</span>':'')+'</div>';
     h+='<div><div class="text-[10px] text-slate-500 font-semibold">Tema</div><div class="text-sm font-bold mt-0.5">'+a.tema+'</div>'+(a.subTema?'<div class="text-xs text-slate-400">'+a.subTema+'</div>':'')+'</div>';
     h+='<div class="p-4 rounded-xl" style="background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.15)"><div class="text-[11px] font-bold text-purple-400 mb-2">Konten / Materi Kegiatan</div><p class="text-sm text-slate-200 leading-relaxed">'+(a.konten||'-')+'</p></div>';
     if(dm)h+='<div><div class="text-[11px] text-slate-500 font-semibold mb-1">Dimensi Profil Pelajar Pancasila</div><div class="flex flex-wrap gap-1">'+dm+'</div></div>';
@@ -476,23 +517,10 @@ function viewAgenda(id){
     document.getElementById('modalAgDetailTitle').innerHTML='<i class="fas fa-eye text-purple-400 mr-2"></i>'+a.judul;
     document.getElementById('agendaDetailContent').innerHTML=h;openModal('modalAgendaDetail');
 }
-function loadTemplateAgenda(){
-    confirmAction('Muat template "Kearifan Lokal - Jajanan Tradisional" ('+TPL.length+' agenda) ke database?').then(yes=>{if(!yes)return;const updates={};TPL.forEach(t=>{const k=db.ref('kokurikuler/agenda').push().key;updates[k]={...t,isTemplate:true,updatedAt:Date.now()}});db.ref('kokurikuler/agenda').update(updates).then(()=>{toast('Template dimuat: '+TPL.length+' agenda');loadAgendaPage()}).catch(e=>toast('Gagal: '+e.message,'error'))});
-}
+function loadTemplateAgenda(){confirmAction('Muat template "Kearifan Lokal - Jajanan Tradisional" ('+TPL.length+' agenda) ke database?').then(yes=>{if(!yes)return;const updates={};TPL.forEach(t=>{const k=db.ref('kokurikuler/agenda').push().key;updates[k]={...t,isTemplate:true,updatedAt:Date.now()}});db.ref('kokurikuler/agenda').update(updates).then(()=>{toast('Template dimuat: '+TPL.length+' agenda');loadAgendaPage()}).catch(e=>toast('Gagal: '+e.message,'error'))})}
 
-/* ===== ABSENSI ===== */
-function loadAbsPage(){toast('Pilih blok kegiatan terlebih dahulu','info')}
-function onAbsFilterChange(){}function onAbsKelasChange(){}function onAbsMapelChange(){}function setAllAbsen(v){}function simpanAbsensi(){toast('Pilih blok kegiatan','info')}
-
-/* ===== PENILAIAN ===== */
-function loadNilPage(){toast('Pilih blok kegiatan terlebih dahulu','info')}
-function onNilFilterChange(){}function onNilKelasChange(){}function onNilMapelChange(){}function setAllNilai(v){}function simpanPenilaian(){toast('Pilih blok kegiatan','info')}
-
-/* ===== REKAP ===== */
-function loadRekap(){}function cetakRekap(){toast('Pilih kelas','info')}
-
-/* ===== GALERI ===== */
-function loadGaleri(){}
+/* ===== STUBS ===== */
+function setAllAbsen(v){}function simpanAbsensi(){toast('Pilih blok kegiatan','info')}function setAllNilai(v){}function simpanPenilaian(){toast('Pilih blok kegiatan','info')}function loadRekap(){}function cetakRekap(){toast('Pilih kelas','info')}function loadGaleri(){}
 
 /* ===== DASHBOARD ===== */
 function loadDashboard(){
@@ -504,7 +532,6 @@ function loadDashboard(){
 function renderDashKelas(){const c=document.getElementById('dashKelas'),cnt={};Object.values(allSiswa).forEach(s=>{cnt[s.kelas]=(cnt[s.kelas]||0)+1});let h='';const mx=Math.max(...Object.values(cnt),1);for(let i=1;i<=6;i++){const n=cnt[i]||0;h+='<div class="flex items-center gap-3 mb-2"><span class="text-xs text-slate-400 w-12">Kelas '+i+'</span><div class="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width:'+Math.round(n/mx*100)+'%;transition:width .5s"></div></div><span class="text-xs font-bold w-6 text-right">'+n+'</span></div>'}c.innerHTML=h||'<p class="text-xs text-slate-500">Belum ada data</p>'}
 function renderDashRecent(){const c=document.getElementById('dashRecent'),keys=Object.keys(allBlok).sort((a,b)=>(allBlok[b].updatedAt||0)-(allBlok[a].updatedAt||0)).slice(0,5);if(!keys.length){c.innerHTML='<p class="text-xs text-slate-500">Belum ada blok</p>';return}let h='';keys.forEach(k=>{const b=allBlok[k];h+='<div class="flex items-center justify-between py-2 border-b border-slate-700/30 last:border-0"><div><div class="text-xs font-semibold">'+formatDateShort(b.tanggal)+' — Kls '+b.kelas+'</div><div class="text-[10px] text-slate-500">'+(b.p5?.topik||'-')+'</div></div><span class="badge badge-p5 text-[9px]">P5</span></div>'});c.innerHTML=h}
 
-/* ===== INIT ===== */
 loadDashboard();
 </script>
 </body>
