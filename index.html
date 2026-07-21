@@ -51,8 +51,6 @@ textarea.input{resize:vertical;min-height:70px}
 .badge-pai{background:rgba(249,115,22,.12);color:#FB923C;border:1px solid rgba(249,115,22,.2)}
 .badge-p5{background:rgba(168,85,247,.12);color:#C084FC;border:1px solid rgba(168,85,247,.2)}
 .badge-kelas{background:rgba(16,185,129,.12);color:#34D399;border:1px solid rgba(16,185,129,.2)}
-.badge-template{background:rgba(168,85,247,.12);color:#C084FC;border:1px solid rgba(168,85,247,.2)}
-.badge-custom{background:rgba(249,115,22,.12);color:#FB923C;border:1px solid rgba(249,115,22,.2)}
 .badge-alur{background:rgba(168,85,247,.12);color:#C084FC;border:1px solid rgba(168,85,247,.2)}
 .badge-rundown{background:rgba(59,130,246,.12);color:#60A5FA;border:1px solid rgba(59,130,246,.2)}
 .badge-tips{background:rgba(249,115,22,.12);color:#FB923C;border:1px solid rgba(249,115,22,.2)}
@@ -139,11 +137,6 @@ tr:hover td{background:rgba(16,185,129,.02)}
     .pr-table tr:nth-child(even) td{background:#F9FAFB!important}
     .pr-table .td-time{text-align:center;font-weight:800;color:#6D28D9;background:#F5F3FF!important}
     .pr-table .td-judul{font-weight:700}
-    .pr-tips{margin:10px 0;border:1px solid #999;border-radius:4px;overflow:hidden}
-    .pr-tips-hdr{background:#FEF3C7;padding:5px 8px;font-size:10px;font-weight:800;border-bottom:1px solid #999;color:#92400E}
-    .pr-tips-item{padding:5px 8px;border-bottom:1px solid #ddd;font-size:9px;line-height:1.6}
-    .pr-tips-item:last-child{border-bottom:none}
-    .pr-tips-item b{color:#111}
     .pr-footer{margin-top:16px;padding-top:8px;border-top:1px solid #ccc;display:flex;justify-content:space-between;font-size:9px;color:#666}
     .pr-sig{text-align:center;min-width:120px}
     .pr-sig .sn{margin-top:45px;font-weight:700;color:#000;font-size:10px;border-bottom:1px solid #333;display:inline-block;padding:0 8px}
@@ -277,13 +270,18 @@ tr:hover td{background:rgba(16,185,129,.02)}
     <div class="p-5 space-y-4" style="max-height:75vh;overflow-y:auto">
         <input type="hidden" id="agendaId" value="">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Kelas</label><select class="input" id="agendaKelas"><option value="1,2,3">Kelas 1, 2, 3</option><option value="4,5,6">Kelas 4, 5, 6</option><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option><option value="1,2,3,4,5,6">Semua Kelas</option></select></div>
+            <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Kelas (Hanya 1)</label><select class="input" id="agendaKelas"><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option></select></div>
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tema P5</label><select class="input" id="agendaTema"><option value="Kearifan Lokal">Kearifan Lokal</option><option value="Gaya Hidup Berkelanjutan">Gaya Hidup Berkelanjutan</option><option value="Bhinneka Tunggal Ika">Bhinneka Tunggal Ika</option><option value="Kewirausahaan">Kewirausahaan</option><option value="Rekayasa dan Teknologi">Rekayasa dan Teknologi</option><option value="Bangunlah Jiwa dan Raganya">Bangunlah Jiwa dan Raganya</option><option value="Suara Demokrasi">Suara Demokrasi</option></select></div>
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Sub Tema</label><input type="text" class="input" id="agendaSubTema" placeholder="Melestarikan Jajanan Tradisional"></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tipe</label><select class="input" id="agendaTipe" onchange="toggleJamFields()"><option value="alur">Alur Pentahapan</option><option value="rundown">Rundown Harian</option><option value="tips">Tips Pelaksanaan</option></select></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tanggal Pelaksanaan</label><input type="date" class="input" id="agendaTanggal"></div>
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Pertemuan Ke-</label><select class="input" id="agendaPertemuan"><option value="1">1 - Pengenalan</option><option value="2">2 - Kontekstualisasi</option><option value="3">3 - Aksi (Praktik)</option><option value="4">4 - Gelar Karya</option><option value="5">5 - Refleksi & Evaluasi</option><option value="0">Rundown / Tips (tanpa pertemuan)</option></select></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Tipe</label><select class="input" id="agendaTipe" onchange="toggleJamFields()"><option value="alur">Alur Pentahapan</option><option value="rundown">Rundown Harian</option><option value="tips">Tips Pelaksanaan</option></select></div>
             <div><label class="text-[11px] text-slate-400 font-semibold mb-1 block">Judul Kegiatan</label><input type="text" class="input" id="agendaJudul" placeholder="Pengenalan Jajanan Tradisional"></div>
         </div>
         
@@ -320,15 +318,24 @@ tr:hover td{background:rgba(16,185,129,.02)}
 </div>
 </div>
 
-<!-- MODAL KIRIM WA GRUP -->
+<!-- MODAL UPLOAD BUKTI & KIRIM WA GRUP -->
 <div class="modal-bg" id="modalWa">
-<div class="modal" onclick="event.stopPropagation()">
+<div class="modal modal-lg" onclick="event.stopPropagation()">
     <div class="flex items-center justify-between p-4 border-b border-slate-700/50">
-        <h3 class="font-bold text-sm"><i class="fab fa-whatsapp text-green-400 mr-2"></i>Kirim Laporan ke Grup WA</h3>
+        <h3 class="font-bold text-sm"><i class="fas fa-camera text-emerald-400 mr-2"></i>Upload Bukti & Laporan WA</h3>
         <button onclick="closeModal('modalWa')" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
     </div>
-    <div class="p-5 space-y-4">
+    <div class="p-5 space-y-4" style="max-height:75vh;overflow-y:auto">
         <input type="hidden" id="waAgendaId">
+        <div>
+            <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Upload Foto Bukti Kegiatan (Maks 5)</label>
+            <div class="upload-zone" id="buktiZone" onclick="document.getElementById('buktiInput').click()" style="padding:14px">
+                <i class="fas fa-cloud-upload-alt text-slate-500"></i>
+                <p class="text-[11px] text-slate-400 mt-1">Klik atau seret foto bukti</p>
+            </div>
+            <input type="file" id="buktiInput" multiple accept="image/*" style="display:none" onchange="handleBuktiSelect(this)">
+            <div id="buktiPreview" class="photo-grid mt-2"></div>
+        </div>
         <div>
             <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Link WhatsApp Group</label>
             <input type="url" class="input" id="waGroupLink" placeholder="https://chat.whatsapp.com/xxxxxxxxxx">
@@ -336,12 +343,12 @@ tr:hover td{background:rgba(16,185,129,.02)}
         </div>
         <div>
             <label class="text-[11px] text-slate-400 font-semibold mb-1 block">Format Laporan (Otomatis)</label>
-            <textarea class="input" id="waTextPreview" style="min-height:200px;font-size:12px;background:var(--bg2)" readonly></textarea>
+            <textarea class="input" id="waTextPreview" style="min-height:180px;font-size:12px;background:var(--bg2)" readonly></textarea>
         </div>
     </div>
     <div class="flex justify-end gap-2 p-4 border-t border-slate-700/50">
         <button class="btn btn-outline" onclick="closeModal('modalWa')">Batal</button>
-        <button class="btn btn-success" onclick="sendToWaGroup()"><i class="fab fa-whatsapp"></i>Kirim ke WhatsApp</button>
+        <button class="btn btn-success" onclick="kirimLaporanWa()"><i class="fab fa-whatsapp"></i>Simpan & Kirim WA</button>
     </div>
 </div>
 </div>
@@ -351,20 +358,6 @@ tr:hover td{background:rgba(16,185,129,.02)}
 const P5_TEMA=[{id:'gaya_hidup_berkelanjutan',nama:'Gaya Hidup Berkelanjutan'},{id:'kearifan_lokal',nama:'Kearifan Lokal'},{id:'bhinneka_tunggal_ika',nama:'Bhinneka Tunggal Ika'},{id:'kewirausahaan',nama:'Kewirausahaan'},{id:'rekayasa_teknologi',nama:'Rekayasa dan Teknologi'},{id:'bangun_jiwa_raga',nama:'Bangunlah Jiwa dan Raganya'},{id:'suara_demokrasi',nama:'Suara Demokrasi'}];
 const DIMENSI=[{id:'beriman',nama:'Beriman & Bertakwa',icon:'fa-hands-praying'},{id:'berkebinekaan',nama:'Berkebinekaan Global',icon:'fa-globe-asia'},{id:'gotong_royong',nama:'Bergotong Royong',icon:'fa-people-carry-box'},{id:'mandiri',nama:'Mandiri',icon:'fa-person-walking'},{id:'bernalar',nama:'Bernalar Kritis',icon:'fa-brain'},{id:'kreatif',nama:'Kreatif',icon:'fa-lightbulb'}];
 
-/* ===== TEMPLATE AGENDA ===== */
-const TPL=[
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'1',judul:'Pengenalan',kelas:'1,2,3',konten:'Nonton video/dongeng jajanan pasar, mengenali nama, bentuk, dan rasa jajanan tradisional.',dimensi:['berkebinekaan','bernalar'],catatan:'Siapkan video/gambar jajanan tradisional lokal.',jamMulai:'',jamSelesai:'',durasi:''},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'1',judul:'Pengenalan',kelas:'4,5,6',konten:'Investigasi asal-usul jajanan lokal, perbedaan bahan alami vs. bahan pengawet sintetis.',dimensi:['berkebinekaan','bernalar'],catatan:'Siapkan contoh bahan alami dan bahan pengawet.',jamMulai:'',jamSelesai:'',durasi:''},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'2',judul:'Kontekstualisasi',kelas:'1,2,3',konten:'Observasi bentuk dan warna bahan alami (daun pisang, kelapa, pandan, gula merah).',dimensi:['bernalar','gotong_royong'],catatan:'Siapkan bahan alami: daun pisang, kelapa parut, pandan, gula merah.',jamMulai:'',jamSelesai:'',durasi:''},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'2',judul:'Kontekstualisasi',kelas:'4,5,6',konten:'Menghubungi/wawancara pembuat jajanan lokal atau demonstrasi oleh narasumber tamu.',dimensi:['bernalar','gotong_royong'],catatan:'Undang narasumber pembuat jajanan tradisional.',jamMulai:'',jamSelesai:'',durasi:''},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'3',judul:'Aksi (Praktik)',kelas:'1,2,3',konten:'Membentuk/menghias/mengemas jajanan sederhana (membentuk getuk/klepon pre-cooked).',dimensi:['kreatif','mandiri'],catatan:'Gunakan adonan setengah matang (aman untuk anak).',jamMulai:'',jamSelesai:'',durasi:''},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'alur',pertemuan:'3',judul:'Aksi (Praktik)',kelas:'4,5,6',konten:'Praktik membuat jajanan tradisional dari bahan mentah hingga pengemasan ramah lingkungan.',dimensi:['kreatif','mandiri'],catatan:'Bahan: tepung, kelapa parut, gula merah, pewarna pandan.',jamMulai:'',jamSelesai:'',durasi:''},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Persiapan & Pembiasaan',kelas:'1,2,3',konten:'Apel pagi, doa bersama, penataan meja kelompok, penyampaian aturan keselamatan.',dimensi:['mandiri'],catatan:'Durasi: 30 menit',jamMulai:'06:30',jamSelesai:'07:00',durasi:'30'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Persiapan & Pembiasaan',kelas:'4,5,6',konten:'Apel pagi, koordinasi kelompok, persiapan alat/bahan memasak atau stan pameran.',dimensi:['mandiri'],catatan:'Durasi: 30 menit',jamMulai:'06:30',jamSelesai:'07:00',durasi:'30'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Pengenalan & Orientasi',kelas:'1,2,3',konten:'Guru mengenalkan bahan alami (daun pisang, kelapa, pewarna pandan) lewat media konkret.',dimensi:['bernalar'],catatan:'Durasi: 60 menit',jamMulai:'07:00',jamSelesai:'08:00',durasi:'60'},
-{tema:'Kearifan Lokal',subTema:'Melestarikan Jajanan Tradisional',tipe:'rundown',pertemuan:'0',judul:'Pengenalan & Orientasi',kelas:'4,5,6',konten:'Diskusi resep, alur kerja kelompok, penetapan tugas tiap anggota (pemasak, pengemas, kasir).',dimensi:['bernalar'],catatan:'Durasi: 60 menit',jamMulai:'07:00',jamSelesai:'08:00',durasi:'60'}
-];
-
 /* ===== FIREBASE ===== */
 const firebaseConfig={apiKey:"AIzaSyBi3kqnWucNoQgtRn0fZyzorxByXVqWgKM",authDomain:"bsensi-harian-guru.firebaseapp.com",databaseURL:"https://bsensi-harian-guru-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"bsensi-harian-guru",storageBucket:"bsensi-harian-guru.firebasestorage.app",messagingSenderId:"127615379056",appId:"1:127615379056:web:7dede88a389bbceba276b5"};
 firebase.initializeApp(firebaseConfig);
@@ -372,7 +365,7 @@ const db=firebase.database(),storage=firebase.storage();
 db.ref('.info/connected').on('value',s=>{const c=s.val();document.getElementById('connDot').style.background=c?'var(--primary)':'var(--danger)';document.getElementById('connText').textContent=c?'Terhubung':'Terputus'});
 
 /* ===== STATE ===== */
-let allGuru={},allSiswa={},allBlok={},allAgenda={},selectedFiles=[],selectedAgendaDim=[];
+let allGuru={},allSiswa={},allBlok={},allAgenda={},selectedFiles=[],selectedAgendaDim=[],selectedBuktiFiles=[];
 
 /* ===== UTILITAS ===== */
 function toast(m,t='success'){const c=document.getElementById('toastContainer'),e=document.createElement('div'),ic=t==='success'?'check-circle':t==='error'?'exclamation-circle':'info-circle';e.className='toast toast-'+t;e.innerHTML='<i class="fas fa-'+ic+'"></i><span>'+m+'</span>';c.appendChild(e);setTimeout(()=>{e.style.opacity='0';e.style.transform='translateX(40px)';e.style.transition='all .3s';setTimeout(()=>e.remove(),300)},3000)}
@@ -380,8 +373,9 @@ function openModal(id){document.getElementById(id).classList.add('show')}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('show')}
 function formatDateShort(d){if(!d)return'-';return new Date(d).toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'})}
+function formatDateLong(d){if(!d)return'Tanpa Tanggal';const p=d.split('-');if(p.length===3){return new Date(p[0],p[1]-1,p[2]).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}return'Tanpa Tanggal'}
 function confirmAction(msg){return new Promise(r=>{const e=document.createElement('div');e.className='confirm-dialog';e.innerHTML='<div class="confirm-box"><i class="fas fa-exclamation-triangle text-2xl text-orange-400 mb-3"></i><p class="text-sm font-semibold mb-4">'+msg+'</p><div class="flex justify-center gap-2"><button class="btn btn-outline" id="cN">Batal</button><button class="btn btn-danger" id="cY"><i class="fas fa-trash mr-1"></i>Hapus</button></div></div>';document.body.appendChild(e);e.querySelector('#cN').onclick=()=>{e.remove();r(false)};e.querySelector('#cY').onclick=()=>{e.remove();r(true)};e.addEventListener('click',ev=>{if(ev.target===e){e.remove();r(false)}})})}
-function getKelasLabel(k){if(!k)return'-';if(k==='1,2,3,4,5,6')return'Semua Kelas';return'Kelas '+k.split(',').map(Number).sort((a,b)=>a-b).join(', ')}
+function getKelasLabel(k){if(!k)return'-';return'Kelas '+k.split(',').map(Number).sort((a,b)=>a-b).join(', ')}
 function getDimNama(id){return(DIMENSI.find(x=>x.id===id)||{}).nama||'-'}
 function genId(){return Date.now().toString(36)+Math.random().toString(36).substr(2,5)}
 document.getElementById('currentDate').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
@@ -389,7 +383,7 @@ document.getElementById('currentDate').textContent=new Date().toLocaleDateString
 (function(){const s=document.getElementById('blokTemaP5');P5_TEMA.forEach(t=>s.innerHTML+='<option value="'+t.id+'">'+t.nama+'</option>')})();
 function onTemaP5Change(){const id=document.getElementById('blokTemaP5').value,info=document.getElementById('blokTemaP5Info');if(id){const t=P5_TEMA.find(x=>x.id===id);info.style.display='block';info.textContent=t.nama}else info.style.display='none'}
 
-/* ===== UPLOAD ===== */
+/* ===== UPLOAD ZONE BLOK ===== */
 const uz=document.getElementById('uploadZone');
 uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('dragover')});
 uz.addEventListener('dragleave',()=>uz.classList.remove('dragover'));
@@ -399,6 +393,16 @@ function handleFileList(files){for(let f of files){if(selectedFiles.length>=5){t
 function removeFile(i){selectedFiles.splice(i,1);renderFilePreview()}
 function renderFilePreview(){const c=document.getElementById('filePreview');if(!selectedFiles.length){c.innerHTML='';return}let h='';selectedFiles.forEach((f,i)=>{h+='<div style="position:relative"><img src="'+URL.createObjectURL(f)+'" alt="p"><button onclick="removeFile('+i+')" style="position:absolute;top:3px;right:3px;background:rgba(239,68,68,.9);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center"><i class="fas fa-times"></i></button></div>'});c.innerHTML=h}
 async function uploadPhotos(bid){const urls=[];for(let i=0;i<selectedFiles.length;i++){const ref=storage.ref('kokurikuler/'+bid+'/'+Date.now()+'_'+i);await ref.put(selectedFiles[i]);urls.push(await ref.getDownloadURL())}return urls}
+
+/* ===== UPLOAD ZONE BUKTI AGENDA ===== */
+const bz=document.getElementById('buktiZone');
+bz.addEventListener('dragover',e=>{e.preventDefault();bz.classList.add('dragover')});
+bz.addEventListener('dragleave',()=>bz.classList.remove('dragover'));
+bz.addEventListener('drop',e=>{e.preventDefault();bz.classList.remove('dragover');handleBuktiList(e.dataTransfer.files)});
+function handleBuktiSelect(inp){handleBuktiList(inp.files);inp.value=''}
+function handleBuktiList(files){for(let f of files){if(selectedBuktiFiles.length>=5){toast('Maks 5 foto','error');break}if(f.size>2*1024*1024){toast(f.name+' > 2MB','error');continue}if(!f.type.startsWith('image/')){toast(f.name+' bukan gambar','error');continue}selectedBuktiFiles.push(f)}renderBuktiPreview()}
+function removeBuktiFile(i){selectedBuktiFiles.splice(i,1);renderBuktiPreview()}
+function renderBuktiPreview(){const c=document.getElementById('buktiPreview');if(!selectedBuktiFiles.length){c.innerHTML='';return}let h='';selectedBuktiFiles.forEach((f,i)=>{h+='<div style="position:relative"><img src="'+URL.createObjectURL(f)+'" alt="p"><button onclick="removeBuktiFile('+i+')" style="position:absolute;top:3px;right:3px;background:rgba(239,68,68,.9);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center"><i class="fas fa-times"></i></button></div>'});c.innerHTML=h}
 
 /* ===== NAVIGASI ===== */
 const pageTitles={dashboard:'Dashboard',guru:'Data Guru',siswa:'Data Siswa',blokKegiatan:'Blok Kegiatan',agendaP5:'Agenda Kegiatan P5',absensi:'Absensi',penilaian:'Penilaian',rekap:'Rekap Nilai & Raport',galeri:'Galeri Foto'};
@@ -428,11 +432,11 @@ function editBlok(id){const b=allBlok[id];if(!b)return;document.getElementById('
 async function hapusBlok(id){if(!(await confirmAction('Hapus blok ini?')))return;db.ref('kokurikuler/blok/'+id).remove().then(()=>{toast('Dihapus');loadBlokList()}).catch(()=>toast('Gagal','error'))}
 
 /* ============================================================
-   AGENDA P5 — CEKLIS PELAKSANAAN & KIRIM WA GRUP
+   AGENDA P5 — CEKLIS PELAKSANAAN, UPLOAD BUKTI & KIRIM WA GRUP
    ============================================================ */
 function loadAgendaPage(){db.ref('kokurikuler/agenda').once('value').then(s=>{allAgenda=s.val()||{};populateAgendaTemaFilter();renderAllAgendaViews()})}
 function populateAgendaTemaFilter(){const sel=document.getElementById('filterAgendaTema'),ts=new Set();Object.values(allAgenda).forEach(a=>{if(a.tema)ts.add(a.tema)});let h='<option value="">Semua Tema</option>';[...ts].sort().forEach(t=>{h+='<option value="'+t+'">'+t+'</option>'});sel.innerHTML=h}
-function getFilteredAgenda(){const fk=document.getElementById('filterAgendaKelas').value,ft=document.getElementById('filterAgendaTema').value,fp=document.getElementById('filterAgendaPertemuan').value,ftp=document.getElementById('filterAgendaTipe').value;let items=Object.entries(allAgenda);if(fk)items=items.filter(([,a])=>(a.kelas||'').includes(fk));if(ft)items=items.filter(([,a])=>a.tema===ft);if(fp)items=items.filter(([,a])=>a.pertemuan===fp);if(ftp)items=items.filter(([,a])=>a.tipe===ftp);return items.sort((a,b)=>{const pa=parseInt(a[1].pertemuan)||99,pb=parseInt(b[1].pertemuan)||99;if(pa!==pb)return pa-pb;const ta=a[1].jamMulai||'',tb=b[1].jamMulai||'';return ta.localeCompare(tb)||(a[1].judul||'').localeCompare(b[1].judul||'')})}
+function getFilteredAgenda(){const fk=document.getElementById('filterAgendaKelas').value,ft=document.getElementById('filterAgendaTema').value,fp=document.getElementById('filterAgendaPertemuan').value,ftp=document.getElementById('filterAgendaTipe').value;let items=Object.entries(allAgenda);if(fk)items=items.filter(([,a])=>(a.kelas||'').includes(fk));if(ft)items=items.filter(([,a])=>a.tema===ft);if(fp)items=items.filter(([,a])=>a.pertemuan===fp);if(ftp)items=items.filter(([,a])=>a.tipe===ftp);return items.sort((a,b)=>{const da=a[1].tanggal||'',db=b[1].tanggal||'';if(da!==db)return da.localeCompare(db);const pa=parseInt(a[1].pertemuan)||99,pb=parseInt(b[1].pertemuan)||99;if(pa!==pb)return pa-pb;const ta=a[1].jamMulai||'',tb=b[1].jamMulai||'';return ta.localeCompare(tb)||(a[1].judul||'').localeCompare(b[1].judul||'')})}
 function renderAllAgendaViews(){renderAgendaList();renderAgendaRundown()}
 function switchAgendaTab(tab,btn){document.querySelectorAll('[data-at]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('agendaTabList').style.display=tab==='list'?'':'none';document.getElementById('agendaTabRundown').style.display=tab==='rundown'?'':'none'}
 
@@ -443,15 +447,16 @@ function renderAgendaList(){const c=document.getElementById('agendaTabList'),ite
     const pl=a.pertemuan==='0'?'-':'Pertemuan '+a.pertemuan;
     const dm=(a.dimensi||[]).map(d=>'<span class="badge badge-dim">'+getDimNama(d)+'</span>').join(' ');
     const jamInfo=(a.jamMulai&&a.jamSelesai)?'<span class="text-[10px] text-purple-400 font-mono ml-1">'+a.jamMulai+' - '+a.jamSelesai+'</span>':'';
+    const tglInfo = a.tanggal ? `<span class="text-[10px] text-slate-400 ml-2"><i class="far fa-calendar-alt"></i> ${formatDateShort(a.tanggal)}</span>` : '';
     const isDone = a.isDone;
     const doneBtn = isDone 
-        ? '<button class="btn btn-success btn-sm" onclick="openWaModal(\''+k+'\')"><i class="fas fa-check"></i>Sudah Dilaksanakan</button>'
-        : '<button class="btn btn-outline btn-sm" onclick="tandaiDilaksanakan(\''+k+'\')"><i class="far fa-square"></i>Tandai Dilaksanakan</button>';
+        ? '<button class="btn btn-success btn-sm" onclick="openWaModal(\''+k+'\')"><i class="fas fa-check"></i>Lihat Bukti & WA</button>'
+        : '<button class="btn btn-outline btn-sm" onclick="openWaModal(\''+k+'\')"><i class="far fa-square"></i>Tandai Dilaksanakan</button>';
         
-    h+='<div class="agenda-card '+(isDone?'done':'')+'"><div class="agenda-card-header"><div><div class="font-bold text-[13px]">'+a.judul+jamInfo+'</div><div class="flex flex-wrap gap-1 mt-1"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span>'+(isDone?'<span class="badge badge-done"><i class="fas fa-check-circle"></i> Selesai</span>':'')+'</div></div><div class="flex gap-1 shrink-0"><button class="btn btn-outline btn-sm" onclick="viewAgenda(\''+k+'\')"><i class="fas fa-eye"></i></button><button class="btn btn-outline btn-sm" onclick="editAgenda(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusAgenda(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div><div class="agenda-card-body"><p class="text-[12px] text-slate-300 leading-relaxed mb-2">'+(a.konten||'-')+'</p>'+(dm?'<div class="flex flex-wrap gap-1">'+dm+'</div>':'')+(a.catatan?'<div class="mt-2 text-[10px] text-slate-500 italic"><i class="fas fa-sticky-note mr-1"></i>'+a.catatan+'</div>':'')+'<div class="mt-3 pt-3 border-t border-slate-700/50 flex justify-end">'+doneBtn+'</div></div></div>';
+    h+='<div class="agenda-card '+(isDone?'done':'')+'"><div class="agenda-card-header"><div><div class="font-bold text-[13px]">'+a.judul+jamInfo+tglInfo+'</div><div class="flex flex-wrap gap-1 mt-1"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span>'+(isDone?'<span class="badge badge-done"><i class="fas fa-check-circle"></i> Selesai</span>':'')+'</div></div><div class="flex gap-1 shrink-0"><button class="btn btn-outline btn-sm" onclick="viewAgenda(\''+k+'\')"><i class="fas fa-eye"></i></button><button class="btn btn-outline btn-sm" onclick="editAgenda(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="hapusAgenda(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div><div class="agenda-card-body"><p class="text-[12px] text-slate-300 leading-relaxed mb-2">'+(a.konten||'-')+'</p>'+(dm?'<div class="flex flex-wrap gap-1">'+dm+'</div>':'')+(a.catatan?'<div class="mt-2 text-[10px] text-slate-500 italic"><i class="fas fa-sticky-note mr-1"></i>'+a.catatan+'</div>':'')+'<div class="mt-3 pt-3 border-t border-slate-700/50 flex justify-end">'+doneBtn+'</div></div></div>';
 });c.innerHTML=h}
 
-/* --- Tab: Rundown --- */
+/* --- Tab: Rundown (Grouped by Date & Judul) --- */
 function renderAgendaRundown(){
     const c=document.getElementById('agendaTabRundown');
     const rdItems=getFilteredAgenda().filter(([,a])=>a.tipe==='rundown');
@@ -460,36 +465,56 @@ function renderAgendaRundown(){
     if(rdItems.length){
         const grouped = {};
         rdItems.forEach(([k, a]) => {
-            if(!grouped[a.judul]) grouped[a.judul] = [];
-            grouped[a.judul].push([k, a]);
+            const dKey = a.tanggal || '';
+            if(!grouped[dKey]) grouped[dKey] = [];
+            grouped[dKey].push([k, a]);
         });
-
+        
         h+='<div class="card"><div class="flex items-center justify-between mb-4"><h3 class="font-bold text-sm"><i class="fas fa-clock text-purple-400 mr-2"></i>Rundown Kegiatan Harian</h3><button class="btn btn-primary btn-sm no-print" onclick="cetakRundown()"><i class="fas fa-print"></i>Cetak Rundown</button></div>';
         
-        for(const judul in grouped) {
-            const items = grouped[judul];
-            const isDone = items[0][1].isDone;
-            const doneBtn = isDone 
-                ? '<button class="btn btn-success btn-sm" onclick="openWaModal(\''+items[0][0]+'\')"><i class="fas fa-check"></i>Sudah Dilaksanakan</button>'
-                : '<button class="btn btn-outline btn-sm" onclick="tandaiDilaksanakan(\''+items[0][0]+'\')"><i class="far fa-square"></i>Tandai Dilaksanakan</button>';
-                
-            h+=`<div class="rundown-group mb-4 p-3 rounded-lg border border-slate-700/50 bg-slate-800/20">
-                <div class="flex justify-between items-center border-b border-slate-700/50 pb-2 mb-2">
-                    <div class="text-purple-400 font-bold text-sm">${judul} <span class="kelas-chip" style="font-size:9px">${getKelasLabel(items[0][1].kelas)}</span></div>
-                    ${doneBtn}
-                </div>
-                <div class="space-y-2">`;
+        const sortedDates = Object.keys(grouped).sort();
+        
+        sortedDates.forEach(dateKey => {
+            const items = grouped[dateKey];
+            const dateStr = formatDateLong(dateKey);
             
-            items.forEach(([k,a])=>{
-                const jam=a.jamMulai&&a.jamSelesai?a.jamMulai+' - '+a.jamSelesai:'-';
-                const dur=a.durasi?a.durasi+' mnt':'';
-                h+=`<div class="rundown-row" style="cursor:pointer;border-bottom-color:rgba(51,65,85,.2);padding:10px 0" onclick="viewAgenda('${k}')">
-                    <div class="rd-time-block"><div class="rd-time-jam">${jam}</div>${dur?`<div class="rd-time-durasi">${dur}</div>`:''}</div>
-                    <div class="rundown-body"><div class="rd-detail">${(a.konten||'-')}</div></div>
-                </div>`;
+            h+=`<div class="mb-4 p-3 rounded-lg border border-slate-700/50 bg-slate-800/20">
+                <div class="text-purple-400 font-bold text-sm mb-3 border-b border-slate-700/50 pb-2 flex items-center gap-2">
+                    <i class="fas fa-calendar-day"></i> ${dateStr}
+                </div>
+                <div class="space-y-3">`;
+            
+            const byJudul = {};
+            items.forEach(([k, a]) => {
+                if(!byJudul[a.judul]) byJudul[a.judul] = [];
+                byJudul[a.judul].push([k, a]);
             });
+            
+            for(const judul in byJudul) {
+                const subItems = byJudul[judul];
+                const isDone = subItems[0][1].isDone;
+                const doneBtn = isDone 
+                    ? '<button class="btn btn-success btn-sm" onclick="openWaModal(\''+subItems[0][0]+'\')"><i class="fas fa-check"></i>Lihat Bukti & WA</button>'
+                    : '<button class="btn btn-outline btn-sm" onclick="openWaModal(\''+subItems[0][0]+'\')"><i class="far fa-square"></i>Tandai Dilaksanakan</button>';
+                    
+                h+=`<div class="bg-slate-900/40 rounded-lg p-3">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="text-emerald-400 font-bold text-xs">${judul} <span class="kelas-chip" style="font-size:9px">${getKelasLabel(subItems[0][1].kelas)}</span></div>
+                        ${doneBtn}
+                    </div>
+                    <div class="space-y-2">`;
+                subItems.forEach(([k,a])=>{
+                    const jam=a.jamMulai&&a.jamSelesai?a.jamMulai+' - '+a.jamSelesai:'-';
+                    const dur=a.durasi?a.durasi+' mnt':'';
+                    h+=`<div class="rundown-row" style="cursor:pointer;border-bottom-color:rgba(51,65,85,.2);padding:8px 0" onclick="viewAgenda('${k}')">
+                        <div class="rd-time-block"><div class="rd-time-jam">${jam}</div>${dur?`<div class="rd-time-durasi">${dur}</div>`:''}</div>
+                        <div class="rundown-body"><div class="rd-detail">${(a.konten||'-')}</div></div>
+                    </div>`;
+                });
+                h+=`</div></div>`;
+            }
             h+=`</div></div>`;
-        }
+        });
         h+='</div>';
     }
     if(tipItems.length){
@@ -510,11 +535,12 @@ function cetakRundown(){
     if(!rdItems.length){toast('Tidak ada rundown untuk dicetak','error');return}
     let h='<div class="pr-header"><h1>Rundown Kegiatan Harian</h1><h2>Kokurikuler P5 — Projek Penguatan Profil Pelajar Pancasila</h2><div class="pr-sub">'+(ft||'Semua Tema')+(fk?' — '+getKelasLabel(fk):' — Semua Kelas')+'</div></div>';
     h+='<div class="pr-info"><span>Tanggal: _______________</span><span>Hari: Jumat</span><span>Tahun Pelajaran: _______________</span></div>';
-    h+='<table class="pr-table"><thead><tr><th class="th-time">WAKTU</th><th>KEGIATAN</th><th>KELAS</th><th>KETERANGAN</th></tr></thead><tbody>';
+    h+='<table class="pr-table"><thead><tr><th class="th-time">WAKTU</th><th>TANGGAL</th><th>KEGIATAN</th><th>KELAS</th><th>KETERANGAN</th></tr></thead><tbody>';
     rdItems.forEach(([,a])=>{
         const jam=a.jamMulai&&a.jamSelesai?a.jamMulai+' - '+a.jamSelesai:'-';
         const dur=a.durasi?'('+a.durasi+' mnt)':'';
-        h+='<tr><td class="td-time">'+jam+'<br><span style="font-size:8px;font-weight:400;color:#666">'+dur+'</span></td><td class="td-judul">'+a.judul+'</td><td>'+getKelasLabel(a.kelas)+'</td><td style="font-size:9px;line-height:1.5">'+(a.konten||'-')+'</td></tr>';
+        const tgl = a.tanggal ? formatDateShort(a.tanggal) : '-';
+        h+='<tr><td class="td-time">'+jam+'<br><span style="font-size:8px;font-weight:400;color:#666">'+dur+'</span></td><td style="text-align:center;font-size:9px">'+tgl+'</td><td class="td-judul">'+a.judul+'</td><td>'+getKelasLabel(a.kelas)+'</td><td style="font-size:9px;line-height:1.5">'+(a.konten||'-')+'</td></tr>';
     });
     h+='</tbody></table>';
     if(tipItems.length){
@@ -527,23 +553,16 @@ function cetakRundown(){
     setTimeout(()=>window.print(),300);
 }
 
-/* --- LOGIC CEKLIS & WA GRUP --- */
-function tandaiDilaksanakan(id) {
-    db.ref('kokurikuler/agenda/'+id).update({isDone: true, doneAt: Date.now()}).then(()=>{
-        toast('Kegiatan ditandai sudah dilaksanakan', 'success');
-        openWaModal(id);
-        loadAgendaPage();
-    }).catch(e=>toast('Gagal menyimpan: '+e.message,'error'));
-}
-
+/* --- LOGIC UPLOAD BUKTI & WA GRUP --- */
 function openWaModal(id) {
     const a = allAgenda[id];
     if(!a) return;
     
     document.getElementById('waAgendaId').value = id;
+    selectedBuktiFiles = [];
+    renderBuktiPreview();
     
-    // Susun teks laporan
-    const tgl = new Date().toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+    const tgl = a.tanggal ? formatDateLong(a.tanggal) : new Date().toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
     let txt = `*Laporan Kegiatan P5*\n\n`;
     txt += `*Tanggal:* ${tgl}\n`;
     txt += `*Kelas:* ${getKelasLabel(a.kelas)}\n`;
@@ -565,6 +584,13 @@ function openWaModal(id) {
         txt += `\n*Dimensi Profil Pelajar:* ${a.dimensi.map(d=>getDimNama(d)).join(', ')}\n`;
     }
     
+    if(a.bukti && a.bukti.length > 0) {
+        txt += `\n*Bukti Foto Kegiatan:*\n`;
+        a.bukti.forEach(url => { txt += `${url}\n`; });
+    } else {
+        txt += `\n_(Bukti foto akan dilampirkan setelah diunggah)_\n`;
+    }
+    
     txt += `\n_Status: Kegiatan telah berhasil dilaksanakan._\n`;
     txt += `\n_Terkirim dari Aplikasi Kokurikuler Jumat._`;
     
@@ -572,22 +598,73 @@ function openWaModal(id) {
     openModal('modalWa');
 }
 
-function sendToWaGroup() {
+async function kirimLaporanWa() {
+    const id = document.getElementById('waAgendaId').value;
     const link = document.getElementById('waGroupLink').value.trim();
-    const text = document.getElementById('waTextPreview').value;
+    let buktiUrls = allAgenda[id]?.bukti || [];
+    
+    if(selectedBuktiFiles.length > 0) {
+        toast('Mengunggah foto bukti...', 'info');
+        const newUrls = await uploadBuktiPhotos(id);
+        buktiUrls = [...buktiUrls, ...newUrls];
+    }
+    
+    // Update database
+    await db.ref('kokurikuler/agenda/'+id).update({ isDone: true, doneAt: Date.now(), bukti: buktiUrls });
+    toast('Bukti berhasil disimpan', 'success');
+    loadAgendaPage();
+    
+    // Generate updated text and send
+    const a = (await db.ref('kokurikuler/agenda/'+id).once('value')).val();
+    let txt = `*Laporan Kegiatan P5*\n\n`;
+    txt += `*Tanggal:* ${a.tanggal ? formatDateLong(a.tanggal) : '-'}\n`;
+    txt += `*Kelas:* ${getKelasLabel(a.kelas)}\n`;
+    if(a.pertemuan !== '0') txt += `*Pertemuan ke-${a.pertemuan}*\n`;
+    txt += `*Tema:* ${a.tema}\n`;
+    if(a.subTema) txt += `*Sub Tema:* ${a.subTema}\n`;
+    txt += `*Judul:* ${a.judul}\n\n`;
+    
+    if(a.tipe === 'rundown' && a.items && a.items.length > 0) {
+        txt += `*Rincian Kegiatan:*\n`;
+        a.items.forEach((item, idx) => {
+            txt += `${idx+1}. (${item.jamMulai}-${item.jamSelesai}) ${item.konten}\n`;
+        });
+    } else {
+        txt += `*Deskripsi Kegiatan:*\n${a.konten || '-'}\n`;
+    }
+    
+    if(a.bukti && a.bukti.length > 0) {
+        txt += `\n*Bukti Foto Kegiatan:*\n`;
+        a.bukti.forEach(url => { txt += `${url}\n`; });
+    }
+    
+    txt += `\n_Status: Kegiatan telah berhasil dilaksanakan._\n`;
+    txt += `\n_Terkirim dari Aplikasi Kokurikuler Jumat._`;
     
     if(!link) {
-        toast('Masukkan link grup WA terlebih dahulu', 'error');
+        toast('Foto tersimpan. Link WA kosong, salin teks manual.', 'info');
+        navigator.clipboard.writeText(txt);
+        closeModal('modalWa');
         return;
     }
     
     let waLink = link;
     if(!waLink.endsWith('/')) waLink += '/';
-    waLink += text ? `?text=${encodeURIComponent(text)}` : '';
+    waLink += `?text=${encodeURIComponent(txt)}`;
     
     window.open(waLink, '_blank');
     closeModal('modalWa');
     toast('Membuka WhatsApp...', 'info');
+}
+
+async function uploadBuktiPhotos(id) {
+    const urls = [];
+    for(let i=0; i<selectedBuktiFiles.length; i++) {
+        const ref = storage.ref('kokurikuler/bukti_agenda/'+id+'/'+Date.now()+'_'+i);
+        await ref.put(selectedBuktiFiles[i]);
+        urls.push(await ref.getDownloadURL());
+    }
+    return urls;
 }
 
 /* --- CRUD Agenda --- */
@@ -637,13 +714,13 @@ function removeRundownItem(btn) {
 
 function openAgendaModal(id){
     selectedAgendaDim=[];document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.remove('selected'));
-    document.getElementById('agendaId').value='';document.getElementById('agendaKelas').value='1,2,3';document.getElementById('agendaTema').value='Kearifan Lokal';document.getElementById('agendaSubTema').value='';document.getElementById('agendaTipe').value='alur';document.getElementById('agendaPertemuan').value='1';document.getElementById('agendaJudul').value='';document.getElementById('agendaKonten').value='';document.getElementById('agendaCatatan').value='';
+    document.getElementById('agendaId').value='';document.getElementById('agendaKelas').value='1';document.getElementById('agendaTema').value='Kearifan Lokal';document.getElementById('agendaSubTema').value='';document.getElementById('agendaTanggal').value='';document.getElementById('agendaTipe').value='alur';document.getElementById('agendaPertemuan').value='1';document.getElementById('agendaJudul').value='';document.getElementById('agendaKonten').value='';document.getElementById('agendaCatatan').value='';
     document.getElementById('rundownItemsContainer').innerHTML = '';
     toggleJamFields();
     if(id&&allAgenda[id]){
         const a=allAgenda[id];
         document.getElementById('modalAgendaTitle').innerHTML='<i class="fas fa-edit text-orange-400 mr-2"></i>Edit Agenda P5';
-        document.getElementById('agendaId').value=id;document.getElementById('agendaKelas').value=a.kelas||'1,2,3';document.getElementById('agendaTema').value=a.tema||'Kearifan Lokal';document.getElementById('agendaSubTema').value=a.subTema||'';document.getElementById('agendaTipe').value=a.tipe||'alur';document.getElementById('agendaPertemuan').value=a.pertemuan||'1';document.getElementById('agendaJudul').value=a.judul||'';document.getElementById('agendaKonten').value=a.konten||'';document.getElementById('agendaCatatan').value=a.catatan||'';
+        document.getElementById('agendaId').value=id;document.getElementById('agendaKelas').value=a.kelas||'1';document.getElementById('agendaTema').value=a.tema||'Kearifan Lokal';document.getElementById('agendaSubTema').value=a.subTema||'';document.getElementById('agendaTanggal').value=a.tanggal||'';document.getElementById('agendaTipe').value=a.tipe||'alur';document.getElementById('agendaPertemuan').value=a.pertemuan||'1';document.getElementById('agendaJudul').value=a.judul||'';document.getElementById('agendaKonten').value=a.konten||'';document.getElementById('agendaCatatan').value=a.catatan||'';
         selectedAgendaDim=a.dimensi?[...a.dimensi]:[];
         document.querySelectorAll('#agendaDimensiWrap .dimensi-chip').forEach(c=>c.classList.toggle('selected',selectedAgendaDim.includes(c.dataset.dim)));
         if(a.tipe === 'rundown') {
@@ -668,10 +745,11 @@ function simpanAgenda(){
     const tema = document.getElementById('agendaTema').value;
     const subTema = document.getElementById('agendaSubTema').value.trim();
     const pertemuan = document.getElementById('agendaPertemuan').value;
+    const tanggal = document.getElementById('agendaTanggal').value;
     const catatan = document.getElementById('agendaCatatan').value.trim();
     
     let data = {
-        kelas: kelas, tema: tema, subTema: subTema, tipe: tipe, pertemuan: pertemuan,
+        kelas: kelas, tema: tema, subTema: subTema, tipe: tipe, pertemuan: pertemuan, tanggal: tanggal,
         judul: judul, konten: document.getElementById('agendaKonten').value.trim(),
         dimensi: [...selectedAgendaDim], catatan: catatan, isTemplate: false, updatedAt: Date.now()
     };
@@ -710,7 +788,7 @@ function viewAgenda(id){
     const pl=a.pertemuan==='0'?'-':'Pertemuan '+a.pertemuan;
     const dm=(a.dimensi||[]).map(d=>'<span class="badge badge-dim"><i class="fas '+(DIMENSI.find(x=>x.id===d)||{icon:'fa-circle'}).icon+'" style="font-size:8px;margin-right:3px"></i>'+getDimNama(d)+'</span>').join(' ');
     let h='<div class="space-y-4">';
-    h+='<div class="flex flex-wrap gap-2"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span>'+(a.jamMulai&&a.jamSelesai?'<span class="badge badge-rundown" style="font-family:monospace">'+a.jamMulai+' - '+a.jamSelesai+(a.durasi?' ('+a.durasi+' mnt)':'')+'</span>':'')+'</div>';
+    h+='<div class="flex flex-wrap gap-2"><span class="badge '+tb+'">'+tl+'</span><span class="badge badge-kelas">'+pl+'</span><span class="kelas-chip"><i class="fas fa-users" style="font-size:8px"></i> '+getKelasLabel(a.kelas)+'</span>'+(a.tanggal?'<span class="badge badge-rundown"><i class="fas fa-calendar-day"></i> '+formatDateLong(a.tanggal)+'</span>':'')+(a.jamMulai&&a.jamSelesai?'<span class="badge badge-rundown" style="font-family:monospace">'+a.jamMulai+' - '+a.jamSelesai+(a.durasi?' ('+a.durasi+' mnt)':'')+'</span>':'')+'</div>';
     h+='<div><div class="text-[10px] text-slate-500 font-semibold">Tema</div><div class="text-sm font-bold mt-0.5">'+a.tema+'</div>'+(a.subTema?'<div class="text-xs text-slate-400">'+a.subTema+'</div>':'')+'</div>';
     
     if(a.tipe === 'rundown' && a.items && a.items.length > 0) {
@@ -727,6 +805,12 @@ function viewAgenda(id){
         h+='</div></div>';
     } else {
         h+='<div class="p-4 rounded-xl" style="background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.15)"><div class="text-[11px] font-bold text-purple-400 mb-2">Konten / Materi Kegiatan</div><p class="text-sm text-slate-200 leading-relaxed">'+(a.konten||'-')+'</p></div>';
+    }
+    
+    if(a.bukti && a.bukti.length > 0) {
+        h+='<div><div class="text-[11px] text-slate-500 font-semibold mb-2">Bukti Foto Kegiatan</div><div class="photo-grid">';
+        a.bukti.forEach(url => { h+=`<img src="${url}" alt="Bukti" onclick="window.open('${url}','_blank')">` });
+        h+='</div></div>';
     }
     
     if(dm)h+='<div><div class="text-[11px] text-slate-500 font-semibold mb-1">Dimensi Profil Pelajar Pancasila</div><div class="flex flex-wrap gap-1">'+dm+'</div></div>';
