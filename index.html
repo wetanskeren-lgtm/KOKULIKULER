@@ -8,12 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-tailwind.config = {
-  theme: { extend: { fontFamily: { display: ['Playfair Display', 'serif'], body: ['Plus Jakarta Sans', 'sans-serif'] } } }
-}
+tailwind.config = { theme: { extend: { fontFamily: { display: ['Playfair Display', 'serif'], body: ['Plus Jakarta Sans', 'sans-serif'] } } } }
 </script>
 <style>
-:root { --primary: #1B4332; --primary-light: #2D6A4F; --primary-lighter: #40916C; --accent: #D4A017; --accent-light: #F2D06B; --bg: #F5F1EB; --bg-card: #FFFFFF; --text: #1A1A2E; --text-muted: #6B7280; --border: #E5E1DB; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; }
+:root { --primary: #1B4332; --primary-light: #2D6A4F; --primary-lighter: #40916C; --accent: #D4A017; --bg: #F5F1EB; --bg-card: #FFFFFF; --text: #1A1A2E; --text-muted: #6B7280; --border: #E5E1DB; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 .bg-pattern { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(27,67,50,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 90%, rgba(212,160,23,0.06) 0%, transparent 60%), linear-gradient(175deg, #F5F1EB 0%, #EDE8E0 100%); }
@@ -49,9 +47,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .radio-group label:has(input[value="0"]:checked) { border-color: #EF4444; background: #FEF2F2; color: #DC2626; font-weight: 700; }
 .radio-group label:has(input[value="1"]:checked) { border-color: #F59E0B; background: #FFFBEB; color: #D97706; font-weight: 700; }
 .radio-group label:has(input[value="2"]:checked) { border-color: #10B981; background: #ECFDF5; color: #059669; font-weight: 700; }
-.upload-zone { border: 2px dashed var(--border); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; background: #FAFAF7; }
-.upload-zone:hover { border-color: var(--primary-lighter); background: #F0F7F4; }
-.upload-zone.dragover { border-color: var(--accent); background: #FFF9E6; }
 .toast-container { position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
 .toast { padding: 14px 20px; border-radius: 12px; color: white; font-weight: 500; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); animation: toastIn 0.4s ease; display: flex; align-items: center; gap: 10px; min-width: 300px; }
 .toast.success { background: linear-gradient(135deg, #059669, #10B981); }
@@ -67,11 +62,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
 .badge-success { background: #ECFDF5; color: #059669; }
 .badge-warning { background: #FFFBEB; color: #D97706; }
-.badge-danger { background: #FEF2F2; color: #DC2626; }
 .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; background: linear-gradient(90deg, var(--primary-lighter), var(--accent)); }
-.file-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #FAFAF7; border-radius: 10px; border: 1px solid var(--border); transition: all 0.2s; }
-.file-item:hover { background: #F0F7F4; border-color: var(--primary-lighter); }
 .navbar { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
 .hero-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15; animation: blobFloat 8s ease-in-out infinite; }
 @keyframes blobFloat { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 15px) scale(0.95); } }
@@ -88,9 +80,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 
 <div class="bg-pattern"></div>
 <div class="toast-container" id="toastContainer"></div>
-
-<!-- KOTAK DEBUG ERROR (AKAN DIHAPUS JIKA SUDAH BERHASIL) -->
-<div id="debugErrorBox" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#FEF2F2; border:2px solid #EF4444; color:#991B1B; padding:24px; border-radius:16px; z-index:99999; max-width:500px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3); font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; line-height:1.6; word-break:break-word;"></div>
 
 <!-- ==================== HALAMAN LOGIN ==================== -->
 <div id="pageLogin" class="page active">
@@ -109,6 +98,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
         <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]">Masuk</button>
         <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]">Daftar</button>
       </div>
+      
+      <!-- FORM LOGIN -->
       <form id="formLogin" onsubmit="handleLogin(event)">
         <div class="space-y-4">
           <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label><div class="relative"><i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="email" id="loginEmail" class="input-field pl-11" placeholder="contoh@email.com" required></div></div>
@@ -116,13 +107,15 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
           <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnLogin"><span>Masuk</span></button>
         </div>
       </form>
+
+      <!-- FORM REGISTER -->
       <form id="formRegister" onsubmit="handleRegister(event)" style="display:none;">
         <div class="space-y-4">
           <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Nama Lengkap</label><div class="relative"><i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regNama" class="input-field pl-11" placeholder="Nama guru" required></div></div>
           <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">NIP</label><div class="relative"><i class="fas fa-id-card absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regNIP" class="input-field pl-11" placeholder="Nomor Induk Pegawai" required></div></div>
           <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Pangkat/Golongan</label><div class="relative"><i class="fas fa-star absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regGolongan" class="input-field pl-11" placeholder="Contoh: III/a" required></div></div>
           <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label><div class="relative"><i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="email" id="regEmail" class="input-field pl-11" placeholder="contoh@email.com" required></div></div>
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password</label><div class="relative"><i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="password" id="regPassword" class="input-field pl-11" placeholder="Min. 6 karakter" required minlength="6"><button type="button" onclick="togglePw('regPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]"><i class="fas fa-eye"></i></button></div></div>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password (Min. 6 karakter)</label><div class="relative"><i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="password" id="regPassword" class="input-field pl-11" placeholder="Min. 6 karakter" required minlength="6"><button type="button" onclick="togglePw('regPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]"><i class="fas fa-eye"></i></button></div></div>
           <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnRegister"><span>Daftar Akun</span></button>
         </div>
       </form>
@@ -135,32 +128,109 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
   <nav class="navbar no-print"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center"><i class="fas fa-clipboard-check text-white text-sm"></i></div><div class="hidden sm:block"><p class="font-700 text-sm text-[#1B4332] leading-tight">ITAP Kurikulum Merdeka</p><p class="text-xs text-[#6B7280]">SDN Majalengka Wetan VIII</p></div></div><div class="flex items-center gap-3"><span class="text-sm font-500 text-[#6B7280] hidden md:inline" id="navUserName">-</span><div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4A017] to-[#F2D06B] flex items-center justify-center text-white font-700 text-sm" id="navUserAvatar">G</div><button onclick="handleLogout()" class="btn-outline text-xs py-2 px-4"><i class="fas fa-sign-out-alt mr-1"></i> Keluar</button></div></div></nav>
   <main class="max-w-7xl mx-auto px-4 py-8">
     <div class="mb-8"><h2 class="font-display text-3xl font-800 text-[#1B4332] mb-1">Dashboard</h2><p class="text-[#6B7280]">Kelola instrumen telaah administrasi pembelajaran Anda</p></div>
+    
+    <!-- Info Guru -->
     <div class="card p-6 mb-6"><div class="flex flex-wrap items-center gap-6"><div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center text-white text-2xl font-800" id="dashAvatar">G</div><div class="flex-1 min-w-[200px]"><h3 class="font-700 text-lg text-[#1A1A2E]" id="dashNama">-</h3><p class="text-sm text-[#6B7280]">NIP: <span id="dashNIP">-</span></p><p class="text-sm text-[#6B7280]">Pangkat/Gol: <span id="dashGolongan">-</span></p></div><button onclick="openModal('modalNewAssessment')" class="btn-primary flex items-center gap-2"><i class="fas fa-plus"></i> Buat Instrumen Baru</button></div></div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Total Instrumen</p><p class="text-2xl font-800 text-[#1B4332]" id="statTotal">0</p></div><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Sudah Selesai</p><p class="text-2xl font-800 text-[#10B981]" id="statSelesai">0</p></div><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Dalam Proses</p><p class="text-2xl font-800 text-[#F59E0B]" id="statProses">0</p></div><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Rata-rata Nilai</p><p class="text-2xl font-800 text-[#D4A017]" id="statRata">0%</p></div></div>
-    <div class="card overflow-hidden"><div class="p-5 border-b border-[#E5E1DB] flex items-center justify-between"><h3 class="font-700 text-lg text-[#1A1A2E]"><i class="fas fa-list-check text-[#1B4332] mr-2"></i>Daftar Instrumen</h3><div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-[#6B7280] text-sm"></i><input type="text" id="searchAssessment" oninput="renderAssessments()" class="input-field pl-9 py-2 text-sm w-48" placeholder="Cari..."></div></div><div id="assessmentList" class="p-5"><div class="text-center py-12 text-[#6B7280]"><i class="fas fa-inbox text-4xl mb-3 opacity-30"></i><p>Belum ada instrumen. Klik "Buat Instrumen Baru" untuk memulai.</p></div></div></div>
+    
+    <!-- Statistik -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Total Instrumen</p><p class="text-2xl font-800 text-[#1B4332]" id="statTotal">0</p></div>
+      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Sudah Selesai</p><p class="text-2xl font-800 text-[#10B981]" id="statSelesai">0</p></div>
+      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Dalam Proses</p><p class="text-2xl font-800 text-[#F59E0B]" id="statProses">0</p></div>
+      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Rata-rata Nilai</p><p class="text-2xl font-800 text-[#D4A017]" id="statRata">0%</p></div>
+    </div>
+
+    <!-- Daftar Instrumen -->
+    <div class="card overflow-hidden">
+      <div class="p-5 border-b border-[#E5E1DB] flex items-center justify-between">
+        <h3 class="font-700 text-lg text-[#1A1A2E]"><i class="fas fa-list-check text-[#1B4332] mr-2"></i>Daftar Instrumen</h3>
+        <div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-[#6B7280] text-sm"></i><input type="text" id="searchAssessment" oninput="renderAssessments()" class="input-field pl-9 py-2 text-sm w-48" placeholder="Cari..."></div>
+      </div>
+      <div id="assessmentList" class="p-5"><div class="text-center py-12 text-[#6B7280]"><i class="fas fa-inbox text-4xl mb-3 opacity-30"></i><p>Belum ada instrumen. Klik "Buat Instrumen Baru" untuk memulai.</p></div></div>
+    </div>
   </main>
 </div>
 
 <!-- ==================== HALAMAN PENILAIAN ==================== -->
 <div id="pageAssessment" class="page">
-  <nav class="navbar no-print"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"><div class="flex items-center gap-3"><button onclick="showPage('pageDashboard')" class="w-9 h-9 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F5F1EB] transition-colors"><i class="fas fa-arrow-left text-sm"></i></button><div><p class="font-700 text-sm text-[#1B4332] leading-tight" id="assessNavTitle">Instrumen Penilaian</p><p class="text-xs text-[#6B7280]" id="assessNavSemester">-</p></div></div><div class="flex items-center gap-2"><button onclick="saveAssessment()" class="btn-outline text-xs py-2 px-4 no-print"><i class="fas fa-save mr-1"></i> Simpan</button><button onclick="window.print()" class="btn-accent text-xs py-2 px-4 no-print"><i class="fas fa-print mr-1"></i> Cetak</button></div></div></nav>
+  <nav class="navbar no-print">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button onclick="showPage('pageDashboard')" class="w-9 h-9 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F5F1EB] transition-colors"><i class="fas fa-arrow-left text-sm"></i></button>
+        <div><p class="font-700 text-sm text-[#1B4332] leading-tight" id="assessNavTitle">Instrumen Penilaian</p><p class="text-xs text-[#6B7280]" id="assessNavSemester">-</p></div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="saveAssessment()" class="btn-outline text-xs py-2 px-4 no-print"><i class="fas fa-save mr-1"></i> Simpan</button>
+        <button onclick="window.print()" class="btn-accent text-xs py-2 px-4 no-print"><i class="fas fa-print mr-1"></i> Cetak</button>
+      </div>
+    </div>
+  </nav>
   <main class="max-w-7xl mx-auto px-4 py-6" id="assessmentContent"></main>
 </div>
 
 <!-- ==================== MODAL BUAT INSTRUMEN ==================== -->
-<div id="modalNewAssessment" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-6"><h3 class="font-display text-xl font-700 text-[#1B4332]">Buat Instrumen Baru</h3><button onclick="closeModal('modalNewAssessment')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button></div><form onsubmit="createAssessment(event)"><div class="space-y-4"><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Semester</label><select id="newSemester" class="select-field" required><option value="">Pilih Semester</option><option value="1">Semester 1 (Ganjil)</option><option value="2">Semester 2 (Genap)</option></select></div><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Kelas</label><select id="newKelas" class="select-field" required><option value="">Pilih Kelas</option><option value="I">Kelas I</option><option value="II">Kelas II</option><option value="III">Kelas III</option><option value="IV">Kelas IV</option><option value="V">Kelas V</option><option value="VI">Kelas VI</option></select></div><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Tahun Pelajaran</label><input type="text" id="newTahun" class="input-field" placeholder="2024/2025" required></div><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Mata Pelajaran</label><input type="text" id="newMapel" class="input-field" placeholder="Contoh: Tematik, Matematika" required></div></div><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal('modalNewAssessment')" class="btn-outline flex-1">Batal</button><button type="submit" class="btn-primary flex-1" id="btnCreate"><i class="fas fa-plus mr-1"></i> Buat</button></div></form></div></div>
+<div id="modalNewAssessment" class="modal-overlay">
+  <div class="modal-content">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-display text-xl font-700 text-[#1B4332]">Buat Instrumen Baru</h3>
+      <button onclick="closeModal('modalNewAssessment')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button>
+    </div>
+    <form onsubmit="createAssessment(event)">
+      <div class="space-y-4">
+        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Semester</label><select id="newSemester" class="select-field" required><option value="">Pilih Semester</option><option value="1">Semester 1 (Ganjil)</option><option value="2">Semester 2 (Genap)</option></select></div>
+        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Kelas</label><select id="newKelas" class="select-field" required><option value="">Pilih Kelas</option><option value="I">Kelas I</option><option value="II">Kelas II</option><option value="III">Kelas III</option><option value="IV">Kelas IV</option><option value="V">Kelas V</option><option value="VI">Kelas VI</option></select></div>
+        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Tahun Pelajaran</label><input type="text" id="newTahun" class="input-field" placeholder="2024/2025" required></div>
+        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Mata Pelajaran</label><input type="text" id="newMapel" class="input-field" placeholder="Contoh: Tematik, Matematika" required></div>
+      </div>
+      <div class="flex gap-3 mt-6">
+        <button type="button" onclick="closeModal('modalNewAssessment')" class="btn-outline flex-1">Batal</button>
+        <button type="submit" class="btn-primary flex-1" id="btnCreate"><i class="fas fa-plus mr-1"></i> Buat</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-<!-- ==================== MODAL UPLOAD FILE ==================== -->
-<div id="modalUpload" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-4"><h3 class="font-display text-lg font-700 text-[#1B4332]">Upload File</h3><button onclick="closeModal('modalUpload')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button></div><p class="text-sm text-[#6B7280] mb-4">Komponen: <strong id="uploadKomponenNama">-</strong></p><div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"><i class="fas fa-cloud-upload-alt text-3xl text-[#40916C] mb-2"></i><p class="text-sm font-600 text-[#1A1A2E]">Klik atau seret file ke sini</p><p class="text-xs text-[#6B7280] mt-1">PDF, JPG, PNG, DOC (Maks. 10MB)</p><input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none" onchange="handleFileSelect(event)"></div><div id="uploadPreview" class="mt-4 hidden"><div class="file-item"><i class="fas fa-file text-[#40916C]"></i><span class="text-sm font-500 flex-1 truncate" id="uploadFileName">-</span><span class="text-xs text-[#6B7280]" id="uploadFileSize">-</span><button onclick="clearUpload()" class="text-[#EF4444] hover:text-[#DC2626]"><i class="fas fa-times"></i></button></div></div><input type="hidden" id="uploadKomponenId"><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal('modalUpload')" class="btn-outline flex-1">Batal</button><button type="button" onclick="uploadFile()" class="btn-primary flex-1" id="btnUpload"><i class="fas fa-upload mr-1"></i> Upload</button></div></div></div>
+<!-- ==================== MODAL LINK GOOGLE DRIVE ==================== -->
+<div id="modalDrive" class="modal-overlay">
+  <div class="modal-content">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-display text-lg font-700 text-[#1B4332]">Upload File ke Google Drive</h3>
+      <button onclick="closeModal('modalDrive')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button>
+    </div>
+    <p class="text-sm text-[#6B7280] mb-4">Komponen: <strong id="driveKomponenNama" class="text-[#1A1A2E]">-</strong></p>
+    
+    <div class="mb-4">
+      <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Tautan (Link) File di Google Drive</label>
+      <input type="url" id="driveLinkInput" class="input-field" placeholder="https://drive.google.com/file/d/.../view?usp=sharing">
+      <p class="text-xs text-[#6B7280] mt-1"><i class="fas fa-info-circle mr-1"></i>Upload file Anda ke Google Drive, lalu klik kanan → "Dapatkan tautan" → salin linknya di sini.</p>
+    </div>
 
-<!-- ==================== MODAL DETAIL FILE ==================== -->
-<div id="modalFileDetail" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-4"><h3 class="font-display text-lg font-700 text-[#1B4332]">File Terlampir</h3><button onclick="closeModal('modalFileDetail')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button></div><div id="fileDetailList" class="space-y-3"></div><div class="mt-6"><button onclick="closeModal('modalFileDetail')" class="btn-outline w-full">Tutup</button></div></div></div>
+    <div class="p-4 bg-[#F0F7F4] rounded-xl mb-4">
+      <p class="text-sm font-600 text-[#1B4332] mb-2"><i class="fab fa-google-drive mr-1"></i> Cara Upload Cepat:</p>
+      <ol class="text-xs text-[#6B7280] list-decimal list-inside space-y-1">
+        <li>Klik tombol "Buka Folder Drive" di bawah.</li>
+        <li>Klik ikon <strong>+ New</strong> lalu pilih <strong>File upload</strong>.</li>
+        <li>Setelah selesai, klik kanan file → <strong>Bagikan</strong> → ubah ke "Siapa saja yang memiliki tautan".</li>
+        <li>Salin tautan, lalu tempelkan di kolom di atas.</li>
+      </ol>
+    </div>
 
-<!-- Firebase SDK -->
+    <a href="https://drive.google.com/drive/folders/1DBC2YJFNo82u9zB1V7P2miNcK4_DYGLZ?usp=drive_link" target="_blank" class="btn-accent w-full flex items-center justify-center gap-2 mb-4 text-center">
+      <i class="fab fa-google-drive"></i> Buka Folder Google Drive
+    </a>
+
+    <input type="hidden" id="driveKomponenId">
+    <div class="flex gap-3">
+      <button type="button" onclick="closeModal('modalDrive')" class="btn-outline flex-1">Batal</button>
+      <button type="button" onclick="saveDriveLink()" class="btn-primary flex-1"><i class="fas fa-link mr-1"></i> Simpan Tautan</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK (Hanya Auth & Database, TANPA STORAGE) -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
 <script>
 // ======================== KONFIGURASI FIREBASE ========================
@@ -169,7 +239,7 @@ const firebaseConfig = {
   authDomain: "adminsitrasi-pembelajaran.firebaseapp.com",
   databaseURL: "https://adminsitrasi-pembelajaran-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "adminsitrasi-pembelajaran",
-  storageBucket: "adminsitrasi-pembelajaran.firebasestorage.app",
+  // storageBucket DIHAPUS karena paket gratis tidak mendukung Storage
   messagingSenderId: "40176862526",
   appId: "1:40176862526:web:c249180c13f151353c186f",
   measurementId: "G-4SJLRBTBPL"
@@ -178,14 +248,17 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
-const storage = firebase.storage();
 
-const FOLDER_ID = '1DBC2YJFNo82u9zB1V7P2miNcK4_DYGLZ';
-const GDRIVE_BASE = `https://drive.google.com/drive/folders/${FOLDER_ID}`;
+const GDRIVE_BASE = 'https://drive.google.com/drive/folders/1DBC2YJFNo82u9zB1V7P2miNcK4_DYGLZ';
 const MAX_SCORE = 40;
-const KOMPONEN = ['Kalender Pendidikan','Jadwal Pelajaran','Jadwal Piket Kelas','Struktur Organisasi Kelas','Denah Tempat Duduk','Papan Informasi Absen','Poster 7 Kebiasaan Anak Indonesia Hebat','Poster 8 Dimensi Profil Lulusan','Kesepakatan Kelas','Capaian Pembelajaran (CP)','Tujuan Pembelajaran (TP)','Alur Tujuan Pembelajaran (ATP)','Modul Ajar/RPM','Modul Kokurikuler','Buku Absensi Harian','Buku Daftar Nilai','Analisis Penilaian','Soal Asesmen Harian','Jurnal / Agenda Harian','Administrasi Penunjang Lainnya'];
+const KOMPONEN = [
+  'Kalender Pendidikan','Jadwal Pelajaran','Jadwal Piket Kelas','Struktur Organisasi Kelas','Denah Tempat Duduk',
+  'Papan Informasi Absen','Poster 7 Kebiasaan Anak Indonesia Hebat','Poster 8 Dimensi Profil Lulusan','Kesepakatan Kelas',
+  'Capaian Pembelajaran (CP)','Tujuan Pembelajaran (TP)','Alur Tujuan Pembelajaran (ATP)','Modul Ajar/RPM','Modul Kokurikuler',
+  'Buku Absensi Harian','Buku Daftar Nilai','Analisis Penilaian','Soal Asesmen Harian','Jurnal / Agenda Harian','Administrasi Penunjang Lainnya'
+];
 
-let currentUser = null, currentAssessmentId = null, currentScores = {}, currentFiles = {}, selectedFile = null;
+let currentUser = null, currentAssessmentId = null, currentScores = {}, currentLinks = {};
 
 // ======================== UTILITAS ========================
 function showPage(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
@@ -193,9 +266,7 @@ function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 function togglePw(id, btn) { const i = document.getElementById(id); const ic = btn.querySelector('i'); if(i.type==='password'){i.type='text';ic.className='fas fa-eye-slash';}else{i.type='password';ic.className='fas fa-eye';} }
 function formatDate(ts) { if(!ts) return '-'; return new Date(ts).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}); }
-function formatFileSize(b) { if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
-function getFileIcon(n) { const e=n.split('.').pop().toLowerCase(); const m={pdf:'fa-file-pdf text-red-500',jpg:'fa-file-image text-blue-500',jpeg:'fa-file-image text-blue-500',png:'fa-file-image text-green-500',doc:'fa-file-word text-blue-600',docx:'fa-file-word text-blue-600'}; return m[e]||'fa-file text-gray-500'; }
-function getKetercapaian(p) { if(p>=91) return {label:'Sangat Baik',cls:'badge-success',color:'#10B981'}; if(p>=81) return {label:'Baik',cls:'badge-success',color:'#10B981'}; if(p>=71) return {label:'Cukup',cls:'badge-warning',color:'#F59E0B'}; return {label:'Kurang',cls:'badge-danger',color:'#EF4444'}; }
+function getKetercapaian(p) { if(p>=91) return {label:'Sangat Baik',color:'#10B981'}; if(p>=81) return {label:'Baik',color:'#10B981'}; if(p>=71) return {label:'Cukup',color:'#F59E0B'}; return {label:'Kurang',color:'#EF4444'}; }
 
 function showToast(msg, type='info') {
   const c = document.getElementById('toastContainer');
@@ -206,127 +277,73 @@ function showToast(msg, type='info') {
   setTimeout(() => { t.classList.add('removing'); setTimeout(() => t.remove(), 300); }, 4000);
 }
 
-// ======================== AUTENTIKASI (DENGAN PENANGANAN ERROR SUPER KUAT) ========================
+// ======================== AUTENTIKASI ========================
 function switchAuthTab(tab) {
   const tl = document.getElementById('tabLogin'), tr = document.getElementById('tabRegister');
   const fl = document.getElementById('formLogin'), fr = document.getElementById('formRegister');
   if(tab==='login') { tl.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]'; tr.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]'; fl.style.display='block'; fr.style.display='none'; }
   else { tr.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]'; tl.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]'; fr.style.display='block'; fl.style.display='none'; }
-  document.getElementById('debugErrorBox').style.display = 'none'; // Sembunyikan error saat pindah tab
 }
 
 async function handleRegister(e) {
   e.preventDefault();
   const btn = document.getElementById('btnRegister');
-  const errBox = document.getElementById('debugErrorBox');
-  errBox.style.display = 'none'; // Reset error box
-
   const nama = document.getElementById('regNama').value.trim();
   const nip = document.getElementById('regNIP').value.trim();
   const golongan = document.getElementById('regGolongan').value.trim();
   const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
 
-  btn.innerHTML = '<span class="spinner"></span> Mendaftar...';
-  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Mendaftar...'; btn.disabled = true;
 
   try {
-    // 1. Buat akun autentikasi
     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
     const uid = userCredential.user.uid;
     
-    // 2. Simpan data profil guru ke database
-    // Menggunakan .set() dengan prioritas tinggi untuk menghindari race condition
     await db.ref('users/' + uid).set({
-      nama: nama,
-      nip: nip,
-      golongan: golongan,
-      email: email,
+      nama, nip, golongan, email,
       createdAt: firebase.database.ServerValue.TIMESTAMP
     });
 
-    // Jika sampai sini berarti SUKSES
     showToast('Pendaftaran berhasil! Silakan masuk.', 'success');
     switchAuthTab('login');
     document.getElementById('loginEmail').value = email;
     document.getElementById('formRegister').reset();
-
   } catch (error) {
-    // Tampilkan error asli ke layar dan console agar jelas penyebabnya
-    console.error("=== ERROR PENDAFTARAN ===");
-    console.error("Kode Error:", error.code);
-    console.error("Pesan Error:", error.message);
-    console.error("Detail Lengkap:", error);
-    
-    let userMsg = '';
-    switch(error.code) {
-      case 'auth/email-already-in-use': userMsg = 'Email sudah terdaftar. Silakan langsung masuk.'; break;
-      case 'auth/invalid-email': userMsg = 'Format email tidak valid.'; break;
-      case 'auth/weak-password': userMsg = 'Password terlalu lemah, minimal 6 karakter.'; break;
-      case 'auth/operation-not-allowed': userMsg = 'METODE LOGIN EMAIL/PASSWORD BELUM DIAKTIFKAN di Firebase Console. (Lihat pesan di bawah)'; break;
-      case 'permission-denied': userMsg = 'AKSES DATABASE DITOLAK. Security Rules belum diubah (Masih default). (Lihat pesan di bawah)'; break;
-      default: userMsg = error.message || 'Terjadi kesalahan tidak dikenal.';
-    }
-
-    // TAMPILKAN DI KOTAK MERAH AGAR JELAS
-    errBox.innerHTML = `
-      <div style="margin-bottom:12px;font-size:16px;font-weight:700;color:#991B1B;">
-        <i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i> Gagal Mendaftar
-      </div>
-      <div style="background:white;padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid #FECACA;">
-        <strong>Kepada Anda:</strong><br>${userMsg}
-      </div>
-      <div style="font-size:12px;color:#7F1D1D;">
-        <strong>Detail Teknis (Untuk Developer):</strong><br>
-        Kode: <code>${error.code}</code><br>
-        Pesan: <code>${error.message}</code>
-      </div>
-      <button onclick="document.getElementById('debugErrorBox').style.display='none'" style="margin-top:12px;width:100%;padding:8px;background:#DC2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">Tutup Pesan</button>
-    `;
-    errBox.style.display = 'block';
+    console.error("Error:", error.code, error.message);
+    let msg = error.message || 'Terjadi kesalahan.';
+    if(error.code === 'auth/email-already-in-use') msg = 'Email sudah terdaftar. Silakan langsung masuk.';
+    else if(error.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
+    else if(error.code === 'auth/weak-password') msg = 'Password terlalu lemah, minimal 6 karakter.';
+    else if(error.code === 'auth/operation-not-allowed') msg = 'Email/Password belum diaktifkan di Firebase Console.';
+    else if(error.code === 'auth/configuration-not-found') msg = 'Layanan Auth belum diinisialisasi. Buka Firebase Console -> Authentication -> Klik "Get Started".';
+    showToast(msg, 'error');
   }
-  
-  btn.innerHTML = '<span>Daftar Akun</span>';
-  btn.disabled = false;
+  btn.innerHTML = '<span>Daftar Akun</span>'; btn.disabled = false;
 }
 
 async function handleLogin(e) {
   e.preventDefault();
   const btn = document.getElementById('btnLogin');
-  const errBox = document.getElementById('debugErrorBox');
-  errBox.style.display = 'none';
-
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
 
-  btn.innerHTML = '<span class="spinner"></span>';
-  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
 
   try {
     await auth.signInWithEmailAndPassword(email, password);
     showToast('Berhasil masuk!', 'success');
   } catch (error) {
-    console.error("=== ERROR LOGIN ===", error.code, error.message);
     let msg = 'Gagal masuk.';
-    if(error.code === 'auth/user-not-found') msg = 'Akun tidak ditemukan.';
+    if(error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') msg = 'Email atau password salah.';
     else if(error.code === 'auth/wrong-password') msg = 'Password salah.';
-    else if(error.code === 'auth/invalid-credential') msg = 'Email atau password salah.';
-    else if(error.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
     else msg = error.message;
-    
-    errBox.innerHTML = `
-      <div style="margin-bottom:12px;font-size:16px;font-weight:700;color:#991B1B;"><i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i> Gagal Masuk</div>
-      <div style="background:white;padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid #FECACA;"><strong>Info:</strong><br>${msg}</div>
-      <div style="font-size:12px;color:#7F1D1D;">Kode: <code>${error.code}</code><br>Pesan: <code>${error.message}</code></div>
-      <button onclick="document.getElementById('debugErrorBox').style.display='none'" style="margin-top:12px;width:100%;padding:8px;background:#DC2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">Tutup Pesan</button>
-    `;
-    errBox.style.display = 'block';
+    showToast(msg, 'error');
   }
-  btn.innerHTML = '<span>Masuk</span>';
-  btn.disabled = false;
+  btn.innerHTML = '<span>Masuk</span>'; btn.disabled = false;
 }
 
-function handleLogout() { auth.signOut(); currentAssessmentId = null; currentScores = {}; currentFiles = {}; showPage('pageLogin'); }
+function handleLogout() { auth.signOut(); currentAssessmentId = null; currentScores = {}; currentLinks = {}; showPage('pageLogin'); }
 
 // Listener Status Auth
 auth.onAuthStateChanged(user => {
@@ -345,7 +362,6 @@ auth.onAuthStateChanged(user => {
       loadAssessments();
     }).catch(err => {
       console.error("Gagal memuat data user:", err);
-      // Jika gagal memuat data (misal rules salah), tetap masuk dashboard
       const n = user.email; const ini = n.charAt(0).toUpperCase();
       document.getElementById('navUserName').textContent = n;
       document.getElementById('navUserAvatar').textContent = ini;
@@ -354,10 +370,7 @@ auth.onAuthStateChanged(user => {
       showPage('pageDashboard');
       loadAssessments();
     });
-  } else {
-    currentUser = null;
-    showPage('pageLogin');
-  }
+  } else { currentUser = null; showPage('pageLogin'); }
 });
 
 // ======================== INSTRUMEN ========================
@@ -372,22 +385,20 @@ async function createAssessment(e) {
 
   try {
     const ref = db.ref('assessments').push();
-    await ref.set({ userId: currentUser.uid, semester, kelas, tahun, mapel, saran: '', scores: {}, files: {}, createdAt: firebase.database.ServerValue.TIMESTAMP, updatedAt: firebase.database.ServerValue.TIMESTAMP });
+    await ref.set({ userId: currentUser.uid, semester, kelas, tahun, mapel, saran: '', scores: {}, links: {}, createdAt: firebase.database.ServerValue.TIMESTAMP, updatedAt: firebase.database.ServerValue.TIMESTAMP });
     closeModal('modalNewAssessment');
     document.getElementById('newMapel').value = '';
     showToast('Instrumen berhasil dibuat!', 'success');
-  } catch(err) {
-    showToast('Gagal membuat: ' + err.message, 'error');
-    console.error(err);
-  }
+  } catch(err) { showToast('Gagal membuat: ' + err.message, 'error'); console.error(err); }
   btn.innerHTML = '<i class="fas fa-plus mr-1"></i> Buat'; btn.disabled = false;
 }
 
 function loadAssessments() {
   if(!currentUser) return;
   db.ref('assessments').orderByChild('userId').equalTo(currentUser.uid).on('value', snap => {
-    renderAssessments(snap.val() || {});
-    updateStats(snap.val() || {});
+    const data = snap.val() || {};
+    renderAssessments(data);
+    updateStats(data);
   });
 }
 
@@ -399,12 +410,30 @@ function renderAssessments(data) {
   let h = '<div class="space-y-3">';
   ent.sort((a,b) => (b[1].createdAt||0) - (a[1].createdAt||0));
   for(const [id, a] of ent) {
-    const sc = a.scores||{}; const fl = a.files||{};
+    const sc = a.scores||{}; const lk = a.links||{};
     const filled = Object.values(sc).filter(v=>v!==null&&v!==undefined).length;
     const total = Object.values(sc).reduce((s,v)=>s+(v||0),0);
     const p = Math.round((total/MAX_SCORE)*100); const k = getKetercapaian(p);
-    const fc = Object.values(fl).filter(f=>f!==null).length;
-    h += `<div class="card p-4 hover:translate-y-[-2px] transition-transform"><div class="flex flex-wrap items-center gap-4"><div class="flex-1 min-w-[200px]"><div class="flex items-center gap-2 mb-1"><h4 class="font-700 text-[#1A1A2E]">Kelas ${a.kelas} - Semester ${a.semester}</h4><span class="badge ${filled===20?'badge-success':'badge-warning'}">${filled===20?'Selesai':'Proses'}</span></div><p class="text-sm text-[#6B7280]">${a.mapel} &bull; TA ${a.tahun} &bull; ${formatDate(a.createdAt)}</p><div class="flex items-center gap-4 mt-2"><div class="flex-1 max-w-[200px]"><div class="progress-bar"><div class="progress-fill" style="width:${(filled/20)*100}%"></div></div></div><span class="text-xs text-[#6B7280]">${filled}/20</span><span class="text-xs text-[#6B7280]"><i class="fas fa-paperclip mr-1"></i>${fc}</span></div></div><div class="text-center px-4"><p class="text-2xl font-800" style="color:${k.color}">${p}%</p><p class="text-xs font-600" style="color:${k.color}">${k.label}</p></div><div class="flex gap-2"><button onclick="openAssessment('${id}')" class="btn-primary text-xs py-2 px-4"><i class="fas fa-pen-to-square mr-1"></i> Isi</button><button onclick="viewAssessmentPrint('${id}')" class="btn-outline text-xs py-2 px-3" title="Cetak"><i class="fas fa-print"></i></button><button onclick="deleteAssessment('${id}')" class="btn-danger text-xs py-2 px-3" title="Hapus"><i class="fas fa-trash"></i></button></div></div></div>`;
+    const linkCount = Object.values(lk).filter(l=>l&&l.trim()!=='').length;
+    h += `<div class="card p-4 hover:translate-y-[-2px] transition-transform">
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="flex-1 min-w-[200px]">
+          <div class="flex items-center gap-2 mb-1"><h4 class="font-700 text-[#1A1A2E]">Kelas ${a.kelas} - Semester ${a.semester}</h4><span class="badge ${filled===20?'badge-success':'badge-warning'}">${filled===20?'Selesai':'Proses'}</span></div>
+          <p class="text-sm text-[#6B7280]">${a.mapel} &bull; TA ${a.tahun} &bull; ${formatDate(a.createdAt)}</p>
+          <div class="flex items-center gap-4 mt-2">
+            <div class="flex-1 max-w-[200px]"><div class="progress-bar"><div class="progress-fill" style="width:${(filled/20)*100}%"></div></div></div>
+            <span class="text-xs text-[#6B7280]">${filled}/20</span>
+            <span class="text-xs text-[#6B7280]"><i class="fab fa-google-drive mr-1"></i>${linkCount} link</span>
+          </div>
+        </div>
+        <div class="text-center px-4"><p class="text-2xl font-800" style="color:${k.color}">${p}%</p><p class="text-xs font-600" style="color:${k.color}">${k.label}</p></div>
+        <div class="flex gap-2">
+          <button onclick="openAssessment('${id}')" class="btn-primary text-xs py-2 px-4"><i class="fas fa-pen-to-square mr-1"></i> Isi</button>
+          <button onclick="viewAssessmentPrint('${id}')" class="btn-outline text-xs py-2 px-3" title="Cetak"><i class="fas fa-print"></i></button>
+          <button onclick="deleteAssessment('${id}')" class="btn-danger text-xs py-2 px-3" title="Hapus"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>`;
   }
   h += '</div>'; c.innerHTML = h;
 }
@@ -419,22 +448,16 @@ function updateStats(data) {
 
 async function deleteAssessment(id) {
   if(!confirm('Yakin hapus instrumen ini?')) return;
-  try {
-    const fs = await db.ref('assessments/'+id+'/files').once('value');
-    const f = fs.val()||{};
-    for(const k in f) { if(f[k]&&f[k].path) { try{await storage.ref(f[k].path).delete();}catch(e){} } }
-    await db.ref('assessments/'+id).remove();
-    showToast('Dihapus.','success');
-  } catch(err) { showToast('Gagal: '+err.message,'error'); }
+  try { await db.ref('assessments/'+id).remove(); showToast('Dihapus.','success'); } catch(err) { showToast('Gagal: '+err.message,'error'); }
 }
 
 // ======================== HALAMAN PENILAIAN ========================
 async function openAssessment(id) {
-  currentAssessmentId = id; currentScores = {}; currentFiles = {};
+  currentAssessmentId = id; currentScores = {}; currentLinks = {};
   const snap = await db.ref('assessments/'+id).once('value');
   const data = snap.val();
   if(!data){ showToast('Tidak ditemukan.','error'); return; }
-  currentScores = data.scores||{}; currentFiles = data.files||{};
+  currentScores = data.scores||{}; currentLinks = data.links||{};
   document.getElementById('assessNavTitle').textContent = `Kelas ${data.kelas} - ${data.mapel}`;
   document.getElementById('assessNavSemester').textContent = `Semester ${data.semester} | TA ${data.tahun}`;
   renderAssessmentPage(data); showPage('pageAssessment');
@@ -445,22 +468,118 @@ function renderAssessmentPage(data) {
   const nama = document.getElementById('dashNama').textContent;
   const nip = document.getElementById('dashNIP').textContent;
   const gol = document.getElementById('dashGolongan').textContent;
+  
   let rows = '';
   KOMPONEN.forEach((k,i) => {
-    const s = currentScores[i]; const f = currentFiles[i]; const hf = f&&f.name;
-    rows += `<tr><td class="text-center font-600 text-[#1B4332]">${i+1}</td><td><div class="font-500">${k}</div>${hf?`<div class="flex items-center gap-1 mt-1"><i class="fas ${getFileIcon(f.name)} text-xs"></i><span class="text-xs text-[#40916C] cursor-pointer hover:underline" onclick="viewFileDetail(${i})">${f.name}</span></div>`:''}</td><td><div class="radio-group"><label><input type="radio" name="sc_${i}" value="0" ${s===0?'checked':''} onchange="updateScore(${i},0)"><span>0</span></label><label><input type="radio" name="sc_${i}" value="1" ${s===1?'checked':''} onchange="updateScore(${i},1)"><span>1</span></label><label><input type="radio" name="sc_${i}" value="2" ${s===2?'checked':''} onchange="updateScore(${i},2)"><span>2</span></label></div></td><td class="text-center font-700 ${s===2?'text-[#059669]':s===1?'text-[#D97706]':s===0?'text-[#DC2626]':'text-[#6B7280]'}">${s!==null&&s!==undefined?s:'-'}</td><td class="text-center no-print"><button onclick="openUploadModal(${i},'${k.replace(/'/g,"\\'")}')" class="w-8 h-8 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F0F7F4] hover:text-[#40916C] hover:border-[#40916C] transition-all mx-auto" title="Upload"><i class="fas fa-upload text-xs"></i></button></td></tr>`;
+    const s = currentScores[i]; 
+    const link = currentLinks[i];
+    const hasLink = link && link.trim() !== '';
+    
+    rows += `<tr>
+      <td class="text-center font-600 text-[#1B4332]">${i+1}</td>
+      <td>
+        <div class="font-500">${k}</div>
+        ${hasLink ? `<a href="${link}" target="_blank" class="flex items-center gap-1 mt-1 text-xs text-[#40916C] hover:underline"><i class="fab fa-google-drive"></i> Lihat File di Drive</a>` : ''}
+      </td>
+      <td>
+        <div class="radio-group">
+          <label><input type="radio" name="sc_${i}" value="0" ${s===0?'checked':''} onchange="updateScore(${i},0)"><span>0</span></label>
+          <label><input type="radio" name="sc_${i}" value="1" ${s===1?'checked':''} onchange="updateScore(${i},1)"><span>1</span></label>
+          <label><input type="radio" name="sc_${i}" value="2" ${s===2?'checked':''} onchange="updateScore(${i},2)"><span>2</span></label>
+        </div>
+      </td>
+      <td class="text-center font-700 ${s===2?'text-[#059669]':s===1?'text-[#D97706]':s===0?'text-[#DC2626]':'text-[#6B7280]'}">${s!==null&&s!==undefined?s:'-'}</td>
+      <td class="text-center no-print">
+        <button onclick="openDriveModal(${i},'${k.replace(/'/g,"\\'")}')" class="w-8 h-8 rounded-lg border ${hasLink ? 'border-[#40916C] bg-[#F0F7F4] text-[#40916C]' : 'border-[#E5E1DB] text-[#6B7280]'} flex items-center justify-center hover:bg-[#F0F7F4] hover:text-[#40916C] hover:border-[#40916C] transition-all mx-auto" title="Hubungkan ke Google Drive">
+          <i class="fab fa-google-drive text-sm"></i>
+        </button>
+      </td>
+    </tr>`;
   });
+  
   const ts = Object.values(currentScores).reduce((s,v)=>s+(v||0),0);
   const p = Math.round((ts/MAX_SCORE)*100); const k = getKetercapaian(p); const sr = data.saran||'';
+  
   c.innerHTML = `
-    <div class="card p-6 mb-6" id="printHeader"><div class="text-center mb-6"><h2 class="font-display text-xl font-800 text-[#1B4332] uppercase tracking-wide">Instrumen Telaah Administrasi Pembelajaran</h2><p class="font-600 text-[#40916C] text-lg">Kurikulum Merdeka</p></div><div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm"><div><span class="text-[#6B7280]">Nama Sekolah:</span><br><strong>SDN Majalengka Wetan VIII</strong></div><div><span class="text-[#6B7280]">Nama Guru:</span><br><strong>${nama}</strong></div><div><span class="text-[#6B7280]">Pangkat/Golongan:</span><br><strong>${gol}</strong></div><div><span class="text-[#6B7280]">Semester/Kelas:</span><br><strong>Semester ${data.semester} / Kelas ${data.kelas}</strong></div><div><span class="text-[#6B7280]">Mata Pelajaran:</span><br><strong>${data.mapel}</strong></div><div><span class="text-[#6B7280]">Tahun Pelajaran:</span><br><strong>${data.tahun}</strong></div></div></div>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 no-print" id="liveStats"><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Skor Total</p><p class="text-2xl font-800 text-[#1B4332]" id="liveTotal">${ts}</p></div><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Ketercapaian</p><p class="text-2xl font-800" id="livePersen" style="color:${k.color}">${p}%</p></div><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Predikat</p><p class="text-lg font-700" id="livePredikat" style="color:${k.color}">${k.label}</p></div><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Terisi</p><p class="text-2xl font-800 text-[#40916C]" id="liveFilled">${Object.values(currentScores).filter(v=>v!==null&&v!==undefined).length}/20</p></div></div>
-    <div class="card overflow-x-auto mb-6"><table class="assess-table"><thead><tr><th style="width:50px">No</th><th>Komponen Administrasi Pembelajaran</th><th style="width:200px">Penilaian</th><th style="width:60px">Skor</th><th style="width:60px" class="no-print">File</th></tr></thead><tbody>${rows}</tbody><tfoot><tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Jumlah / Skor Total</td><td colspan="2" class="text-center font-800 text-lg text-[#1B4332]" id="footerTotal">${ts}</td><td class="no-print"></td></tr><tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Ketercapaian</td><td colspan="2" class="text-center font-800 text-lg" id="footerPersen" style="color:${k.color}">${p}%</td><td class="no-print"></td></tr></tfoot></table></div>
-    <div class="card p-5 mb-6"><h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-info-circle text-[#1B4332] mr-1"></i> Keterangan Penilaian</h4><div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm"><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FEF2F2] text-[#DC2626] font-700 text-xs">0</span><span class="text-[#6B7280]">Tidak Ada</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FFFBEB] text-[#D97706] font-700 text-xs">1</span><span class="text-[#6B7280]">Ada, Tidak Sesuai</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#ECFDF5] text-[#059669] font-700 text-xs">2</span><span class="text-[#6B7280]">Ada dan Sesuai</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><i class="fas fa-calculator text-[#1B4332]"></i><span class="text-[#6B7280]">Nilai = (Total/40)x100%</span></div></div></div>
-    <div class="card p-5 mb-6"><h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-chart-bar text-[#1B4332] mr-1"></i> Skala Ketercapaian</h4><div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm"><div class="p-3 rounded-xl border-2 border-[#10B981] bg-[#ECFDF5] text-center"><p class="font-800 text-[#059669]">91% - 100%</p><p class="font-600 text-[#059669]">Sangat Baik</p></div><div class="p-3 rounded-xl border-2 border-[#34D399] bg-[#F0FDF9] text-center"><p class="font-800 text-[#10B981]">81% - 90%</p><p class="font-600 text-[#10B981]">Baik</p></div><div class="p-3 rounded-xl border-2 border-[#FBBF24] bg-[#FFFBEB] text-center"><p class="font-800 text-[#D97706]">71% - 80%</p><p class="font-600 text-[#D97706]">Cukup</p></div><div class="p-3 rounded-xl border-2 border-[#F87171] bg-[#FEF2F2] text-center"><p class="font-800 text-[#DC2626]">&lt; 71%</p><p class="font-600 text-[#DC2626]">Kurang</p></div></div></div>
-    <div class="card p-5 mb-6"><h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-lightbulb text-[#D4A017] mr-1"></i> Saran</h4><textarea id="saranField" class="input-field min-h-[120px] resize-y no-print" placeholder="Tulis saran perbaikan...">${sr}</textarea><div id="saranDisplay" class="hidden text-sm text-[#1A1A2E] whitespace-pre-wrap border-2 border-transparent rounded-xl p-3 bg-[#FAFAF7]">${sr}</div></div>
-    <div class="card p-5 mb-6 no-print"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-[#F0F7F4] flex items-center justify-center"><i class="fab fa-google-drive text-[#40916C] text-lg"></i></div><div class="flex-1"><p class="font-600 text-sm text-[#1A1A2E]">Folder Google Drive</p><p class="text-xs text-[#6B7280]">File yang diupload juga tersimpan di folder Drive terkait</p></div><a href="${GDRIVE_BASE}" target="_blank" class="btn-outline text-xs py-2 px-4"><i class="fab fa-google-drive mr-1"></i> Buka Drive</a></div></div>
-    <div class="card p-6" id="signatureSection"><div class="grid grid-cols-3 gap-4 text-center text-sm"><div><p class="font-500 text-[#6B7280]">Majalengka, ................ 20...</p><p class="font-600 text-[#1A1A2E] mt-1">Kepala Sekolah/Supervisor</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">KARYADI, S.Pd</p><p class="text-xs text-[#6B7280]">NIP. 197505052000031012</p></div><div><p class="font-500 text-[#6B7280]">&nbsp;</p><p class="font-600 text-[#1A1A2E] mt-1">Guru yang Disupervisi</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">${nama}</p><p class="text-xs text-[#6B7280]">NIP. ${nip}</p></div><div><p class="font-500 text-[#6B7280]">Mengetahui,</p><p class="font-600 text-[#1A1A2E] mt-1">Pengawas Bina</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">H. AJA WIHARJA, S.Pd., M.M.Pd.</p><p class="text-xs text-[#6B7280]">NIP. 196906141990091002</p></div></div></div>`;
+    <!-- Header -->
+    <div class="card p-6 mb-6" id="printHeader">
+      <div class="text-center mb-6"><h2 class="font-display text-xl font-800 text-[#1B4332] uppercase tracking-wide">Instrumen Telaah Administrasi Pembelajaran</h2><p class="font-600 text-[#40916C] text-lg">Kurikulum Merdeka</p></div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+        <div><span class="text-[#6B7280]">Nama Sekolah:</span><br><strong>SDN Majalengka Wetan VIII</strong></div>
+        <div><span class="text-[#6B7280]">Nama Guru:</span><br><strong>${nama}</strong></div>
+        <div><span class="text-[#6B7280]">Pangkat/Golongan:</span><br><strong>${gol}</strong></div>
+        <div><span class="text-[#6B7280]">Semester/Kelas:</span><br><strong>Semester ${data.semester} / Kelas ${data.kelas}</strong></div>
+        <div><span class="text-[#6B7280]">Mata Pelajaran:</span><br><strong>${data.mapel}</strong></div>
+        <div><span class="text-[#6B7280]">Tahun Pelajaran:</span><br><strong>${data.tahun}</strong></div>
+      </div>
+    </div>
+
+    <!-- Live Stats -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 no-print" id="liveStats">
+      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Skor Total</p><p class="text-2xl font-800 text-[#1B4332]" id="liveTotal">${ts}</p></div>
+      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Ketercapaian</p><p class="text-2xl font-800" id="livePersen" style="color:${k.color}">${p}%</p></div>
+      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Predikat</p><p class="text-lg font-700" id="livePredikat" style="color:${k.color}">${k.label}</p></div>
+      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Terisi</p><p class="text-2xl font-800 text-[#40916C]" id="liveFilled">${Object.values(currentScores).filter(v=>v!==null&&v!==undefined).length}/20</p></div>
+    </div>
+
+    <!-- Tabel Penilaian -->
+    <div class="card overflow-x-auto mb-6">
+      <table class="assess-table">
+        <thead><tr><th style="width:50px">No</th><th>Komponen Administrasi Pembelajaran</th><th style="width:200px">Penilaian</th><th style="width:60px">Skor</th><th style="width:60px" class="no-print">Drive</th></tr></thead>
+        <tbody>${rows}</tbody>
+        <tfoot>
+          <tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Jumlah / Skor Total</td><td colspan="2" class="text-center font-800 text-lg text-[#1B4332]" id="footerTotal">${ts}</td><td class="no-print"></td></tr>
+          <tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Ketercapaian</td><td colspan="2" class="text-center font-800 text-lg" id="footerPersen" style="color:${k.color}">${p}%</td><td class="no-print"></td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Keterangan -->
+    <div class="card p-5 mb-6">
+      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-info-circle text-[#1B4332] mr-1"></i> Keterangan Penilaian</h4>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FEF2F2] text-[#DC2626] font-700 text-xs">0</span><span class="text-[#6B7280]">Tidak Ada</span></div>
+        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FFFBEB] text-[#D97706] font-700 text-xs">1</span><span class="text-[#6B7280]">Ada, Tidak Sesuai</span></div>
+        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#ECFDF5] text-[#059669] font-700 text-xs">2</span><span class="text-[#6B7280]">Ada dan Sesuai</span></div>
+        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><i class="fas fa-calculator text-[#1B4332]"></i><span class="text-[#6B7280]">Nilai = (Total/40)x100%</span></div>
+      </div>
+    </div>
+
+    <!-- Skala -->
+    <div class="card p-5 mb-6">
+      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-chart-bar text-[#1B4332] mr-1"></i> Skala Ketercapaian</h4>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+        <div class="p-3 rounded-xl border-2 border-[#10B981] bg-[#ECFDF5] text-center"><p class="font-800 text-[#059669]">91% - 100%</p><p class="font-600 text-[#059669]">Sangat Baik</p></div>
+        <div class="p-3 rounded-xl border-2 border-[#34D399] bg-[#F0FDF9] text-center"><p class="font-800 text-[#10B981]">81% - 90%</p><p class="font-600 text-[#10B981]">Baik</p></div>
+        <div class="p-3 rounded-xl border-2 border-[#FBBF24] bg-[#FFFBEB] text-center"><p class="font-800 text-[#D97706]">71% - 80%</p><p class="font-600 text-[#D97706]">Cukup</p></div>
+        <div class="p-3 rounded-xl border-2 border-[#F87171] bg-[#FEF2F2] text-center"><p class="font-800 text-[#DC2626]">&lt; 71%</p><p class="font-600 text-[#DC2626]">Kurang</p></div>
+      </div>
+    </div>
+
+    <!-- Saran -->
+    <div class="card p-5 mb-6">
+      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-lightbulb text-[#D4A017] mr-1"></i> Saran</h4>
+      <textarea id="saranField" class="input-field min-h-[120px] resize-y no-print" placeholder="Tulis saran perbaikan...">${sr}</textarea>
+      <div id="saranDisplay" class="hidden text-sm text-[#1A1A2E] whitespace-pre-wrap border-2 border-transparent rounded-xl p-3 bg-[#FAFAF7]">${sr}</div>
+    </div>
+
+    <!-- Link Drive -->
+    <div class="card p-5 mb-6 no-print">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#F0F7F4] flex items-center justify-center"><i class="fab fa-google-drive text-[#40916C] text-lg"></i></div>
+        <div class="flex-1"><p class="font-600 text-sm text-[#1A1A2E]">Folder Google Drive Utama</p><p class="text-xs text-[#6B7280]">Klik untuk membuka folder tempat menyimpan semua file bukti administrasi</p></div>
+        <a href="${GDRIVE_BASE}" target="_blank" class="btn-accent text-xs py-2 px-4"><i class="fab fa-google-drive mr-1"></i> Buka Drive</a>
+      </div>
+    </div>
+
+    <!-- Tanda Tangan -->
+    <div class="card p-6" id="signatureSection">
+      <div class="grid grid-cols-3 gap-4 text-center text-sm">
+        <div><p class="font-500 text-[#6B7280]">Majalengka, ................ 20...</p><p class="font-600 text-[#1A1A2E] mt-1">Kepala Sekolah/Supervisor</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">KARYADI, S.Pd</p><p class="text-xs text-[#6B7280]">NIP. 197505052000031012</p></div>
+        <div><p class="font-500 text-[#6B7280]">&nbsp;</p><p class="font-600 text-[#1A1A2E] mt-1">Guru yang Disupervisi</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">${nama}</p><p class="text-xs text-[#6B7280]">NIP. ${nip}</p></div>
+        <div><p class="font-500 text-[#6B7280]">Mengetahui,</p><p class="font-600 text-[#1A1A2E] mt-1">Pengawas Bina</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">H. AJA WIHARJA, S.Pd., M.M.Pd.</p><p class="text-xs text-[#6B7280]">NIP. 196906141990091002</p></div>
+      </div>
+    </div>`;
 }
 
 function updateScore(i, v) {
@@ -488,55 +607,48 @@ async function saveAssessment() {
   if(!currentAssessmentId) return;
   const sr = document.getElementById('saranField')?document.getElementById('saranField').value:'';
   const sd = document.getElementById('saranDisplay'); if(sd) sd.textContent=sr;
-  try { await db.ref('assessments/'+currentAssessmentId).update({scores:currentScores,saran:sr,updatedAt:firebase.database.ServerValue.TIMESTAMP}); showToast('Berhasil disimpan!','success'); }
+  try { await db.ref('assessments/'+currentAssessmentId).update({scores:currentScores,links:currentLinks,saran:sr,updatedAt:firebase.database.ServerValue.TIMESTAMP}); showToast('Berhasil disimpan!','success'); }
   catch(err) { showToast('Gagal menyimpan: '+err.message,'error'); }
 }
 
 function viewAssessmentPrint(id) { openAssessment(id); setTimeout(()=>window.print(), 800); }
 
-// ======================== UPLOAD FILE ========================
-function openUploadModal(i, n) { document.getElementById('uploadKomponenId').value=i; document.getElementById('uploadKomponenNama').textContent=n; document.getElementById('uploadPreview').classList.add('hidden'); selectedFile=null; document.getElementById('fileInput').value=''; openModal('modalUpload'); }
-
-function handleFileSelect(e) {
-  const f=e.target.files[0]; if(!f) return;
-  if(f.size>10*1024*1024){showToast('Maks 10MB.','warning');return;}
-  selectedFile=f; document.getElementById('uploadFileName').textContent=f.name; document.getElementById('uploadFileSize').textContent=formatFileSize(f.size); document.getElementById('uploadPreview').classList.remove('hidden');
+// ======================== LINK GOOGLE DRIVE (PENGGANTI STORAGE) ========================
+function openDriveModal(i, nama) {
+  document.getElementById('driveKomponenId').value = i;
+  document.getElementById('driveKomponenNama').textContent = nama;
+  document.getElementById('driveLinkInput').value = currentLinks[i] || '';
+  openModal('modalDrive');
 }
-function clearUpload() { selectedFile=null; document.getElementById('fileInput').value=''; document.getElementById('uploadPreview').classList.add('hidden'); }
 
+async function saveDriveLink() {
+  const i = document.getElementById('driveKomponenId').value;
+  const link = document.getElementById('driveLinkInput').value.trim();
+  
+  if(!link) { showToast('Masukkan tautan Google Drive.','warning'); return; }
+  if(!link.includes('drive.google.com')) { showToast('Pastikan link berasal dari Google Drive.','warning'); return; }
+
+  currentLinks[i] = link;
+  
+  if(currentAssessmentId) {
+    try {
+      await db.ref('assessments/'+currentAssessmentId+'/links/'+i).set(link);
+      await db.ref('assessments/'+currentAssessmentId+'/updatedAt').set(firebase.database.ServerValue.TIMESTAMP);
+      closeModal('modalDrive');
+      showToast('Tautan berhasil disimpan!', 'success');
+      
+      // Refresh tampilan
+      const snap = await db.ref('assessments/'+currentAssessmentId).once('value');
+      renderAssessmentPage(snap.val());
+    } catch(err) { showToast('Gagal menyimpan: '+err.message,'error'); }
+  }
+}
+
+// ======================== INISIALISASI ========================
 document.addEventListener('DOMContentLoaded', () => {
-  const z=document.getElementById('uploadZone');
-  if(z){z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('dragover');});z.addEventListener('dragleave',()=>z.classList.remove('dragover'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('dragover');const f=e.dataTransfer.files[0];if(f){const i=document.getElementById('fileInput');const d=new DataTransfer();d.items.add(f);i.files=d.files;handleFileSelect({target:i});}});}
-  const now=new Date(); const y=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1; const ti=document.getElementById('newTahun'); if(ti) ti.value=y+'/'+(y+1);
+  const now=new Date(); const y=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1; 
+  const ti=document.getElementById('newTahun'); if(ti) ti.value=y+'/'+(y+1);
 });
-
-async function uploadFile() {
-  if(!selectedFile){showToast('Pilih file.','warning');return;}
-  if(!currentAssessmentId){showToast('Tidak ada instrumen.','error');return;}
-  const btn=document.getElementById('btnUpload'); btn.innerHTML='<span class="spinner"></span> Upload...'; btn.disabled=true;
-  const i=document.getElementById('uploadKomponenId').value;
-  const path=`uploads/${currentAssessmentId}/${i}_${Date.now()}_${selectedFile.name}`;
-  try {
-    const ref=storage.ref(path); await ref.put(selectedFile); const url=await ref.getDownloadURL();
-    const fd={name:selectedFile.name,size:selectedFile.size,type:selectedFile.type,url,path,uploadedAt:firebase.database.ServerValue.TIMESTAMP};
-    await db.ref('assessments/'+currentAssessmentId+'/files/'+i).set(fd);
-    currentFiles[i]=fd; closeModal('modalUpload'); showToast('File berhasil diupload!','success');
-    const snap=await db.ref('assessments/'+currentAssessmentId).once('value'); renderAssessmentPage(snap.val());
-  } catch(err) { showToast('Gagal upload: '+err.message,'error'); }
-  btn.innerHTML='<i class="fas fa-upload mr-1"></i> Upload'; btn.disabled=false;
-}
-
-async function viewFileDetail(i) {
-  const f=currentFiles[i]; if(!f) return;
-  document.getElementById('fileDetailList').innerHTML=`<div class="file-item"><i class="fas ${getFileIcon(f.name)} text-lg"></i><div class="flex-1"><p class="font-600 text-sm">${f.name}</p><p class="text-xs text-[#6B7280]">${formatFileSize(f.size)} &bull; ${formatDate(f.uploadedAt)}</p></div></div><div class="flex gap-3 mt-3"><a href="${f.url}" target="_blank" class="btn-primary flex-1 text-center text-sm py-2"><i class="fas fa-eye mr-1"></i> Lihat/Unduh</a><button onclick="deleteFile(${i})" class="btn-danger flex-1 text-sm py-2"><i class="fas fa-trash mr-1"></i> Hapus</button></div><div class="mt-3 p-3 bg-[#F5F1EB] rounded-lg"><p class="text-xs text-[#6B7280]"><i class="fab fa-google-drive mr-1"></i> File juga tersimpan di <a href="${GDRIVE_BASE}" target="_blank" class="text-[#40916C] underline">Google Drive</a></p></div>`;
-  openModal('modalFileDetail');
-}
-
-async function deleteFile(i) {
-  if(!confirm('Hapus file ini?')) return; const f=currentFiles[i]; if(!f) return;
-  try { if(f.path) await storage.ref(f.path).delete(); await db.ref('assessments/'+currentAssessmentId+'/files/'+i).remove(); delete currentFiles[i]; closeModal('modalFileDetail'); showToast('Dihapus.','success'); const snap=await db.ref('assessments/'+currentAssessmentId).once('value'); renderAssessmentPage(snap.val()); }
-  catch(err) { showToast('Gagal: '+err.message,'error'); }
-}
 </script>
 </body>
 </html>
