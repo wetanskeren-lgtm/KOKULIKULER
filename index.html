@@ -3,269 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instrumen Telaah Administrasi Pembelajaran - Kurikulum Merdeka</title>
+<title>ITAP Kurikulum Merdeka - SDN Majalengka Wetan VIII</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
 tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['Plus Jakarta Sans', 'sans-serif'],
-      }
-    }
-  }
+  theme: { extend: { fontFamily: { display: ['Playfair Display', 'serif'], body: ['Plus Jakarta Sans', 'sans-serif'] } } }
 }
 </script>
 <style>
-:root {
-  --primary: #1B4332;
-  --primary-light: #2D6A4F;
-  --primary-lighter: #40916C;
-  --accent: #D4A017;
-  --accent-light: #F2D06B;
-  --bg: #F5F1EB;
-  --bg-card: #FFFFFF;
-  --text: #1A1A2E;
-  --text-muted: #6B7280;
-  --border: #E5E1DB;
-  --success: #10B981;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-}
-
+:root { --primary: #1B4332; --primary-light: #2D6A4F; --primary-lighter: #40916C; --accent: #D4A017; --accent-light: #F2D06B; --bg: #F5F1EB; --bg-card: #FFFFFF; --text: #1A1A2E; --text-muted: #6B7280; --border: #E5E1DB; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-
-/* Animasi latar belakang */
-.bg-pattern {
-  position: fixed; inset: 0; z-index: -1;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(27,67,50,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(212,160,23,0.06) 0%, transparent 60%),
-    linear-gradient(175deg, #F5F1EB 0%, #EDE8E0 100%);
-}
-.bg-pattern::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231B4332' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-/* Halaman */
+.bg-pattern { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(27,67,50,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 90%, rgba(212,160,23,0.06) 0%, transparent 60%), linear-gradient(175deg, #F5F1EB 0%, #EDE8E0 100%); }
+.bg-pattern::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231B4332' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
 .page { display: none; min-height: 100vh; animation: fadeSlideIn 0.5s ease; }
 .page.active { display: block; }
 @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Kartu */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
-  transition: box-shadow 0.3s, transform 0.3s;
-}
-.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 16px 40px rgba(0,0,0,0.05); }
-
-/* Tombol utama */
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  color: white; border: none; padding: 12px 28px; border-radius: 12px;
-  font-weight: 600; font-size: 15px; cursor: pointer;
-  transition: all 0.3s; box-shadow: 0 4px 14px rgba(27,67,50,0.3);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03); transition: box-shadow 0.3s, transform 0.3s; }
+.btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; border: none; padding: 12px 28px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 14px rgba(27,67,50,0.3); font-family: 'Plus Jakarta Sans', sans-serif; }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27,67,50,0.4); }
-.btn-primary:active { transform: translateY(0); }
-
-.btn-accent {
-  background: linear-gradient(135deg, var(--accent) 0%, #C4940F 100%);
-  color: white; border: none; padding: 12px 28px; border-radius: 12px;
-  font-weight: 600; font-size: 15px; cursor: pointer;
-  transition: all 0.3s; box-shadow: 0 4px 14px rgba(212,160,23,0.3);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,160,23,0.4); }
-
-.btn-outline {
-  background: transparent; color: var(--primary); border: 2px solid var(--primary-lighter);
-  padding: 10px 24px; border-radius: 12px; font-weight: 600; font-size: 14px;
-  cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;
-}
+.btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+.btn-accent { background: linear-gradient(135deg, var(--accent) 0%, #C4940F 100%); color: white; border: none; padding: 12px 28px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 14px rgba(212,160,23,0.3); font-family: 'Plus Jakarta Sans', sans-serif; }
+.btn-accent:hover { transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary-lighter); padding: 10px 24px; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif; }
 .btn-outline:hover { background: var(--primary); color: white; }
-
-.btn-danger {
-  background: var(--danger); color: white; border: none; padding: 8px 16px;
-  border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer;
-  transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;
-}
+.btn-danger { background: var(--danger); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif; }
 .btn-danger:hover { background: #DC2626; }
-
-/* Input */
-.input-field {
-  width: 100%; padding: 12px 16px; border: 2px solid var(--border);
-  border-radius: 12px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: border-color 0.3s, box-shadow 0.3s; background: white;
-}
+.input-field { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; transition: border-color 0.3s, box-shadow 0.3s; background: white; }
 .input-field:focus { outline: none; border-color: var(--primary-lighter); box-shadow: 0 0 0 3px rgba(45,106,79,0.1); }
-
-/* Tabel penilaian */
+.select-field { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; transition: border-color 0.3s, box-shadow 0.3s; background: white; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+.select-field:focus { outline: none; border-color: var(--primary-lighter); box-shadow: 0 0 0 3px rgba(45,106,79,0.1); }
 .assess-table { width: 100%; border-collapse: separate; border-spacing: 0; }
-.assess-table thead th {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  color: white; padding: 14px 12px; font-weight: 600; font-size: 13px;
-  text-transform: uppercase; letter-spacing: 0.5px;
-}
+.assess-table thead th { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 14px 12px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
 .assess-table thead th:first-child { border-radius: 12px 0 0 0; }
 .assess-table thead th:last-child { border-radius: 0 12px 0 0; }
 .assess-table tbody tr { transition: background 0.2s; }
 .assess-table tbody tr:nth-child(even) { background: #FAFAF7; }
 .assess-table tbody tr:hover { background: #F0EDE6; }
-.assess-table tbody td {
-  padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px;
-  vertical-align: middle;
-}
-
-/* Radio kustom */
+.assess-table tbody td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
 .radio-group { display: flex; gap: 8px; justify-content: center; }
-.radio-group label {
-  display: flex; align-items: center; gap: 6px; cursor: pointer;
-  padding: 6px 12px; border-radius: 8px; border: 2px solid var(--border);
-  font-size: 13px; font-weight: 500; transition: all 0.2s;
-}
+.radio-group label { display: flex; align-items: center; gap: 6px; cursor: pointer; padding: 6px 12px; border-radius: 8px; border: 2px solid var(--border); font-size: 13px; font-weight: 500; transition: all 0.2s; }
 .radio-group input[type="radio"] { display: none; }
-.radio-group input[type="radio"]:checked + span { font-weight: 700; }
-.radio-group label:has(input[value="0"]:checked) { border-color: #EF4444; background: #FEF2F2; color: #DC2626; }
-.radio-group label:has(input[value="1"]:checked) { border-color: #F59E0B; background: #FFFBEB; color: #D97706; }
-.radio-group label:has(input[value="2"]:checked) { border-color: #10B981; background: #ECFDF5; color: #059669; }
-
-/* Upload area */
-.upload-zone {
-  border: 2px dashed var(--border); border-radius: 12px; padding: 20px;
-  text-align: center; cursor: pointer; transition: all 0.3s;
-  background: #FAFAF7;
-}
+.radio-group label:has(input[value="0"]:checked) { border-color: #EF4444; background: #FEF2F2; color: #DC2626; font-weight: 700; }
+.radio-group label:has(input[value="1"]:checked) { border-color: #F59E0B; background: #FFFBEB; color: #D97706; font-weight: 700; }
+.radio-group label:has(input[value="2"]:checked) { border-color: #10B981; background: #ECFDF5; color: #059669; font-weight: 700; }
+.upload-zone { border: 2px dashed var(--border); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; background: #FAFAF7; }
 .upload-zone:hover { border-color: var(--primary-lighter); background: #F0F7F4; }
 .upload-zone.dragover { border-color: var(--accent); background: #FFF9E6; }
-
-/* Toast */
 .toast-container { position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
-.toast {
-  padding: 14px 20px; border-radius: 12px; color: white; font-weight: 500; font-size: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15); animation: toastIn 0.4s ease;
-  display: flex; align-items: center; gap: 10px; min-width: 280px;
-}
+.toast { padding: 14px 20px; border-radius: 12px; color: white; font-weight: 500; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); animation: toastIn 0.4s ease; display: flex; align-items: center; gap: 10px; min-width: 300px; }
 .toast.success { background: linear-gradient(135deg, #059669, #10B981); }
 .toast.error { background: linear-gradient(135deg, #DC2626, #EF4444); }
 .toast.info { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
-.toast.warning { background: linear-gradient(135deg, #D97706, #F59E0B); }
 @keyframes toastIn { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
 .toast.removing { animation: toastOut 0.3s ease forwards; }
 @keyframes toastOut { to { opacity: 0; transform: translateX(60px); } }
-
-/* Modal */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-  z-index: 1000; display: none; align-items: center; justify-content: center;
-  animation: fadeIn 0.3s;
-}
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; }
 .modal-overlay.active { display: flex; }
-.modal-content {
-  background: white; border-radius: 20px; padding: 32px; max-width: 520px;
-  width: 90%; max-height: 85vh; overflow-y: auto;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.2); animation: modalIn 0.4s ease;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal-content { background: white; border-radius: 20px; padding: 32px; max-width: 520px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 24px 64px rgba(0,0,0,0.2); animation: modalIn 0.4s ease; }
 @keyframes modalIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
-/* Badge status */
-.badge {
-  display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px;
-  border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase;
-}
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
 .badge-success { background: #ECFDF5; color: #059669; }
 .badge-warning { background: #FFFBEB; color: #D97706; }
 .badge-danger { background: #FEF2F2; color: #DC2626; }
-.badge-info { background: #F0F7F4; color: var(--primary-light); }
-
-/* Progress bar */
 .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; background: linear-gradient(90deg, var(--primary-lighter), var(--accent)); }
-
-/* File list */
-.file-item {
-  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
-  background: #FAFAF7; border-radius: 10px; border: 1px solid var(--border);
-  transition: all 0.2s;
-}
+.file-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #FAFAF7; border-radius: 10px; border: 1px solid var(--border); transition: all 0.2s; }
 .file-item:hover { background: #F0F7F4; border-color: var(--primary-lighter); }
-
-/* Navbar */
-.navbar {
-  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
-}
-
-/* Decorative */
-.hero-blob {
-  position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15;
-  animation: blobFloat 8s ease-in-out infinite;
-}
-@keyframes blobFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
-}
-
-/* Stat card */
-.stat-card {
-  background: white; border-radius: 16px; padding: 20px;
-  border: 1px solid var(--border); position: relative; overflow: hidden;
-}
-.stat-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: linear-gradient(90deg, var(--primary-lighter), var(--accent));
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #C5BFB5; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #A09A90; }
-
-/* Cetak */
-@media print {
-  .no-print { display: none !important; }
-  body { background: white; }
-  .card { box-shadow: none; border: 1px solid #ccc; }
-  .assess-table thead th { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .assess-table tbody tr:nth-child(even) { background: #f5f5f5 !important; -webkit-print-color-adjust: exact; }
-  .radio-group label:has(input[value="2"]:checked) { background: #d1fae5 !important; -webkit-print-color-adjust: exact; }
-  .radio-group label:has(input[value="1"]:checked) { background: #fef3c7 !important; -webkit-print-color-adjust: exact; }
-  .radio-group label:has(input[value="0"]:checked) { background: #fee2e2 !important; -webkit-print-color-adjust: exact; }
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-  .assess-table { font-size: 12px; }
-  .assess-table thead th, .assess-table tbody td { padding: 8px 6px; }
-  .radio-group label { padding: 4px 8px; font-size: 11px; }
-  .modal-content { padding: 20px; }
-}
-
-/* Loading spinner */
+.navbar { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+.hero-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15; animation: blobFloat 8s ease-in-out infinite; }
+@keyframes blobFloat { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 15px) scale(0.95); } }
+.stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary-lighter), var(--accent)); }
 .spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* Select */
-.select-field {
-  width: 100%; padding: 12px 16px; border: 2px solid var(--border);
-  border-radius: 12px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: border-color 0.3s, box-shadow 0.3s; background: white;
-  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 16px center;
-}
-.select-field:focus { outline: none; border-color: var(--primary-lighter); box-shadow: 0 0 0 3px rgba(45,106,79,0.1); }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: #C5BFB5; border-radius: 3px; }
+@media print { .no-print { display: none !important; } body { background: white; } .card { box-shadow: none; border: 1px solid #ccc; } .assess-table thead th { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .radio-group label:has(input[value="2"]:checked) { background: #d1fae5 !important; -webkit-print-color-adjust: exact; } .radio-group label:has(input[value="1"]:checked) { background: #fef3c7 !important; -webkit-print-color-adjust: exact; } .radio-group label:has(input[value="0"]:checked) { background: #fee2e2 !important; -webkit-print-color-adjust: exact; } #saranField { display: none !important; } #saranDisplay { display: block !important; } #liveStats { display: none !important; } }
+@media (max-width: 768px) { .assess-table { font-size: 12px; } .assess-table thead th, .assess-table tbody td { padding: 8px 6px; } .radio-group label { padding: 4px 8px; font-size: 11px; } .modal-content { padding: 20px; } }
 </style>
 </head>
 <body>
@@ -273,14 +89,15 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 <div class="bg-pattern"></div>
 <div class="toast-container" id="toastContainer"></div>
 
+<!-- KOTAK DEBUG ERROR (AKAN DIHAPUS JIKA SUDAH BERHASIL) -->
+<div id="debugErrorBox" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#FEF2F2; border:2px solid #EF4444; color:#991B1B; padding:24px; border-radius:16px; z-index:99999; max-width:500px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3); font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; line-height:1.6; word-break:break-word;"></div>
+
 <!-- ==================== HALAMAN LOGIN ==================== -->
 <div id="pageLogin" class="page active">
   <div class="min-h-screen flex items-center justify-center p-4 relative">
     <div class="hero-blob" style="width:400px;height:400px;background:var(--primary);top:10%;left:-10%;"></div>
     <div class="hero-blob" style="width:300px;height:300px;background:var(--accent);bottom:10%;right:-5%;animation-delay:-3s;"></div>
-
     <div class="card w-full max-w-md p-8 relative z-10">
-      <!-- Logo/Header -->
       <div class="text-center mb-8">
         <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center shadow-lg">
           <i class="fas fa-clipboard-check text-white text-3xl"></i>
@@ -288,83 +105,25 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
         <h1 class="font-display text-2xl font-800 text-[#1B4332] leading-tight">Instrumen Telaah<br>Administrasi Pembelajaran</h1>
         <p class="text-sm text-[#6B7280] mt-2 font-medium">Kurikulum Merdeka &mdash; SDN Majalengka Wetan VIII</p>
       </div>
-
-      <!-- Tab Login/Register -->
       <div class="flex bg-[#F5F1EB] rounded-xl p-1 mb-6">
         <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]">Masuk</button>
         <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]">Daftar</button>
       </div>
-
-      <!-- Form Login -->
       <form id="formLogin" onsubmit="handleLogin(event)">
         <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label>
-            <div class="relative">
-              <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i>
-              <input type="email" id="loginEmail" class="input-field pl-11" placeholder="contoh@email.com" required>
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password</label>
-            <div class="relative">
-              <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i>
-              <input type="password" id="loginPassword" class="input-field pl-11" placeholder="Masukkan password" required>
-              <button type="button" onclick="togglePassword('loginPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
-          <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnLogin">
-            <span>Masuk</span>
-          </button>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label><div class="relative"><i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="email" id="loginEmail" class="input-field pl-11" placeholder="contoh@email.com" required></div></div>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password</label><div class="relative"><i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="password" id="loginPassword" class="input-field pl-11" placeholder="Masukkan password" required><button type="button" onclick="togglePw('loginPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]"><i class="fas fa-eye"></i></button></div></div>
+          <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnLogin"><span>Masuk</span></button>
         </div>
       </form>
-
-      <!-- Form Register -->
       <form id="formRegister" onsubmit="handleRegister(event)" style="display:none;">
         <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Nama Lengkap</label>
-            <div class="relative">
-              <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i>
-              <input type="text" id="regNama" class="input-field pl-11" placeholder="Nama guru" required>
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">NIP</label>
-            <div class="relative">
-              <i class="fas fa-id-card absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i>
-              <input type="text" id="regNIP" class="input-field pl-11" placeholder="Nomor Induk Pegawai" required>
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Pangkat/Golongan</label>
-            <div class="relative">
-              <i class="fas fa-star absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i>
-              <input type="text" id="regGolongan" class="input-field pl-11" placeholder="Contoh: III/a" required>
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label>
-            <div class="relative">
-              <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i>
-              <input type="email" id="regEmail" class="input-field pl-11" placeholder="contoh@email.com" required>
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password</label>
-            <div class="relative">
-              <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i>
-              <input type="password" id="regPassword" class="input-field pl-11" placeholder="Min. 6 karakter" required minlength="6">
-              <button type="button" onclick="togglePassword('regPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
-          <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnRegister">
-            <span>Daftar Akun</span>
-          </button>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Nama Lengkap</label><div class="relative"><i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regNama" class="input-field pl-11" placeholder="Nama guru" required></div></div>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">NIP</label><div class="relative"><i class="fas fa-id-card absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regNIP" class="input-field pl-11" placeholder="Nomor Induk Pegawai" required></div></div>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Pangkat/Golongan</label><div class="relative"><i class="fas fa-star absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regGolongan" class="input-field pl-11" placeholder="Contoh: III/a" required></div></div>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label><div class="relative"><i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="email" id="regEmail" class="input-field pl-11" placeholder="contoh@email.com" required></div></div>
+          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password</label><div class="relative"><i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="password" id="regPassword" class="input-field pl-11" placeholder="Min. 6 karakter" required minlength="6"><button type="button" onclick="togglePw('regPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]"><i class="fas fa-eye"></i></button></div></div>
+          <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnRegister"><span>Daftar Akun</span></button>
         </div>
       </form>
     </div>
@@ -373,220 +132,29 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 
 <!-- ==================== HALAMAN DASHBOARD ==================== -->
 <div id="pageDashboard" class="page">
-  <!-- Navbar -->
-  <nav class="navbar no-print">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center">
-          <i class="fas fa-clipboard-check text-white text-sm"></i>
-        </div>
-        <div class="hidden sm:block">
-          <p class="font-700 text-sm text-[#1B4332] leading-tight">ITAP Kurikulum Merdeka</p>
-          <p class="text-xs text-[#6B7280]">SDN Majalengka Wetan VIII</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="text-sm font-500 text-[#6B7280] hidden md:inline" id="navUserName">-</span>
-        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4A017] to-[#F2D06B] flex items-center justify-center text-white font-700 text-sm" id="navUserAvatar">G</div>
-        <button onclick="handleLogout()" class="btn-outline text-xs py-2 px-4" title="Keluar">
-          <i class="fas fa-sign-out-alt mr-1"></i> Keluar
-        </button>
-      </div>
-    </div>
-  </nav>
-
+  <nav class="navbar no-print"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center"><i class="fas fa-clipboard-check text-white text-sm"></i></div><div class="hidden sm:block"><p class="font-700 text-sm text-[#1B4332] leading-tight">ITAP Kurikulum Merdeka</p><p class="text-xs text-[#6B7280]">SDN Majalengka Wetan VIII</p></div></div><div class="flex items-center gap-3"><span class="text-sm font-500 text-[#6B7280] hidden md:inline" id="navUserName">-</span><div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4A017] to-[#F2D06B] flex items-center justify-center text-white font-700 text-sm" id="navUserAvatar">G</div><button onclick="handleLogout()" class="btn-outline text-xs py-2 px-4"><i class="fas fa-sign-out-alt mr-1"></i> Keluar</button></div></div></nav>
   <main class="max-w-7xl mx-auto px-4 py-8">
-    <!-- Header Dashboard -->
-    <div class="mb-8">
-      <h2 class="font-display text-3xl font-800 text-[#1B4332] mb-1">Dashboard</h2>
-      <p class="text-[#6B7280]">Kelola instrumen telaah administrasi pembelajaran Anda</p>
-    </div>
-
-    <!-- Info Guru -->
-    <div class="card p-6 mb-6">
-      <div class="flex flex-wrap items-center gap-6">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center text-white text-2xl font-800" id="dashAvatar">G</div>
-        <div class="flex-1 min-w-[200px]">
-          <h3 class="font-700 text-lg text-[#1A1A2E]" id="dashNama">-</h3>
-          <p class="text-sm text-[#6B7280]">NIP: <span id="dashNIP">-</span></p>
-          <p class="text-sm text-[#6B7280]">Pangkat/Gol: <span id="dashGolongan">-</span></p>
-        </div>
-        <button onclick="openAssessmentModal()" class="btn-primary flex items-center gap-2">
-          <i class="fas fa-plus"></i> Buat Instrumen Baru
-        </button>
-      </div>
-    </div>
-
-    <!-- Statistik -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="statsContainer">
-      <div class="stat-card">
-        <p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Total Instrumen</p>
-        <p class="text-2xl font-800 text-[#1B4332]" id="statTotal">0</p>
-      </div>
-      <div class="stat-card">
-        <p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Sudah Selesai</p>
-        <p class="text-2xl font-800 text-[#10B981]" id="statSelesai">0</p>
-      </div>
-      <div class="stat-card">
-        <p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Dalam Proses</p>
-        <p class="text-2xl font-800 text-[#F59E0B]" id="statProses">0</p>
-      </div>
-      <div class="stat-card">
-        <p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Rata-rata Nilai</p>
-        <p class="text-2xl font-800 text-[#D4A017]" id="statRata">0%</p>
-      </div>
-    </div>
-
-    <!-- Daftar Instrumen -->
-    <div class="card overflow-hidden">
-      <div class="p-5 border-b border-[#E5E1DB] flex items-center justify-between">
-        <h3 class="font-700 text-lg text-[#1A1A2E]"><i class="fas fa-list-check text-[#1B4332] mr-2"></i>Daftar Instrumen</h3>
-        <div class="relative">
-          <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-[#6B7280] text-sm"></i>
-          <input type="text" id="searchAssessment" oninput="renderAssessments()" class="input-field pl-9 py-2 text-sm w-48" placeholder="Cari...">
-        </div>
-      </div>
-      <div id="assessmentList" class="p-5">
-        <div class="text-center py-12 text-[#6B7280]">
-          <i class="fas fa-inbox text-4xl mb-3 opacity-30"></i>
-          <p>Belum ada instrumen. Klik "Buat Instrumen Baru" untuk memulai.</p>
-        </div>
-      </div>
-    </div>
+    <div class="mb-8"><h2 class="font-display text-3xl font-800 text-[#1B4332] mb-1">Dashboard</h2><p class="text-[#6B7280]">Kelola instrumen telaah administrasi pembelajaran Anda</p></div>
+    <div class="card p-6 mb-6"><div class="flex flex-wrap items-center gap-6"><div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center text-white text-2xl font-800" id="dashAvatar">G</div><div class="flex-1 min-w-[200px]"><h3 class="font-700 text-lg text-[#1A1A2E]" id="dashNama">-</h3><p class="text-sm text-[#6B7280]">NIP: <span id="dashNIP">-</span></p><p class="text-sm text-[#6B7280]">Pangkat/Gol: <span id="dashGolongan">-</span></p></div><button onclick="openModal('modalNewAssessment')" class="btn-primary flex items-center gap-2"><i class="fas fa-plus"></i> Buat Instrumen Baru</button></div></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Total Instrumen</p><p class="text-2xl font-800 text-[#1B4332]" id="statTotal">0</p></div><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Sudah Selesai</p><p class="text-2xl font-800 text-[#10B981]" id="statSelesai">0</p></div><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Dalam Proses</p><p class="text-2xl font-800 text-[#F59E0B]" id="statProses">0</p></div><div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Rata-rata Nilai</p><p class="text-2xl font-800 text-[#D4A017]" id="statRata">0%</p></div></div>
+    <div class="card overflow-hidden"><div class="p-5 border-b border-[#E5E1DB] flex items-center justify-between"><h3 class="font-700 text-lg text-[#1A1A2E]"><i class="fas fa-list-check text-[#1B4332] mr-2"></i>Daftar Instrumen</h3><div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-[#6B7280] text-sm"></i><input type="text" id="searchAssessment" oninput="renderAssessments()" class="input-field pl-9 py-2 text-sm w-48" placeholder="Cari..."></div></div><div id="assessmentList" class="p-5"><div class="text-center py-12 text-[#6B7280]"><i class="fas fa-inbox text-4xl mb-3 opacity-30"></i><p>Belum ada instrumen. Klik "Buat Instrumen Baru" untuk memulai.</p></div></div></div>
   </main>
 </div>
 
 <!-- ==================== HALAMAN PENILAIAN ==================== -->
 <div id="pageAssessment" class="page">
-  <!-- Navbar -->
-  <nav class="navbar no-print">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <button onclick="showPage('pageDashboard')" class="w-9 h-9 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F5F1EB] transition-colors">
-          <i class="fas fa-arrow-left text-sm"></i>
-        </button>
-        <div>
-          <p class="font-700 text-sm text-[#1B4332] leading-tight" id="assessNavTitle">Instrumen Penilaian</p>
-          <p class="text-xs text-[#6B7280]" id="assessNavSemester">-</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <button onclick="saveAssessment()" class="btn-outline text-xs py-2 px-4 no-print">
-          <i class="fas fa-save mr-1"></i> Simpan
-        </button>
-        <button onclick="window.print()" class="btn-accent text-xs py-2 px-4 no-print">
-          <i class="fas fa-print mr-1"></i> Cetak
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <main class="max-w-7xl mx-auto px-4 py-6" id="assessmentContent">
-    <!-- Diisi oleh JavaScript -->
-  </main>
+  <nav class="navbar no-print"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"><div class="flex items-center gap-3"><button onclick="showPage('pageDashboard')" class="w-9 h-9 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F5F1EB] transition-colors"><i class="fas fa-arrow-left text-sm"></i></button><div><p class="font-700 text-sm text-[#1B4332] leading-tight" id="assessNavTitle">Instrumen Penilaian</p><p class="text-xs text-[#6B7280]" id="assessNavSemester">-</p></div></div><div class="flex items-center gap-2"><button onclick="saveAssessment()" class="btn-outline text-xs py-2 px-4 no-print"><i class="fas fa-save mr-1"></i> Simpan</button><button onclick="window.print()" class="btn-accent text-xs py-2 px-4 no-print"><i class="fas fa-print mr-1"></i> Cetak</button></div></div></nav>
+  <main class="max-w-7xl mx-auto px-4 py-6" id="assessmentContent"></main>
 </div>
 
 <!-- ==================== MODAL BUAT INSTRUMEN ==================== -->
-<div id="modalNewAssessment" class="modal-overlay">
-  <div class="modal-content">
-    <div class="flex items-center justify-between mb-6">
-      <h3 class="font-display text-xl font-700 text-[#1B4332]">Buat Instrumen Baru</h3>
-      <button onclick="closeModal('modalNewAssessment')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <form onsubmit="createAssessment(event)">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Semester</label>
-          <select id="newSemester" class="select-field" required>
-            <option value="">Pilih Semester</option>
-            <option value="1">Semester 1 (Ganjil)</option>
-            <option value="2">Semester 2 (Genap)</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Kelas</label>
-          <select id="newKelas" class="select-field" required>
-            <option value="">Pilih Kelas</option>
-            <option value="I">Kelas I</option>
-            <option value="II">Kelas II</option>
-            <option value="III">Kelas III</option>
-            <option value="IV">Kelas IV</option>
-            <option value="V">Kelas V</option>
-            <option value="VI">Kelas VI</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Tahun Pelajaran</label>
-          <input type="text" id="newTahun" class="input-field" placeholder="2024/2025" required>
-        </div>
-        <div>
-          <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Mata Pelajaran</label>
-          <input type="text" id="newMapel" class="input-field" placeholder="Contoh: Tematik, Matematika" required>
-        </div>
-      </div>
-      <div class="flex gap-3 mt-6">
-        <button type="button" onclick="closeModal('modalNewAssessment')" class="btn-outline flex-1">Batal</button>
-        <button type="submit" class="btn-primary flex-1" id="btnCreateAssessment">
-          <i class="fas fa-plus mr-1"></i> Buat
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+<div id="modalNewAssessment" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-6"><h3 class="font-display text-xl font-700 text-[#1B4332]">Buat Instrumen Baru</h3><button onclick="closeModal('modalNewAssessment')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button></div><form onsubmit="createAssessment(event)"><div class="space-y-4"><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Semester</label><select id="newSemester" class="select-field" required><option value="">Pilih Semester</option><option value="1">Semester 1 (Ganjil)</option><option value="2">Semester 2 (Genap)</option></select></div><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Kelas</label><select id="newKelas" class="select-field" required><option value="">Pilih Kelas</option><option value="I">Kelas I</option><option value="II">Kelas II</option><option value="III">Kelas III</option><option value="IV">Kelas IV</option><option value="V">Kelas V</option><option value="VI">Kelas VI</option></select></div><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Tahun Pelajaran</label><input type="text" id="newTahun" class="input-field" placeholder="2024/2025" required></div><div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Mata Pelajaran</label><input type="text" id="newMapel" class="input-field" placeholder="Contoh: Tematik, Matematika" required></div></div><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal('modalNewAssessment')" class="btn-outline flex-1">Batal</button><button type="submit" class="btn-primary flex-1" id="btnCreate"><i class="fas fa-plus mr-1"></i> Buat</button></div></form></div></div>
 
 <!-- ==================== MODAL UPLOAD FILE ==================== -->
-<div id="modalUpload" class="modal-overlay">
-  <div class="modal-content">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="font-display text-lg font-700 text-[#1B4332]">Upload File</h3>
-      <button onclick="closeModal('modalUpload')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <p class="text-sm text-[#6B7280] mb-4">Komponen: <strong id="uploadKomponenNama">-</strong></p>
-    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-      <i class="fas fa-cloud-upload-alt text-3xl text-[#40916C] mb-2"></i>
-      <p class="text-sm font-600 text-[#1A1A2E]">Klik atau seret file ke sini</p>
-      <p class="text-xs text-[#6B7280] mt-1">PDF, JPG, PNG, DOC (Maks. 10MB)</p>
-      <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none" onchange="handleFileSelect(event)">
-    </div>
-    <div id="uploadPreview" class="mt-4 hidden">
-      <div class="file-item">
-        <i class="fas fa-file text-[#40916C]"></i>
-        <span class="text-sm font-500 flex-1 truncate" id="uploadFileName">-</span>
-        <span class="text-xs text-[#6B7280]" id="uploadFileSize">-</span>
-        <button onclick="clearUpload()" class="text-[#EF4444] hover:text-[#DC2626]"><i class="fas fa-times"></i></button>
-      </div>
-    </div>
-    <input type="hidden" id="uploadKomponenId">
-    <div class="flex gap-3 mt-6">
-      <button type="button" onclick="closeModal('modalUpload')" class="btn-outline flex-1">Batal</button>
-      <button type="button" onclick="uploadFile()" class="btn-primary flex-1" id="btnUpload">
-        <i class="fas fa-upload mr-1"></i> Upload
-      </button>
-    </div>
-  </div>
-</div>
+<div id="modalUpload" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-4"><h3 class="font-display text-lg font-700 text-[#1B4332]">Upload File</h3><button onclick="closeModal('modalUpload')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button></div><p class="text-sm text-[#6B7280] mb-4">Komponen: <strong id="uploadKomponenNama">-</strong></p><div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"><i class="fas fa-cloud-upload-alt text-3xl text-[#40916C] mb-2"></i><p class="text-sm font-600 text-[#1A1A2E]">Klik atau seret file ke sini</p><p class="text-xs text-[#6B7280] mt-1">PDF, JPG, PNG, DOC (Maks. 10MB)</p><input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none" onchange="handleFileSelect(event)"></div><div id="uploadPreview" class="mt-4 hidden"><div class="file-item"><i class="fas fa-file text-[#40916C]"></i><span class="text-sm font-500 flex-1 truncate" id="uploadFileName">-</span><span class="text-xs text-[#6B7280]" id="uploadFileSize">-</span><button onclick="clearUpload()" class="text-[#EF4444] hover:text-[#DC2626]"><i class="fas fa-times"></i></button></div></div><input type="hidden" id="uploadKomponenId"><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal('modalUpload')" class="btn-outline flex-1">Batal</button><button type="button" onclick="uploadFile()" class="btn-primary flex-1" id="btnUpload"><i class="fas fa-upload mr-1"></i> Upload</button></div></div></div>
 
 <!-- ==================== MODAL DETAIL FILE ==================== -->
-<div id="modalFileDetail" class="modal-overlay">
-  <div class="modal-content">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="font-display text-lg font-700 text-[#1B4332]">File Terlampir</h3>
-      <button onclick="closeModal('modalFileDetail')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div id="fileDetailList" class="space-y-3">
-      <!-- Diisi JS -->
-    </div>
-    <div class="mt-6">
-      <button onclick="closeModal('modalFileDetail')" class="btn-outline w-full">Tutup</button>
-    </div>
-  </div>
-</div>
+<div id="modalFileDetail" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-4"><h3 class="font-display text-lg font-700 text-[#1B4332]">File Terlampir</h3><button onclick="closeModal('modalFileDetail')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button></div><div id="fileDetailList" class="space-y-3"></div><div class="mt-6"><button onclick="closeModal('modalFileDetail')" class="btn-outline w-full">Tutup</button></div></div></div>
 
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -612,112 +180,46 @@ const auth = firebase.auth();
 const db = firebase.database();
 const storage = firebase.storage();
 
-// ======================== KONSTANTA ========================
 const FOLDER_ID = '1DBC2YJFNo82u9zB1V7P2miNcK4_DYGLZ';
 const GDRIVE_BASE = `https://drive.google.com/drive/folders/${FOLDER_ID}`;
 const MAX_SCORE = 40;
+const KOMPONEN = ['Kalender Pendidikan','Jadwal Pelajaran','Jadwal Piket Kelas','Struktur Organisasi Kelas','Denah Tempat Duduk','Papan Informasi Absen','Poster 7 Kebiasaan Anak Indonesia Hebat','Poster 8 Dimensi Profil Lulusan','Kesepakatan Kelas','Capaian Pembelajaran (CP)','Tujuan Pembelajaran (TP)','Alur Tujuan Pembelajaran (ATP)','Modul Ajar/RPM','Modul Kokurikuler','Buku Absensi Harian','Buku Daftar Nilai','Analisis Penilaian','Soal Asesmen Harian','Jurnal / Agenda Harian','Administrasi Penunjang Lainnya'];
 
-const KOMPONEN = [
-  'Kalender Pendidikan', 'Jadwal Pelajaran', 'Jadwal Piket Kelas',
-  'Struktur Organisasi Kelas', 'Denah Tempat Duduk', 'Papan Informasi Absen',
-  'Poster 7 Kebiasaan Anak Indonesia Hebat', 'Poster 8 Dimensi Profil Lulusan',
-  'Kesepakatan Kelas', 'Capaian Pembelajaran (CP)', 'Tujuan Pembelajaran (TP)',
-  'Alur Tujuan Pembelajaran (ATP)', 'Modul Ajar/RPM', 'Modul Kokurikuler',
-  'Buku Absensi Harian', 'Buku Daftar Nilai', 'Analisis Penilaian',
-  'Soal Asesmen Harian', 'Jurnal / Agenda Harian', 'Administrasi Penunjang Lainnya'
-];
-
-// ======================== STATE ========================
-let currentUser = null;
-let currentAssessmentId = null;
-let currentScores = {};
-let currentFiles = {};
-let selectedFile = null;
+let currentUser = null, currentAssessmentId = null, currentScores = {}, currentFiles = {}, selectedFile = null;
 
 // ======================== UTILITAS ========================
-function showPage(pageId) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-function showToast(message, type = 'info') {
-  const container = document.getElementById('toastContainer');
-  const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle', warning: 'fa-exclamation-triangle' };
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
-  toast.innerHTML = `<i class="fas ${icons[type]}"></i><span>${message}</span>`;
-  container.appendChild(toast);
-  setTimeout(() => {
-    toast.classList.add('removing');
-    setTimeout(() => toast.remove(), 300);
-  }, 3500);
-}
-
+function showPage(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+function togglePw(id, btn) { const i = document.getElementById(id); const ic = btn.querySelector('i'); if(i.type==='password'){i.type='text';ic.className='fas fa-eye-slash';}else{i.type='password';ic.className='fas fa-eye';} }
+function formatDate(ts) { if(!ts) return '-'; return new Date(ts).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}); }
+function formatFileSize(b) { if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
+function getFileIcon(n) { const e=n.split('.').pop().toLowerCase(); const m={pdf:'fa-file-pdf text-red-500',jpg:'fa-file-image text-blue-500',jpeg:'fa-file-image text-blue-500',png:'fa-file-image text-green-500',doc:'fa-file-word text-blue-600',docx:'fa-file-word text-blue-600'}; return m[e]||'fa-file text-gray-500'; }
+function getKetercapaian(p) { if(p>=91) return {label:'Sangat Baik',cls:'badge-success',color:'#10B981'}; if(p>=81) return {label:'Baik',cls:'badge-success',color:'#10B981'}; if(p>=71) return {label:'Cukup',cls:'badge-warning',color:'#F59E0B'}; return {label:'Kurang',cls:'badge-danger',color:'#EF4444'}; }
 
-function togglePassword(inputId, btn) {
-  const input = document.getElementById(inputId);
-  const icon = btn.querySelector('i');
-  if (input.type === 'password') {
-    input.type = 'text';
-    icon.className = 'fas fa-eye-slash';
-  } else {
-    input.type = 'password';
-    icon.className = 'fas fa-eye';
-  }
+function showToast(msg, type='info') {
+  const c = document.getElementById('toastContainer');
+  const icons = {success:'fa-check-circle',error:'fa-exclamation-circle',info:'fa-info-circle'};
+  const t = document.createElement('div'); t.className = `toast ${type}`;
+  t.innerHTML = `<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.classList.add('removing'); setTimeout(() => t.remove(), 300); }, 4000);
 }
 
-function formatDate(ts) {
-  if (!ts) return '-';
-  const d = new Date(ts);
-  return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-}
-
-function getKetercapaian(persen) {
-  if (persen >= 91) return { label: 'Sangat Baik', class: 'badge-success', color: '#10B981' };
-  if (persen >= 81) return { label: 'Baik', class: 'badge-success', color: '#10B981' };
-  if (persen >= 71) return { label: 'Cukup', class: 'badge-warning', color: '#F59E0B' };
-  return { label: 'Kurang', class: 'badge-danger', color: '#EF4444' };
-}
-
-function getFileIcon(name) {
-  const ext = name.split('.').pop().toLowerCase();
-  const map = { pdf: 'fa-file-pdf text-red-500', jpg: 'fa-file-image text-blue-500', jpeg: 'fa-file-image text-blue-500', png: 'fa-file-image text-green-500', doc: 'fa-file-word text-blue-600', docx: 'fa-file-word text-blue-600' };
-  return map[ext] || 'fa-file text-gray-500';
-}
-
-function formatFileSize(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / 1048576).toFixed(1) + ' MB';
-}
-
-// ======================== AUTENTIKASI ========================
+// ======================== AUTENTIKASI (DENGAN PENANGANAN ERROR SUPER KUAT) ========================
 function switchAuthTab(tab) {
-  const loginTab = document.getElementById('tabLogin');
-  const regTab = document.getElementById('tabRegister');
-  const formLogin = document.getElementById('formLogin');
-  const formRegister = document.getElementById('formRegister');
-  if (tab === 'login') {
-    loginTab.className = 'flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]';
-    regTab.className = 'flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]';
-    formLogin.style.display = 'block';
-    formRegister.style.display = 'none';
-  } else {
-    regTab.className = 'flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]';
-    loginTab.className = 'flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]';
-    formRegister.style.display = 'block';
-    formLogin.style.display = 'none';
-  }
+  const tl = document.getElementById('tabLogin'), tr = document.getElementById('tabRegister');
+  const fl = document.getElementById('formLogin'), fr = document.getElementById('formRegister');
+  if(tab==='login') { tl.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]'; tr.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]'; fl.style.display='block'; fr.style.display='none'; }
+  else { tr.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]'; tl.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]'; fr.style.display='block'; fl.style.display='none'; }
+  document.getElementById('debugErrorBox').style.display = 'none'; // Sembunyikan error saat pindah tab
 }
 
 async function handleRegister(e) {
   e.preventDefault();
   const btn = document.getElementById('btnRegister');
-  btn.innerHTML = '<span class="spinner"></span>';
-  btn.disabled = true;
+  const errBox = document.getElementById('debugErrorBox');
+  errBox.style.display = 'none'; // Reset error box
 
   const nama = document.getElementById('regNama').value.trim();
   const nip = document.getElementById('regNIP').value.trim();
@@ -725,23 +227,65 @@ async function handleRegister(e) {
   const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
 
+  btn.innerHTML = '<span class="spinner"></span> Mendaftar...';
+  btn.disabled = true;
+
   try {
-    const cred = await auth.createUserWithEmailAndPassword(email, password);
-    await db.ref('users/' + cred.user.uid).set({
-      nama, nip, golongan, email,
+    // 1. Buat akun autentikasi
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    const uid = userCredential.user.uid;
+    
+    // 2. Simpan data profil guru ke database
+    // Menggunakan .set() dengan prioritas tinggi untuk menghindari race condition
+    await db.ref('users/' + uid).set({
+      nama: nama,
+      nip: nip,
+      golongan: golongan,
+      email: email,
       createdAt: firebase.database.ServerValue.TIMESTAMP
     });
+
+    // Jika sampai sini berarti SUKSES
     showToast('Pendaftaran berhasil! Silakan masuk.', 'success');
     switchAuthTab('login');
     document.getElementById('loginEmail').value = email;
     document.getElementById('formRegister').reset();
-  } catch (err) {
-    let msg = 'Gagal mendaftar.';
-    if (err.code === 'auth/email-already-in-use') msg = 'Email sudah terdaftar. Silakan masuk.';
-    else if (err.code === 'auth/weak-password') msg = 'Password terlalu lemah (min. 6 karakter).';
-    else if (err.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
-    showToast(msg, 'error');
+
+  } catch (error) {
+    // Tampilkan error asli ke layar dan console agar jelas penyebabnya
+    console.error("=== ERROR PENDAFTARAN ===");
+    console.error("Kode Error:", error.code);
+    console.error("Pesan Error:", error.message);
+    console.error("Detail Lengkap:", error);
+    
+    let userMsg = '';
+    switch(error.code) {
+      case 'auth/email-already-in-use': userMsg = 'Email sudah terdaftar. Silakan langsung masuk.'; break;
+      case 'auth/invalid-email': userMsg = 'Format email tidak valid.'; break;
+      case 'auth/weak-password': userMsg = 'Password terlalu lemah, minimal 6 karakter.'; break;
+      case 'auth/operation-not-allowed': userMsg = 'METODE LOGIN EMAIL/PASSWORD BELUM DIAKTIFKAN di Firebase Console. (Lihat pesan di bawah)'; break;
+      case 'permission-denied': userMsg = 'AKSES DATABASE DITOLAK. Security Rules belum diubah (Masih default). (Lihat pesan di bawah)'; break;
+      default: userMsg = error.message || 'Terjadi kesalahan tidak dikenal.';
+    }
+
+    // TAMPILKAN DI KOTAK MERAH AGAR JELAS
+    errBox.innerHTML = `
+      <div style="margin-bottom:12px;font-size:16px;font-weight:700;color:#991B1B;">
+        <i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i> Gagal Mendaftar
+      </div>
+      <div style="background:white;padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid #FECACA;">
+        <strong>Kepada Anda:</strong><br>${userMsg}
+      </div>
+      <div style="font-size:12px;color:#7F1D1D;">
+        <strong>Detail Teknis (Untuk Developer):</strong><br>
+        Kode: <code>${error.code}</code><br>
+        Pesan: <code>${error.message}</code>
+      </div>
+      <button onclick="document.getElementById('debugErrorBox').style.display='none'" style="margin-top:12px;width:100%;padding:8px;background:#DC2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">Tutup Pesan</button>
+    `;
+    errBox.style.display = 'block';
   }
+  
   btn.innerHTML = '<span>Daftar Akun</span>';
   btn.disabled = false;
 }
@@ -749,51 +293,64 @@ async function handleRegister(e) {
 async function handleLogin(e) {
   e.preventDefault();
   const btn = document.getElementById('btnLogin');
-  btn.innerHTML = '<span class="spinner"></span>';
-  btn.disabled = true;
+  const errBox = document.getElementById('debugErrorBox');
+  errBox.style.display = 'none';
 
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
 
+  btn.innerHTML = '<span class="spinner"></span>';
+  btn.disabled = true;
+
   try {
     await auth.signInWithEmailAndPassword(email, password);
     showToast('Berhasil masuk!', 'success');
-  } catch (err) {
+  } catch (error) {
+    console.error("=== ERROR LOGIN ===", error.code, error.message);
     let msg = 'Gagal masuk.';
-    if (err.code === 'auth/user-not-found') msg = 'Akun tidak ditemukan.';
-    else if (err.code === 'auth/wrong-password') msg = 'Password salah.';
-    else if (err.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
-    else if (err.code === 'auth/too-many-requests') msg = 'Terlalu banyak percobaan. Coba lagi nanti.';
-    showToast(msg, 'error');
+    if(error.code === 'auth/user-not-found') msg = 'Akun tidak ditemukan.';
+    else if(error.code === 'auth/wrong-password') msg = 'Password salah.';
+    else if(error.code === 'auth/invalid-credential') msg = 'Email atau password salah.';
+    else if(error.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
+    else msg = error.message;
+    
+    errBox.innerHTML = `
+      <div style="margin-bottom:12px;font-size:16px;font-weight:700;color:#991B1B;"><i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i> Gagal Masuk</div>
+      <div style="background:white;padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid #FECACA;"><strong>Info:</strong><br>${msg}</div>
+      <div style="font-size:12px;color:#7F1D1D;">Kode: <code>${error.code}</code><br>Pesan: <code>${error.message}</code></div>
+      <button onclick="document.getElementById('debugErrorBox').style.display='none'" style="margin-top:12px;width:100%;padding:8px;background:#DC2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">Tutup Pesan</button>
+    `;
+    errBox.style.display = 'block';
   }
   btn.innerHTML = '<span>Masuk</span>';
   btn.disabled = false;
 }
 
-function handleLogout() {
-  auth.signOut();
-  currentAssessmentId = null;
-  currentScores = {};
-  currentFiles = {};
-  showToast('Berhasil keluar.', 'info');
-}
+function handleLogout() { auth.signOut(); currentAssessmentId = null; currentScores = {}; currentFiles = {}; showPage('pageLogin'); }
 
-// Listener status autentikasi
+// Listener Status Auth
 auth.onAuthStateChanged(user => {
   if (user) {
     currentUser = user;
     db.ref('users/' + user.uid).once('value').then(snap => {
-      const data = snap.val() || {};
-      const nama = data.nama || user.email;
-      const initial = nama.charAt(0).toUpperCase();
-
-      document.getElementById('navUserName').textContent = nama;
-      document.getElementById('navUserAvatar').textContent = initial;
-      document.getElementById('dashAvatar').textContent = initial;
-      document.getElementById('dashNama').textContent = nama;
-      document.getElementById('dashNIP').textContent = data.nip || '-';
-      document.getElementById('dashGolongan').textContent = data.golongan || '-';
-
+      const d = snap.val() || {};
+      const n = d.nama || user.email; const ini = n.charAt(0).toUpperCase();
+      document.getElementById('navUserName').textContent = n;
+      document.getElementById('navUserAvatar').textContent = ini;
+      document.getElementById('dashAvatar').textContent = ini;
+      document.getElementById('dashNama').textContent = n;
+      document.getElementById('dashNIP').textContent = d.nip || '-';
+      document.getElementById('dashGolongan').textContent = d.golongan || '-';
+      showPage('pageDashboard');
+      loadAssessments();
+    }).catch(err => {
+      console.error("Gagal memuat data user:", err);
+      // Jika gagal memuat data (misal rules salah), tetap masuk dashboard
+      const n = user.email; const ini = n.charAt(0).toUpperCase();
+      document.getElementById('navUserName').textContent = n;
+      document.getElementById('navUserAvatar').textContent = ini;
+      document.getElementById('dashAvatar').textContent = ini;
+      document.getElementById('dashNama').textContent = n;
       showPage('pageDashboard');
       loadAssessments();
     });
@@ -804,617 +361,182 @@ auth.onAuthStateChanged(user => {
 });
 
 // ======================== INSTRUMEN ========================
-function openAssessmentModal() {
-  document.getElementById('newTahun').value = '2024/2025';
-  openModal('modalNewAssessment');
-}
-
 async function createAssessment(e) {
   e.preventDefault();
-  const btn = document.getElementById('btnCreateAssessment');
-  btn.innerHTML = '<span class="spinner"></span>';
-  btn.disabled = true;
-
+  const btn = document.getElementById('btnCreate');
+  btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
   const semester = document.getElementById('newSemester').value;
   const kelas = document.getElementById('newKelas').value;
   const tahun = document.getElementById('newTahun').value.trim();
   const mapel = document.getElementById('newMapel').value.trim();
 
-  const ref = db.ref('assessments').push();
-  const initData = {};
-  KOMPONEN.forEach((k, i) => {
-    initData['scores/' + i] = null;
-    initData['files/' + i] = null;
-  });
-
   try {
-    await ref.set({
-      userId: currentUser.uid,
-      semester, kelas, tahun, mapel,
-      saran: '',
-      scores: {},
-      files: {},
-      createdAt: firebase.database.ServerValue.TIMESTAMP,
-      updatedAt: firebase.database.ServerValue.TIMESTAMP
-    });
+    const ref = db.ref('assessments').push();
+    await ref.set({ userId: currentUser.uid, semester, kelas, tahun, mapel, saran: '', scores: {}, files: {}, createdAt: firebase.database.ServerValue.TIMESTAMP, updatedAt: firebase.database.ServerValue.TIMESTAMP });
     closeModal('modalNewAssessment');
     document.getElementById('newMapel').value = '';
     showToast('Instrumen berhasil dibuat!', 'success');
-    loadAssessments();
-  } catch (err) {
-    showToast('Gagal membuat instrumen: ' + err.message, 'error');
+  } catch(err) {
+    showToast('Gagal membuat: ' + err.message, 'error');
+    console.error(err);
   }
-  btn.innerHTML = '<i class="fas fa-plus mr-1"></i> Buat';
-  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-plus mr-1"></i> Buat'; btn.disabled = false;
 }
 
 function loadAssessments() {
-  if (!currentUser) return;
+  if(!currentUser) return;
   db.ref('assessments').orderByChild('userId').equalTo(currentUser.uid).on('value', snap => {
-    const data = snap.val() || {};
-    renderAssessments(data);
-    updateStats(data);
+    renderAssessments(snap.val() || {});
+    updateStats(snap.val() || {});
   });
 }
 
 function renderAssessments(data) {
-  const container = document.getElementById('assessmentList');
-  const search = (document.getElementById('searchAssessment').value || '').toLowerCase();
-
-  const entries = Object.entries(data).filter(([id, a]) => {
-    const text = `${a.kelas} ${a.semester} ${a.tahun} ${a.mapel}`.toLowerCase();
-    return text.includes(search);
-  });
-
-  if (entries.length === 0) {
-    container.innerHTML = `
-      <div class="text-center py-12 text-[#6B7280]">
-        <i class="fas fa-inbox text-4xl mb-3 opacity-30"></i>
-        <p>${search ? 'Tidak ditemukan instrumen yang cocok.' : 'Belum ada instrumen. Klik "Buat Instrumen Baru" untuk memulai.'}</p>
-      </div>`;
-    return;
+  const c = document.getElementById('assessmentList');
+  const s = (document.getElementById('searchAssessment').value||'').toLowerCase();
+  const ent = Object.entries(data).filter(([id, a]) => `${a.kelas} ${a.semester} ${a.tahun} ${a.mapel}`.toLowerCase().includes(s));
+  if(!ent.length) { c.innerHTML = `<div class="text-center py-12 text-[#6B7280]"><i class="fas fa-inbox text-4xl mb-3 opacity-30"></i><p>${s?'Tidak ditemukan.':'Belum ada instrumen.'}</p></div>`; return; }
+  let h = '<div class="space-y-3">';
+  ent.sort((a,b) => (b[1].createdAt||0) - (a[1].createdAt||0));
+  for(const [id, a] of ent) {
+    const sc = a.scores||{}; const fl = a.files||{};
+    const filled = Object.values(sc).filter(v=>v!==null&&v!==undefined).length;
+    const total = Object.values(sc).reduce((s,v)=>s+(v||0),0);
+    const p = Math.round((total/MAX_SCORE)*100); const k = getKetercapaian(p);
+    const fc = Object.values(fl).filter(f=>f!==null).length;
+    h += `<div class="card p-4 hover:translate-y-[-2px] transition-transform"><div class="flex flex-wrap items-center gap-4"><div class="flex-1 min-w-[200px]"><div class="flex items-center gap-2 mb-1"><h4 class="font-700 text-[#1A1A2E]">Kelas ${a.kelas} - Semester ${a.semester}</h4><span class="badge ${filled===20?'badge-success':'badge-warning'}">${filled===20?'Selesai':'Proses'}</span></div><p class="text-sm text-[#6B7280]">${a.mapel} &bull; TA ${a.tahun} &bull; ${formatDate(a.createdAt)}</p><div class="flex items-center gap-4 mt-2"><div class="flex-1 max-w-[200px]"><div class="progress-bar"><div class="progress-fill" style="width:${(filled/20)*100}%"></div></div></div><span class="text-xs text-[#6B7280]">${filled}/20</span><span class="text-xs text-[#6B7280]"><i class="fas fa-paperclip mr-1"></i>${fc}</span></div></div><div class="text-center px-4"><p class="text-2xl font-800" style="color:${k.color}">${p}%</p><p class="text-xs font-600" style="color:${k.color}">${k.label}</p></div><div class="flex gap-2"><button onclick="openAssessment('${id}')" class="btn-primary text-xs py-2 px-4"><i class="fas fa-pen-to-square mr-1"></i> Isi</button><button onclick="viewAssessmentPrint('${id}')" class="btn-outline text-xs py-2 px-3" title="Cetak"><i class="fas fa-print"></i></button><button onclick="deleteAssessment('${id}')" class="btn-danger text-xs py-2 px-3" title="Hapus"><i class="fas fa-trash"></i></button></div></div></div>`;
   }
-
-  let html = '<div class="space-y-3">';
-  entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-
-  for (const [id, a] of entries) {
-    const scores = a.scores || {};
-    const files = a.files || {};
-    const filled = Object.values(scores).filter(v => v !== null && v !== undefined).length;
-    const total = Object.values(scores).reduce((s, v) => s + (v || 0), 0);
-    const persen = Math.round((total / MAX_SCORE) * 100);
-    const ket = getKetercapaian(persen);
-    const isComplete = filled === 20;
-    const fileCount = Object.values(files).filter(f => f !== null).length;
-
-    html += `
-    <div class="card p-4 hover:translate-y-[-2px] transition-transform">
-      <div class="flex flex-wrap items-center gap-4">
-        <div class="flex-1 min-w-[200px]">
-          <div class="flex items-center gap-2 mb-1">
-            <h4 class="font-700 text-[#1A1A2E]">Kelas ${a.kelas} - Semester ${a.semester}</h4>
-            <span class="badge ${isComplete ? 'badge-success' : 'badge-warning'}">${isComplete ? 'Selesai' : 'Proses'}</span>
-          </div>
-          <p class="text-sm text-[#6B7280]">${a.mapel} &bull; TA ${a.tahun} &bull; ${formatDate(a.createdAt)}</p>
-          <div class="flex items-center gap-4 mt-2">
-            <div class="flex-1 max-w-[200px]">
-              <div class="progress-bar">
-                <div class="progress-fill" style="width:${(filled/20)*100}%"></div>
-              </div>
-            </div>
-            <span class="text-xs text-[#6B7280]">${filled}/20 komponen</span>
-            <span class="text-xs text-[#6B7280]"><i class="fas fa-paperclip mr-1"></i>${fileCount} file</span>
-          </div>
-        </div>
-        <div class="text-center px-4">
-          <p class="text-2xl font-800" style="color:${ket.color}">${persen}%</p>
-          <p class="text-xs font-600" style="color:${ket.color}">${ket.label}</p>
-        </div>
-        <div class="flex gap-2">
-          <button onclick="openAssessment('${id}')" class="btn-primary text-xs py-2 px-4">
-            <i class="fas fa-pen-to-square mr-1"></i> Isi
-          </button>
-          <button onclick="viewAssessmentPrint('${id}')" class="btn-outline text-xs py-2 px-3" title="Cetak">
-            <i class="fas fa-print"></i>
-          </button>
-          <button onclick="deleteAssessment('${id}')" class="btn-danger text-xs py-2 px-3" title="Hapus">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-    </div>`;
-  }
-  html += '</div>';
-  container.innerHTML = html;
+  h += '</div>'; c.innerHTML = h;
 }
 
 function updateStats(data) {
-  const entries = Object.values(data);
-  const total = entries.length;
-  const selesai = entries.filter(a => {
-    const s = a.scores || {};
-    return Object.values(s).filter(v => v !== null && v !== undefined).length === 20;
-  }).length;
-  const proses = total - selesai;
-  const rata = total > 0
-    ? Math.round(entries.reduce((s, a) => {
-        const sc = a.scores || {};
-        return s + Object.values(sc).reduce((x, v) => x + (v || 0), 0);
-      }, 0) / (total * MAX_SCORE) * 100)
-    : 0;
-
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statSelesai').textContent = selesai;
-  document.getElementById('statProses').textContent = proses;
-  document.getElementById('statRata').textContent = rata + '%';
+  const e = Object.values(data); const t = e.length;
+  const s = e.filter(a=>Object.values(a.scores||{}).filter(v=>v!==null&&v!==undefined).length===20).length;
+  const r = t>0 ? Math.round(e.reduce((s,a)=>s+Object.values(a.scores||{}).reduce((x,v)=>x+(v||0),0),0)/(t*MAX_SCORE)*100) : 0;
+  document.getElementById('statTotal').textContent=t; document.getElementById('statSelesai').textContent=s;
+  document.getElementById('statProses').textContent=t-s; document.getElementById('statRata').textContent=r+'%';
 }
 
 async function deleteAssessment(id) {
-  if (!confirm('Yakin ingin menghapus instrumen ini? Tindakan ini tidak dapat dibatalkan.')) return;
+  if(!confirm('Yakin hapus instrumen ini?')) return;
   try {
-    // Hapus file dari Storage
-    const filesSnap = await db.ref('assessments/' + id + '/files').once('value');
-    const files = filesSnap.val() || {};
-    for (const key in files) {
-      if (files[key] && files[key].path) {
-        try { await storage.ref(files[key].path).delete(); } catch(e) {}
-      }
-    }
-    await db.ref('assessments/' + id).remove();
-    showToast('Instrumen berhasil dihapus.', 'success');
-  } catch (err) {
-    showToast('Gagal menghapus: ' + err.message, 'error');
-  }
+    const fs = await db.ref('assessments/'+id+'/files').once('value');
+    const f = fs.val()||{};
+    for(const k in f) { if(f[k]&&f[k].path) { try{await storage.ref(f[k].path).delete();}catch(e){} } }
+    await db.ref('assessments/'+id).remove();
+    showToast('Dihapus.','success');
+  } catch(err) { showToast('Gagal: '+err.message,'error'); }
 }
 
 // ======================== HALAMAN PENILAIAN ========================
 async function openAssessment(id) {
-  currentAssessmentId = id;
-  currentScores = {};
-  currentFiles = {};
-
-  const snap = await db.ref('assessments/' + id).once('value');
+  currentAssessmentId = id; currentScores = {}; currentFiles = {};
+  const snap = await db.ref('assessments/'+id).once('value');
   const data = snap.val();
-  if (!data) { showToast('Instrumen tidak ditemukan.', 'error'); return; }
-
-  currentScores = data.scores || {};
-  currentFiles = data.files || {};
-
+  if(!data){ showToast('Tidak ditemukan.','error'); return; }
+  currentScores = data.scores||{}; currentFiles = data.files||{};
   document.getElementById('assessNavTitle').textContent = `Kelas ${data.kelas} - ${data.mapel}`;
   document.getElementById('assessNavSemester').textContent = `Semester ${data.semester} | TA ${data.tahun}`;
-
-  renderAssessmentPage(data);
-  showPage('pageAssessment');
+  renderAssessmentPage(data); showPage('pageAssessment');
 }
 
 function renderAssessmentPage(data) {
-  const container = document.getElementById('assessmentContent');
-  const nama = data.userName || document.getElementById('dashNama').textContent;
-  const nip = data.userNip || document.getElementById('dashNIP').textContent;
-  const golongan = data.userGolongan || document.getElementById('dashGolongan').textContent;
-
-  let tableRows = '';
-  KOMPONEN.forEach((komp, i) => {
-    const score = currentScores[i];
-    const fileData = currentFiles[i];
-    const hasFile = fileData && fileData.name;
-
-    tableRows += `
-    <tr>
-      <td class="text-center font-600 text-[#1B4332]">${i + 1}</td>
-      <td>
-        <div class="font-500">${komp}</div>
-        ${hasFile ? `<div class="flex items-center gap-1 mt-1"><i class="fas ${getFileIcon(fileData.name)} text-xs"></i><span class="text-xs text-[#40916C] cursor-pointer hover:underline" onclick="viewFileDetail(${i})">${fileData.name}</span></div>` : ''}
-      </td>
-      <td>
-        <div class="radio-group">
-          <label><input type="radio" name="score_${i}" value="0" ${score === 0 ? 'checked' : ''} onchange="updateScore(${i}, 0)"><span>0</span></label>
-          <label><input type="radio" name="score_${i}" value="1" ${score === 1 ? 'checked' : ''} onchange="updateScore(${i}, 1)"><span>1</span></label>
-          <label><input type="radio" name="score_${i}" value="2" ${score === 2 ? 'checked' : ''} onchange="updateScore(${i}, 2)"><span>2</span></label>
-        </div>
-      </td>
-      <td class="text-center font-700 ${score === 2 ? 'text-[#059669]' : score === 1 ? 'text-[#D97706]' : score === 0 ? 'text-[#DC2626]' : 'text-[#6B7280]'}">${score !== null && score !== undefined ? score : '-'}</td>
-      <td class="text-center no-print">
-        <button onclick="openUploadModal(${i}, '${komp.replace(/'/g, "\\'")}')" class="w-8 h-8 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F0F7F4] hover:text-[#40916C] hover:border-[#40916C] transition-all mx-auto" title="Upload file">
-          <i class="fas fa-upload text-xs"></i>
-        </button>
-      </td>
-    </tr>`;
+  const c = document.getElementById('assessmentContent');
+  const nama = document.getElementById('dashNama').textContent;
+  const nip = document.getElementById('dashNIP').textContent;
+  const gol = document.getElementById('dashGolongan').textContent;
+  let rows = '';
+  KOMPONEN.forEach((k,i) => {
+    const s = currentScores[i]; const f = currentFiles[i]; const hf = f&&f.name;
+    rows += `<tr><td class="text-center font-600 text-[#1B4332]">${i+1}</td><td><div class="font-500">${k}</div>${hf?`<div class="flex items-center gap-1 mt-1"><i class="fas ${getFileIcon(f.name)} text-xs"></i><span class="text-xs text-[#40916C] cursor-pointer hover:underline" onclick="viewFileDetail(${i})">${f.name}</span></div>`:''}</td><td><div class="radio-group"><label><input type="radio" name="sc_${i}" value="0" ${s===0?'checked':''} onchange="updateScore(${i},0)"><span>0</span></label><label><input type="radio" name="sc_${i}" value="1" ${s===1?'checked':''} onchange="updateScore(${i},1)"><span>1</span></label><label><input type="radio" name="sc_${i}" value="2" ${s===2?'checked':''} onchange="updateScore(${i},2)"><span>2</span></label></div></td><td class="text-center font-700 ${s===2?'text-[#059669]':s===1?'text-[#D97706]':s===0?'text-[#DC2626]':'text-[#6B7280]'}">${s!==null&&s!==undefined?s:'-'}</td><td class="text-center no-print"><button onclick="openUploadModal(${i},'${k.replace(/'/g,"\\'")}')" class="w-8 h-8 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F0F7F4] hover:text-[#40916C] hover:border-[#40916C] transition-all mx-auto" title="Upload"><i class="fas fa-upload text-xs"></i></button></td></tr>`;
   });
-
-  const totalScore = Object.values(currentScores).reduce((s, v) => s + (v || 0), 0);
-  const persen = Math.round((totalScore / MAX_SCORE) * 100);
-  const ket = getKetercapaian(persen);
-  const saran = data.saran || '';
-
-  container.innerHTML = `
-    <!-- Header Cetak -->
-    <div class="card p-6 mb-6" id="printHeader">
-      <div class="text-center mb-6">
-        <h2 class="font-display text-xl font-800 text-[#1B4332] uppercase tracking-wide">Instrumen Telaah Administrasi Pembelajaran</h2>
-        <p class="font-600 text-[#40916C] text-lg">Kurikulum Merdeka</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-        <div><span class="text-[#6B7280]">Nama Sekolah:</span><br><strong class="text-[#1A1A2E]">SDN Majalengka Wetan VIII</strong></div>
-        <div><span class="text-[#6B7280]">Nama Guru:</span><br><strong class="text-[#1A1A2E]">${nama}</strong></div>
-        <div><span class="text-[#6B7280]">Pangkat/Golongan:</span><br><strong class="text-[#1A1A2E]">${golongan}</strong></div>
-        <div><span class="text-[#6B7280]">Semester/Kelas:</span><br><strong class="text-[#1A1A2E]">Semester ${data.semester} / Kelas ${data.kelas}</strong></div>
-        <div><span class="text-[#6B7280]">Mata Pelajaran:</span><br><strong class="text-[#1A1A2E]">${data.mapel}</strong></div>
-        <div><span class="text-[#6B7280]">Tahun Pelajaran:</span><br><strong class="text-[#1A1A2E]">${data.tahun}</strong></div>
-      </div>
-    </div>
-
-    <!-- Ringkasan Nilai -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 no-print" id="liveStats">
-      <div class="stat-card text-center">
-        <p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Skor Total</p>
-        <p class="text-2xl font-800 text-[#1B4332]" id="liveTotal">${totalScore}</p>
-      </div>
-      <div class="stat-card text-center">
-        <p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Ketercapaian</p>
-        <p class="text-2xl font-800" id="livePersen" style="color:${ket.color}">${persen}%</p>
-      </div>
-      <div class="stat-card text-center">
-        <p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Predikat</p>
-        <p class="text-lg font-700" id="livePredikat" style="color:${ket.color}">${ket.label}</p>
-      </div>
-      <div class="stat-card text-center">
-        <p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Terisi</p>
-        <p class="text-2xl font-800 text-[#40916C]" id="liveFilled">${Object.values(currentScores).filter(v => v !== null && v !== undefined).length}/20</p>
-      </div>
-    </div>
-
-    <!-- Tabel Penilaian -->
-    <div class="card overflow-x-auto mb-6">
-      <table class="assess-table">
-        <thead>
-          <tr>
-            <th style="width:50px">No</th>
-            <th>Komponen Administrasi Pembelajaran</th>
-            <th style="width:200px">Penilaian</th>
-            <th style="width:60px">Skor</th>
-            <th style="width:60px" class="no-print">File</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${tableRows}
-        </tbody>
-        <tfoot>
-          <tr class="bg-[#F5F1EB]">
-            <td colspan="2" class="text-right font-700 px-4 py-3">Jumlah / Skor Total</td>
-            <td colspan="2" class="text-center font-800 text-lg text-[#1B4332]" id="footerTotal">${totalScore}</td>
-            <td class="no-print"></td>
-          </tr>
-          <tr class="bg-[#F5F1EB]">
-            <td colspan="2" class="text-right font-700 px-4 py-3">Ketercapaian</td>
-            <td colspan="2" class="text-center font-800 text-lg" id="footerPersen" style="color:${ket.color}">${persen}%</td>
-            <td class="no-print"></td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-
-    <!-- Keterangan -->
-    <div class="card p-5 mb-6">
-      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-info-circle text-[#1B4332] mr-1"></i> Keterangan Penilaian</h4>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]">
-          <span class="w-6 h-6 rounded flex items-center justify-center bg-[#FEF2F2] text-[#DC2626] font-700 text-xs">0</span>
-          <span class="text-[#6B7280]">Tidak Ada</span>
-        </div>
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]">
-          <span class="w-6 h-6 rounded flex items-center justify-center bg-[#FFFBEB] text-[#D97706] font-700 text-xs">1</span>
-          <span class="text-[#6B7280]">Ada, Tidak Sesuai</span>
-        </div>
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]">
-          <span class="w-6 h-6 rounded flex items-center justify-center bg-[#ECFDF5] text-[#059669] font-700 text-xs">2</span>
-          <span class="text-[#6B7280]">Ada dan Sesuai</span>
-        </div>
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]">
-          <i class="fas fa-calculator text-[#1B4332]"></i>
-          <span class="text-[#6B7280]">Nilai = (Total/40) x 100%</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Skala Ketercapaian -->
-    <div class="card p-5 mb-6">
-      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-chart-bar text-[#1B4332] mr-1"></i> Skala Ketercapaian</h4>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-        <div class="p-3 rounded-xl border-2 border-[#10B981] bg-[#ECFDF5] text-center">
-          <p class="font-800 text-[#059669]">91% - 100%</p>
-          <p class="font-600 text-[#059669]">Sangat Baik</p>
-        </div>
-        <div class="p-3 rounded-xl border-2 border-[#34D399] bg-[#F0FDF9] text-center">
-          <p class="font-800 text-[#10B981]">81% - 90%</p>
-          <p class="font-600 text-[#10B981]">Baik</p>
-        </div>
-        <div class="p-3 rounded-xl border-2 border-[#FBBF24] bg-[#FFFBEB] text-center">
-          <p class="font-800 text-[#D97706]">71% - 80%</p>
-          <p class="font-600 text-[#D97706]">Cukup</p>
-        </div>
-        <div class="p-3 rounded-xl border-2 border-[#F87171] bg-[#FEF2F2] text-center">
-          <p class="font-800 text-[#DC2626]">&lt; 71%</p>
-          <p class="font-600 text-[#DC2626]">Kurang</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Saran -->
-    <div class="card p-5 mb-6">
-      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-lightbulb text-[#D4A017] mr-1"></i> Saran</h4>
-      <textarea id="saranField" class="input-field min-h-[120px] resize-y no-print" placeholder="Tulis saran perbaikan di sini...">${saran}</textarea>
-      <div id="saranDisplay" class="hidden text-sm text-[#1A1A2E] whitespace-pre-wrap border-2 border-transparent rounded-xl p-3 bg-[#FAFAF7]">${saran}</div>
-    </div>
-
-    <!-- Link Google Drive -->
-    <div class="card p-5 mb-6 no-print">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-[#F0F7F4] flex items-center justify-center">
-          <i class="fab fa-google-drive text-[#40916C] text-lg"></i>
-        </div>
-        <div class="flex-1">
-          <p class="font-600 text-sm text-[#1A1A2E]">Folder Google Drive</p>
-          <p class="text-xs text-[#6B7280]">File yang diupload juga tersimpan di folder Drive terkait</p>
-        </div>
-        <a href="${GDRIVE_BASE}" target="_blank" class="btn-outline text-xs py-2 px-4">
-          <i class="fab fa-google-drive mr-1"></i> Buka Drive
-        </a>
-      </div>
-    </div>
-
-    <!-- Tanda Tangan -->
-    <div class="card p-6" id="signatureSection">
-      <div class="grid grid-cols-3 gap-4 text-center text-sm">
-        <div>
-          <p class="font-500 text-[#6B7280]">Majalengka, ................ 20...</p>
-          <p class="font-600 text-[#1A1A2E] mt-1">Kepala Sekolah/Supervisor</p>
-          <div class="h-20"></div>
-          <p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">KARYADI, S.Pd</p>
-          <p class="text-xs text-[#6B7280]">NIP. 197505052000031012</p>
-        </div>
-        <div>
-          <p class="font-500 text-[#6B7280]">&nbsp;</p>
-          <p class="font-600 text-[#1A1A2E] mt-1">Guru yang Disupervisi</p>
-          <div class="h-20"></div>
-          <p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">${nama}</p>
-          <p class="text-xs text-[#6B7280]">NIP. ${nip}</p>
-        </div>
-        <div>
-          <p class="font-500 text-[#6B7280]">Mengetahui,</p>
-          <p class="font-600 text-[#1A1A2E] mt-1">Pengawas Bina</p>
-          <div class="h-20"></div>
-          <p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">H. AJA WIHARJA, S.Pd., M.M.Pd.</p>
-          <p class="text-xs text-[#6B7280]">NIP. 196906141990091002</p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Tangani cetak: sembunyikan input, tampilkan teks saran
-  const stylePrint = document.createElement('style');
-  stylePrint.id = 'dynamicPrintStyle';
-  stylePrint.textContent = `@media print { #saranField { display: none !important; } #saranDisplay { display: block !important; } #liveStats { display: none !important; } }`;
-  document.head.appendChild(stylePrint);
+  const ts = Object.values(currentScores).reduce((s,v)=>s+(v||0),0);
+  const p = Math.round((ts/MAX_SCORE)*100); const k = getKetercapaian(p); const sr = data.saran||'';
+  c.innerHTML = `
+    <div class="card p-6 mb-6" id="printHeader"><div class="text-center mb-6"><h2 class="font-display text-xl font-800 text-[#1B4332] uppercase tracking-wide">Instrumen Telaah Administrasi Pembelajaran</h2><p class="font-600 text-[#40916C] text-lg">Kurikulum Merdeka</p></div><div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm"><div><span class="text-[#6B7280]">Nama Sekolah:</span><br><strong>SDN Majalengka Wetan VIII</strong></div><div><span class="text-[#6B7280]">Nama Guru:</span><br><strong>${nama}</strong></div><div><span class="text-[#6B7280]">Pangkat/Golongan:</span><br><strong>${gol}</strong></div><div><span class="text-[#6B7280]">Semester/Kelas:</span><br><strong>Semester ${data.semester} / Kelas ${data.kelas}</strong></div><div><span class="text-[#6B7280]">Mata Pelajaran:</span><br><strong>${data.mapel}</strong></div><div><span class="text-[#6B7280]">Tahun Pelajaran:</span><br><strong>${data.tahun}</strong></div></div></div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 no-print" id="liveStats"><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Skor Total</p><p class="text-2xl font-800 text-[#1B4332]" id="liveTotal">${ts}</p></div><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Ketercapaian</p><p class="text-2xl font-800" id="livePersen" style="color:${k.color}">${p}%</p></div><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Predikat</p><p class="text-lg font-700" id="livePredikat" style="color:${k.color}">${k.label}</p></div><div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Terisi</p><p class="text-2xl font-800 text-[#40916C]" id="liveFilled">${Object.values(currentScores).filter(v=>v!==null&&v!==undefined).length}/20</p></div></div>
+    <div class="card overflow-x-auto mb-6"><table class="assess-table"><thead><tr><th style="width:50px">No</th><th>Komponen Administrasi Pembelajaran</th><th style="width:200px">Penilaian</th><th style="width:60px">Skor</th><th style="width:60px" class="no-print">File</th></tr></thead><tbody>${rows}</tbody><tfoot><tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Jumlah / Skor Total</td><td colspan="2" class="text-center font-800 text-lg text-[#1B4332]" id="footerTotal">${ts}</td><td class="no-print"></td></tr><tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Ketercapaian</td><td colspan="2" class="text-center font-800 text-lg" id="footerPersen" style="color:${k.color}">${p}%</td><td class="no-print"></td></tr></tfoot></table></div>
+    <div class="card p-5 mb-6"><h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-info-circle text-[#1B4332] mr-1"></i> Keterangan Penilaian</h4><div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm"><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FEF2F2] text-[#DC2626] font-700 text-xs">0</span><span class="text-[#6B7280]">Tidak Ada</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FFFBEB] text-[#D97706] font-700 text-xs">1</span><span class="text-[#6B7280]">Ada, Tidak Sesuai</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#ECFDF5] text-[#059669] font-700 text-xs">2</span><span class="text-[#6B7280]">Ada dan Sesuai</span></div><div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><i class="fas fa-calculator text-[#1B4332]"></i><span class="text-[#6B7280]">Nilai = (Total/40)x100%</span></div></div></div>
+    <div class="card p-5 mb-6"><h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-chart-bar text-[#1B4332] mr-1"></i> Skala Ketercapaian</h4><div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm"><div class="p-3 rounded-xl border-2 border-[#10B981] bg-[#ECFDF5] text-center"><p class="font-800 text-[#059669]">91% - 100%</p><p class="font-600 text-[#059669]">Sangat Baik</p></div><div class="p-3 rounded-xl border-2 border-[#34D399] bg-[#F0FDF9] text-center"><p class="font-800 text-[#10B981]">81% - 90%</p><p class="font-600 text-[#10B981]">Baik</p></div><div class="p-3 rounded-xl border-2 border-[#FBBF24] bg-[#FFFBEB] text-center"><p class="font-800 text-[#D97706]">71% - 80%</p><p class="font-600 text-[#D97706]">Cukup</p></div><div class="p-3 rounded-xl border-2 border-[#F87171] bg-[#FEF2F2] text-center"><p class="font-800 text-[#DC2626]">&lt; 71%</p><p class="font-600 text-[#DC2626]">Kurang</p></div></div></div>
+    <div class="card p-5 mb-6"><h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-lightbulb text-[#D4A017] mr-1"></i> Saran</h4><textarea id="saranField" class="input-field min-h-[120px] resize-y no-print" placeholder="Tulis saran perbaikan...">${sr}</textarea><div id="saranDisplay" class="hidden text-sm text-[#1A1A2E] whitespace-pre-wrap border-2 border-transparent rounded-xl p-3 bg-[#FAFAF7]">${sr}</div></div>
+    <div class="card p-5 mb-6 no-print"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-[#F0F7F4] flex items-center justify-center"><i class="fab fa-google-drive text-[#40916C] text-lg"></i></div><div class="flex-1"><p class="font-600 text-sm text-[#1A1A2E]">Folder Google Drive</p><p class="text-xs text-[#6B7280]">File yang diupload juga tersimpan di folder Drive terkait</p></div><a href="${GDRIVE_BASE}" target="_blank" class="btn-outline text-xs py-2 px-4"><i class="fab fa-google-drive mr-1"></i> Buka Drive</a></div></div>
+    <div class="card p-6" id="signatureSection"><div class="grid grid-cols-3 gap-4 text-center text-sm"><div><p class="font-500 text-[#6B7280]">Majalengka, ................ 20...</p><p class="font-600 text-[#1A1A2E] mt-1">Kepala Sekolah/Supervisor</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">KARYADI, S.Pd</p><p class="text-xs text-[#6B7280]">NIP. 197505052000031012</p></div><div><p class="font-500 text-[#6B7280]">&nbsp;</p><p class="font-600 text-[#1A1A2E] mt-1">Guru yang Disupervisi</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">${nama}</p><p class="text-xs text-[#6B7280]">NIP. ${nip}</p></div><div><p class="font-500 text-[#6B7280]">Mengetahui,</p><p class="font-600 text-[#1A1A2E] mt-1">Pengawas Bina</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">H. AJA WIHARJA, S.Pd., M.M.Pd.</p><p class="text-xs text-[#6B7280]">NIP. 196906141990091002</p></div></div></div>`;
 }
 
-function updateScore(index, value) {
-  currentScores[index] = value;
-  updateLiveStats();
-  // Simpan otomatis ke Firebase
-  if (currentAssessmentId) {
-    db.ref('assessments/' + currentAssessmentId + '/scores/' + index).set(value);
-    db.ref('assessments/' + currentAssessmentId + '/updatedAt').set(firebase.database.ServerValue.TIMESTAMP);
+function updateScore(i, v) {
+  currentScores[i] = v; updateLiveStats();
+  if(currentAssessmentId) {
+    db.ref('assessments/'+currentAssessmentId+'/scores/'+i).set(v);
+    db.ref('assessments/'+currentAssessmentId+'/updatedAt').set(firebase.database.ServerValue.TIMESTAMP);
   }
 }
 
 function updateLiveStats() {
-  const total = Object.values(currentScores).reduce((s, v) => s + (v || 0), 0);
-  const persen = Math.round((total / MAX_SCORE) * 100);
-  const ket = getKetercapaian(persen);
-  const filled = Object.values(currentScores).filter(v => v !== null && v !== undefined).length;
-
-  const elTotal = document.getElementById('liveTotal');
-  const elPersen = document.getElementById('livePersen');
-  const elPredikat = document.getElementById('livePredikat');
-  const elFilled = document.getElementById('liveFilled');
-  const elFooterTotal = document.getElementById('footerTotal');
-  const elFooterPersen = document.getElementById('footerPersen');
-
-  if (elTotal) { elTotal.textContent = total; elTotal.style.animation = 'none'; elTotal.offsetHeight; elTotal.style.animation = 'fadeSlideIn 0.3s ease'; }
-  if (elPersen) { elPersen.textContent = persen + '%'; elPersen.style.color = ket.color; }
-  if (elPredikat) { elPredikat.textContent = ket.label; elPredikat.style.color = ket.color; }
-  if (elFilled) elFilled.textContent = filled + '/20';
-  if (elFooterTotal) elFooterTotal.textContent = total;
-  if (elFooterPersen) { elFooterPersen.textContent = persen + '%'; elFooterPersen.style.color = ket.color; }
-
-  // Update warna baris skor
-  KOMPONEN.forEach((_, i) => {
-    const radios = document.querySelectorAll(`input[name="score_${i}"]`);
-    const row = radios.length > 0 ? radios[0].closest('tr') : null;
-    if (!row) return;
-    const scoreCell = row.querySelector('td:nth-child(4)');
-    if (scoreCell) {
-      const s = currentScores[i];
-      scoreCell.textContent = (s !== null && s !== undefined) ? s : '-';
-      scoreCell.className = 'text-center font-700 ' + (s === 2 ? 'text-[#059669]' : s === 1 ? 'text-[#D97706]' : s === 0 ? 'text-[#DC2626]' : 'text-[#6B7280]');
-    }
-  });
+  const t = Object.values(currentScores).reduce((s,v)=>s+(v||0),0);
+  const p = Math.round((t/MAX_SCORE)*100); const k = getKetercapaian(p);
+  const f = Object.values(currentScores).filter(v=>v!==null&&v!==undefined).length;
+  const el=(id)=>document.getElementById(id);
+  if(el('liveTotal')) el('liveTotal').textContent=t;
+  if(el('livePersen')){el('livePersen').textContent=p+'%';el('livePersen').style.color=k.color;}
+  if(el('livePredikat')){el('livePredikat').textContent=k.label;el('livePredikat').style.color=k.color;}
+  if(el('liveFilled')) el('liveFilled').textContent=f+'/20';
+  if(el('footerTotal')) el('footerTotal').textContent=t;
+  if(el('footerPersen')){el('footerPersen').textContent=p+'%';el('footerPersen').style.color=k.color;}
 }
 
 async function saveAssessment() {
-  if (!currentAssessmentId) return;
-
-  const saran = document.getElementById('saranField') ? document.getElementById('saranField').value : '';
-  const saranDisplay = document.getElementById('saranDisplay');
-  if (saranDisplay) saranDisplay.textContent = saran;
-
-  try {
-    await db.ref('assessments/' + currentAssessmentId).update({
-      scores: currentScores,
-      saran: saran,
-      updatedAt: firebase.database.ServerValue.TIMESTAMP
-    });
-    showToast('Instrumen berhasil disimpan!', 'success');
-  } catch (err) {
-    showToast('Gagal menyimpan: ' + err.message, 'error');
-  }
+  if(!currentAssessmentId) return;
+  const sr = document.getElementById('saranField')?document.getElementById('saranField').value:'';
+  const sd = document.getElementById('saranDisplay'); if(sd) sd.textContent=sr;
+  try { await db.ref('assessments/'+currentAssessmentId).update({scores:currentScores,saran:sr,updatedAt:firebase.database.ServerValue.TIMESTAMP}); showToast('Berhasil disimpan!','success'); }
+  catch(err) { showToast('Gagal menyimpan: '+err.message,'error'); }
 }
 
-function viewAssessmentPrint(id) {
-  openAssessment(id);
-  setTimeout(() => window.print(), 800);
-}
+function viewAssessmentPrint(id) { openAssessment(id); setTimeout(()=>window.print(), 800); }
 
 // ======================== UPLOAD FILE ========================
-function openUploadModal(index, nama) {
-  document.getElementById('uploadKomponenId').value = index;
-  document.getElementById('uploadKomponenNama').textContent = nama;
-  document.getElementById('uploadPreview').classList.add('hidden');
-  selectedFile = null;
-  document.getElementById('fileInput').value = '';
-  openModal('modalUpload');
-}
+function openUploadModal(i, n) { document.getElementById('uploadKomponenId').value=i; document.getElementById('uploadKomponenNama').textContent=n; document.getElementById('uploadPreview').classList.add('hidden'); selectedFile=null; document.getElementById('fileInput').value=''; openModal('modalUpload'); }
 
 function handleFileSelect(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 10 * 1024 * 1024) {
-    showToast('Ukuran file maksimal 10MB.', 'warning');
-    return;
-  }
-  selectedFile = file;
-  document.getElementById('uploadFileName').textContent = file.name;
-  document.getElementById('uploadFileSize').textContent = formatFileSize(file.size);
-  document.getElementById('uploadPreview').classList.remove('hidden');
+  const f=e.target.files[0]; if(!f) return;
+  if(f.size>10*1024*1024){showToast('Maks 10MB.','warning');return;}
+  selectedFile=f; document.getElementById('uploadFileName').textContent=f.name; document.getElementById('uploadFileSize').textContent=formatFileSize(f.size); document.getElementById('uploadPreview').classList.remove('hidden');
 }
+function clearUpload() { selectedFile=null; document.getElementById('fileInput').value=''; document.getElementById('uploadPreview').classList.add('hidden'); }
 
-function clearUpload() {
-  selectedFile = null;
-  document.getElementById('fileInput').value = '';
-  document.getElementById('uploadPreview').classList.add('hidden');
-}
-
-// Drag & Drop
 document.addEventListener('DOMContentLoaded', () => {
-  const zone = document.getElementById('uploadZone');
-  if (zone) {
-    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
-    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-    zone.addEventListener('drop', e => {
-      e.preventDefault();
-      zone.classList.remove('dragover');
-      const file = e.dataTransfer.files[0];
-      if (file) {
-        const input = document.getElementById('fileInput');
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        input.files = dt.files;
-        handleFileSelect({ target: input });
-      }
-    });
-  }
+  const z=document.getElementById('uploadZone');
+  if(z){z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('dragover');});z.addEventListener('dragleave',()=>z.classList.remove('dragover'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('dragover');const f=e.dataTransfer.files[0];if(f){const i=document.getElementById('fileInput');const d=new DataTransfer();d.items.add(f);i.files=d.files;handleFileSelect({target:i});}});}
+  const now=new Date(); const y=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1; const ti=document.getElementById('newTahun'); if(ti) ti.value=y+'/'+(y+1);
 });
 
 async function uploadFile() {
-  if (!selectedFile) { showToast('Pilih file terlebih dahulu.', 'warning'); return; }
-  if (!currentAssessmentId) { showToast('Tidak ada instrumen aktif.', 'error'); return; }
-
-  const btn = document.getElementById('btnUpload');
-  btn.innerHTML = '<span class="spinner"></span> Mengupload...';
-  btn.disabled = true;
-
-  const index = document.getElementById('uploadKomponenId').value;
-  const path = `uploads/${currentAssessmentId}/${index}_${Date.now()}_${selectedFile.name}`;
-
+  if(!selectedFile){showToast('Pilih file.','warning');return;}
+  if(!currentAssessmentId){showToast('Tidak ada instrumen.','error');return;}
+  const btn=document.getElementById('btnUpload'); btn.innerHTML='<span class="spinner"></span> Upload...'; btn.disabled=true;
+  const i=document.getElementById('uploadKomponenId').value;
+  const path=`uploads/${currentAssessmentId}/${i}_${Date.now()}_${selectedFile.name}`;
   try {
-    const ref = storage.ref(path);
-    await ref.put(selectedFile);
-    const url = await ref.getDownloadURL();
-
-    const fileData = {
-      name: selectedFile.name,
-      size: selectedFile.size,
-      type: selectedFile.type,
-      url: url,
-      path: path,
-      uploadedAt: firebase.database.ServerValue.TIMESTAMP
-    };
-
-    await db.ref('assessments/' + currentAssessmentId + '/files/' + index).set(fileData);
-    currentFiles[index] = fileData;
-
-    closeModal('modalUpload');
-    showToast('File berhasil diupload!', 'success');
-
-    // Refresh halaman penilaian
-    const snap = await db.ref('assessments/' + currentAssessmentId).once('value');
-    renderAssessmentPage(snap.val());
-  } catch (err) {
-    showToast('Gagal upload: ' + err.message, 'error');
-  }
-  btn.innerHTML = '<i class="fas fa-upload mr-1"></i> Upload';
-  btn.disabled = false;
+    const ref=storage.ref(path); await ref.put(selectedFile); const url=await ref.getDownloadURL();
+    const fd={name:selectedFile.name,size:selectedFile.size,type:selectedFile.type,url,path,uploadedAt:firebase.database.ServerValue.TIMESTAMP};
+    await db.ref('assessments/'+currentAssessmentId+'/files/'+i).set(fd);
+    currentFiles[i]=fd; closeModal('modalUpload'); showToast('File berhasil diupload!','success');
+    const snap=await db.ref('assessments/'+currentAssessmentId).once('value'); renderAssessmentPage(snap.val());
+  } catch(err) { showToast('Gagal upload: '+err.message,'error'); }
+  btn.innerHTML='<i class="fas fa-upload mr-1"></i> Upload'; btn.disabled=false;
 }
 
-async function viewFileDetail(index) {
-  const fileData = currentFiles[index];
-  if (!fileData) return;
-
-  const container = document.getElementById('fileDetailList');
-  container.innerHTML = `
-    <div class="file-item">
-      <i class="fas ${getFileIcon(fileData.name)} text-lg"></i>
-      <div class="flex-1">
-        <p class="font-600 text-sm">${fileData.name}</p>
-        <p class="text-xs text-[#6B7280]">${formatFileSize(fileData.size)} &bull; ${formatDate(fileData.uploadedAt)}</p>
-      </div>
-    </div>
-    <div class="flex gap-3 mt-3">
-      <a href="${fileData.url}" target="_blank" class="btn-primary flex-1 text-center text-sm py-2">
-        <i class="fas fa-eye mr-1"></i> Lihat / Unduh
-      </a>
-      <button onclick="deleteFile(${index})" class="btn-danger flex-1 text-sm py-2">
-        <i class="fas fa-trash mr-1"></i> Hapus
-      </button>
-    </div>
-    <div class="mt-3 p-3 bg-[#F5F1EB] rounded-lg">
-      <p class="text-xs text-[#6B7280]"><i class="fab fa-google-drive mr-1"></i> File juga tersimpan di <a href="${GDRIVE_BASE}" target="_blank" class="text-[#40916C] underline">Google Drive</a></p>
-    </div>
-  `;
+async function viewFileDetail(i) {
+  const f=currentFiles[i]; if(!f) return;
+  document.getElementById('fileDetailList').innerHTML=`<div class="file-item"><i class="fas ${getFileIcon(f.name)} text-lg"></i><div class="flex-1"><p class="font-600 text-sm">${f.name}</p><p class="text-xs text-[#6B7280]">${formatFileSize(f.size)} &bull; ${formatDate(f.uploadedAt)}</p></div></div><div class="flex gap-3 mt-3"><a href="${f.url}" target="_blank" class="btn-primary flex-1 text-center text-sm py-2"><i class="fas fa-eye mr-1"></i> Lihat/Unduh</a><button onclick="deleteFile(${i})" class="btn-danger flex-1 text-sm py-2"><i class="fas fa-trash mr-1"></i> Hapus</button></div><div class="mt-3 p-3 bg-[#F5F1EB] rounded-lg"><p class="text-xs text-[#6B7280]"><i class="fab fa-google-drive mr-1"></i> File juga tersimpan di <a href="${GDRIVE_BASE}" target="_blank" class="text-[#40916C] underline">Google Drive</a></p></div>`;
   openModal('modalFileDetail');
 }
 
-async function deleteFile(index) {
-  if (!confirm('Hapus file ini?')) return;
-  const fileData = currentFiles[index];
-  if (!fileData) return;
-
-  try {
-    if (fileData.path) {
-      await storage.ref(fileData.path).delete();
-    }
-    await db.ref('assessments/' + currentAssessmentId + '/files/' + index).remove();
-    delete currentFiles[index];
-    closeModal('modalFileDetail');
-    showToast('File berhasil dihapus.', 'success');
-
-    const snap = await db.ref('assessments/' + currentAssessmentId).once('value');
-    renderAssessmentPage(snap.val());
-  } catch (err) {
-    showToast('Gagal menghapus file: ' + err.message, 'error');
-  }
+async function deleteFile(i) {
+  if(!confirm('Hapus file ini?')) return; const f=currentFiles[i]; if(!f) return;
+  try { if(f.path) await storage.ref(f.path).delete(); await db.ref('assessments/'+currentAssessmentId+'/files/'+i).remove(); delete currentFiles[i]; closeModal('modalFileDetail'); showToast('Dihapus.','success'); const snap=await db.ref('assessments/'+currentAssessmentId).once('value'); renderAssessmentPage(snap.val()); }
+  catch(err) { showToast('Gagal: '+err.message,'error'); }
 }
-
-// ======================== INISIALISASI ========================
-// Set tahun pelajaran otomatis
-document.addEventListener('DOMContentLoaded', () => {
-  const now = new Date();
-  const year = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
-  const tahunInput = document.getElementById('newTahun');
-  if (tahunInput) tahunInput.value = year + '/' + (year + 1);
-});
 </script>
 </body>
 </html>
