@@ -1,654 +1,188 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ITAP Kurikulum Merdeka - SDN Majalengka Wetan VIII</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script>
-tailwind.config = { theme: { extend: { fontFamily: { display: ['Playfair Display', 'serif'], body: ['Plus Jakarta Sans', 'sans-serif'] } } } }
-</script>
-<style>
-:root { --primary: #1B4332; --primary-light: #2D6A4F; --primary-lighter: #40916C; --accent: #D4A017; --bg: #F5F1EB; --bg-card: #FFFFFF; --text: #1A1A2E; --text-muted: #6B7280; --border: #E5E1DB; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-.bg-pattern { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(27,67,50,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 90%, rgba(212,160,23,0.06) 0%, transparent 60%), linear-gradient(175deg, #F5F1EB 0%, #EDE8E0 100%); }
-.bg-pattern::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231B4332' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
-.page { display: none; min-height: 100vh; animation: fadeSlideIn 0.5s ease; }
-.page.active { display: block; }
-@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03); transition: box-shadow 0.3s, transform 0.3s; }
-.btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; border: none; padding: 12px 28px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 14px rgba(27,67,50,0.3); font-family: 'Plus Jakarta Sans', sans-serif; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27,67,50,0.4); }
-.btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-.btn-accent { background: linear-gradient(135deg, var(--accent) 0%, #C4940F 100%); color: white; border: none; padding: 12px 28px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 14px rgba(212,160,23,0.3); font-family: 'Plus Jakarta Sans', sans-serif; }
-.btn-accent:hover { transform: translateY(-2px); }
-.btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary-lighter); padding: 10px 24px; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif; }
-.btn-outline:hover { background: var(--primary); color: white; }
-.btn-danger { background: var(--danger); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif; }
-.btn-danger:hover { background: #DC2626; }
-.input-field { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; transition: border-color 0.3s, box-shadow 0.3s; background: white; }
-.input-field:focus { outline: none; border-color: var(--primary-lighter); box-shadow: 0 0 0 3px rgba(45,106,79,0.1); }
-.select-field { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; transition: border-color 0.3s, box-shadow 0.3s; background: white; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
-.select-field:focus { outline: none; border-color: var(--primary-lighter); box-shadow: 0 0 0 3px rgba(45,106,79,0.1); }
-.assess-table { width: 100%; border-collapse: separate; border-spacing: 0; }
-.assess-table thead th { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 14px 12px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-.assess-table thead th:first-child { border-radius: 12px 0 0 0; }
-.assess-table thead th:last-child { border-radius: 0 12px 0 0; }
-.assess-table tbody tr { transition: background 0.2s; }
-.assess-table tbody tr:nth-child(even) { background: #FAFAF7; }
-.assess-table tbody tr:hover { background: #F0EDE6; }
-.assess-table tbody td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
-.radio-group { display: flex; gap: 8px; justify-content: center; }
-.radio-group label { display: flex; align-items: center; gap: 6px; cursor: pointer; padding: 6px 12px; border-radius: 8px; border: 2px solid var(--border); font-size: 13px; font-weight: 500; transition: all 0.2s; }
-.radio-group input[type="radio"] { display: none; }
-.radio-group label:has(input[value="0"]:checked) { border-color: #EF4444; background: #FEF2F2; color: #DC2626; font-weight: 700; }
-.radio-group label:has(input[value="1"]:checked) { border-color: #F59E0B; background: #FFFBEB; color: #D97706; font-weight: 700; }
-.radio-group label:has(input[value="2"]:checked) { border-color: #10B981; background: #ECFDF5; color: #059669; font-weight: 700; }
-.toast-container { position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
-.toast { padding: 14px 20px; border-radius: 12px; color: white; font-weight: 500; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); animation: toastIn 0.4s ease; display: flex; align-items: center; gap: 10px; min-width: 300px; }
-.toast.success { background: linear-gradient(135deg, #059669, #10B981); }
-.toast.error { background: linear-gradient(135deg, #DC2626, #EF4444); }
-.toast.info { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
-@keyframes toastIn { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
-.toast.removing { animation: toastOut 0.3s ease forwards; }
-@keyframes toastOut { to { opacity: 0; transform: translateX(60px); } }
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; }
-.modal-overlay.active { display: flex; }
-.modal-content { background: white; border-radius: 20px; padding: 32px; max-width: 520px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 24px 64px rgba(0,0,0,0.2); animation: modalIn 0.4s ease; }
-@keyframes modalIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.badge-success { background: #ECFDF5; color: #059669; }
-.badge-warning { background: #FFFBEB; color: #D97706; }
-.progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; background: linear-gradient(90deg, var(--primary-lighter), var(--accent)); }
-.navbar { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-.hero-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15; animation: blobFloat 8s ease-in-out infinite; }
-@keyframes blobFloat { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 15px) scale(0.95); } }
-.stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary-lighter), var(--accent)); }
-.spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; }
-@keyframes spin { to { transform: rotate(360deg); } }
-::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: #C5BFB5; border-radius: 3px; }
-@media print { .no-print { display: none !important; } body { background: white; } .card { box-shadow: none; border: 1px solid #ccc; } .assess-table thead th { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .radio-group label:has(input[value="2"]:checked) { background: #d1fae5 !important; -webkit-print-color-adjust: exact; } .radio-group label:has(input[value="1"]:checked) { background: #fef3c7 !important; -webkit-print-color-adjust: exact; } .radio-group label:has(input[value="0"]:checked) { background: #fee2e2 !important; -webkit-print-color-adjust: exact; } #saranField { display: none !important; } #saranDisplay { display: block !important; } #liveStats { display: none !important; } }
-@media (max-width: 768px) { .assess-table { font-size: 12px; } .assess-table thead th, .assess-table tbody td { padding: 8px 6px; } .radio-group label { padding: 4px 8px; font-size: 11px; } .modal-content { padding: 20px; } }
-</style>
-</head>
-<body>
-
-<div class="bg-pattern"></div>
-<div class="toast-container" id="toastContainer"></div>
-
-<!-- ==================== HALAMAN LOGIN ==================== -->
-<div id="pageLogin" class="page active">
-  <div class="min-h-screen flex items-center justify-center p-4 relative">
-    <div class="hero-blob" style="width:400px;height:400px;background:var(--primary);top:10%;left:-10%;"></div>
-    <div class="hero-blob" style="width:300px;height:300px;background:var(--accent);bottom:10%;right:-5%;animation-delay:-3s;"></div>
-    <div class="card w-full max-w-md p-8 relative z-10">
-      <div class="text-center mb-8">
-        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center shadow-lg">
-          <i class="fas fa-clipboard-check text-white text-3xl"></i>
-        </div>
-        <h1 class="font-display text-2xl font-800 text-[#1B4332] leading-tight">Instrumen Telaah<br>Administrasi Pembelajaran</h1>
-        <p class="text-sm text-[#6B7280] mt-2 font-medium">Kurikulum Merdeka &mdash; SDN Majalengka Wetan VIII</p>
-      </div>
-      <div class="flex bg-[#F5F1EB] rounded-xl p-1 mb-6">
-        <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]">Masuk</button>
-        <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]">Daftar</button>
-      </div>
-      
-      <!-- FORM LOGIN -->
-      <form id="formLogin" onsubmit="handleLogin(event)">
-        <div class="space-y-4">
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label><div class="relative"><i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="email" id="loginEmail" class="input-field pl-11" placeholder="contoh@email.com" required></div></div>
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password</label><div class="relative"><i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="password" id="loginPassword" class="input-field pl-11" placeholder="Masukkan password" required><button type="button" onclick="togglePw('loginPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]"><i class="fas fa-eye"></i></button></div></div>
-          <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnLogin"><span>Masuk</span></button>
-        </div>
-      </form>
-
-      <!-- FORM REGISTER -->
-      <form id="formRegister" onsubmit="handleRegister(event)" style="display:none;">
-        <div class="space-y-4">
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Nama Lengkap</label><div class="relative"><i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regNama" class="input-field pl-11" placeholder="Nama guru" required></div></div>
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">NIP</label><div class="relative"><i class="fas fa-id-card absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regNIP" class="input-field pl-11" placeholder="Nomor Induk Pegawai" required></div></div>
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Pangkat/Golongan</label><div class="relative"><i class="fas fa-star absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="text" id="regGolongan" class="input-field pl-11" placeholder="Contoh: III/a" required></div></div>
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Email</label><div class="relative"><i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="email" id="regEmail" class="input-field pl-11" placeholder="contoh@email.com" required></div></div>
-          <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Password (Min. 6 karakter)</label><div class="relative"><i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]"></i><input type="password" id="regPassword" class="input-field pl-11" placeholder="Min. 6 karakter" required minlength="6"><button type="button" onclick="togglePw('regPassword', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#1B4332]"><i class="fas fa-eye"></i></button></div></div>
-          <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="btnRegister"><span>Daftar Akun</span></button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== HALAMAN DASHBOARD ==================== -->
-<div id="pageDashboard" class="page">
-  <nav class="navbar no-print"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center"><i class="fas fa-clipboard-check text-white text-sm"></i></div><div class="hidden sm:block"><p class="font-700 text-sm text-[#1B4332] leading-tight">ITAP Kurikulum Merdeka</p><p class="text-xs text-[#6B7280]">SDN Majalengka Wetan VIII</p></div></div><div class="flex items-center gap-3"><span class="text-sm font-500 text-[#6B7280] hidden md:inline" id="navUserName">-</span><div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4A017] to-[#F2D06B] flex items-center justify-center text-white font-700 text-sm" id="navUserAvatar">G</div><button onclick="handleLogout()" class="btn-outline text-xs py-2 px-4"><i class="fas fa-sign-out-alt mr-1"></i> Keluar</button></div></div></nav>
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <div class="mb-8"><h2 class="font-display text-3xl font-800 text-[#1B4332] mb-1">Dashboard</h2><p class="text-[#6B7280]">Kelola instrumen telaah administrasi pembelajaran Anda</p></div>
-    
-    <!-- Info Guru -->
-    <div class="card p-6 mb-6"><div class="flex flex-wrap items-center gap-6"><div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1B4332] to-[#40916C] flex items-center justify-center text-white text-2xl font-800" id="dashAvatar">G</div><div class="flex-1 min-w-[200px]"><h3 class="font-700 text-lg text-[#1A1A2E]" id="dashNama">-</h3><p class="text-sm text-[#6B7280]">NIP: <span id="dashNIP">-</span></p><p class="text-sm text-[#6B7280]">Pangkat/Gol: <span id="dashGolongan">-</span></p></div><button onclick="openModal('modalNewAssessment')" class="btn-primary flex items-center gap-2"><i class="fas fa-plus"></i> Buat Instrumen Baru</button></div></div>
-    
-    <!-- Statistik -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Total Instrumen</p><p class="text-2xl font-800 text-[#1B4332]" id="statTotal">0</p></div>
-      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Sudah Selesai</p><p class="text-2xl font-800 text-[#10B981]" id="statSelesai">0</p></div>
-      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Dalam Proses</p><p class="text-2xl font-800 text-[#F59E0B]" id="statProses">0</p></div>
-      <div class="stat-card"><p class="text-xs font-600 text-[#6B7280] uppercase tracking-wide mb-1">Rata-rata Nilai</p><p class="text-2xl font-800 text-[#D4A017]" id="statRata">0%</p></div>
-    </div>
-
-    <!-- Daftar Instrumen -->
-    <div class="card overflow-hidden">
-      <div class="p-5 border-b border-[#E5E1DB] flex items-center justify-between">
-        <h3 class="font-700 text-lg text-[#1A1A2E]"><i class="fas fa-list-check text-[#1B4332] mr-2"></i>Daftar Instrumen</h3>
-        <div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-[#6B7280] text-sm"></i><input type="text" id="searchAssessment" oninput="renderAssessments()" class="input-field pl-9 py-2 text-sm w-48" placeholder="Cari..."></div>
-      </div>
-      <div id="assessmentList" class="p-5"><div class="text-center py-12 text-[#6B7280]"><i class="fas fa-inbox text-4xl mb-3 opacity-30"></i><p>Belum ada instrumen. Klik "Buat Instrumen Baru" untuk memulai.</p></div></div>
-    </div>
-  </main>
-</div>
-
-<!-- ==================== HALAMAN PENILAIAN ==================== -->
-<div id="pageAssessment" class="page">
-  <nav class="navbar no-print">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <button onclick="showPage('pageDashboard')" class="w-9 h-9 rounded-lg border border-[#E5E1DB] flex items-center justify-center text-[#6B7280] hover:bg-[#F5F1EB] transition-colors"><i class="fas fa-arrow-left text-sm"></i></button>
-        <div><p class="font-700 text-sm text-[#1B4332] leading-tight" id="assessNavTitle">Instrumen Penilaian</p><p class="text-xs text-[#6B7280]" id="assessNavSemester">-</p></div>
-      </div>
-      <div class="flex items-center gap-2">
-        <button onclick="saveAssessment()" class="btn-outline text-xs py-2 px-4 no-print"><i class="fas fa-save mr-1"></i> Simpan</button>
-        <button onclick="window.print()" class="btn-accent text-xs py-2 px-4 no-print"><i class="fas fa-print mr-1"></i> Cetak</button>
-      </div>
-    </div>
-  </nav>
-  <main class="max-w-7xl mx-auto px-4 py-6" id="assessmentContent"></main>
-</div>
-
-<!-- ==================== MODAL BUAT INSTRUMEN ==================== -->
-<div id="modalNewAssessment" class="modal-overlay">
-  <div class="modal-content">
-    <div class="flex items-center justify-between mb-6">
-      <h3 class="font-display text-xl font-700 text-[#1B4332]">Buat Instrumen Baru</h3>
-      <button onclick="closeModal('modalNewAssessment')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button>
-    </div>
-    <form onsubmit="createAssessment(event)">
-      <div class="space-y-4">
-        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Semester</label><select id="newSemester" class="select-field" required><option value="">Pilih Semester</option><option value="1">Semester 1 (Ganjil)</option><option value="2">Semester 2 (Genap)</option></select></div>
-        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Kelas</label><select id="newKelas" class="select-field" required><option value="">Pilih Kelas</option><option value="I">Kelas I</option><option value="II">Kelas II</option><option value="III">Kelas III</option><option value="IV">Kelas IV</option><option value="V">Kelas V</option><option value="VI">Kelas VI</option></select></div>
-        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Tahun Pelajaran</label><input type="text" id="newTahun" class="input-field" placeholder="2024/2025" required></div>
-        <div><label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Mata Pelajaran</label><input type="text" id="newMapel" class="input-field" placeholder="Contoh: Tematik, Matematika" required></div>
-      </div>
-      <div class="flex gap-3 mt-6">
-        <button type="button" onclick="closeModal('modalNewAssessment')" class="btn-outline flex-1">Batal</button>
-        <button type="submit" class="btn-primary flex-1" id="btnCreate"><i class="fas fa-plus mr-1"></i> Buat</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ==================== MODAL LINK GOOGLE DRIVE ==================== -->
-<div id="modalDrive" class="modal-overlay">
-  <div class="modal-content">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="font-display text-lg font-700 text-[#1B4332]">Upload File ke Google Drive</h3>
-      <button onclick="closeModal('modalDrive')" class="w-8 h-8 rounded-lg hover:bg-[#F5F1EB] flex items-center justify-center text-[#6B7280]"><i class="fas fa-times"></i></button>
-    </div>
-    <p class="text-sm text-[#6B7280] mb-4">Komponen: <strong id="driveKomponenNama" class="text-[#1A1A2E]">-</strong></p>
-    
-    <div class="mb-4">
-      <label class="block text-sm font-600 text-[#1A1A2E] mb-1.5">Tautan (Link) File di Google Drive</label>
-      <input type="url" id="driveLinkInput" class="input-field" placeholder="https://drive.google.com/file/d/.../view?usp=sharing">
-      <p class="text-xs text-[#6B7280] mt-1"><i class="fas fa-info-circle mr-1"></i>Upload file Anda ke Google Drive, lalu klik kanan → "Dapatkan tautan" → salin linknya di sini.</p>
-    </div>
-
-    <div class="p-4 bg-[#F0F7F4] rounded-xl mb-4">
-      <p class="text-sm font-600 text-[#1B4332] mb-2"><i class="fab fa-google-drive mr-1"></i> Cara Upload Cepat:</p>
-      <ol class="text-xs text-[#6B7280] list-decimal list-inside space-y-1">
-        <li>Klik tombol "Buka Folder Drive" di bawah.</li>
-        <li>Klik ikon <strong>+ New</strong> lalu pilih <strong>File upload</strong>.</li>
-        <li>Setelah selesai, klik kanan file → <strong>Bagikan</strong> → ubah ke "Siapa saja yang memiliki tautan".</li>
-        <li>Salin tautan, lalu tempelkan di kolom di atas.</li>
-      </ol>
-    </div>
-
-    <a href="https://drive.google.com/drive/folders/1DBC2YJFNo82u9zB1V7P2miNcK4_DYGLZ?usp=drive_link" target="_blank" class="btn-accent w-full flex items-center justify-center gap-2 mb-4 text-center">
-      <i class="fab fa-google-drive"></i> Buka Folder Google Drive
-    </a>
-
-    <input type="hidden" id="driveKomponenId">
-    <div class="flex gap-3">
-      <button type="button" onclick="closeModal('modalDrive')" class="btn-outline flex-1">Batal</button>
-      <button type="button" onclick="saveDriveLink()" class="btn-primary flex-1"><i class="fas fa-link mr-1"></i> Simpan Tautan</button>
-    </div>
-  </div>
-</div>
-
-<!-- Firebase SDK (Hanya Auth & Database, TANPA STORAGE) -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
-<script>
-// ======================== KONFIGURASI FIREBASE ========================
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LMS Kokurikuler</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet"><style>
+:root{--ink:#12332f;--leaf:#1f7a5c;--leaf2:#d9efe6;--sun:#f2b632;--bg:#eef4f2;--card:#fff;--mut:#5d716d;--line:#d5e2de;--bad:#b3261e}*{box-sizing:border-box}body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}h1,h2,h3{margin:0 0 .4em;line-height:1.2}p{margin:.3em 0}header{background:var(--ink);color:white;padding:.7rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between}header b{font-size:1.1rem}header small{opacity:.75;display:block}nav{display:flex;gap:.3rem;overflow-x:auto;padding:.5rem 1rem;background:white;border-bottom:1px solid var(--line)}nav button{border:0;background:none;padding:.5rem .9rem;border-radius:99px;font:inherit;font-weight:600;color:var(--mut);cursor:pointer;white-space:nowrap}nav button.on{background:var(--leaf);color:white}main{max-width:1050px;margin:auto;padding:1rem}.grid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem}.stat{font-size:2rem;font-weight:800;color:var(--leaf)}.btn{background:var(--leaf);color:white;border:0;border-radius:8px;padding:.55rem 1rem;font:inherit;font-weight:700;cursor:pointer}.btn.sm{padding:.3rem .7rem;font-size:.85rem}.ghost{background:none;color:var(--leaf);border:1px solid var(--leaf)}.red{background:var(--bad)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:1px}button:disabled{opacity:.55;cursor:wait}label{display:block;font-weight:600;margin:.6rem 0 .2rem;font-size:.9rem}input,select,textarea{width:100%;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;font:inherit;background:white}.tag{display:inline-block;background:var(--leaf2);color:var(--leaf);border-radius:99px;padding:.1rem .6rem;font-size:.8rem;font-weight:700}.tag.sun{background:#fdf0c9;color:#7a5a00}.mut{color:var(--mut);font-size:.9rem}.row{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap}.tabs{display:flex;gap:.4rem;margin-bottom:.8rem;flex-wrap:wrap}.auth{max-width:480px;margin:2rem auto}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{padding:.45rem;border-bottom:1px solid var(--line);text-align:left}.scroll{overflow-x:auto}dialog{border:0;border-radius:14px;max-width:650px;width:calc(100% - 2rem);padding:1.2rem;max-height:90vh;overflow:auto}dialog::backdrop{background:#0006}.hab{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem;border:1px solid var(--line);border-radius:12px;background:white;margin-bottom:.6rem;cursor:pointer}.hab input{width:1.4rem;height:1.4rem;margin-top:.2rem;accent-color:var(--leaf)}.hab.done{background:var(--leaf2);border-color:var(--leaf)}.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--sun)}#toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--ink);color:white;padding:.6rem 1rem;border-radius:8px;display:none;z-index:9}.err{color:var(--bad);font-weight:600}.actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}@media print{header,nav,.btn,#toast{display:none!important}body{background:white}.card{break-inside:avoid}main{max-width:none}}
+</style></head><body><div id="app"></div><dialog id="dlg"></dialog><div id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app-compat.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth-compat.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-database-compat.min.js"></script><script>
+'use strict';
 const firebaseConfig = {
-  apiKey: "AIzaSyDKrzSkegOCC3mVMivkEaBq841ltbXCMks",
-  authDomain: "adminsitrasi-pembelajaran.firebaseapp.com",
-  databaseURL: "https://adminsitrasi-pembelajaran-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "adminsitrasi-pembelajaran",
-  // storageBucket DIHAPUS karena paket gratis tidak mendukung Storage
-  messagingSenderId: "40176862526",
-  appId: "1:40176862526:web:c249180c13f151353c186f",
-  measurementId: "G-4SJLRBTBPL"
+  apiKey: "AIzaSyBwYUh9OqVOac1eScXZkYBEMTTmu-1we20",
+  authDomain: "ulangan-harian-digital.firebaseapp.com",
+  databaseURL: "https://ulangan-harian-digital-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "ulangan-harian-digital",
+  storageBucket: "ulangan-harian-digital.firebasestorage.app",
+  messagingSenderId: "998856001022",
+  appId: "1:998856001022:web:41386d4977fe68c42bacaf",
+  measurementId: "G-73532949QL"
 };
+const backupFirebaseConfig={apiKey:'AIzaSyBFUq9ekVf80pWBVJZM-mmUoVqr5SYYuyk',authDomain:'stscadangan2026.firebaseapp.com',databaseURL:'https://stscadangan2026-default-rtdb.asia-southeast1.firebasedatabase.app',projectId:'stscadangan2026',storageBucket:'stscadangan2026.firebasestorage.app',messagingSenderId:'635421075978',appId:'1:635421075978:web:8739473b6aa25c47f04df3',measurementId:'G-63LB4BPRWY'};
+firebase.initializeApp(firebaseConfig);const auth=firebase.auth(),db=firebase.database();const bdb=firebase.initializeApp(backupFirebaseConfig,'backup').database();const sApp=firebase.initializeApp(firebaseConfig,'sec'),sAuth=sApp.auth(),sDb=sApp.database();
+const THEMES=[{id:'t1',n:'Gaya Hidup Berkelanjutan',i:'🌱',f:'Memahami dampak aktivitas manusia terhadap lingkungan, serta belajar menjaga bumi dan mengatasi masalah sekitar seperti sampah dan perubahan iklim.',c:['Pupuk kompos dari sisa makanan kantin','Ecobrick dari botol plastik bekas','Gerakan hemat air dan energi di sekolah']},{id:'t2',n:'Kearifan Lokal',i:'🎎',f:'Menumbuhkan rasa bangga terhadap budaya, tradisi, kuliner, kesenian, dan potensi asli daerah tempat tinggal siswa.',c:['Membuat makanan tradisional khas daerah','Mempraktikkan permainan tradisional yang mulai langka','Mempelajari alat musik daerah']},{id:'t3',n:'Bhinneka Tunggal Ika',i:'🤝',f:'Menghargai perbedaan agama, suku, ras, bahasa, dan latar belakang sosial; menumbuhkan toleransi dan mencegah perundungan.',c:['Festival pakaian adat nusantara','Bertukar cerita perayaan hari besar keagamaan teman','Membuat Dinding Toleransi']},{id:'t4',n:'Bangunlah Jiwa dan Raganya',i:'💪',f:'Menjaga kesehatan fisik (raga) dan mental/emosional (jiwa), termasuk pembiasaan hidup sehat dan aman.',c:['Proyek Aku Suka Makan Sayur','Kampanye anti-perundungan ramah anak','Senam pagi dan meditasi ketenangan sebelum belajar']},{id:'t5',n:'Rekayasa dan Teknologi',i:'🔧',f:'Mengasah kreativitas menciptakan teknologi sederhana dan solusi praktis atas masalah sehari-hari dari barang di sekitar.',c:['Robot mainan dari kardus bekas','Penyaring air bersih untuk sekolah','Penyiraman tanaman otomatis dari botol bekas']},{id:'t6',n:'Kewirausahaan',i:'🛒',f:'Menumbuhkan jiwa kreatif, inovatif, mandiri, serta dasar literasi keuangan dan ekonomi sejak dini.',c:['Market Day: menjual kerajinan atau makanan sehat','Menghitung modal, harga jual, dan keuntungan bersama','Membuat label dan poster produk']}];
+const KAIH=[{id:'bangun',n:'Bangun Pagi',i:'🌅',w:'04.00–06.00',d:'Melatih kedisiplinan, menghargai waktu, dan menyiapkan mental serta energi positif sebelum berangkat sekolah.'},{id:'ibadah',n:'Beribadah',i:'🕌',w:'',d:'Nilai spiritual dan ketakwaan sebagai fondasi: moralitas, kejujuran, rasa syukur, dan ketenangan hati.'},{id:'olahraga',n:'Berolahraga',i:'🏃',w:'',d:'Menjaga kesehatan fisik dan mental. Di sekolah, Senam Anak Indonesia Hebat minimal 2 kali seminggu.'},{id:'makan',n:'Makan Sehat dan Bergizi',i:'🥗',w:'',d:'Makan seimbang dengan prinsip Isi Piringku; kurangi makanan instan dan gula berlebih.'},{id:'belajar',n:'Gemar Belajar',i:'📚',w:'',d:'Menumbuhkan rasa ingin tahu dan literasi sepanjang hayat; belajar sebagai kegemaran, bukan beban nilai.'},{id:'masyarakat',n:'Bermasyarakat',i:'🏘️',w:'',d:'Gotong royong, membantu sesama, bermain fisik untuk mengasah empati, dan bijak bergawai (3S: Screen Time, Screen Break, Screen Zone).'},{id:'tidur',n:'Tidur Cepat',i:'🌙',w:'',d:'Tidur cukup untuk menjaga fungsi kognitif, emosi, dan kebugaran esok hari.'}];
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),today=()=>ymd(new Date()),lastDays=n=>Array.from({length:n},(_,i)=>{const d=new Date();d.setDate(d.getDate()-i);return ymd(d)}),val=async p=>(await db.ref(p).get()).val(),themeOf=id=>THEMES.find(t=>t.id===id)||THEMES[0],countHab=d=>KAIH.filter(h=>d?.[h.id]===true).length;let me=null,school=null,mem=null,view='home',registering=false,authTab='login',bootId=0,rekapDate=today(),rekapKelas='',impRows=[],impAcc=[];const S=p=>`s/${me.npsn}/${p}`;let toastTimer;function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display='none',3500)}function msg(x){return {'auth/invalid-credential':'Email atau kata sandi salah.','auth/email-already-in-use':'Email sudah terdaftar.','auth/weak-password':'Kata sandi minimal 6 karakter.','auth/operation-not-allowed':'Aktifkan Email/Password di Firebase Authentication.','PERMISSION_DENIED':'Akses ditolak oleh aturan Firebase Database.'}[x?.code]||x?.message||String(x)}
+function openModal(title,body,onsub){$('dlg').innerHTML=`<form id="mf"><h3>${esc(title)}</h3>${body}<p class="err" id="merr"></p><div class="row"><button type="button" class="btn ghost" id="cancelModal">Batal</button><button class="btn" id="saveModal">Simpan</button></div></form>`;$('cancelModal').onclick=()=>$('dlg').close();$('mf').onsubmit=async e=>{e.preventDefault();const b=$('saveModal');b.disabled=true;try{await onsub(e.target);$('dlg').close();await go(view)}catch(x){$('merr').textContent=msg(x)}finally{b.disabled=false}};$('dlg').showModal()}
+function authView(){
+  $('app').innerHTML=`<div class="auth card"><h1>🌿 LMS Kokurikuler</h1><p class="mut">Program Kokurikuler “Aku dan Lingkunganku” — 6 tema, 2 semester, untuk siswa kelas 1–6.</p>
+  <div class="tabs" style="margin-top:1rem"><button class="btn sm" type="button" onclick="showAuthPanel('staffLogin')">Login Guru/Admin</button><button class="btn sm ghost" type="button" onclick="showAuthPanel('teacherRegister')">Registrasi Guru</button><button class="btn sm ghost" type="button" onclick="showAuthPanel('studentLogin')">Login Siswa</button></div>
+  <section id="staffLogin"><h3>Login Guru / Admin</h3><p class="mut">Guru harus registrasi terlebih dahulu dan menunggu persetujuan admin sekolah.</p><form id="af"><label>Email guru/admin</label><input name="email" type="email" autocomplete="username" required><label>Kata sandi</label><input name="pass" type="password" autocomplete="current-password" required><p class="err" id="aerr"></p><button class="btn" id="abtn" style="width:100%;margin-top:.8rem">Masuk sebagai Guru/Admin</button></form></section>
+  <section id="teacherRegister" hidden><h3>Registrasi Guru</h3><p class="mut">Masukkan NPSN sekolah yang sudah terdaftar. Akun guru baru aktif setelah disetujui admin sekolah.</p><form id="teacherForm"><label>NPSN Sekolah (8 digit)</label><input name="npsn" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required placeholder="Masukkan NPSN sekolah"><label>Nama lengkap guru</label><input name="nama" required maxlength="100"><label>Email aktif</label><input name="email" type="email" autocomplete="email" required><label>Kata sandi (minimal 6 karakter)</label><input name="pass" type="password" minlength="6" autocomplete="new-password" required><input type="hidden" name="role" value="guru"><p class="err" id="terr"></p><button class="btn" id="tbtn" style="width:100%;margin-top:.8rem">Daftar sebagai Guru</button></form></section>
+  <section id="studentLogin" hidden><h3>Login Siswa</h3><p class="mut">Siswa cukup mengisi NPSN, kelas, rombel, dan nama siswa sesuai data yang didaftarkan sekolah.</p><form id="studentForm"><label>1. NPSN Sekolah (8 digit)</label><input name="npsn" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required placeholder="Masukkan NPSN sekolah"><label>2. Kelas</label><select name="kelas" required><option value="">Pilih kelas</option><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option></select><label>3. Rombel</label><input name="rombel" required maxlength="20" placeholder="Contoh: A"><label>4. Nama siswa</label><input name="nama" required maxlength="100" autocomplete="name" placeholder="Nama lengkap sesuai data sekolah"><p class="err" id="serr"></p><button class="btn" id="sbtn" style="width:100%;margin-top:.8rem">Masuk ke Modul Siswa</button></form></section></div>`;
+  showAuthPanel('staffLogin');
+  $('af').onsubmit=async e=>{e.preventDefault();$('aerr').textContent='';$('abtn').disabled=true;try{await auth.signInWithEmailAndPassword(e.target.elements.email.value.trim(),e.target.elements.pass.value)}catch(x){$('aerr').textContent=msg(x)}finally{$('abtn').disabled=false}};
+  $('teacherForm').onsubmit=async e=>{e.preventDefault();$('terr').textContent='';$('tbtn').disabled=true;authTab='user';try{await submitAuth(e.target);$('terr').textContent='Registrasi dikirim. Akun guru menunggu persetujuan admin sekolah.'}catch(x){$('terr').textContent=msg(x)}finally{$('tbtn').disabled=false}};
+  $('studentForm').onsubmit=async e=>{e.preventDefault();$('serr').textContent='';$('sbtn').disabled=true;const npsn=e.target.elements.npsn.value.trim(),kelas=e.target.elements.kelas.value.trim(),rombel=e.target.elements.rombel.value.trim(),nama=e.target.elements.nama.value.trim();try{if(!/^\d{8}$/.test(npsn))throw Error('NPSN harus terdiri dari 8 digit angka.');const sch=await val('schools/'+npsn);if(!sch)throw Error('NPSN sekolah tidak ditemukan atau belum terdaftar.');const members=await val(`s/${npsn}/members`)||{};const norm=v=>String(v??'').toLowerCase().replace(/[^a-z0-9]/g,'');const wantName=norm(nama),wantRombel=norm(rombel);const found=Object.entries(members).find(([uid,m])=>{if(m?.role!=='siswa'||m?.status!=='aktif'||norm(m.name||m.nama)!==wantName)return false;const mk=norm(m.kelas),mr=norm(m.rombel||m.rombongan_belajar||'');const full=norm(kelas+rombel),spaced=norm(kelas+' '+rombel);const classMatch=(mk===norm(kelas)&&(!mr||mr===wantRombel))||mk===full||mk===spaced||mk===norm(kelas+'-'+rombel)||mk===norm(kelas+'/'+rombel);return classMatch});if(!found)throw Error('Data siswa tidak cocok. Periksa NPSN, kelas, rombel, dan nama; pastikan siswa sudah didaftarkan admin.');await auth.signInAnonymously();const [uid,m]=found;me={uid:auth.currentUser.uid,role:'siswa',npsn,name:m.name||m.nama};school=sch;mem={...m,kelas:m.kelas||kelas,rombel:m.rombel||rombel,studentRecordUid:uid};view='themes';publicShell();await go('themes')}catch(x){$('serr').textContent=msg(x)}finally{$('sbtn').disabled=false}};
+}
+function showAuthPanel(panel){for(const id of ['staffLogin','teacherRegister','studentLogin'])$(id).hidden=id!==panel;document.querySelectorAll('.tabs button').forEach((b,i)=>{b.classList.toggle('ghost',(['staffLogin','teacherRegister','studentLogin'][i]!==panel));});}
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.database();
+function publicShell(){
+  if(!me||me.role!=='siswa'||!/^\d{8}$/.test(String(me.npsn||'')))return authView();
+  $('app').innerHTML=`<header><div><b>🌿 LMS Kokurikuler</b><small>Aku dan Lingkunganku · Login siswa dengan NPSN</small></div><div>${esc(me.name)} · Kelas ${esc(mem?.kelas||'-')} <button class="btn sm ghost" style="color:white;border-color:white" onclick="exitStudent()">Ganti siswa</button></div></header><nav><button data-v="themes" class="on" onclick="go('themes')">6 Tema / Modul</button></nav><main id="main"></main>`;
+}
+function exitStudent(){auth.signOut().catch(()=>{});me=null;mem=null;school=null;authView()}
+async function submitAuth(f){
+  const field=n=>f.elements.namedItem(n).value;
+  if(authTab==='login'){
+    await auth.signInWithEmailAndPassword(field('email').trim(),field('pass'));
+    return;
+  }
+  const npsn=field('npsn').trim(),email=field('email').trim(),nama=field('nama').trim();
+  if(!/^\d{8}$/.test(npsn))throw Error('NPSN harus 8 digit angka.');
+  if(!nama)throw Error('Nama wajib diisi.');
+  const role=authTab==='school'?'admin':field('role');
+  const kelas=authTab==='user'?field('kelas').trim().toUpperCase():'';
+  if(authTab==='user'&&role==='siswa'&&!kelas)throw Error('Kelas siswa wajib diisi.');
+  registering=true;
+  let uid=null,createdAuth=false;
+  try{
+    // Buat sesi autentikasi terlebih dahulu. Pembacaan sekolah tidak boleh dilakukan
+    // sebelum login jika aturan database membatasi pembacaan untuk pengguna terautentikasi.
+    uid=(await auth.createUserWithEmailAndPassword(email,field('pass'))).user.uid;
+    createdAuth=true;
 
-const GDRIVE_BASE = 'https://drive.google.com/drive/folders/1DBC2YJFNo82u9zB1V7P2miNcK4_DYGLZ';
-const MAX_SCORE = 40;
-const KOMPONEN = [
-  'Kalender Pendidikan','Jadwal Pelajaran','Jadwal Piket Kelas','Struktur Organisasi Kelas','Denah Tempat Duduk',
-  'Papan Informasi Absen','Poster 7 Kebiasaan Anak Indonesia Hebat','Poster 8 Dimensi Profil Lulusan','Kesepakatan Kelas',
-  'Capaian Pembelajaran (CP)','Tujuan Pembelajaran (TP)','Alur Tujuan Pembelajaran (ATP)','Modul Ajar/RPM','Modul Kokurikuler',
-  'Buku Absensi Harian','Buku Daftar Nilai','Analisis Penilaian','Soal Asesmen Harian','Jurnal / Agenda Harian','Administrasi Penunjang Lainnya'
+    if(authTab==='school'){
+      // Buat sekolah terlebih dahulu agar aturan dapat memverifikasi adminUid pada
+      // penulisan profil pengguna berikutnya. Aturan wajib menolak NPSN yang sudah ada.
+      await db.ref('schools/'+npsn).set({
+        name:field('sekolah').trim(),jenjang:field('jenjang'),adminUid:uid,
+        createdAt:firebase.database.ServerValue.TIMESTAMP
+      });
+      await db.ref('users/'+uid).set({name:nama,role:'admin',npsn});
+      await db.ref(`s/${npsn}/members/${uid}`).set({name:nama,role:'admin',status:'aktif',email});
+    }else{
+      // Rules Firebase memvalidasi keberadaan sekolah ketika profil ditulis;
+      // tidak perlu membaca daftar sekolah sebelum profil dibuat.
+      const profile={name:nama,role,npsn};
+      const member={name:nama,role,kelas,status:role==='guru'?'pending':'aktif',email};
+      await db.ref('users/'+uid).set(profile);
+      await db.ref(`s/${npsn}/members/${uid}`).set(member);
+    }
+    registering=false;
+    await boot(auth.currentUser);
+  }catch(e){
+    registering=false;
+    // Jangan menghapus sesi dengan signOut jika profil sudah berhasil dibuat;
+    // tampilkan pesan spesifik agar admin dapat memulihkan akun bila penulisan parsial terjadi.
+    if(createdAuth)await auth.signOut().catch(()=>{});
+    const detail=msg(e);
+    throw Error(detail+(createdAuth?' Akun autentikasi mungkin sudah dibuat. Jika pendaftaran gagal di tengah proses, hapus akun yang belum memiliki profil melalui Firebase Authentication sebelum mencoba lagi.':''));
+  }
+}
+auth.onAuthStateChanged(u=>{if(!registering && me?.role!=='siswa')boot(u)});async function boot(u){const run=++bootId;if(!u){me=null;school=null;mem=null;authView();return}try{const p=await val('users/'+u.uid);if(run!==bootId)return;if(!p){$('app').innerHTML='<div class="auth card"><p class="err">Profil tidak ditemukan. Hubungi admin sekolah.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>';return}me={uid:u.uid,...p};if(!/^\d{8}$/.test(me.npsn||''))throw Error('NPSN profil tidak valid.');[school,mem]=await Promise.all([val('schools/'+me.npsn),val(S('members/'+me.uid))]);if(run!==bootId)return;if(!school||!mem||mem.role!==me.role){$('app').innerHTML='<div class="auth card"><p class="err">Keanggotaan sekolah tidak valid. Hubungi admin.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>';return}if(mem.status!=='aktif'){$('app').innerHTML=`<div class="auth card"><h2>${mem.status==='pending'?'Menunggu persetujuan':'Akun tidak aktif'}</h2><p>Hubungi admin ${esc(school.name)} untuk mengaktifkan akun.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>`;return}view='home';shell()}catch(x){if(run===bootId)$('app').innerHTML=`<div class="auth card"><p class="err">${esc(msg(x))}</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>`}}
+function shell(){const nav=[['home','Beranda'],['themes','6 Tema'],['projects','Projek'],['kaih','7 Kebiasaan']];if(me.role!=='siswa')nav.push(['rekap','Rekap kebiasaan']);if(me.role==='admin')nav.push(['users','Pengguna'],['import','Impor data']);$('app').innerHTML=`<header><div><b>🌿 ${esc(school.name)}</b><small>NPSN ${esc(me.npsn)} · ${esc(school.jenjang)}</small></div><div>${esc(me.name)} <span class="tag sun">${esc(me.role)}</span> <button class="btn sm ghost" style="color:white;border-color:white" onclick="auth.signOut()">Keluar</button></div></header><nav>${nav.map(([k,l])=>`<button data-v="${k}" onclick="go('${k}')">${l}</button>`).join('')}</nav><main id="main"></main>`;go('home')}
+let viewToken=0;async function go(v){if(!me)return;const allowed=['home','themes','projects','kaih',...(me.role!=='siswa'?['rekap']:[]),...(me.role==='admin'?['users','import']:[])];if(!allowed.includes(v))return toast('Menu tidak tersedia.');view=v;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));const m=$('main'),token=++viewToken;m.innerHTML='<p class="mut">Memuat…</p>';try{const html=await({home:vHome,themes:vThemes,projects:vProjects,kaih:vKaih,rekap:vRekap,users:vUsers,import:vImport}[v])();if(token===viewToken)m.innerHTML=html}catch(x){if(token===viewToken)m.innerHTML=`<p class="err">${esc(msg(x))}</p><p class="mut">Periksa koneksi serta aturan Firebase Realtime Database.</p>`}}
+async function vHome(){const [members,projects]=await Promise.all([val(S('members')),val(S('projects'))]),ms=Object.values(members||{}),ps=Object.values(projects||{}),n=r=>ms.filter(m=>m.role===r&&m.status==='aktif').length;let extra='';if(me.role==='siswa'){const k=await val(S(`kaih/${me.uid}/${today()}`))||{},c=countHab(k);extra=`<div class="card"><h3>Kebiasaan hari ini</h3><div class="stat">${c}/7</div><div class="bar"><i style="width:${c/7*100}%"></i></div><p><button class="btn sm" onclick="go('kaih')">Isi checklist</button></p></div>`}return `<h2>Halo, ${esc(me.name)} 👋</h2><div class="grid"><div class="card"><h3>Siswa aktif</h3><div class="stat">${n('siswa')}</div></div><div class="card"><h3>Guru aktif</h3><div class="stat">${n('guru')}</div></div><div class="card"><h3>Projek kokurikuler</h3><div class="stat">${ps.length}</div></div>${extra}</div><h3 style="margin-top:1.2rem">Enam tema</h3><div class="grid">${THEMES.map(t=>`<div class="card"><b>${t.i} ${t.n}</b></div>`).join('')}</div>`}
+const COURSE_LEVELS=(t)=>[
+{title:'LEVEL 0: PENGATURAN INDUK (COURSE DASHBOARD)',week:'Pengaturan kursus',items:[
+['l0a','Nama Kursus & Tujuan Pembelajaran','Kokurikuler - '+t.n+' (Gerakan Anak Indonesia Hebat)','page'],
+['l0b','Target Pengguna dan Fase','Murid SD kelas 1–6. Fase A&B untuk kelas 1–3; Fase C untuk kelas 4–6.','page'],
+['l0c','Metode Kelulusan','Activity Completion Tracking: aktivitas wajib dicentang selesai. Sertifikat terbuka setelah semua aktivitas wajib selesai.','completion']]},
+{title:'LEVEL 1: MODUL PENGENALAN & ORIENTASI',week:'MINGGU 1',items:[
+['l1a','1.1 Panduan Pembelajaran & Kontrak Belajar','Baca tujuan tema, aturan keselamatan, pembagian fase, dan kesepakatan belajar.','page'],
+['l1b','1.2 Ruang Tonton: Video Pemantik','Tonton video/presentasi pengantar yang disediakan guru tentang '+t.n.toLowerCase()+'.','video'],
+['l1c','1.3 Forum Diskusi Pemantik','Kelas 1–3: kirim jawaban berupa rekaman suara. Kelas 4–6: tulis jawaban singkat tentang pengalamanmu terkait tema ini.','forum']]},
+{title:'LEVEL 2: INVESTIGASI & OBSERVASI NYATA',week:'MINGGU 2',items:[
+['l2a','2.1 Materi Instruksi: Detektif Tema','Pelajari langkah observasi, cara mencatat temuan, dan cara bekerja dengan aman.','lesson'],
+['l2b','2.2 Unduh Lembar Kerja Observasi (LKPD)','Guru dapat melampirkan LKPD PDF/Word. Siswa mengunduh dan mengisi lembar kerja sesuai fase.','download'],
+['l2c','2.3 Ruang Tugas: Unggah Hasil Pengamatan','Kelas 1–3: unggah foto gambar/coretan hasil pengamatan. Kelas 4–6: unggah tabel data, catatan, atau dokumentasi hasil observasi.','assignment']]},
+{title:'LEVEL 3: AKSI NYATA & KREATIVITAS',week:'MINGGU 3–4',items:[
+['l3a','3.1 Pembagian Kelompok Digital','Guru membagi kelompok sesuai kelas/fase dan menetapkan peran anggota.','group'],
+['l3b','3.2 Inspirasi Karya: Bank Ide','Pelajari contoh karya dan pilih ide yang sesuai dengan tema '+t.n+'. Contoh kegiatan: '+t.c.join('; ')+'.','gallery'],
+['l3c','3.3 Ruang Kolaborasi & Upload Proyek Akhir','Kelas 1–3: unggah foto karya kelompok. Kelas 4–6: unggah video, laporan foto, atau dokumentasi produk/proyek.','groupassignment']]},
+{title:'LEVEL 4: REFLEKSI, ASESMEN, & PAMERAN',week:'MINGGU 5',items:[
+['l4a','4.1 Galeri Virtual: Pameran Karya','Lihat karya teman dan berikan apresiasi yang sopan. Guru dapat menambahkan tautan galeri.','gallery'],
+['l4b','4.2 Evaluasi Diri & Refleksi Mandiri','Kelas 1–3: pilih emoji 😊 / 😐 / 🙁. Kelas 4–6: jawab tiga pertanyaan refleksi singkat tentang proses, tantangan, dan pembelajaran.','reflection'],
+['l4c','4.3 Penilaian Guru: Rubrik Karakter','Penilaian guru: Kolaborasi, Kemandirian, Penalaran Kritis, Kreativitas. Skala BB, MB, BSH, SB.','rubric']]},
+{title:'LEVEL 5: PENUTUP & KELULUSAN KURSUS',week:'SERTIFIKAT',items:[
+['l5a','5.1 Sertifikat / Lencana Digital','Sertifikat terbuka setelah seluruh aktivitas wajib pada tema ini berstatus selesai.','certificate']]}
 ];
-
-let currentUser = null, currentAssessmentId = null, currentScores = {}, currentLinks = {};
-
-// ======================== UTILITAS ========================
-function showPage(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
-function openModal(id) { document.getElementById(id).classList.add('active'); }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-function togglePw(id, btn) { const i = document.getElementById(id); const ic = btn.querySelector('i'); if(i.type==='password'){i.type='text';ic.className='fas fa-eye-slash';}else{i.type='password';ic.className='fas fa-eye';} }
-function formatDate(ts) { if(!ts) return '-'; return new Date(ts).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}); }
-function getKetercapaian(p) { if(p>=91) return {label:'Sangat Baik',color:'#10B981'}; if(p>=81) return {label:'Baik',color:'#10B981'}; if(p>=71) return {label:'Cukup',color:'#F59E0B'}; return {label:'Kurang',color:'#EF4444'}; }
-
-function showToast(msg, type='info') {
-  const c = document.getElementById('toastContainer');
-  const icons = {success:'fa-check-circle',error:'fa-exclamation-circle',info:'fa-info-circle'};
-  const t = document.createElement('div'); t.className = `toast ${type}`;
-  t.innerHTML = `<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
-  c.appendChild(t);
-  setTimeout(() => { t.classList.add('removing'); setTimeout(() => t.remove(), 300); }, 4000);
+const activityLabels={page:'Baca materi',video:'Tandai video selesai ditonton',forum:'Tandai diskusi selesai',lesson:'Tandai materi selesai dipelajari',download:'Tandai LKPD sudah diunduh/diisi',assignment:'Tandai tugas sudah dikumpulkan',group:'Tandai pembagian kelompok selesai',gallery:'Tandai galeri/inspirasi sudah dilihat',groupassignment:'Tandai proyek akhir sudah dikumpulkan',reflection:'Tandai refleksi selesai',rubric:'Tandai penilaian guru selesai',completion:'Tandai pengaturan selesai',certificate:'Lihat status sertifikat'};
+function semesterOfTheme(tid){const n=THEMES.findIndex(t=>t.id===tid);return n<3?'Semester 1':'Semester 2'}
+function annualPlan(){return `<div class="card"><h3>📅 Rencana 1 Tahun Ajaran</h3><p>Program dibagi menjadi 2 semester. Setiap semester memuat 3 tema; setiap tema memakai struktur Level 0–5 dengan waktu pelaksanaan fleksibel sekitar 5 minggu.</p><div class="grid"><div><h4>Semester 1</h4><p>${THEMES.slice(0,3).map(t=>t.i+' '+t.n).join('<br>')}</p><p class="mut">Perkiraan 15 minggu kegiatan tema, sisakan waktu untuk jeda, asesmen, dan agenda sekolah.</p></div><div><h4>Semester 2</h4><p>${THEMES.slice(3,6).map(t=>t.i+' '+t.n).join('<br>')}</p><p class="mut">Perkiraan 15 minggu kegiatan tema, sisakan waktu untuk jeda, asesmen, dan agenda sekolah.</p></div></div><p class="mut">Jadwal ini berupa pembagian rancangan, bukan kalender tanggal tetap. Sesuaikan dengan kalender pendidikan dan agenda sekolah setempat.</p></div>`}
+function courseKey(tid){return 'lms_course_'+(me?.npsn||'')+'_'+(me?.uid||'')+'_'+tid}
+function readCourse(tid){try{return JSON.parse(localStorage.getItem(courseKey(tid))||'{}')}catch{return {}}}
+function courseDone(tid){const d=readCourse(tid);return COURSE_LEVELS(themeOf(tid)).flatMap(l=>l.items).filter(i=>i[0]!=='l5a').every(i=>d[i[0]]===true)}
+async function vThemes(){return `<h2>Program Kokurikuler 1 Tahun</h2><p class="mut">Satu tahun ajaran dibagi menjadi 2 semester. Semester 1 berisi tema 1–3 dan Semester 2 berisi tema 4–6. Setiap tema tetap memiliki Level 0–5 dan pelacakan penyelesaian.</p>${annualPlan()}<div class="grid">${THEMES.map(t=>{const all=COURSE_LEVELS(t).flatMap(l=>l.items).filter(i=>i[0]!=='l5a'),d=readCourse(t.id),done=all.filter(i=>d[i[0]]).length;return `<div class="card"><span class="tag">${semesterOfTheme(t.id)}</span><h3>${t.i} ${t.n}</h3><p>${esc(t.f)}</p><div class="bar"><i style="width:${done/all.length*100}%"></i></div><p class="mut">${done}/${all.length} aktivitas selesai ${courseDone(t.id)?' · Sertifikat terbuka':''}</p><div class="actions"><button class="btn sm" onclick="openCourse('${t.id}')">Buka modul tema</button>${me.role!=='siswa'?`<button class="btn sm ghost" onclick="newProject('${t.id}')">Buat projek tema</button>`:''}</div></div>`}).join('')}</div>`}
+function openCourse(tid){const t=themeOf(tid),levels=COURSE_LEVELS(t),d=readCourse(tid),total=levels.flatMap(l=>l.items).filter(i=>i[0]!=='l5a').length,done=levels.flatMap(l=>l.items).filter(i=>i[0]!=='l5a'&&d[i[0]]).length,eligible=me.role==='siswa';const html=`<div class="actions"><button class="btn sm ghost" onclick="go('themes')">← Kembali ke tema</button><button class="btn sm ghost" onclick="window.print()">Cetak modul</button>${courseDone(tid)&&eligible?`<button class="btn sm" onclick="printCourseCertificate('${tid}')">🎓 Cetak sertifikat</button>`:''}</div><h2>${t.i} ${t.n}</h2><p>${esc(t.f)}</p><p class="tag">${semesterOfTheme(t.id)} · Fase A&B: kelas 1–3 · Fase C: kelas 4–6</p><p class="mut">Setiap poin memiliki aktivitas yang berbeda. Checklist akan tercentang otomatis setelah aktivitas benar-benar diselesaikan.</p><h3 style="margin-top:1rem">Progres kursus: ${done}/${total}</h3><div class="bar"><i style="width:${total?done/total*100:0}%"></i></div>${levels.map(l=>`<section class="card" style="margin-top:.9rem"><h3>${l.title}</h3><p class="mut">${l.week}</p>${l.items.map(i=>{const isCert=i[0]==='l5a',complete=isCert?courseDone(tid):d[i[0]]===true;return `<div class="hab ${complete?'done':''}"><input type="checkbox" ${complete?'checked':''} disabled aria-label="${complete?'Selesai':'Belum selesai'}"><span style="flex:1"><b>${esc(i[1])}</b><p>${esc(i[2])}</p><span class="tag">${esc(i[3].toUpperCase())}</span>${!isCert?`<p><button type="button" class="btn sm ${complete?'ghost':''}" onclick="openLesson('${tid}','${i[0]}')">${complete?'✅ Lihat aktivitas':'Buka aktivitas: '+esc(activityLabels[i[3]]||'Mulai aktivitas')}</button></p>`:''}${isCert?`<p class="${complete?'tag':'mut'}">${complete?'🎓 Sertifikat terbuka':'🔒 Selesaikan semua aktivitas wajib untuk membuka sertifikat.'}</p>${complete&&eligible?`<button class="btn sm" onclick="printCourseCertificate('${tid}')">Cetak sertifikat</button>`:''}`:`<p class="mut">${complete?'✅ Selesai otomatis':'🔒 Belum selesai — selesaikan aktivitas di atas untuk membuka checklist'}</p>`}</span></div>`}).join('')}</section>`).join('')}`;$('main').innerHTML=html;view='course';document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v==='themes'))}
+const THEME_READINGS={
+ t1:{title:'Gaya Hidup Berkelanjutan',intro:'Bumi adalah rumah kita bersama. Air, udara, tanah, tumbuhan, dan hewan membantu semua makhluk hidup. Sampah yang dibuang sembarangan dapat menyumbat saluran air dan mencemari lingkungan. Kita bisa menjaga bumi dengan memilah sampah, menggunakan kembali barang yang masih layak, menghemat air dan listrik, serta menanam dan merawat tumbuhan.',examples:'Contoh aksi: membawa botol minum sendiri, mematikan lampu saat tidak dipakai, memakai kedua sisi kertas, dan membuat kompos dari sisa sayuran yang sesuai.',questions:['Masalah lingkungan apa yang kamu lihat di rumah atau sekolah?','Sebutkan dua tindakan yang bisa kamu lakukan untuk mengurangi sampah.','Aksi apa yang akan kamu lakukan selama satu minggu?']},
+ t2:{title:'Kearifan Lokal',intro:'Kearifan lokal adalah pengetahuan, kebiasaan, karya, dan nilai baik yang tumbuh di suatu daerah. Contohnya bahasa daerah, cerita rakyat, makanan tradisional, permainan, tarian, musik, kerajinan, serta kebiasaan gotong royong. Setiap daerah memiliki keunikan. Kita dapat mempelajarinya dengan bertanya kepada keluarga atau warga, mendengarkan cerita dengan sopan, dan menjaga tradisi yang baik.',examples:'Contoh kegiatan: wawancara anggota keluarga tentang permainan masa kecil, membuat catatan makanan khas daerah, atau belajar satu lagu atau permainan tradisional.',questions:['Tradisi atau makanan khas apa yang kamu ketahui?','Siapa yang dapat kamu tanya untuk mempelajari budaya daerahmu?','Bagaimana cara menghargai budaya daerah lain?']},
+ t3:{title:'Bhinneka Tunggal Ika',intro:'Indonesia memiliki banyak suku, bahasa, adat, dan kebiasaan. Walaupun berbeda, kita tetap dapat berteman dan bekerja sama. Menghargai perbedaan berarti mendengarkan teman, tidak mengejek nama atau kebiasaan orang lain, berbagi kesempatan, dan menyelesaikan masalah dengan kata-kata yang baik. Perundungan bukan candaan jika membuat orang lain takut atau sedih. Jika melihat perundungan, mintalah bantuan guru atau orang dewasa tepercaya.',examples:'Contoh aksi: membuat poster persahabatan, mendengarkan cerita teman, dan menyepakati aturan kelompok agar semua anggota mendapat giliran.',questions:['Apa persamaan yang kamu miliki dengan teman yang berbeda darimu?','Apa yang sebaiknya kamu lakukan jika ada teman diejek?','Tuliskan satu kalimat yang menunjukkan sikap menghargai perbedaan.']},
+ t4:{title:'Bangunlah Jiwa dan Raganya',intro:'Tubuh dan perasaan kita sama-sama perlu dijaga. Tubuh sehat terbantu oleh makanan bergizi, air putih, kebersihan, gerak badan, dan tidur cukup. Kesehatan jiwa juga penting. Kita boleh merasa senang, sedih, kecewa, atau khawatir. Mengenali perasaan dan bercerita kepada orang dewasa tepercaya dapat membantu. Kita juga perlu menjaga pertemanan dengan bersikap baik dan menolak perundungan.',examples:'Contoh aksi: bergerak aktif dengan aman, mencuci tangan, memilih makanan beragam, beristirahat dari layar, dan menyampaikan perasaan dengan sopan.',questions:['Kebiasaan apa yang membantu tubuhmu tetap sehat?','Apa yang bisa kamu lakukan saat merasa sedih atau khawatir?','Bagaimana cara membuat kelas terasa aman dan ramah?']},
+ t5:{title:'Rekayasa dan Teknologi',intro:'Teknologi adalah alat atau cara yang membantu manusia menyelesaikan masalah. Teknologi tidak selalu berupa komputer; alat sederhana pun dapat menjadi teknologi. Untuk membuat solusi, kita perlu mengamati masalah, mencari ide, menggambar rancangan, memilih bahan yang aman, mencoba, lalu memperbaiki hasilnya. Kegagalan saat mencoba adalah kesempatan untuk belajar. Mintalah bantuan guru saat memakai alat yang tajam, panas, atau berisiko.',examples:'Contoh karya: tempat pensil dari kardus bekas, penyiram tanaman sederhana, atau rancangan penyaring air sebagai model pembelajaran. Air hasil percobaan tidak boleh diminum.',questions:['Masalah apa di kelas atau rumah yang ingin kamu bantu selesaikan?','Alat atau bahan aman apa yang bisa digunakan?','Bagaimana kamu akan menguji apakah idemu berhasil?']},
+ t6:{title:'Kewirausahaan',intro:'Kewirausahaan berarti menemukan kebutuhan, membuat sesuatu yang bermanfaat, lalu menjelaskan manfaatnya kepada orang lain. Wirausaha yang baik bersikap jujur, kreatif, bertanggung jawab, dan menjaga kualitas. Saat membuat produk, kita dapat menghitung modal atau biaya bahan, menentukan harga secara wajar, mencatat pemasukan, dan menghitung sisa uang. Bekerja sama dan mendengarkan masukan membantu produk menjadi lebih baik.',examples:'Contoh kegiatan: membuat pembatas buku, menjual hasil kerajinan dalam Market Day dengan izin guru, membuat poster produk, atau berlatih menghitung modal dan harga jual tanpa harus berjualan sungguhan.',questions:['Barang atau jasa apa yang bermanfaat bagi temanmu?','Bahan apa yang dibutuhkan untuk membuatnya?','Mengapa penjual harus jujur dan mencatat uang dengan benar?']}
+};
+function responseKey(tid){return 'lms_answers_'+(me?.npsn||'')+'_'+(me?.uid||'')+'_'+tid}
+function readResponses(tid){try{return JSON.parse(localStorage.getItem(responseKey(tid))||'{}')}catch{return {}}}
+const ACTIVITY_GUIDES={
+l0a:'Tujuan poin ini adalah mengenali nama kursus dan tujuan pembelajaran tema. Perhatikan judul tema, lalu pahami hasil belajar yang ingin dicapai selama kegiatan.',
+l0b:'Kegiatan disesuaikan dengan jenjang kelas. Kelas 1–3 dapat menjawab secara lisan, menggambar, atau menulis singkat. Kelas 4–6 dapat membuat catatan, tabel, dan laporan yang lebih rinci.',
+l0c:'Penyelesaian tema ditentukan dari aktivitas wajib yang benar-benar dilakukan. Kerjakan setiap poin sesuai instruksi dan simpan bukti atau jawaban jika diminta.',
+l1a:'Sebelum mulai, baca tujuan tema dan instruksi pada setiap poin. Dengarkan arahan guru, gunakan alat dengan aman, hargai pendapat teman, dan minta bantuan jika ada kegiatan yang belum dipahami.',
+l2a:'Langkah observasi: (1) tentukan hal yang ingin diamati, (2) amati dengan teliti, (3) catat apa yang benar-benar dilihat, (4) bandingkan temuan, lalu (5) ceritakan hasilnya. Jangan mengambil atau menyentuh benda berbahaya.',
+l3b:'Pilih ide karya yang sesuai dengan tema. Perhatikan manfaat karya, bahan yang diperlukan, keamanan, dan apakah karya dapat dibuat bersama. Diskusikan ide dengan kelompok sebelum mulai membuatnya.',
+l4a:'Saat melihat pameran karya, perhatikan ide, usaha, dan manfaat karya teman. Berikan komentar yang sopan, sebutkan hal yang kamu sukai, dan jangan mengejek karya orang lain.'
+};
+function lessonText(tid,aid){const t=themeOf(tid),r=THEME_READINGS[tid]||THEME_READINGS.t1,item=COURSE_LEVELS(t).flatMap(l=>l.items).find(i=>i[0]===aid);return {title:item?item[1]:r.title,description:item?item[2]:'Pelajari materi dan lakukan kegiatan dengan tertib.',type:item?item[3]:'page',reading:ACTIVITY_GUIDES[aid]||(item?item[2]:r.intro),questions:r.questions}}
+function speakLesson(tid,aid){const x=lessonText(tid,aid);if(!('speechSynthesis' in window))return toast('Fitur bacakan tidak didukung browser ini.');speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(x.title+'. '+x.reading+'. '+x.description);u.lang='id-ID';u.rate=.9;speechSynthesis.speak(u)}
+function openLesson(tid,aid){
+ const t=themeOf(tid),x=lessonText(tid,aid),answers=readResponses(tid),old=answers[aid]||{},isStudent=me.role==='siswa',isTeacher=me.role==='guru'||me.role==='admin';
+ let activity='';
+ if(x.type==='page'||x.type==='lesson'||x.type==='gallery') activity=`<h3>📖 Materi untuk poin ini</h3><div style="white-space:pre-wrap;line-height:1.8">${esc(x.reading)}</div><div class="card" style="margin-top:1rem"><b>Yang perlu dilakukan</b><p>${esc(x.description)}</p><label><input id="readConfirm" type="checkbox" ${old.done?'checked':''}> Saya sudah membaca/mempelajari materi ini.</label></div><button class="btn" type="button" onclick="finishRead('${tid}','${aid}')">Simpan selesai membaca</button>`;
+ else if(x.type==='video') activity=`<h3>🎬 Video pemantik</h3><p>${esc(x.description)}</p><label>Tautan video dari guru (jika tersedia)</label><input id="videoUrl" type="url" placeholder="https://..." value="${esc(old.url||'')}"><label><input id="watchedConfirm" type="checkbox" ${old.done?'checked':''}> Saya sudah menonton video/presentasi.</label><div class="actions"><button class="btn" type="button" onclick="finishVideo('${tid}','${aid}')">Simpan selesai menonton</button>${old.url?`<button class="btn ghost" type="button" onclick="GenUIOpenVideo('${esc(old.url)}')">Buka video</button>`:''}</div>`;
+ else if(x.type==='assignment'||x.type==='groupassignment'||x.type==='forum') activity=`<h3>${x.type==='forum'?'💬 Jawaban diskusi': '📷 Unggah hasil kegiatan'}</h3><p>${esc(x.description)}</p>${x.type==='forum'?`<label>Jawaban diskusi / cerita pengalaman</label><textarea id="activityText" rows="4" placeholder="Tuliskan jawabanmu...">${esc(old.text||'')}</textarea><label>Atau unggah rekaman suara (opsional)</label>`:`<label>Unggah foto, video, atau dokumen hasil kegiatan</label>`}<input id="activityFile" type="file" accept="image/*,video/*,audio/*,.pdf,.doc,.docx" ${isStudent?'':'disabled'}><p class="mut">${old.fileName?'File tersimpan: '+esc(old.fileName):'Pilih file hasil pekerjaan. Batas ukuran 1,5 MB agar dapat disimpan di browser.'}</p><label>Catatan singkat (opsional)</label><textarea id="activityNote" rows="2" placeholder="Ceritakan hasil kegiatan...">${esc(old.note||'')}</textarea><button class="btn" type="button" onclick="saveUploadActivity('${tid}','${aid}','${x.type}')" ${isStudent?'':'disabled'}>Unggah / simpan hasil dan tandai selesai</button>`;
+ else if(x.type==='rubric') activity=`<h3>🧭 Penilaian karakter</h3><p>${esc(x.description)}</p><p class="mut">Isi penilaian diri berdasarkan kegiatan yang kamu lakukan. Guru juga dapat menggunakan rubrik ini saat mendampingi siswa.</p>${[['kolaborasi','Kolaborasi'],['mandiri','Kemandirian'],['kritis','Penalaran kritis'],['kreatif','Kreativitas']].map(([k,l])=>`<label>${l}</label><select id="score_${k}"><option value="">Pilih capaian</option>${['BB','MB','BSH','SB'].map(v=>`<option ${old[k]===v?'selected':''}>${v}</option>`).join('')}</select>`).join('')}<label>Catatan guru</label><textarea id="score_note" rows="3">${esc(old.note||'')}</textarea><button class="btn" type="button" onclick="saveRubric('${tid}','${aid}')">Simpan penilaian</button>`;
+ else if(x.type==='download') activity=`<h3>📄 Lembar kerja (LKPD)</h3><p>${esc(x.description)}</p><label>Tautan LKPD yang dibagikan guru (jika ada)</label><input id="lkpdUrl" type="url" placeholder="https://..." value="${esc(old.url||'')}"><label><input id="lkpdConfirm" type="checkbox" ${old.done?'checked':''}> Saya sudah membuka/mengunduh dan mengisi LKPD.</label><button class="btn" type="button" onclick="finishDownload('${tid}','${aid}')">Simpan selesai LKPD</button>`;
+ else if(x.type==='reflection') activity=`<h3>💭 Refleksi diri</h3><p>${esc(x.description)}</p>${(me.kelas&&parseInt(me.kelas)>=4?x.questions:x.questions.slice(0,1)).map((q,i)=>`<label>${i+1}. ${esc(q)}</label><textarea id="reflect_${i}" rows="3" placeholder="Tuliskan jawabanmu...">${esc(old['q'+i]||'')}</textarea>`).join('')}<label>Perasaan setelah kegiatan</label><select id="reflectMood"><option value="">Pilih perasaan</option>${['😊 Senang','😐 Biasa saja','🙁 Masih kesulitan'].map(v=>`<option ${old.mood===v?'selected':''}>${v}</option>`).join('')}</select><button class="btn" type="button" onclick="saveReflection('${tid}','${aid}')">Simpan refleksi</button>`;
+ else if(x.type==='completion'||x.type==='group') activity=`<h3>✅ Konfirmasi kegiatan</h3><p>${esc(x.description)}</p><label>Catatan kegiatan (opsional)</label><textarea id="activityNote" rows="3" placeholder="Apa yang sudah dilakukan?">${esc(old.note||'')}</textarea><label><input id="activityConfirm" type="checkbox" ${old.done?'checked':''}> Kegiatan ini sudah dilakukan sesuai arahan guru.</label><button class="btn" type="button" onclick="finishConfirm('${tid}','${aid}')">Simpan dan tandai selesai</button>`;
+ else activity=`<h3>📝 Pertanyaan kegiatan</h3><p>${esc(x.description)}</p>${x.questions.map((q,i)=>`<label>${i+1}. ${esc(q)}</label><textarea id="answer_${i}" rows="3" placeholder="Tuliskan jawabanmu...">${esc(old['q'+i]||'')}</textarea>`).join('')}<button class="btn" type="button" onclick="saveAnswers('${tid}','${aid}',${x.questions.length})">Simpan jawaban dan tandai selesai</button>`;
+ $('main').innerHTML=`<div class="actions"><button class="btn sm ghost" onclick="openCourse('${tid}')">← Kembali ke modul</button>${['page','lesson','gallery'].includes(x.type)?`<button class="btn sm ghost" onclick="speakLesson('${tid}','${aid}')">🔊 Bacakan materi</button><button class="btn sm ghost" onclick="if('speechSynthesis' in window)speechSynthesis.cancel()">⏹ Hentikan suara</button>`:''}</div><div class="card"><span class="tag">${esc(t.n)} · ${esc(x.type.toUpperCase())}</span><h2 style="margin-top:.5rem">${esc(x.title)}</h2><p>${esc(x.description)}</p>${activity}${old.done?'<p class="tag" style="margin-top:1rem">✅ Aktivitas ini sudah tersimpan dan checklist terbuka.</p>':''}</div>`;
 }
+function saveActivity(tid,aid,data,message){const all=readResponses(tid);all[aid]={...data,done:true,savedAt:new Date().toISOString()};try{localStorage.setItem(responseKey(tid),JSON.stringify(all));const d=readCourse(tid);d[aid]=true;localStorage.setItem(courseKey(tid),JSON.stringify(d));toast(message||'Aktivitas tersimpan. Checklist otomatis tercentang.');openCourse(tid)}catch(e){toast('Penyimpanan gagal. Ukuran file mungkin terlalu besar; pilih file di bawah 1,5 MB.')}}
+function finishRead(tid,aid){if(!$('readConfirm')?.checked)return toast('Centang konfirmasi setelah membaca materi.');saveActivity(tid,aid,{done:true},'Materi selesai dibaca. Checklist otomatis tercentang.')}
+function finishVideo(tid,aid){if(!$('watchedConfirm')?.checked)return toast('Centang konfirmasi setelah menonton video.');saveActivity(tid,aid,{done:true,url:$('videoUrl')?.value.trim()||''},'Video ditandai selesai ditonton.')}
+function GenUIOpenVideo(url){try{window.open(url,'_blank','noopener')}catch(e){toast('Tidak dapat membuka tautan video.')}}
+function finishDownload(tid,aid){if(!$('lkpdConfirm')?.checked)return toast('Konfirmasi bahwa LKPD sudah dibuka/diunduh dan diisi.');saveActivity(tid,aid,{done:true,url:$('lkpdUrl')?.value.trim()||''},'Aktivitas LKPD selesai.')}
+function finishConfirm(tid,aid){if(!$('activityConfirm')?.checked)return toast('Konfirmasi bahwa kegiatan benar-benar sudah dilakukan.');saveActivity(tid,aid,{done:true,note:$('activityNote')?.value.trim()||''},'Kegiatan tersimpan dan checklist otomatis tercentang.')}
+function saveAnswers(tid,aid,n){const out={};for(let i=0;i<n;i++)out['q'+i]=$('answer_'+i)?.value.trim()||'';if(!Object.values(out).some(Boolean))return toast('Isi setidaknya satu jawaban.');saveActivity(tid,aid,out,'Jawaban tersimpan dan checklist otomatis tercentang.')}
+function saveReflection(tid,aid){const out={mood:$('reflectMood')?.value||''};let n=0;for(let i=0;$('reflect_'+i);i++){out['q'+i]=$('reflect_'+i).value.trim();if(out['q'+i])n++}if(!n&&!out.mood)return toast('Isi refleksi terlebih dahulu.');saveActivity(tid,aid,out,'Refleksi tersimpan dan checklist otomatis tercentang.')}
+function saveRubric(tid,aid){const out={};for(const k of ['kolaborasi','mandiri','kritis','kreatif']){out[k]=$('score_'+k)?.value||'';if(!out[k])return toast('Pilih capaian untuk semua aspek penilaian.')}out.note=$('score_note')?.value.trim()||'';saveActivity(tid,aid,out,'Rubrik penilaian tersimpan.')}
+function saveUploadActivity(tid,aid,type){const file=$('activityFile')?.files?.[0],text=$('activityText')?.value.trim()||'',note=$('activityNote')?.value.trim()||'';if(!file&&!text&&!note)return toast('Isi jawaban atau pilih file hasil kegiatan terlebih dahulu.');if(file&&file.size>1.5*1024*1024)return toast('Ukuran file maksimal 1,5 MB. Pilih file yang lebih kecil.');const save=data=>saveActivity(tid,aid,{...data,text,note},'Hasil kegiatan tersimpan dan checklist otomatis tercentang.');if(!file)return save({});const reader=new FileReader();reader.onload=()=>save({fileName:file.name,fileType:file.type,fileData:reader.result,fileSize:file.size});reader.onerror=()=>toast('File gagal dibaca. Coba pilih ulang.');reader.readAsDataURL(file)}
+function toggleCourse(tid,aid,on){toast('Checklist dibuka otomatis setelah menyelesaikan aktivitasnya. Buka aktivitas untuk mengerjakannya.')}
 
-// ======================== AUTENTIKASI ========================
-function switchAuthTab(tab) {
-  const tl = document.getElementById('tabLogin'), tr = document.getElementById('tabRegister');
-  const fl = document.getElementById('formLogin'), fr = document.getElementById('formRegister');
-  if(tab==='login') { tl.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]'; tr.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]'; fl.style.display='block'; fr.style.display='none'; }
-  else { tr.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all bg-white shadow text-[#1B4332]'; tl.className='flex-1 py-2.5 rounded-lg text-sm font-600 transition-all text-[#6B7280]'; fr.style.display='block'; fl.style.display='none'; }
-}
+function printCourseCertificate(tid){if(me.role!=='siswa')return toast('Sertifikat dicetak melalui akun siswa masing-masing.');if(!courseDone(tid))return toast('Selesaikan seluruh aktivitas wajib sebelum mencetak sertifikat.');const t=themeOf(tid),tanggal=new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}),w=window.open('','_blank');if(!w)return toast('Izinkan pop-up agar sertifikat dapat dicetak.');w.document.write(`<!doctype html><html lang="id"><head><meta charset="utf-8"><title>Sertifikat Kokurikuler</title><style>body{font-family:Arial,sans-serif;margin:0;padding:30px;background:#f5faf7}.sert{border:10px double #1f7a5c;min-height:80vh;padding:45px;text-align:center;background:white;display:flex;flex-direction:column;justify-content:center}h1{color:#1f7a5c;font-size:38px;margin:8px}h2{font-size:26px}p{font-size:18px;line-height:1.7}.nama{font-size:30px;font-weight:bold;border-bottom:2px solid #1f7a5c;display:inline-block;padding:8px 30px;margin:15px}@media print{body{padding:0;background:white}.sert{min-height:90vh;break-inside:avoid}}</style></head><body><div class="sert"><p>GERAKAN ANAK INDONESIA HEBAT</p><h1>SERTIFIKAT PENYELESAIAN</h1><h2>Kokurikuler — Aku dan Lingkunganku</h2><p>Diberikan kepada</p><div class="nama">${esc(me.name)}</div><p>Kelas: ${esc(mem?.kelas||'-')}</p><p>Telah menyelesaikan seluruh aktivitas wajib tema<br><strong>${esc(t.n)}</strong></p><p>${esc(semesterOfTheme(tid))} · Tahun ajaran berjalan</p><p>Terbit pada ${tanggal}</p><br><p>Guru Pembimbing<br><br><br>________________________</p></div><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close()}
 
-async function handleRegister(e) {
-  e.preventDefault();
-  const btn = document.getElementById('btnRegister');
-  const nama = document.getElementById('regNama').value.trim();
-  const nip = document.getElementById('regNIP').value.trim();
-  const golongan = document.getElementById('regGolongan').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
-  const password = document.getElementById('regPassword').value;
-
-  btn.innerHTML = '<span class="spinner"></span> Mendaftar...'; btn.disabled = true;
-
-  try {
-    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-    const uid = userCredential.user.uid;
-    
-    await db.ref('users/' + uid).set({
-      nama, nip, golongan, email,
-      createdAt: firebase.database.ServerValue.TIMESTAMP
-    });
-
-    showToast('Pendaftaran berhasil! Silakan masuk.', 'success');
-    switchAuthTab('login');
-    document.getElementById('loginEmail').value = email;
-    document.getElementById('formRegister').reset();
-  } catch (error) {
-    console.error("Error:", error.code, error.message);
-    let msg = error.message || 'Terjadi kesalahan.';
-    if(error.code === 'auth/email-already-in-use') msg = 'Email sudah terdaftar. Silakan langsung masuk.';
-    else if(error.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
-    else if(error.code === 'auth/weak-password') msg = 'Password terlalu lemah, minimal 6 karakter.';
-    else if(error.code === 'auth/operation-not-allowed') msg = 'Email/Password belum diaktifkan di Firebase Console.';
-    else if(error.code === 'auth/configuration-not-found') msg = 'Layanan Auth belum diinisialisasi. Buka Firebase Console -> Authentication -> Klik "Get Started".';
-    showToast(msg, 'error');
-  }
-  btn.innerHTML = '<span>Daftar Akun</span>'; btn.disabled = false;
-}
-
-async function handleLogin(e) {
-  e.preventDefault();
-  const btn = document.getElementById('btnLogin');
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
-
-  btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
-
-  try {
-    await auth.signInWithEmailAndPassword(email, password);
-    showToast('Berhasil masuk!', 'success');
-  } catch (error) {
-    let msg = 'Gagal masuk.';
-    if(error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') msg = 'Email atau password salah.';
-    else if(error.code === 'auth/wrong-password') msg = 'Password salah.';
-    else msg = error.message;
-    showToast(msg, 'error');
-  }
-  btn.innerHTML = '<span>Masuk</span>'; btn.disabled = false;
-}
-
-function handleLogout() { auth.signOut(); currentAssessmentId = null; currentScores = {}; currentLinks = {}; showPage('pageLogin'); }
-
-// Listener Status Auth
-auth.onAuthStateChanged(user => {
-  if (user) {
-    currentUser = user;
-    db.ref('users/' + user.uid).once('value').then(snap => {
-      const d = snap.val() || {};
-      const n = d.nama || user.email; const ini = n.charAt(0).toUpperCase();
-      document.getElementById('navUserName').textContent = n;
-      document.getElementById('navUserAvatar').textContent = ini;
-      document.getElementById('dashAvatar').textContent = ini;
-      document.getElementById('dashNama').textContent = n;
-      document.getElementById('dashNIP').textContent = d.nip || '-';
-      document.getElementById('dashGolongan').textContent = d.golongan || '-';
-      showPage('pageDashboard');
-      loadAssessments();
-    }).catch(err => {
-      console.error("Gagal memuat data user:", err);
-      const n = user.email; const ini = n.charAt(0).toUpperCase();
-      document.getElementById('navUserName').textContent = n;
-      document.getElementById('navUserAvatar').textContent = ini;
-      document.getElementById('dashAvatar').textContent = ini;
-      document.getElementById('dashNama').textContent = n;
-      showPage('pageDashboard');
-      loadAssessments();
-    });
-  } else { currentUser = null; showPage('pageLogin'); }
-});
-
-// ======================== INSTRUMEN ========================
-async function createAssessment(e) {
-  e.preventDefault();
-  const btn = document.getElementById('btnCreate');
-  btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
-  const semester = document.getElementById('newSemester').value;
-  const kelas = document.getElementById('newKelas').value;
-  const tahun = document.getElementById('newTahun').value.trim();
-  const mapel = document.getElementById('newMapel').value.trim();
-
-  try {
-    const ref = db.ref('assessments').push();
-    await ref.set({ userId: currentUser.uid, semester, kelas, tahun, mapel, saran: '', scores: {}, links: {}, createdAt: firebase.database.ServerValue.TIMESTAMP, updatedAt: firebase.database.ServerValue.TIMESTAMP });
-    closeModal('modalNewAssessment');
-    document.getElementById('newMapel').value = '';
-    showToast('Instrumen berhasil dibuat!', 'success');
-  } catch(err) { showToast('Gagal membuat: ' + err.message, 'error'); console.error(err); }
-  btn.innerHTML = '<i class="fas fa-plus mr-1"></i> Buat'; btn.disabled = false;
-}
-
-function loadAssessments() {
-  if(!currentUser) return;
-  db.ref('assessments').orderByChild('userId').equalTo(currentUser.uid).on('value', snap => {
-    const data = snap.val() || {};
-    renderAssessments(data);
-    updateStats(data);
-  });
-}
-
-function renderAssessments(data) {
-  const c = document.getElementById('assessmentList');
-  const s = (document.getElementById('searchAssessment').value||'').toLowerCase();
-  const ent = Object.entries(data).filter(([id, a]) => `${a.kelas} ${a.semester} ${a.tahun} ${a.mapel}`.toLowerCase().includes(s));
-  if(!ent.length) { c.innerHTML = `<div class="text-center py-12 text-[#6B7280]"><i class="fas fa-inbox text-4xl mb-3 opacity-30"></i><p>${s?'Tidak ditemukan.':'Belum ada instrumen.'}</p></div>`; return; }
-  let h = '<div class="space-y-3">';
-  ent.sort((a,b) => (b[1].createdAt||0) - (a[1].createdAt||0));
-  for(const [id, a] of ent) {
-    const sc = a.scores||{}; const lk = a.links||{};
-    const filled = Object.values(sc).filter(v=>v!==null&&v!==undefined).length;
-    const total = Object.values(sc).reduce((s,v)=>s+(v||0),0);
-    const p = Math.round((total/MAX_SCORE)*100); const k = getKetercapaian(p);
-    const linkCount = Object.values(lk).filter(l=>l&&l.trim()!=='').length;
-    h += `<div class="card p-4 hover:translate-y-[-2px] transition-transform">
-      <div class="flex flex-wrap items-center gap-4">
-        <div class="flex-1 min-w-[200px]">
-          <div class="flex items-center gap-2 mb-1"><h4 class="font-700 text-[#1A1A2E]">Kelas ${a.kelas} - Semester ${a.semester}</h4><span class="badge ${filled===20?'badge-success':'badge-warning'}">${filled===20?'Selesai':'Proses'}</span></div>
-          <p class="text-sm text-[#6B7280]">${a.mapel} &bull; TA ${a.tahun} &bull; ${formatDate(a.createdAt)}</p>
-          <div class="flex items-center gap-4 mt-2">
-            <div class="flex-1 max-w-[200px]"><div class="progress-bar"><div class="progress-fill" style="width:${(filled/20)*100}%"></div></div></div>
-            <span class="text-xs text-[#6B7280]">${filled}/20</span>
-            <span class="text-xs text-[#6B7280]"><i class="fab fa-google-drive mr-1"></i>${linkCount} link</span>
-          </div>
-        </div>
-        <div class="text-center px-4"><p class="text-2xl font-800" style="color:${k.color}">${p}%</p><p class="text-xs font-600" style="color:${k.color}">${k.label}</p></div>
-        <div class="flex gap-2">
-          <button onclick="openAssessment('${id}')" class="btn-primary text-xs py-2 px-4"><i class="fas fa-pen-to-square mr-1"></i> Isi</button>
-          <button onclick="viewAssessmentPrint('${id}')" class="btn-outline text-xs py-2 px-3" title="Cetak"><i class="fas fa-print"></i></button>
-          <button onclick="deleteAssessment('${id}')" class="btn-danger text-xs py-2 px-3" title="Hapus"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>
-    </div>`;
-  }
-  h += '</div>'; c.innerHTML = h;
-}
-
-function updateStats(data) {
-  const e = Object.values(data); const t = e.length;
-  const s = e.filter(a=>Object.values(a.scores||{}).filter(v=>v!==null&&v!==undefined).length===20).length;
-  const r = t>0 ? Math.round(e.reduce((s,a)=>s+Object.values(a.scores||{}).reduce((x,v)=>x+(v||0),0),0)/(t*MAX_SCORE)*100) : 0;
-  document.getElementById('statTotal').textContent=t; document.getElementById('statSelesai').textContent=s;
-  document.getElementById('statProses').textContent=t-s; document.getElementById('statRata').textContent=r+'%';
-}
-
-async function deleteAssessment(id) {
-  if(!confirm('Yakin hapus instrumen ini?')) return;
-  try { await db.ref('assessments/'+id).remove(); showToast('Dihapus.','success'); } catch(err) { showToast('Gagal: '+err.message,'error'); }
-}
-
-// ======================== HALAMAN PENILAIAN ========================
-async function openAssessment(id) {
-  currentAssessmentId = id; currentScores = {}; currentLinks = {};
-  const snap = await db.ref('assessments/'+id).once('value');
-  const data = snap.val();
-  if(!data){ showToast('Tidak ditemukan.','error'); return; }
-  currentScores = data.scores||{}; currentLinks = data.links||{};
-  document.getElementById('assessNavTitle').textContent = `Kelas ${data.kelas} - ${data.mapel}`;
-  document.getElementById('assessNavSemester').textContent = `Semester ${data.semester} | TA ${data.tahun}`;
-  renderAssessmentPage(data); showPage('pageAssessment');
-}
-
-function renderAssessmentPage(data) {
-  const c = document.getElementById('assessmentContent');
-  const nama = document.getElementById('dashNama').textContent;
-  const nip = document.getElementById('dashNIP').textContent;
-  const gol = document.getElementById('dashGolongan').textContent;
-  
-  let rows = '';
-  KOMPONEN.forEach((k,i) => {
-    const s = currentScores[i]; 
-    const link = currentLinks[i];
-    const hasLink = link && link.trim() !== '';
-    
-    rows += `<tr>
-      <td class="text-center font-600 text-[#1B4332]">${i+1}</td>
-      <td>
-        <div class="font-500">${k}</div>
-        ${hasLink ? `<a href="${link}" target="_blank" class="flex items-center gap-1 mt-1 text-xs text-[#40916C] hover:underline"><i class="fab fa-google-drive"></i> Lihat File di Drive</a>` : ''}
-      </td>
-      <td>
-        <div class="radio-group">
-          <label><input type="radio" name="sc_${i}" value="0" ${s===0?'checked':''} onchange="updateScore(${i},0)"><span>0</span></label>
-          <label><input type="radio" name="sc_${i}" value="1" ${s===1?'checked':''} onchange="updateScore(${i},1)"><span>1</span></label>
-          <label><input type="radio" name="sc_${i}" value="2" ${s===2?'checked':''} onchange="updateScore(${i},2)"><span>2</span></label>
-        </div>
-      </td>
-      <td class="text-center font-700 ${s===2?'text-[#059669]':s===1?'text-[#D97706]':s===0?'text-[#DC2626]':'text-[#6B7280]'}">${s!==null&&s!==undefined?s:'-'}</td>
-      <td class="text-center no-print">
-        <button onclick="openDriveModal(${i},'${k.replace(/'/g,"\\'")}')" class="w-8 h-8 rounded-lg border ${hasLink ? 'border-[#40916C] bg-[#F0F7F4] text-[#40916C]' : 'border-[#E5E1DB] text-[#6B7280]'} flex items-center justify-center hover:bg-[#F0F7F4] hover:text-[#40916C] hover:border-[#40916C] transition-all mx-auto" title="Hubungkan ke Google Drive">
-          <i class="fab fa-google-drive text-sm"></i>
-        </button>
-      </td>
-    </tr>`;
-  });
-  
-  const ts = Object.values(currentScores).reduce((s,v)=>s+(v||0),0);
-  const p = Math.round((ts/MAX_SCORE)*100); const k = getKetercapaian(p); const sr = data.saran||'';
-  
-  c.innerHTML = `
-    <!-- Header -->
-    <div class="card p-6 mb-6" id="printHeader">
-      <div class="text-center mb-6"><h2 class="font-display text-xl font-800 text-[#1B4332] uppercase tracking-wide">Instrumen Telaah Administrasi Pembelajaran</h2><p class="font-600 text-[#40916C] text-lg">Kurikulum Merdeka</p></div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-        <div><span class="text-[#6B7280]">Nama Sekolah:</span><br><strong>SDN Majalengka Wetan VIII</strong></div>
-        <div><span class="text-[#6B7280]">Nama Guru:</span><br><strong>${nama}</strong></div>
-        <div><span class="text-[#6B7280]">Pangkat/Golongan:</span><br><strong>${gol}</strong></div>
-        <div><span class="text-[#6B7280]">Semester/Kelas:</span><br><strong>Semester ${data.semester} / Kelas ${data.kelas}</strong></div>
-        <div><span class="text-[#6B7280]">Mata Pelajaran:</span><br><strong>${data.mapel}</strong></div>
-        <div><span class="text-[#6B7280]">Tahun Pelajaran:</span><br><strong>${data.tahun}</strong></div>
-      </div>
-    </div>
-
-    <!-- Live Stats -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 no-print" id="liveStats">
-      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Skor Total</p><p class="text-2xl font-800 text-[#1B4332]" id="liveTotal">${ts}</p></div>
-      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Ketercapaian</p><p class="text-2xl font-800" id="livePersen" style="color:${k.color}">${p}%</p></div>
-      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Predikat</p><p class="text-lg font-700" id="livePredikat" style="color:${k.color}">${k.label}</p></div>
-      <div class="stat-card text-center"><p class="text-xs font-600 text-[#6B7280] uppercase mb-1">Terisi</p><p class="text-2xl font-800 text-[#40916C]" id="liveFilled">${Object.values(currentScores).filter(v=>v!==null&&v!==undefined).length}/20</p></div>
-    </div>
-
-    <!-- Tabel Penilaian -->
-    <div class="card overflow-x-auto mb-6">
-      <table class="assess-table">
-        <thead><tr><th style="width:50px">No</th><th>Komponen Administrasi Pembelajaran</th><th style="width:200px">Penilaian</th><th style="width:60px">Skor</th><th style="width:60px" class="no-print">Drive</th></tr></thead>
-        <tbody>${rows}</tbody>
-        <tfoot>
-          <tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Jumlah / Skor Total</td><td colspan="2" class="text-center font-800 text-lg text-[#1B4332]" id="footerTotal">${ts}</td><td class="no-print"></td></tr>
-          <tr class="bg-[#F5F1EB]"><td colspan="2" class="text-right font-700 px-4 py-3">Ketercapaian</td><td colspan="2" class="text-center font-800 text-lg" id="footerPersen" style="color:${k.color}">${p}%</td><td class="no-print"></td></tr>
-        </tfoot>
-      </table>
-    </div>
-
-    <!-- Keterangan -->
-    <div class="card p-5 mb-6">
-      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-info-circle text-[#1B4332] mr-1"></i> Keterangan Penilaian</h4>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FEF2F2] text-[#DC2626] font-700 text-xs">0</span><span class="text-[#6B7280]">Tidak Ada</span></div>
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#FFFBEB] text-[#D97706] font-700 text-xs">1</span><span class="text-[#6B7280]">Ada, Tidak Sesuai</span></div>
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><span class="w-6 h-6 rounded flex items-center justify-center bg-[#ECFDF5] text-[#059669] font-700 text-xs">2</span><span class="text-[#6B7280]">Ada dan Sesuai</span></div>
-        <div class="flex items-center gap-2 p-2 rounded-lg bg-[#F5F1EB]"><i class="fas fa-calculator text-[#1B4332]"></i><span class="text-[#6B7280]">Nilai = (Total/40)x100%</span></div>
-      </div>
-    </div>
-
-    <!-- Skala -->
-    <div class="card p-5 mb-6">
-      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-chart-bar text-[#1B4332] mr-1"></i> Skala Ketercapaian</h4>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-        <div class="p-3 rounded-xl border-2 border-[#10B981] bg-[#ECFDF5] text-center"><p class="font-800 text-[#059669]">91% - 100%</p><p class="font-600 text-[#059669]">Sangat Baik</p></div>
-        <div class="p-3 rounded-xl border-2 border-[#34D399] bg-[#F0FDF9] text-center"><p class="font-800 text-[#10B981]">81% - 90%</p><p class="font-600 text-[#10B981]">Baik</p></div>
-        <div class="p-3 rounded-xl border-2 border-[#FBBF24] bg-[#FFFBEB] text-center"><p class="font-800 text-[#D97706]">71% - 80%</p><p class="font-600 text-[#D97706]">Cukup</p></div>
-        <div class="p-3 rounded-xl border-2 border-[#F87171] bg-[#FEF2F2] text-center"><p class="font-800 text-[#DC2626]">&lt; 71%</p><p class="font-600 text-[#DC2626]">Kurang</p></div>
-      </div>
-    </div>
-
-    <!-- Saran -->
-    <div class="card p-5 mb-6">
-      <h4 class="font-700 text-sm text-[#1A1A2E] mb-3"><i class="fas fa-lightbulb text-[#D4A017] mr-1"></i> Saran</h4>
-      <textarea id="saranField" class="input-field min-h-[120px] resize-y no-print" placeholder="Tulis saran perbaikan...">${sr}</textarea>
-      <div id="saranDisplay" class="hidden text-sm text-[#1A1A2E] whitespace-pre-wrap border-2 border-transparent rounded-xl p-3 bg-[#FAFAF7]">${sr}</div>
-    </div>
-
-    <!-- Link Drive -->
-    <div class="card p-5 mb-6 no-print">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-[#F0F7F4] flex items-center justify-center"><i class="fab fa-google-drive text-[#40916C] text-lg"></i></div>
-        <div class="flex-1"><p class="font-600 text-sm text-[#1A1A2E]">Folder Google Drive Utama</p><p class="text-xs text-[#6B7280]">Klik untuk membuka folder tempat menyimpan semua file bukti administrasi</p></div>
-        <a href="${GDRIVE_BASE}" target="_blank" class="btn-accent text-xs py-2 px-4"><i class="fab fa-google-drive mr-1"></i> Buka Drive</a>
-      </div>
-    </div>
-
-    <!-- Tanda Tangan -->
-    <div class="card p-6" id="signatureSection">
-      <div class="grid grid-cols-3 gap-4 text-center text-sm">
-        <div><p class="font-500 text-[#6B7280]">Majalengka, ................ 20...</p><p class="font-600 text-[#1A1A2E] mt-1">Kepala Sekolah/Supervisor</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">KARYADI, S.Pd</p><p class="text-xs text-[#6B7280]">NIP. 197505052000031012</p></div>
-        <div><p class="font-500 text-[#6B7280]">&nbsp;</p><p class="font-600 text-[#1A1A2E] mt-1">Guru yang Disupervisi</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">${nama}</p><p class="text-xs text-[#6B7280]">NIP. ${nip}</p></div>
-        <div><p class="font-500 text-[#6B7280]">Mengetahui,</p><p class="font-600 text-[#1A1A2E] mt-1">Pengawas Bina</p><div class="h-20"></div><p class="font-700 text-[#1A1A2E] border-t border-[#1A1A2E] pt-1 inline-block">H. AJA WIHARJA, S.Pd., M.M.Pd.</p><p class="text-xs text-[#6B7280]">NIP. 196906141990091002</p></div>
-      </div>
-    </div>`;
-}
-
-function updateScore(i, v) {
-  currentScores[i] = v; updateLiveStats();
-  if(currentAssessmentId) {
-    db.ref('assessments/'+currentAssessmentId+'/scores/'+i).set(v);
-    db.ref('assessments/'+currentAssessmentId+'/updatedAt').set(firebase.database.ServerValue.TIMESTAMP);
-  }
-}
-
-function updateLiveStats() {
-  const t = Object.values(currentScores).reduce((s,v)=>s+(v||0),0);
-  const p = Math.round((t/MAX_SCORE)*100); const k = getKetercapaian(p);
-  const f = Object.values(currentScores).filter(v=>v!==null&&v!==undefined).length;
-  const el=(id)=>document.getElementById(id);
-  if(el('liveTotal')) el('liveTotal').textContent=t;
-  if(el('livePersen')){el('livePersen').textContent=p+'%';el('livePersen').style.color=k.color;}
-  if(el('livePredikat')){el('livePredikat').textContent=k.label;el('livePredikat').style.color=k.color;}
-  if(el('liveFilled')) el('liveFilled').textContent=f+'/20';
-  if(el('footerTotal')) el('footerTotal').textContent=t;
-  if(el('footerPersen')){el('footerPersen').textContent=p+'%';el('footerPersen').style.color=k.color;}
-}
-
-async function saveAssessment() {
-  if(!currentAssessmentId) return;
-  const sr = document.getElementById('saranField')?document.getElementById('saranField').value:'';
-  const sd = document.getElementById('saranDisplay'); if(sd) sd.textContent=sr;
-  try { await db.ref('assessments/'+currentAssessmentId).update({scores:currentScores,links:currentLinks,saran:sr,updatedAt:firebase.database.ServerValue.TIMESTAMP}); showToast('Berhasil disimpan!','success'); }
-  catch(err) { showToast('Gagal menyimpan: '+err.message,'error'); }
-}
-
-function viewAssessmentPrint(id) { openAssessment(id); setTimeout(()=>window.print(), 800); }
-
-// ======================== LINK GOOGLE DRIVE (PENGGANTI STORAGE) ========================
-function openDriveModal(i, nama) {
-  document.getElementById('driveKomponenId').value = i;
-  document.getElementById('driveKomponenNama').textContent = nama;
-  document.getElementById('driveLinkInput').value = currentLinks[i] || '';
-  openModal('modalDrive');
-}
-
-async function saveDriveLink() {
-  const i = document.getElementById('driveKomponenId').value;
-  const link = document.getElementById('driveLinkInput').value.trim();
-  
-  if(!link) { showToast('Masukkan tautan Google Drive.','warning'); return; }
-  if(!link.includes('drive.google.com')) { showToast('Pastikan link berasal dari Google Drive.','warning'); return; }
-
-  currentLinks[i] = link;
-  
-  if(currentAssessmentId) {
-    try {
-      await db.ref('assessments/'+currentAssessmentId+'/links/'+i).set(link);
-      await db.ref('assessments/'+currentAssessmentId+'/updatedAt').set(firebase.database.ServerValue.TIMESTAMP);
-      closeModal('modalDrive');
-      showToast('Tautan berhasil disimpan!', 'success');
-      
-      // Refresh tampilan
-      const snap = await db.ref('assessments/'+currentAssessmentId).once('value');
-      renderAssessmentPage(snap.val());
-    } catch(err) { showToast('Gagal menyimpan: '+err.message,'error'); }
-  }
-}
-
-// ======================== INISIALISASI ========================
-document.addEventListener('DOMContentLoaded', () => {
-  const now=new Date(); const y=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1; 
-  const ti=document.getElementById('newTahun'); if(ti) ti.value=y+'/'+(y+1);
-});
-</script>
-</body>
-</html>
+function newProject(tid){if(me.role==='siswa')return;openModal('Projek baru',`<label>Tema</label><select name="tema">${THEMES.map(t=>`<option value="${t.id}" ${t.id===tid?'selected':''}>${t.n}</option>`).join('')}</select><label>Judul projek</label><input name="jud" required><label>Deskripsi / tujuan</label><textarea name="desk" rows="3"></textarea><label>Kelas (mis. 4A, atau SEMUA)</label><input name="kelas" value="${esc(me.role==='guru'?(mem.kelas||'SEMUA'):'SEMUA')}"><label>Tenggat</label><input name="tgl" type="date"><label>Langkah kegiatan (satu per baris)</label><textarea name="langkah" rows="4"></textarea>`,async f=>{const v=n=>f.elements.namedItem(n).value,kelas=v('kelas').trim().toUpperCase()||'SEMUA';if(me.role==='guru'&&mem.kelas&&kelas!=='SEMUA'&&kelas!==mem.kelas.toUpperCase())throw Error('Guru hanya boleh membuat projek untuk kelas sendiri atau semua kelas.');await db.ref(S('projects')).push({theme:v('tema'),title:v('jud').trim(),desc:v('desk').trim(),kelas,deadline:v('tgl'),steps:v('langkah').split('\n').map(s=>s.trim()).filter(Boolean),by:me.uid,byName:me.name,at:firebase.database.ServerValue.TIMESTAMP})})}
+async function vProjects(){const pr=await val(S('projects')),k=(mem?.kelas||'').toUpperCase();const list=Object.entries(pr||{}).filter(([,p])=>me.role==='admin'||p.kelas==='SEMUA'||p.kelas===k||(me.role==='guru'&&p.by===me.uid)).sort((a,b)=>(b[1].at||0)-(a[1].at||0));let subs={};if(me.role==='siswa'){const mine=await Promise.all(list.map(async([id])=>[id,await val(S(`subs/${id}/${me.uid}`))]));for(const [id,v] of mine)if(v)subs[id]={[me.uid]:v};}else{const perProject=await Promise.all(list.map(async([id])=>[id,await val(S(`subs/${id}`)).catch(()=>null)]));for(const [id,v] of perProject)if(v)subs[id]=v;}const head=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem"><h2>Projek Kokurikuler</h2>${me.role!=='siswa'?'<button class="btn" onclick="newProject()">+ Projek baru</button>':''}</div>`;if(!list.length)return head+'<div class="card"><p>Belum ada projek untuk kelas Anda.</p></div>';return head+`<div class="grid">${list.map(([id,p])=>{const t=themeOf(p.theme),my=subs?.[id]?.[me.uid],cnt=Object.keys(subs?.[id]||{}).length;return `<div class="card"><span class="tag">${t.i} ${t.n}</span><h3 style="margin-top:.5rem">${esc(p.title)}</h3><p>${esc(p.desc)}</p><p class="mut">Kelas ${esc(p.kelas)} · Guru ${esc(p.byName)}${p.deadline?' · Tenggat '+esc(p.deadline):''}</p>${p.steps?.length?`<ol>${p.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:''}${me.role==='siswa'?`${my?`<p class="tag sun">Terkirim${my.nilai!=null?' · Nilai '+esc(my.nilai):''}</p>${my.feedback?`<p class="mut">Catatan guru: ${esc(my.feedback)}</p>`:''}`:''}<p><button class="btn sm" onclick="submitWork('${id}')">${my?'Ubah laporan':'Kumpulkan laporan'}</button></p>`:`<div class="actions"><button class="btn sm" onclick="reviewWork('${id}')">Lihat pengumpulan (${cnt})</button>${(me.role==='admin'||p.by===me.uid)?`<button class="btn sm red" onclick="delProject('${id}')">Hapus</button>`:''}</div>`}</div>`}).join('')}</div>`}
+async function submitWork(pid){if(me.role!=='siswa')return;const p=await val(S('projects/'+pid));if(!p||!(p.kelas==='SEMUA'||p.kelas===(mem.kelas||'').toUpperCase()))throw Error('Projek tidak tersedia untuk kelas Anda.');const old=await val(S(`subs/${pid}/${me.uid}`))||{};openModal('Laporan projek',`<label>Ceritakan yang kamu kerjakan</label><textarea name="isi" rows="5" required>${esc(old.text)}</textarea><label>Tautan foto/video/dokumen (opsional)</label><input name="link" type="url" value="${esc(old.link)}">`,async f=>{const v=n=>f.elements.namedItem(n).value;await db.ref(S(`subs/${pid}/${me.uid}`)).update({name:me.name,kelas:mem?.kelas||'',text:v('isi').trim(),link:v('link').trim(),at:firebase.database.ServerValue.TIMESTAMP})})}
+async function reviewWork(pid){if(me.role==='siswa')return;const p=await val(S('projects/'+pid));if(!p||!(me.role==='admin'||p.by===me.uid||p.kelas==='SEMUA'||p.kelas===(mem.kelas||'').toUpperCase()))return toast('Akses projek ditolak.');const subs=await val(S('subs/'+pid))||{},members=await val(S('members'))||{};const e=Object.entries(subs).filter(([u,s])=>me.role==='admin'||(members[u]?.kelas||s.kelas||'').toUpperCase()===(mem.kelas||'').toUpperCase());openModal('Pengumpulan siswa',e.length?e.map(([u,s])=>`<div class="card" style="margin-bottom:.6rem"><b>${esc(s.name)}</b> <span class="mut">${esc(s.kelas)}</span><p>${esc(s.text)}</p>${/^https?:\/\//i.test(s.link||'')?`<p><a href="${esc(s.link)}" target="_blank" rel="noopener noreferrer">Buka tautan</a></p>`:''}<label>Nilai (0–100)</label><input name="n_${u}" type="number" min="0" max="100" value="${esc(s.nilai??'')}"><label>Umpan balik</label><input name="f_${u}" value="${esc(s.feedback||'')}"></div>`).join(''):'<p>Belum ada yang mengumpulkan.</p>',async f=>{const updates={};for(const [u] of e){const n=f.elements.namedItem('n_'+u).value;updates[`subs/${pid}/${u}/nilai`]=n===''?null:Number(n);updates[`subs/${pid}/${u}/feedback`]=f.elements.namedItem('f_'+u).value.trim()}if(Object.keys(updates).length)await db.ref(S('')).update(updates)})}
+async function delProject(pid){if(me.role==='siswa')return;const p=await val(S('projects/'+pid));if(!p||(me.role!=='admin'&&p.by!==me.uid))return toast('Tidak memiliki izin menghapus projek.');if(confirm('Hapus projek beserta seluruh laporan siswa?')){await db.ref(S('')).update({['projects/'+pid]:null,['subs/'+pid]:null});go('projects')}}
+async function vKaih(){if(me.role!=='siswa')return `<h2>7 Kebiasaan Anak Indonesia Hebat</h2><div class="grid">${KAIH.map(h=>`<div class="card"><h3>${h.i} ${h.n}</h3>${h.w?`<span class="tag sun">${h.w}</span>`:''}<p>${esc(h.d)}</p></div>`).join('')}</div><p class="mut">Siswa mengisi checklist harian; guru melihat rekap di menu Rekap kebiasaan.</p>`;const all=await val(S('kaih/'+me.uid))||{},days=lastDays(7),td=all[today()]||{};return `<h2>Checklist kebiasaan hari ini</h2><p class="mut">${today()} — centang yang sudah kamu lakukan.</p>${KAIH.map(h=>{const wk=days.filter(d=>all[d]?.[h.id]===true).length;return `<label class="hab ${td[h.id]===true?'done':''}"><input type="checkbox" ${td[h.id]===true?'checked':''} onchange="toggleHab('${h.id}',this.checked)"><span style="flex:1"><b>${h.i} ${h.n}</b> ${h.w?`<span class="tag sun">${h.w}</span>`:''}<br><span class="mut">${esc(h.d)}</span><div class="bar" style="margin-top:.4rem"><i style="width:${wk/7*100}%"></i></div><span class="mut">${wk}/7 hari minggu ini</span></span></label>`}).join('')}`}
+async function toggleHab(id,on){if(me.role!=='siswa'||!KAIH.some(h=>h.id===id))return;try{const r=db.ref(S(`kaih/${me.uid}/${today()}/${id}`));on?await r.set(true):await r.remove();await go('kaih')}catch(x){toast(msg(x));go('kaih')}}
+async function vRekap(){if(me.role==='siswa')throw Error('Tidak memiliki akses.');const members=await val(S('members'))||{};const sis=Object.entries(members).filter(([,m])=>m.role==='siswa'&&m.status==='aktif'&&(me.role==='admin'||(m.kelas||'').toUpperCase()===(mem.kelas||'').toUpperCase()));const kelas=[...new Set(sis.map(([,m])=>m.kelas).filter(Boolean))].sort();if(me.role==='guru')rekapKelas=mem.kelas||'';const rows=sis.filter(([,m])=>!rekapKelas||m.kelas===rekapKelas).sort((a,b)=>(a[1].kelas||'').localeCompare(b[1].kelas||'')||a[1].name.localeCompare(b[1].name));const results=await Promise.all(rows.map(async([u])=>{try{return await val(S(`kaih/${u}/${rekapDate}`))||{}}catch{return {}}}));return `<h2>Rekap 7 Kebiasaan</h2><div class="row" style="justify-content:flex-start;margin:0 0 .8rem"><input type="date" style="width:auto" value="${esc(rekapDate)}" onchange="rekapDate=this.value;go('rekap')"><select style="width:auto" ${me.role==='guru'?'disabled':''} onchange="rekapKelas=this.value;go('rekap')"><option value="">Semua kelas</option>${kelas.map(k=>`<option value="${esc(k)}" ${k===rekapKelas?'selected':''}>${esc(k)}</option>`).join('')}</select><button class="btn sm ghost" onclick="window.print()">Cetak</button></div><div class="card scroll"><table><tr><th>Nama</th><th>Kelas</th>${KAIH.map(h=>`<th title="${esc(h.n)}">${h.i}</th>`).join('')}<th>Total</th></tr>${rows.map(([u,m],i)=>{const d=results[i];return `<tr><td>${esc(m.name)}</td><td>${esc(m.kelas)}</td>${KAIH.map(h=>`<td>${d[h.id]===true?'✅':'–'}</td>`).join('')}<td><b>${countHab(d)}/7</b></td></tr>`}).join('')||'<tr><td colspan="10">Belum ada siswa.</td></tr>'}</table></div>`}
+async function vUsers(){if(me.role!=='admin')throw Error('Akses khusus admin.');const ms=Object.entries(await val(S('members'))||{});return `<h2>Pengguna sekolah</h2><p class="mut">Bagikan NPSN <b>${esc(me.npsn)}</b> kepada guru dan siswa agar bisa mendaftar.</p><div class="card scroll"><table><tr><th>Nama</th><th>Peran</th><th>Kelas</th><th>Email</th><th>Status</th><th>Aksi</th></tr>${ms.map(([u,m])=>`<tr><td>${esc(m.name)}</td><td>${esc(m.role)}</td><td>${esc(m.kelas)}</td><td>${esc(m.email)}</td><td><span class="tag ${m.status==='aktif'?'':'sun'}">${esc(m.status)}</span></td><td>${m.role!=='admin'?`<button class="btn sm ${m.status==='aktif'?'ghost':''}" onclick="setStatus('${u}','${m.status==='aktif'?'nonaktif':'aktif'}')">${m.status==='aktif'?'Nonaktifkan':'Aktifkan'}</button>`:''}</td></tr>`).join('')}</table></div>`}async function setStatus(u,s){if(me.role!=='admin'||u===me.uid)return;try{const m=await val(S('members/'+u));if(!m||m.role==='admin')throw Error('Tidak boleh mengubah status admin.');await db.ref(S(`members/${u}/status`)).set(s);go('users')}catch(x){toast(msg(x))}}
+const bpath=p=>p.trim().replace(/\{npsn\}/g,me.npsn).replace(/^\/+|\/+$/g,''),norm=v=>(Array.isArray(v)?v.map((x,i)=>[String(i),x]):Object.entries(v||{})).filter(([,x])=>x&&typeof x==='object');async function vImport(){if(me.role!=='admin')throw Error('Akses khusus admin.');return `<h2>Impor data dari Firebase cadangan</h2><p class="mut">Data dibaca dari database cadangan. Pastikan path/kolom NPSN hanya milik sekolah <b>${esc(me.npsn)}</b>. Gunakan <code>{npsn}</code> untuk path yang dikelompokkan berdasarkan sekolah.</p><div class="card"><h3>1. Profil sekolah</h3><label>Path data sekolah di cadangan</label><input id="imSek" placeholder="mis. sekolah/{npsn}"><p><button class="btn sm" onclick="impSchool()">Ambil profil sekolah</button></p></div><div class="card" style="margin-top:.9rem"><h3>2. Data siswa</h3><label>Path data siswa di cadangan</label><input id="imPath" placeholder="mis. siswa/{npsn}"><p><button class="btn sm" onclick="impPreview()">Pratinjau</button></p><div id="imBox"></div><p id="imLog" class="mut"></p></div>`}
+async function impSchool(){if(me.role!=='admin')return;try{const path=bpath($('imSek').value);if(!path)throw Error('Isi path data sekolah.');const v=(await bdb.ref(path).get()).val();if(!v)throw Error('Data tidak ditemukan atau akses ditolak.');const o=[v,...Object.values(v).filter(x=>x&&typeof x==='object')].find(x=>String(x.npsn||'')===me.npsn)||(String(v.npsn||'')===me.npsn?v:null);if(!o)throw Error('NPSN sekolah tidak cocok. Pastikan data memiliki kolom NPSN.');const upd={name:o.nama_sekolah||o.nama||o.name||o.sekolah||school.name,jenjang:o.jenjang||school.jenjang,alamat:o.alamat||''};if(!confirm(`Perbarui profil sekolah?\nNama: ${upd.name}\nJenjang: ${upd.jenjang}\nAlamat: ${upd.alamat||'-'}`))return;await db.ref('schools/'+me.npsn).update(upd);school={...school,...upd};toast('Profil sekolah diperbarui.');shell();go('import')}catch(x){toast(msg(x))}}
+async function impPreview(){if(me.role!=='admin')return;const box=$('imBox');box.textContent='Membaca…';try{const path=bpath($('imPath').value);if(!path)throw Error('Isi path data siswa.');impRows=norm((await bdb.ref(path).get()).val());if(!impRows.length)throw Error('Tidak ada data atau akses ditolak.');const keys=[...new Set(impRows.slice(0,50).flatMap(([,r])=>Object.keys(r)))];const g={nama:/^(nama|name)|nama_?siswa|lengkap/i,kelas:/kelas|rombel|class/i,nisn:/nisn|^nis$/i,npsn:/npsn/i};const sel=(k,l)=>`<label>${l}</label><select id="im_${k}"><option value="">(tidak ada)</option>${keys.map(c=>`<option value="${esc(c)}" ${g[k].test(c)?'selected':''}>${esc(c)}</option>`).join('')}</select>`;box.innerHTML=`<p class="tag">${impRows.length} data ditemukan</p><pre class="mut" style="white-space:pre-wrap;overflow:auto;max-height:8rem">${esc(JSON.stringify(impRows[0][1],null,2))}</pre>${sel('nama','Kolom nama')}${sel('kelas','Kolom kelas')}${sel('nisn','Kolom NISN/NIS (identitas akun)')}${sel('npsn','Kolom NPSN (filter sekolah)')}<label>Kata sandi awal (minimal 8 karakter; bagikan secara pribadi dan segera ganti)</label><input id="imPw" type="password" minlength="8" placeholder="Buat kata sandi sementara yang kuat"><p><button class="btn" onclick="impRun()">Impor siswa</button></p>`}catch(x){box.innerHTML=`<p class="err">${esc(msg(x))}</p>`}}
+async function impRun(){if(me.role!=='admin')return;const m={};['nama','kelas','nisn','npsn'].forEach(k=>m[k]=$('im_'+k).value);if(!m.nama||!m.kelas||!m.npsn)return toast('Pilih kolom nama, kelas, dan NPSN untuk mencegah pencampuran data sekolah.');const rows=impRows.filter(([,r])=>String(r[m.npsn]??'').trim()===me.npsn);if(!rows.length)return toast('Tidak ada siswa dengan NPSN yang cocok.');const pw=$('imPw').value;if(pw.length<8)return toast('Kata sandi awal minimal 8 karakter.');if(!confirm(`Buat akun untuk ${rows.length} siswa dengan NPSN ${me.npsn}?`))return;const log=$('imLog');impAcc=[];let ok=0,skip=0,fail=0;const seen=new Set();for(const [id,r] of rows){const nama=String(r[m.nama]??'').trim(),kelas=String(r[m.kelas]??'').trim().toUpperCase(),nisn=String(r[m.nisn]??'').replace(/\D/g,'');if(!nama||!kelas){fail++;continue}const ident=(nisn||String(id).replace(/[^a-z0-9]/gi,'')).toLowerCase();if(!ident||seen.has(ident)){skip++;continue}seen.add(ident);const email=ident+'@'+me.npsn+'.lms';log.textContent=`Memproses ${ok+skip+fail+1}/${rows.length}: ${nama}`;try{const uid=(await sAuth.createUserWithEmailAndPassword(email,pw)).user.uid;await sDb.ref('users/'+uid).set({name:nama,role:'siswa',npsn:me.npsn});await sDb.ref(`s/${me.npsn}/members/${uid}`).set({name:nama,role:'siswa',kelas,status:'aktif',email,nisn});impAcc.push([nama,kelas,email,pw]);ok++}catch(x){if(x.code==='auth/email-already-in-use')skip++;else{fail++;console.warn('Impor gagal',nama,x)}}finally{await sAuth.signOut().catch(()=>{})}}log.innerHTML=`Selesai: ${ok} akun dibuat, ${skip} dilewati/sudah ada, ${fail} gagal. ${ok?'<button class="btn sm" onclick="impCsv()">Unduh daftar akun (CSV)</button>':''}<p class="mut">Simpan CSV secara aman dan hapus setelah kredensial dibagikan.</p>`}
+function impCsv(){if(me.role!=='admin'||!impAcc.length)return;const q=s=>'"'+String(s).replace(/"/g,'""').replace(/^[=+@\-]/,'\'$&')+'"';const csv='\ufeffNama,Kelas,Email login,Kata sandi awal\n'+impAcc.map(r=>r.map(q).join(',')).join('\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='akun-siswa-'+me.npsn+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+</script></body></html>
