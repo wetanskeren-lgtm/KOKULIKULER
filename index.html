@@ -55,10 +55,14 @@ async function submitAuth(f){
   registering=true;
   let uid=null,createdAuth=false;
   try{
-    // Buat sesi autentikasi terlebih dahulu. Pembacaan sekolah tidak boleh dilakukan
-    // sebelum login jika aturan database membatasi pembacaan untuk pengguna terautentikasi.
+    // Buat sesi autentikasi terlebih dahulu, lalu pastikan NPSN benar-benar terdaftar.
+    // Pemeriksaan dilakukan setelah autentikasi agar sesuai dengan Rules yang membatasi pembacaan.
     uid=(await auth.createUserWithEmailAndPassword(email,field('pass'))).user.uid;
     createdAuth=true;
+    if(authTab==='user'){
+      const schoolCheck=await db.ref('schools/'+npsn).get();
+      if(!schoolCheck.exists()) throw Error('NPSN sekolah tidak ditemukan di Firebase. Minta admin sekolah memastikan sekolah sudah terdaftar sebelum registrasi guru.');
+    }
 
     if(authTab==='school'){
       // Buat sekolah terlebih dahulu agar aturan dapat memverifikasi adminUid pada
@@ -81,14 +85,23 @@ async function submitAuth(f){
     await boot(auth.currentUser);
   }catch(e){
     registering=false;
-    // Jangan menghapus sesi dengan signOut jika profil sudah berhasil dibuat;
-    // tampilkan pesan spesifik agar admin dapat memulihkan akun bila penulisan parsial terjadi.
-    if(createdAuth)await auth.signOut().catch(()=>{});
+    // Jika registrasi gagal setelah akun Authentication dibuat, coba bersihkan akun
+    // yang baru dibuat agar tidak tertinggal sebagai akun tanpa profil. Jika penghapusan
+    // ditolak oleh Firebase, beri tahu pengguna bahwa akun perlu dibersihkan oleh admin.
+    let orphanLeft=false;
+    if(createdAuth){
+      try{
+        const u=auth.currentUser;
+        if(u && u.uid===uid) await u.delete();
+        else orphanLeft=true;
+      }catch(cleanErr){ orphanLeft=true; }
+      await auth.signOut().catch(()=>{});
+    }
     const detail=msg(e);
-    throw Error(detail+(createdAuth?' Akun autentikasi mungkin sudah dibuat. Jika pendaftaran gagal di tengah proses, hapus akun yang belum memiliki profil melalui Firebase Authentication sebelum mencoba lagi.':''));
+    throw Error(detail+(orphanLeft?' Akun Firebase sempat dibuat tetapi tidak dapat dibersihkan otomatis. Admin perlu menghapus akun yang belum memiliki profil di Firebase Authentication, lalu coba registrasi kembali.':''));
   }
 }
-auth.onAuthStateChanged(u=>{if(!registering && me?.role!=='siswa')boot(u)});async function boot(u){const run=++bootId;if(!u){me=null;school=null;mem=null;authView();return}try{const p=await val('users/'+u.uid);if(run!==bootId)return;if(!p){$('app').innerHTML='<div class="auth card"><p class="err">Profil tidak ditemukan. Hubungi admin sekolah.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>';return}me={uid:u.uid,...p};if(!/^\d{8}$/.test(me.npsn||''))throw Error('NPSN profil tidak valid.');[school,mem]=await Promise.all([val('schools/'+me.npsn),val(S('members/'+me.uid))]);if(run!==bootId)return;if(!school||!mem||mem.role!==me.role){$('app').innerHTML='<div class="auth card"><p class="err">Keanggotaan sekolah tidak valid. Hubungi admin.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>';return}if(mem.status!=='aktif'){$('app').innerHTML=`<div class="auth card"><h2>${mem.status==='pending'?'Menunggu persetujuan':'Akun tidak aktif'}</h2><p>Hubungi admin ${esc(school.name)} untuk mengaktifkan akun.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>`;return}view='home';shell()}catch(x){if(run===bootId)$('app').innerHTML=`<div class="auth card"><p class="err">${esc(msg(x))}</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>`}}
+auth.onAuthStateChanged(u=>{if(!registering && me?.role!=='siswa')boot(u)});async function boot(u){const run=++bootId;if(!u){me=null;school=null;mem=null;authView();return}try{const p=await val('users/'+u.uid);if(run!==bootId)return;if(!p){$('app').innerHTML='<div class="auth card"><h2>Profil akun belum tersimpan</h2><p class="err">Akun login ada di Firebase Authentication, tetapi data profilnya tidak ditemukan di Realtime Database pada jalur <code>users/'+esc(u.uid)+'</code>.</p><p>Ini biasanya terjadi jika registrasi sebelumnya terputus atau aturan Firebase menolak penyimpanan profil. Keluar terlebih dahulu. Admin perlu memeriksa Firebase Realtime Database dan Firebase Authentication sebelum akun ini digunakan.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>';return}me={uid:u.uid,...p};if(!/^\d{8}$/.test(me.npsn||''))throw Error('NPSN profil tidak valid.');[school,mem]=await Promise.all([val('schools/'+me.npsn),val(S('members/'+me.uid))]);if(run!==bootId)return;if(!school||!mem||mem.role!==me.role){$('app').innerHTML='<div class="auth card"><p class="err">Keanggotaan sekolah tidak valid. Hubungi admin.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>';return}if(mem.status!=='aktif'){$('app').innerHTML=`<div class="auth card"><h2>${mem.status==='pending'?'Menunggu persetujuan':'Akun tidak aktif'}</h2><p>Hubungi admin ${esc(school.name)} untuk mengaktifkan akun.</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>`;return}view='home';shell()}catch(x){if(run===bootId)$('app').innerHTML=`<div class="auth card"><p class="err">${esc(msg(x))}</p><button class="btn" onclick="auth.signOut()">Keluar</button></div>`}}
 function shell(){const nav=[['home','Beranda'],['themes','6 Tema'],['projects','Projek'],['kaih','7 Kebiasaan']];if(me.role!=='siswa')nav.push(['rekap','Rekap kebiasaan']);if(me.role==='admin')nav.push(['users','Pengguna'],['import','Impor data']);$('app').innerHTML=`<header><div><b>🌿 ${esc(school.name)}</b><small>NPSN ${esc(me.npsn)} · ${esc(school.jenjang)}</small></div><div>${esc(me.name)} <span class="tag sun">${esc(me.role)}</span> <button class="btn sm ghost" style="color:white;border-color:white" onclick="auth.signOut()">Keluar</button></div></header><nav>${nav.map(([k,l])=>`<button data-v="${k}" onclick="go('${k}')">${l}</button>`).join('')}</nav><main id="main"></main>`;go('home')}
 let viewToken=0;async function go(v){if(!me)return;const allowed=['home','themes','projects','kaih',...(me.role!=='siswa'?['rekap']:[]),...(me.role==='admin'?['users','import']:[])];if(!allowed.includes(v))return toast('Menu tidak tersedia.');view=v;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));const m=$('main'),token=++viewToken;m.innerHTML='<p class="mut">Memuat…</p>';try{const html=await({home:vHome,themes:vThemes,projects:vProjects,kaih:vKaih,rekap:vRekap,users:vUsers,import:vImport}[v])();if(token===viewToken)m.innerHTML=html}catch(x){if(token===viewToken)m.innerHTML=`<p class="err">${esc(msg(x))}</p><p class="mut">Periksa koneksi serta aturan Firebase Realtime Database.</p>`}}
 async function vHome(){const [members,projects]=await Promise.all([val(S('members')),val(S('projects'))]),ms=Object.values(members||{}),ps=Object.values(projects||{}),n=r=>ms.filter(m=>m.role===r&&m.status==='aktif').length;let extra='';if(me.role==='siswa'){const k=await val(S(`kaih/${me.uid}/${today()}`))||{},c=countHab(k);extra=`<div class="card"><h3>Kebiasaan hari ini</h3><div class="stat">${c}/7</div><div class="bar"><i style="width:${c/7*100}%"></i></div><p><button class="btn sm" onclick="go('kaih')">Isi checklist</button></p></div>`}return `<h2>Halo, ${esc(me.name)} 👋</h2><div class="grid"><div class="card"><h3>Siswa aktif</h3><div class="stat">${n('siswa')}</div></div><div class="card"><h3>Guru aktif</h3><div class="stat">${n('guru')}</div></div><div class="card"><h3>Projek kokurikuler</h3><div class="stat">${ps.length}</div></div>${extra}</div><h3 style="margin-top:1.2rem">Enam tema</h3><div class="grid">${THEMES.map(t=>`<div class="card"><b>${t.i} ${t.n}</b></div>`).join('')}</div>`}
