@@ -40,7 +40,7 @@ function publicShell(){
 }
 function exitStudent(){auth.signOut().catch(()=>{});me=null;mem=null;school=null;authView()}
 async function submitAuth(f){
-  const field=n=>f.elements.namedItem(n).value;
+  const field=n=>{const el=f.elements.namedItem(n);if(!el)throw Error('Kolom formulir tidak ditemukan: '+n+'. Muat ulang halaman dan coba kembali.');return el.value??'';};
   if(authTab==='login'){
     await auth.signInWithEmailAndPassword(field('email').trim(),field('pass'));
     return;
@@ -49,7 +49,8 @@ async function submitAuth(f){
   if(!/^\d{8}$/.test(npsn))throw Error('NPSN harus 8 digit angka.');
   if(!nama)throw Error('Nama wajib diisi.');
   const role=authTab==='school'?'admin':field('role');
-  const kelas=authTab==='user'?field('kelas').trim().toUpperCase():'';
+  // Formulir registrasi guru tidak memiliki kolom kelas; kelas hanya wajib dibaca untuk akun siswa.
+  const kelas=(authTab==='user'&&role==='siswa')?field('kelas').trim().toUpperCase():'';
   if(authTab==='user'&&role==='siswa'&&!kelas)throw Error('Kelas siswa wajib diisi.');
   registering=true;
   let uid=null,createdAuth=false;
